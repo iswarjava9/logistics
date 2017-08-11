@@ -1,6 +1,7 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -46,6 +48,10 @@ public class Customer implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "contact_id")
 	private Person				primaryContact;
+
+	// bi-directional many-to-one association to Quotation
+	@OneToMany(mappedBy = "customer")
+	private List<Quotation>		quotations;
 
 	public Customer() {
 	}
@@ -178,5 +184,13 @@ public class Customer implements Serializable {
 	public void setPrimaryContact(Person primaryContact) {
 
 		this.primaryContact = primaryContact;
+	}
+
+	public List<Quotation> getQuotations() {
+		return quotations;
+	}
+
+	public void setQuotations(List<Quotation> quotations) {
+		this.quotations = quotations;
 	}
 }

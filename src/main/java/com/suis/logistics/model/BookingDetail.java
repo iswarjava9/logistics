@@ -3,6 +3,7 @@ package com.suis.logistics.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -195,6 +197,10 @@ public class BookingDetail implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="transhipment_port_id")
 	private Place transhipmentPort;
+
+	// bi-directional many-to-one association to ContainerDetail
+	@OneToMany(mappedBy = "bookingDetail")
+	private List<ContainerDetail>	containerDetails;
 
 	public BookingDetail() {
 	}
@@ -557,6 +563,16 @@ public class BookingDetail implements Serializable {
 
 	public void setTranshipmentPort(Place transhipmentPort) {
 		this.transhipmentPort = transhipmentPort;
+	}
+
+
+
+	public List<ContainerDetail> getContainerDetails() {
+		return containerDetails;
+	}
+
+	public void setContainerDetails(List<ContainerDetail> containerDetails) {
+		this.containerDetails = containerDetails;
 	}
 
 	@Override
