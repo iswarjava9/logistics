@@ -51,26 +51,19 @@ public class Utility {
         ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of("UTC"));
         System.out.println("zonedDateTime : " + zonedDateTime);
         System.out.println(Date.from(zonedDateTime.toInstant()));
+
+
 	}
 
 	public static void date(){
-		Date today = new Date();
-		LocalDateTime ldt = LocalDateTime.ofInstant(today.toInstant(), ZoneId.of("UTC"));
-		System.out.println(ldt);
-		ZonedDateTime zdt = ldt.atZone(ZoneId.of("UTC"));
-
-		Date output = Date.from(zdt.toInstant());
-
-		System.out.println(zdt);
-		System.out.println(output);
-
-		Instant inst = zdt.toInstant();
-
-		Date newDate = Date.from(inst);
-
-		System.out.println(inst);
-
-
+System.out.println(ZoneId.getAvailableZoneIds());
+		LocalDateTime now = LocalDateTime.now();
+		System.out.println(now);
+		System.out.println(ZoneId.systemDefault());
+		ZonedDateTime current = now.atZone(ZoneId.systemDefault());
+		System.out.println(current);
+		ZonedDateTime zdt = current.withZoneSameInstant(ZoneId.of("UTC"));
+		System.out.println(zdt.toLocalDateTime());
 
 
 

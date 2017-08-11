@@ -44,7 +44,7 @@ public class BookingDto {
 	private Integer						clientId;
 	private Integer						userId;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm z")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private LocalDateTime						docsCutOffDateTime;
 	private Date						rateCutOffDateTime;
 	private Date						docsReceivedDate;

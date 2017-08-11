@@ -25,6 +25,9 @@ import com.suis.logistics.web.user.UserDto;
 public class ConverterUtil {
 
 	@Resource
+	DateUtil dateUtil;
+
+	@Resource
 	public ModelMapper modelMapper;
 
 	public Client convertClientDtoToEntity(ClientDto clientDto) {
@@ -65,7 +68,8 @@ public class ConverterUtil {
 		System.out.println(bookingDetail.getConsignee().getAddress());
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 		BookingDto bookingDto = modelMapper.map(bookingDetail, BookingDto.class);
-
+		// DateTime conversion to any required timezone
+     //bookingDto.setDocsCutOffDateTime(dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(),"US/Arizona"));
 		return bookingDto;
 	}
 }
