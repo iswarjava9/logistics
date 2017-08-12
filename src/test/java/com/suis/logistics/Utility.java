@@ -12,17 +12,17 @@ import org.modelmapper.ModelMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suis.logistics.model.Client;
+import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
-import com.suis.logistics.web.place.PlaceDto;
 
 public class Utility {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//generateObjectToJsonString();
+		generateObjectToJsonString();
 		// convertDtoToEntity();
 
-		date();
+		//date();
 
 	}
 
@@ -75,7 +75,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 	public static void generateObjectToJsonString() {
 		ObjectMapper mapper = new ObjectMapper();
 		// Client obj = new Client();
-		PlaceDto obj = new PlaceDto();
+		BusinessLineDto obj = new BusinessLineDto();
 
 		// Object to JSON in String
 		try {

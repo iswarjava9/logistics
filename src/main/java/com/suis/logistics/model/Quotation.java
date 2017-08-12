@@ -1,8 +1,7 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,141 +11,108 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import javax.persistence.OneToOne;
 
 /**
  * The persistent class for the quotation database table.
  *
  */
 @Entity
-@NamedQuery(name="Quotation.findAll", query="SELECT q FROM Quotation q")
+@NamedQuery(name = "Quotation.findAll", query = "SELECT q FROM Quotation q")
 public class Quotation implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+	private static final long	serialVersionUID	= 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int					id;
+	@Column(name = "agent_driven")
+	private String				agentDriven;
+	@Column(name = "container_handling")
+	private String				containerHandling;
+	@Column(name = "customer_ref_no")
+	private String				customerRefNo;
 
-	@Column(name="agent_driven")
-	private String agentDriven;
+	@Column(name = "effective_date")
+	private ZonedDateTime				effectiveDate;
 
-	@Column(name="container_handling")
-	private String containerHandling;
-
-	@Column(name="customer_ref_no")
-	private String customerRefNo;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="effective_date")
-	private Date effectiveDate;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="expiration_date")
-	private Date expirationDate;
-
-	@Column(name="inco_term_location")
-	private String incoTermLocation;
-
-	@Column(name="payment_term")
-	private String paymentTerm;
-
-	@Column(name="quote_no")
-	private String quoteNo;
-
-	@Column(name="quoted_by")
-	private String quotedBy;
-
-	@Column(name="transit_time")
-	private String transitTime;
-
-	private String voyage;
-
-	//bi-directional many-to-one association to ContainerDetail
-	@OneToMany(mappedBy="quotation")
-	private List<ContainerDetail> containerDetails;
-
-	//bi-directional many-to-one association to BusinessLine
+	@Column(name = "expiration_date")
+	private ZonedDateTime		expirationDate;
+	@Column(name = "inco_term_location")
+	private String				incoTermLocation;
+	@Column(name = "payment_term")
+	private String				paymentTerm;
+	@Column(name = "quote_no")
+	private String				quoteNo;
+	@Column(name = "quoted_by")
+	private String				quotedBy;
+	@Column(name = "transit_time")
+	private String				transitTime;
+	private String				voyage;
+	// bi-directional many-to-one association to ContainerDetail
+	@OneToOne(mappedBy = "quotation")
+	private ContainerDetail		containerDetail;
+	// bi-directional many-to-one association to BusinessLine
 	@ManyToOne
-	@JoinColumn(name="business_line_id")
-	private BusinessLine businessLine;
-
-	//bi-directional many-to-one association to Country
+	@JoinColumn(name = "business_line_id")
+	private BusinessLine		businessLine;
+	// bi-directional many-to-one association to Country
 	@ManyToOne
-	private Country country;
-
-	//bi-directional many-to-one association to Customer
+	private Country				country;
+	// bi-directional many-to-one association to Customer
 	@ManyToOne
-	private Customer customer;
-
-	//bi-directional many-to-one association to Division
+	private Customer			customer;
+	// bi-directional many-to-one association to Division
 	@ManyToOne
-	private Division division;
-
-	//bi-directional many-to-one association to IncoTerm
+	private Division			division;
+	// bi-directional many-to-one association to IncoTerm
 	@ManyToOne
-	@JoinColumn(name="inco_term_id")
-	private IncoTerm incoTerm;
-
-	//bi-directional many-to-one association to MovementType
+	@JoinColumn(name = "inco_term_id")
+	private IncoTerm			incoTerm;
+	// bi-directional many-to-one association to MovementType
 	@ManyToOne
-	@JoinColumn(name="type_of_movement_id")
-	private MovementType movementType;
-
-	//bi-directional many-to-one association to Person
+	@JoinColumn(name = "type_of_movement_id")
+	private MovementType		movementType;
+	// bi-directional many-to-one association to Person
 	@ManyToOne
-	@JoinColumn(name="contact_id")
-	private Person person1;
-
-	//bi-directional many-to-one association to Person
+	@JoinColumn(name = "contact_id")
+	private Person				primaryContact;
+	// bi-directional many-to-one association to Person
 	@ManyToOne
-	@JoinColumn(name="sales_representative_id")
-	private Person person2;
-
-	//bi-directional many-to-one association to Place
+	@JoinColumn(name = "sales_representative_id")
+	private Person				salesRepresentative;
+	// bi-directional many-to-one association to Place
 	@ManyToOne
-	@JoinColumn(name="final_destination_id")
-	private Place place1;
-
-	//bi-directional many-to-one association to Place
+	@JoinColumn(name = "final_destination_id")
+	private Place				finalDestination;
+	// bi-directional many-to-one association to Place
 	@ManyToOne
-	@JoinColumn(name="pickup_city_id")
-	private Place place2;
-
-	//bi-directional many-to-one association to Place
+	@JoinColumn(name = "pickup_city_id")
+	private Place				pickupCity;
+	// bi-directional many-to-one association to Place
 	@ManyToOne
-	@JoinColumn(name="port_of_discharge_id")
-	private Place place3;
-
-	//bi-directional many-to-one association to Place
+	@JoinColumn(name = "port_of_discharge_id")
+	private Place				portOfDischarge;
+	// bi-directional many-to-one association to Place
 	@ManyToOne
-	@JoinColumn(name="port_of_load_id")
-	private Place place4;
-
-	//bi-directional many-to-one association to Place
+	@JoinColumn(name = "port_of_load_id")
+	private Place				portOfLoad;
+	// bi-directional many-to-one association to Place
 	@ManyToOne
-	@JoinColumn(name="preferred_carrier_id")
-	private Place place5;
-
-	//bi-directional many-to-one association to ServiceLevel
+	@JoinColumn(name = "preferred_carrier_id")
+	private Place				preferredCarrier;
+	// bi-directional many-to-one association to ServiceLevel
 	@ManyToOne
-	@JoinColumn(name="service_level_id")
-	private ServiceLevel serviceLevel;
-
-	//bi-directional many-to-one association to ServiceType
+	@JoinColumn(name = "service_level_id")
+	private ServiceLevel		serviceLevel;
+	// bi-directional many-to-one association to ServiceType
 	@ManyToOne
-	@JoinColumn(name="service_type_id")
-	private ServiceType serviceType;
-
-	//bi-directional many-to-one association to State
+	@JoinColumn(name = "service_type_id")
+	private ServiceType			serviceType;
+	// bi-directional many-to-one association to State
 	@ManyToOne
-	private State state;
-
-	//bi-directional many-to-one association to Vessel
+	private State				state;
+	// bi-directional many-to-one association to Vessel
 	@ManyToOne
-	private Vessel vessel;
+	private Vessel				vessel;
 
 	public Quotation() {
 	}
@@ -183,19 +149,21 @@ public class Quotation implements Serializable {
 		this.customerRefNo = customerRefNo;
 	}
 
-	public Date getEffectiveDate() {
-		return this.effectiveDate;
+
+
+	public ZonedDateTime getEffectiveDate() {
+		return effectiveDate;
 	}
 
-	public void setEffectiveDate(Date effectiveDate) {
+	public void setEffectiveDate(ZonedDateTime effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 
-	public Date getExpirationDate() {
-		return this.expirationDate;
+	public ZonedDateTime getExpirationDate() {
+		return expirationDate;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(ZonedDateTime expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 
@@ -247,26 +215,12 @@ public class Quotation implements Serializable {
 		this.voyage = voyage;
 	}
 
-	public List<ContainerDetail> getContainerDetails() {
-		return this.containerDetails;
-	}
-
-	public void setContainerDetails(List<ContainerDetail> containerDetails) {
-		this.containerDetails = containerDetails;
-	}
-
-	public ContainerDetail addContainerDetail(ContainerDetail containerDetail) {
-		getContainerDetails().add(containerDetail);
-		containerDetail.setQuotation(this);
-
+	public ContainerDetail getContainerDetail() {
 		return containerDetail;
 	}
 
-	public ContainerDetail removeContainerDetail(ContainerDetail containerDetail) {
-		getContainerDetails().remove(containerDetail);
-		containerDetail.setQuotation(null);
-
-		return containerDetail;
+	public void setContainerDetail(ContainerDetail containerDetail) {
+		this.containerDetail = containerDetail;
 	}
 
 	public BusinessLine getBusinessLine() {
@@ -317,60 +271,60 @@ public class Quotation implements Serializable {
 		this.movementType = movementType;
 	}
 
-	public Person getPerson1() {
-		return this.person1;
+	public Person getPrimaryContact() {
+		return primaryContact;
 	}
 
-	public void setPerson1(Person person1) {
-		this.person1 = person1;
+	public void setPrimaryContact(Person primaryContact) {
+		this.primaryContact = primaryContact;
 	}
 
-	public Person getPerson2() {
-		return this.person2;
+	public Person getSalesRepresentative() {
+		return salesRepresentative;
 	}
 
-	public void setPerson2(Person person2) {
-		this.person2 = person2;
+	public void setSalesRepresentative(Person salesRepresentative) {
+		this.salesRepresentative = salesRepresentative;
 	}
 
-	public Place getPlace1() {
-		return this.place1;
+	public Place getFinalDestination() {
+		return finalDestination;
 	}
 
-	public void setPlace1(Place place1) {
-		this.place1 = place1;
+	public void setFinalDestination(Place finalDestination) {
+		this.finalDestination = finalDestination;
 	}
 
-	public Place getPlace2() {
-		return this.place2;
+	public Place getPickupCity() {
+		return pickupCity;
 	}
 
-	public void setPlace2(Place place2) {
-		this.place2 = place2;
+	public void setPickupCity(Place pickupCity) {
+		this.pickupCity = pickupCity;
 	}
 
-	public Place getPlace3() {
-		return this.place3;
+	public Place getPortOfDischarge() {
+		return portOfDischarge;
 	}
 
-	public void setPlace3(Place place3) {
-		this.place3 = place3;
+	public void setPortOfDischarge(Place portOfDischarge) {
+		this.portOfDischarge = portOfDischarge;
 	}
 
-	public Place getPlace4() {
-		return this.place4;
+	public Place getPortOfLoad() {
+		return portOfLoad;
 	}
 
-	public void setPlace4(Place place4) {
-		this.place4 = place4;
+	public void setPortOfLoad(Place portOfLoad) {
+		this.portOfLoad = portOfLoad;
 	}
 
-	public Place getPlace5() {
-		return this.place5;
+	public Place getPreferredCarrier() {
+		return preferredCarrier;
 	}
 
-	public void setPlace5(Place place5) {
-		this.place5 = place5;
+	public void setPreferredCarrier(Place preferredCarrier) {
+		this.preferredCarrier = preferredCarrier;
 	}
 
 	public ServiceLevel getServiceLevel() {
@@ -404,5 +358,4 @@ public class Quotation implements Serializable {
 	public void setVessel(Vessel vessel) {
 		this.vessel = vessel;
 	}
-
 }
