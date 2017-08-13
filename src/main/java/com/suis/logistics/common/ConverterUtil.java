@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.BusinessLine;
 import com.suis.logistics.model.Client;
+import com.suis.logistics.model.Commodity;
+import com.suis.logistics.model.ContainerDetail;
+import com.suis.logistics.model.ContainerType;
 import com.suis.logistics.model.Customer;
 import com.suis.logistics.model.Division;
 import com.suis.logistics.model.Person;
@@ -19,6 +22,9 @@ import com.suis.logistics.model.User;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
+import com.suis.logistics.web.commodity.CommodityDto;
+import com.suis.logistics.web.container.ContainerDto;
+import com.suis.logistics.web.containertype.ContainerTypeDto;
 import com.suis.logistics.web.customer.CustomerDto;
 import com.suis.logistics.web.division.DivisionDto;
 import com.suis.logistics.web.person.PersonDto;
@@ -96,5 +102,28 @@ public class ConverterUtil {
 		return modelMapper.map(businessLine, BusinessLineDto.class);
 	}
 
+	public Commodity convertCommodityDtoToEntity(CommodityDto commodityDto) {
+		return modelMapper.map(commodityDto, Commodity.class);
+	}
 
+	public CommodityDto convertCommodityToDto(Commodity commodity) {
+		return modelMapper.map(commodity, CommodityDto.class);
+	}
+
+	public ContainerDetail convertContainerDtoToEntity(ContainerDto containerDto) {
+
+		return modelMapper.map(containerDto, ContainerDetail.class);
+	}
+
+	public ContainerDto convertContainerToDto(ContainerDetail container) {
+		return modelMapper.map(container, ContainerDto.class);
+	}
+
+	public ContainerType convertContainerTypeDtoToEntity(ContainerTypeDto containerTypeDto) {
+		return modelMapper.map(containerTypeDto, ContainerType.class);
+	}
+
+	public ContainerTypeDto convertContainerTypeToDto(ContainerType containerType) {
+		return modelMapper.map(containerType, ContainerTypeDto.class);
+	}
 }
