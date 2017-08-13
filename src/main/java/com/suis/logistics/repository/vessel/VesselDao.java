@@ -5,5 +5,5 @@ import com.suis.logistics.model.Vessel;
 public interface VesselDao {
 	public Integer createVessel(Vessel vessel);
 
-	public Vessel findById(int vesselID);
+	public Vessel findById(int id);
 }

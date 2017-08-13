@@ -1,4 +1,4 @@
-package com.suis.logistics.web.movementtype;
+package com.suis.logistics.web.cargo;
 
 import javax.annotation.Resource;
 
@@ -12,30 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.suis.logistics.service.movementtype.MovementTypeService;
+import com.suis.logistics.service.cargo.CargoService;
 import com.suis.logistics.web.BaseController;
 
 @RestController
-@RequestMapping("/movementtype")
-public class MovementTypeController extends BaseController {
+@RequestMapping("/cargo")
+public class CargoController extends BaseController {
 
 	@Resource
-	MovementTypeService movementTypeService;
+	CargoService cargoService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> createMovementType(@RequestBody MovementTypeDto movementTypeDto) {
+	public ResponseEntity<Void> createCargo(@RequestBody CargoDto cargoDto) {
 
-		Integer movementTypeId = movementTypeService.createMovementType(converterUtil.convertMovementTypeDtoToEntity(movementTypeDto));
+		Integer cargoId = cargoService.createCargo(converterUtil.convertCargoDtoToEntity(cargoDto));
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("movementTypeId", String.valueOf(movementTypeId));
+		headers.set("cargoId", String.valueOf(cargoId));
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
 	@Transactional
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<MovementTypeDto> get(@PathVariable("id") int id) {
+	public ResponseEntity<CargoDto> get(@PathVariable("id") int id) {
 
-		MovementTypeDto movementTypeDto = converterUtil.convertMovementTypeToDto(movementTypeService.getMovementType(id));
-		return new ResponseEntity<MovementTypeDto>(movementTypeDto, HttpStatus.OK);
+		CargoDto cargoDto = converterUtil.convertCargoToDto(cargoService.getCargo(id));
+		return new ResponseEntity<CargoDto>(cargoDto, HttpStatus.OK);
 	}
 }

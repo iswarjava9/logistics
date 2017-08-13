@@ -12,12 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the quotation database table.
  *
  */
 @Entity
+@Table(name="quotation")
 @NamedQuery(name = "Quotation.findAll", query = "SELECT q FROM Quotation q")
 public class Quotation implements Serializable {
 	private static final long	serialVersionUID	= 1L;

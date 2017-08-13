@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 
 /**
  * The persistent class for the piece_type database table.
@@ -28,7 +30,8 @@ public class PieceType implements Serializable {
 	private int id;
 
 	@Column(name="bulk_item")
-	private byte bulkItem;
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean bulkItem;
 
 	@Column(name="edi_code1")
 	private String ediCode1;
@@ -37,9 +40,11 @@ public class PieceType implements Serializable {
 	private String ediCode2;
 
 	@Column(name="handheld_scanner")
-	private byte handheldScanner;
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean handheldScanner;
 
-	private byte inactive;
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean inactive;
 
 	@Column(name="piece_type")
 	private String pieceType;
@@ -52,23 +57,23 @@ public class PieceType implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public byte getBulkItem() {
-		return this.bulkItem;
+	public boolean isBulkItem() {
+		return bulkItem;
 	}
 
-	public void setBulkItem(byte bulkItem) {
+	public void setBulkItem(boolean bulkItem) {
 		this.bulkItem = bulkItem;
 	}
 
 	public String getEdiCode1() {
-		return this.ediCode1;
+		return ediCode1;
 	}
 
 	public void setEdiCode1(String ediCode1) {
@@ -76,31 +81,31 @@ public class PieceType implements Serializable {
 	}
 
 	public String getEdiCode2() {
-		return this.ediCode2;
+		return ediCode2;
 	}
 
 	public void setEdiCode2(String ediCode2) {
 		this.ediCode2 = ediCode2;
 	}
 
-	public byte getHandheldScanner() {
-		return this.handheldScanner;
+	public boolean isHandheldScanner() {
+		return handheldScanner;
 	}
 
-	public void setHandheldScanner(byte handheldScanner) {
+	public void setHandheldScanner(boolean handheldScanner) {
 		this.handheldScanner = handheldScanner;
 	}
 
-	public byte getInactive() {
-		return this.inactive;
+	public boolean isInactive() {
+		return inactive;
 	}
 
-	public void setInactive(byte inactive) {
+	public void setInactive(boolean inactive) {
 		this.inactive = inactive;
 	}
 
 	public String getPieceType() {
-		return this.pieceType;
+		return pieceType;
 	}
 
 	public void setPieceType(String pieceType) {
@@ -108,25 +113,11 @@ public class PieceType implements Serializable {
 	}
 
 	public List<Cargo> getCargos() {
-		return this.cargos;
+		return cargos;
 	}
 
 	public void setCargos(List<Cargo> cargos) {
 		this.cargos = cargos;
-	}
-
-	public Cargo addCargo(Cargo cargo) {
-		getCargos().add(cargo);
-		cargo.setPieceType(this);
-
-		return cargo;
-	}
-
-	public Cargo removeCargo(Cargo cargo) {
-		getCargos().remove(cargo);
-		cargo.setPieceType(null);
-
-		return cargo;
 	}
 
 }

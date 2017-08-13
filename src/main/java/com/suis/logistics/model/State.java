@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -17,6 +18,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
+@Table(name="state")
 @NamedQuery(name="State.findAll", query="SELECT s FROM State s")
 public class State implements Serializable {
 	private static final long serialVersionUID = 1L;

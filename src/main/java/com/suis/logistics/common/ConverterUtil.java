@@ -9,28 +9,40 @@ import org.springframework.stereotype.Component;
 
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.BusinessLine;
+import com.suis.logistics.model.Cargo;
+import com.suis.logistics.model.CargoTemplate;
 import com.suis.logistics.model.Client;
 import com.suis.logistics.model.Commodity;
 import com.suis.logistics.model.ContainerDetail;
 import com.suis.logistics.model.ContainerType;
 import com.suis.logistics.model.Customer;
 import com.suis.logistics.model.Division;
+import com.suis.logistics.model.IncoTerm;
+import com.suis.logistics.model.MovementType;
 import com.suis.logistics.model.Person;
+import com.suis.logistics.model.PieceType;
 import com.suis.logistics.model.Place;
 import com.suis.logistics.model.Quotation;
 import com.suis.logistics.model.User;
+import com.suis.logistics.model.Vessel;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
+import com.suis.logistics.web.cargo.CargoDto;
+import com.suis.logistics.web.cargotemplate.CargoTemplateDto;
 import com.suis.logistics.web.client.ClientDto;
 import com.suis.logistics.web.commodity.CommodityDto;
 import com.suis.logistics.web.container.ContainerDto;
 import com.suis.logistics.web.containertype.ContainerTypeDto;
 import com.suis.logistics.web.customer.CustomerDto;
 import com.suis.logistics.web.division.DivisionDto;
+import com.suis.logistics.web.incoterm.IncoTermDto;
+import com.suis.logistics.web.movementtype.MovementTypeDto;
 import com.suis.logistics.web.person.PersonDto;
+import com.suis.logistics.web.piecetype.PieceTypeDto;
 import com.suis.logistics.web.place.PlaceDto;
 import com.suis.logistics.web.quotation.QuotationDto;
 import com.suis.logistics.web.user.UserDto;
+import com.suis.logistics.web.vessel.VesselDto;
 
 @Component
 public class ConverterUtil {
@@ -125,5 +137,53 @@ public class ConverterUtil {
 
 	public ContainerTypeDto convertContainerTypeToDto(ContainerType containerType) {
 		return modelMapper.map(containerType, ContainerTypeDto.class);
+	}
+
+	public IncoTerm convertIncoTermDtoToEntity(IncoTermDto incoTermDto) {
+		return modelMapper.map(incoTermDto, IncoTerm.class);
+	}
+
+	public IncoTermDto convertIncoTermToDto(IncoTerm incoTerm) {
+		return modelMapper.map(incoTerm, IncoTermDto.class);
+	}
+
+	public PieceType convertPieceTypeDtoToEntity(PieceTypeDto pieceTypeDto) {
+		return modelMapper.map(pieceTypeDto, PieceType.class);
+	}
+
+	public PieceTypeDto convertPieceTypeToDto(PieceType pieceType) {
+		return modelMapper.map(pieceType, PieceTypeDto.class);
+	}
+
+	public MovementType convertMovementTypeDtoToEntity(MovementTypeDto movementTypeDto) {
+		return modelMapper.map(movementTypeDto, MovementType.class);
+	}
+
+	public MovementTypeDto convertMovementTypeToDto(MovementType movementType) {
+		return modelMapper.map(movementType, MovementTypeDto.class);
+	}
+
+	public Vessel convertVesselDtoToEntity(VesselDto vesselDto) {
+		return modelMapper.map(vesselDto, Vessel.class);
+	}
+
+	public VesselDto convertVesselToDto(Vessel vessel) {
+		return modelMapper.map(vessel, VesselDto.class);
+	}
+
+	public Cargo convertCargoDtoToEntity(CargoDto cargoDto) {
+		return modelMapper.map(cargoDto, Cargo.class);
+	}
+
+	public CargoDto convertCargoToDto(Cargo cargo) {
+		return modelMapper.map(cargo, CargoDto.class);
+	}
+
+	public CargoTemplate convertCargoTemplateDtoToEntity(CargoTemplateDto cargoTemplateDto) {
+		return modelMapper.map(cargoTemplateDto, CargoTemplate.class);
+	}
+
+	public CargoTemplateDto convertCargoTemplateToDto(CargoTemplate cargoTemplate) {
+		return modelMapper.map(cargoTemplate, CargoTemplateDto.class);
 	}
 }

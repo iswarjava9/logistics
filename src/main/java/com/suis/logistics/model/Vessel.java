@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
+@Table(name="vessel")
 @NamedQuery(name="Vessel.findAll", query="SELECT v FROM Vessel v")
 public class Vessel implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +30,7 @@ public class Vessel implements Serializable {
 	private int id;
 
 	@Column(name="`lloyds _code`")
-	private String lloyds_Code;
+	private String lloydsCode;
 
 	private String name;
 
@@ -55,12 +57,14 @@ public class Vessel implements Serializable {
 		this.id = id;
 	}
 
-	public String getLloyds_Code() {
-		return this.lloyds_Code;
+
+
+	public String getLloydsCode() {
+		return lloydsCode;
 	}
 
-	public void setLloyds_Code(String lloyds_Code) {
-		this.lloyds_Code = lloyds_Code;
+	public void setLloydsCode(String lloydsCode) {
+		this.lloydsCode = lloydsCode;
 	}
 
 	public String getName() {
