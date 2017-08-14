@@ -1,7 +1,6 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,60 +8,49 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 /**
  * The persistent class for the cargo_template database table.
  *
  */
 @Entity
-@Table(name="cargo_template")
-@NamedQuery(name="CargoTemplate.findAll", query="SELECT c FROM CargoTemplate c")
+@Table(name = "cargo_template")
+@NamedQuery(name = "CargoTemplate.findAll", query = "SELECT c FROM CargoTemplate c")
 public class CargoTemplate implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+	private static final long	serialVersionUID	= 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-
-	@Column(name="cargo_no")
-	private String cargoNo;
-
-	private String description;
-
-	@Column(name="hts_id")
-	private int htsId;
-
-	//bi-directional many-to-one association to Cargo
-	@OneToMany(mappedBy="cargoTemplate")
-	private List<Cargo> cargos;
-
-	//bi-directional many-to-one association to Commodity
-	@ManyToOne
-	@JoinColumn(name="schedule_b_id")
-	private Commodity commodity;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer					id;
+	@Column(name = "cargo_type_code")
+	private String				cargoTypeCode;
+	private String				description;
+	@Column(name = "hts_id")
+	private Integer					htsId;
+	// uni directional one-to-one association to Commodity
+	@OneToOne
+	@JoinColumn(name = "schedule_b_id")
+	private Commodity			commodity;
 
 	public CargoTemplate() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getCargoNo() {
-		return this.cargoNo;
+	public String getCargoTypeCode() {
+		return cargoTypeCode;
 	}
 
-	public void setCargoNo(String cargoNo) {
-		this.cargoNo = cargoNo;
+	public void setCargoTypeCode(String cargoTypeCode) {
+		this.cargoTypeCode = cargoTypeCode;
 	}
 
 	public String getDescription() {
@@ -73,34 +61,12 @@ public class CargoTemplate implements Serializable {
 		this.description = description;
 	}
 
-	public int getHtsId() {
+	public Integer getHtsId() {
 		return this.htsId;
 	}
 
-	public void setHtsId(int htsId) {
+	public void setHtsId(Integer htsId) {
 		this.htsId = htsId;
-	}
-
-	public List<Cargo> getCargos() {
-		return this.cargos;
-	}
-
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
-	}
-
-	public Cargo addCargo(Cargo cargo) {
-		getCargos().add(cargo);
-		cargo.setCargoTemplate(this);
-
-		return cargo;
-	}
-
-	public Cargo removeCargo(Cargo cargo) {
-		getCargos().remove(cargo);
-		cargo.setCargoTemplate(null);
-
-		return cargo;
 	}
 
 	public Commodity getCommodity() {
@@ -110,5 +76,4 @@ public class CargoTemplate implements Serializable {
 	public void setCommodity(Commodity commodity) {
 		this.commodity = commodity;
 	}
-
 }

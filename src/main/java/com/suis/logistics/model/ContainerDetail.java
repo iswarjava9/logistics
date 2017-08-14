@@ -1,6 +1,7 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,7 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -67,8 +71,45 @@ public class ContainerDetail implements Serializable {
 	private ContainerType containerType;
 
 	//bi-directional many-to-one association to Quotation
-	@ManyToOne
+	@OneToOne
 	private Quotation quotation;
+
+	@Column(name="vehicle_no")
+	private int vehicleNo;
+
+	@Column(name="stuffing_no")
+	private int stuffingNo;
+
+	@Column(name="railway_bill_no")
+	private int railwayBillNo;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="pickup_date")
+	private Date pickupDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="planned_ship_date")
+	private Date plannedShipDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="cus_pickup_last_free_date")
+	private Date cusPickupLastFreeDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="cus_return_last_free_date")
+	private Date cusReturnLastFreeDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="car_pickup_last_free_date")
+	private Date carPickupLastFreeDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="car_return_last_free_date")
+	private Date carReturnLastFreeDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="discharge_date")
+	private Date dischargeDate;
 
 	public ContainerDetail() {
 	}

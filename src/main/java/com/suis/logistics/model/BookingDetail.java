@@ -18,186 +18,143 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
  * The persistent class for the booking_detail database table.
  *
  */
 @Entity
-@Table(name="booking_detail")
-@NamedQuery(name="BookingDetail.findAll", query="SELECT b FROM BookingDetail b")
+@Table(name = "booking_detail")
+@NamedQuery(name = "BookingDetail.findAll", query = "SELECT b FROM BookingDetail b")
 public class BookingDetail implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
+	private static final long		serialVersionUID	= 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer					id;
+	@Column(name = "aes_auth_no")
+	private String					aesAuthNo;
+	@Column(name = "booking_person_id")
+	private Integer					bookingPersonId;
+	@Column(name = "booking_status_id")
+	private Integer					bookingStatusId;
+	@Column(name = "carrier_booking_no")
+	private String					carrierBookingNo;
+	@Column(name = "carrier_contact")
+	private String					carrierContact;
+	@Column(name = "carrier_id")
+	private Integer					carrierId;
+	@Column(name = "carrier_voyage")
+	private String					carrierVoyage;
+	private String					controller;
+	@Column(name = "division_id")
+	private Integer					divisionId;
 
-	@Column(name="aes_auth_no")
-	private String aesAuthNo;
+	@Column(name = "forwarder_id")
+	private Integer					forwarderId;
+	@Column(name = "forwarder_ref_no")
+	private String					forwarderRefNo;
+	private String					freight;
+	@Column(name = "line_of_business_id")
+	private Integer					lineOfBusinessId;
+	@Column(name = "nra_number")
+	private String					nraNumber;
+	@Column(name = "nvocc_booking_no")
+	private String					nvoccBookingNo;
+	@Column(name = "sales_representative_id")
+	private Integer					salesRepresentativeId;
+	@Column(name = "service_contract_id")
+	private Integer					serviceContractId;
+	@Column(name = "shipper_ref_no")
+	private String					shipperRefNo;
+	@Column(name = "type_of_move_id")
+	private Integer					typeOfMoveId;
+	@Column(name = "type_of_service_id")
+	private Integer					typeOfServiceId;
+	@Column(name = "vessel_id")
+	private Integer					vesselId;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="booking_date")
-	private Date bookingDate;
 
-	@Column(name="booking_person_id")
-	private int bookingPersonId;
-
-	@Column(name="booking_status_id")
-	private int bookingStatusId;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="cargo_moving_date")
-	private Date cargoMovingDate;
-
-	@Column(name="carrier_booking_no")
-	private String carrierBookingNo;
-
-	@Column(name="carrier_contact")
-	private String carrierContact;
-
-	@Column(name="carrier_id")
-	private int carrierId;
-
-	@Column(name="carrier_voyage")
-	private String carrierVoyage;
-
-	private String controller;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="cut_off_date")
-	private Date cutOffDate;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="delievery_eta")
-	private Date delieveryEta;
-
-	@Column(name="division_id")
-	private int divisionId;
-
-	//@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="docs_cut_off_date_time")
-	private LocalDateTime docsCutOffDateTime;
-
+	// @Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "docs_cut_off_date_time")
+	private LocalDateTime			docsCutOffDateTime;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="docs_received_date")
-	private Date docsReceivedDate;
-
+	@Column(name = "docs_received_date")
+	private Date					docsReceivedDate;
 	@Temporal(TemporalType.DATE)
-	private Date eta;
-
-	@Column(name="forwarder_id")
-	private int forwarderId;
-
-	@Column(name="forwarder_ref_no")
-	private String forwarderRefNo;
-
-	private String freight;
-
-	@Column(name="line_of_business_id")
-	private int lineOfBusinessId;
-
-	@Column(name="nra_number")
-	private String nraNumber;
-
-	@Column(name="nvocc_booking_no")
-	private String nvoccBookingNo;
-
+	private Date					eta;
 	@Temporal(TemporalType.DATE)
-	@Column(name="rate_cut_off_date_time")
-	private Date rateCutOffDateTime;
-
+	@Column(name = "booking_date")
+	private Date					bookingDate;
 	@Temporal(TemporalType.DATE)
-	@Column(name="sail_date")
-	private Date sailDate;
+	@Column(name = "cargo_moving_date")
+	private Date					cargoMovingDate;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "cut_off_date")
+	private Date					cutOffDate;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "delievery_eta")
+	private Date					delieveryEta;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "rate_cut_off_date_time")
+	private Date					rateCutOffDateTime;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "sail_date")
+	private Date					sailDate;
 
-	@Column(name="sales_representative_id")
-	private int salesRepresentativeId;
-
-	@Column(name="service_contract_id")
-	private int serviceContractId;
-
-	@Column(name="shipper_ref_no")
-	private String shipperRefNo;
-
-	@Column(name="type_of_move_id")
-	private int typeOfMoveId;
-
-	@Column(name="type_of_service_id")
-	private int typeOfServiceId;
-
-	@Column(name="vessel_id")
-	private int vesselId;
-
-	//bi-directional many-to-one association to Client
+	// bi-directional many-to-one association to Client
 	@ManyToOne
-	private Client client;
-
-	//bi-directional many-to-one association to Customer
+	private Client					client;
+	// bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="foreign_agent_id")
-	private Customer foreignAgent;
-
-	//bi-directional many-to-one association to Customer
+	@JoinColumn(name = "foreign_agent_id")
+	private Customer				foreignAgent;
+	// bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="account_id")
-	private Customer account;
-
-	//bi-directional many-to-one association to Customer
+	@JoinColumn(name = "account_id")
+	private Customer				account;
+	// bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="consignee_id")
-	private Customer consignee;
-
-	//bi-directional many-to-one association to Customer
+	@JoinColumn(name = "consignee_id")
+	private Customer				consignee;
+	// bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="local_ss_line_office_id")
-	private Customer localSSLineOffice;
-
-	//bi-directional many-to-one association to Customer
+	@JoinColumn(name = "local_ss_line_office_id")
+	private Customer				localSSLineOffice;
+	// bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="notify_id")
-	private Customer notify;
-
-	//bi-directional many-to-one association to Customer
+	@JoinColumn(name = "notify_id")
+	private Customer				notify;
+	// bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="shipper_id")
-	private Customer shipper;
-
-	//bi-directional many-to-one association to User
+	@JoinColumn(name = "shipper_id")
+	private Customer				shipper;
+	// bi-directional many-to-one association to User
 	@ManyToOne
-	private User user;
-
-	//bi-directional many-to-one association to PhysicalEntity
+	private User					user;
+	// bi-directional many-to-one association to PhysicalEntity
 	@ManyToOne
-	@JoinColumn(name="load_terminal_id")
-	private Place loadTerminal;
-
-	//bi-directional many-to-one association to PhysicalEntity
+	@JoinColumn(name = "load_terminal_id")
+	private Place					loadTerminal;
+	// bi-directional many-to-one association to PhysicalEntity
 	@ManyToOne
-	@JoinColumn(name="place_of_delivery_id")
-	private Place placeOfDelivery;
-
-	//bi-directional many-to-one association to PhysicalEntity
+	@JoinColumn(name = "place_of_delivery_id")
+	private Place					placeOfDelivery;
+	// bi-directional many-to-one association to PhysicalEntity
 	@ManyToOne
-	@JoinColumn(name="place_of_receipt_id")
-	private Place placeOfReceipt;
-
-	//bi-directional many-to-one association to PhysicalEntity
+	@JoinColumn(name = "place_of_receipt_id")
+	private Place					placeOfReceipt;
+	// bi-directional many-to-one association to PhysicalEntity
 	@ManyToOne
-	@JoinColumn(name="port_of_discharge_id")
-	private Place portOfDischarge;
-
-	//bi-directional many-to-one association to PhysicalEntity
+	@JoinColumn(name = "port_of_discharge_id")
+	private Place					portOfDischarge;
+	// bi-directional many-to-one association to PhysicalEntity
 	@ManyToOne
-	@JoinColumn(name="port_of_load_id")
-	private Place portOfLoad;
-
-	//bi-directional many-to-one association to PhysicalEntity
+	@JoinColumn(name = "port_of_load_id")
+	private Place					portOfLoad;
+	// bi-directional many-to-one association to PhysicalEntity
 	@ManyToOne
-	@JoinColumn(name="transhipment_port_id")
-	private Place transhipmentPort;
-
+	@JoinColumn(name = "transhipment_port_id")
+	private Place					transhipmentPort;
 	// bi-directional many-to-one association to ContainerDetail
 	@OneToMany(mappedBy = "bookingDetail")
 	private List<ContainerDetail>	containerDetails;
@@ -205,11 +162,11 @@ public class BookingDetail implements Serializable {
 	public BookingDetail() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -229,19 +186,19 @@ public class BookingDetail implements Serializable {
 		this.bookingDate = bookingDate;
 	}
 
-	public int getBookingPersonId() {
+	public Integer getBookingPersonId() {
 		return this.bookingPersonId;
 	}
 
-	public void setBookingPersonId(int bookingPersonId) {
+	public void setBookingPersonId(Integer bookingPersonId) {
 		this.bookingPersonId = bookingPersonId;
 	}
 
-	public int getBookingStatusId() {
+	public Integer getBookingStatusId() {
 		return this.bookingStatusId;
 	}
 
-	public void setBookingStatusId(int bookingStatusId) {
+	public void setBookingStatusId(Integer bookingStatusId) {
 		this.bookingStatusId = bookingStatusId;
 	}
 
@@ -269,11 +226,11 @@ public class BookingDetail implements Serializable {
 		this.carrierContact = carrierContact;
 	}
 
-	public int getCarrierId() {
+	public Integer getCarrierId() {
 		return this.carrierId;
 	}
 
-	public void setCarrierId(int carrierId) {
+	public void setCarrierId(Integer carrierId) {
 		this.carrierId = carrierId;
 	}
 
@@ -309,11 +266,11 @@ public class BookingDetail implements Serializable {
 		this.delieveryEta = delieveryEta;
 	}
 
-	public int getDivisionId() {
+	public Integer getDivisionId() {
 		return this.divisionId;
 	}
 
-	public void setDivisionId(int divisionId) {
+	public void setDivisionId(Integer divisionId) {
 		this.divisionId = divisionId;
 	}
 
@@ -341,11 +298,11 @@ public class BookingDetail implements Serializable {
 		this.eta = eta;
 	}
 
-	public int getForwarderId() {
+	public Integer getForwarderId() {
 		return this.forwarderId;
 	}
 
-	public void setForwarderId(int forwarderId) {
+	public void setForwarderId(Integer forwarderId) {
 		this.forwarderId = forwarderId;
 	}
 
@@ -365,11 +322,11 @@ public class BookingDetail implements Serializable {
 		this.freight = freight;
 	}
 
-	public int getLineOfBusinessId() {
+	public Integer getLineOfBusinessId() {
 		return this.lineOfBusinessId;
 	}
 
-	public void setLineOfBusinessId(int lineOfBusinessId) {
+	public void setLineOfBusinessId(Integer lineOfBusinessId) {
 		this.lineOfBusinessId = lineOfBusinessId;
 	}
 
@@ -405,19 +362,19 @@ public class BookingDetail implements Serializable {
 		this.sailDate = sailDate;
 	}
 
-	public int getSalesRepresentativeId() {
+	public Integer getSalesRepresentativeId() {
 		return this.salesRepresentativeId;
 	}
 
-	public void setSalesRepresentativeId(int salesRepresentativeId) {
+	public void setSalesRepresentativeId(Integer salesRepresentativeId) {
 		this.salesRepresentativeId = salesRepresentativeId;
 	}
 
-	public int getServiceContractId() {
+	public Integer getServiceContractId() {
 		return this.serviceContractId;
 	}
 
-	public void setServiceContractId(int serviceContractId) {
+	public void setServiceContractId(Integer serviceContractId) {
 		this.serviceContractId = serviceContractId;
 	}
 
@@ -429,27 +386,27 @@ public class BookingDetail implements Serializable {
 		this.shipperRefNo = shipperRefNo;
 	}
 
-	public int getTypeOfMoveId() {
+	public Integer getTypeOfMoveId() {
 		return this.typeOfMoveId;
 	}
 
-	public void setTypeOfMoveId(int typeOfMoveId) {
+	public void setTypeOfMoveId(Integer typeOfMoveId) {
 		this.typeOfMoveId = typeOfMoveId;
 	}
 
-	public int getTypeOfServiceId() {
+	public Integer getTypeOfServiceId() {
 		return this.typeOfServiceId;
 	}
 
-	public void setTypeOfServiceId(int typeOfServiceId) {
+	public void setTypeOfServiceId(Integer typeOfServiceId) {
 		this.typeOfServiceId = typeOfServiceId;
 	}
 
-	public int getVesselId() {
+	public Integer getVesselId() {
 		return this.vesselId;
 	}
 
-	public void setVesselId(int vesselId) {
+	public void setVesselId(Integer vesselId) {
 		this.vesselId = vesselId;
 	}
 
@@ -565,8 +522,6 @@ public class BookingDetail implements Serializable {
 		this.transhipmentPort = transhipmentPort;
 	}
 
-
-
 	public List<ContainerDetail> getContainerDetails() {
 		return containerDetails;
 	}
@@ -594,7 +549,4 @@ public class BookingDetail implements Serializable {
 				+ ", placeOfDelivery=" + placeOfDelivery + ", placeOfReceipt=" + placeOfReceipt + ", portOfDischarge="
 				+ portOfDischarge + ", portOfLoad=" + portOfLoad + ", transhipmentPort=" + transhipmentPort + "]";
 	}
-
-
-
 }

@@ -12,8 +12,8 @@ import org.modelmapper.ModelMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suis.logistics.model.Client;
+import com.suis.logistics.web.cargotemplate.CargoTemplateDto;
 import com.suis.logistics.web.client.ClientDto;
-import com.suis.logistics.web.containertype.ContainerTypeDto;
 
 public class Utility {
 
@@ -75,7 +75,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 	public static void generateObjectToJsonString() {
 		ObjectMapper mapper = new ObjectMapper();
 		// Client obj = new Client();
-		ContainerTypeDto obj = new ContainerTypeDto();
+		CargoTemplateDto obj = new CargoTemplateDto();
 
 		// Object to JSON in String
 		try {

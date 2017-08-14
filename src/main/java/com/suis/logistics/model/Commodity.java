@@ -1,7 +1,6 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,45 +8,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 /**
  * The persistent class for the commodity database table.
  *
  */
 @Entity
-@Table(name="commodity")
-@NamedQuery(name="Commodity.findAll", query="SELECT c FROM Commodity c")
+@Table(name = "commodity")
+@NamedQuery(name = "Commodity.findAll", query = "SELECT c FROM Commodity c")
 public class Commodity implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+	private static final long	serialVersionUID	= 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int					id;
+	private String				commodity;
+	private String				description;
+	@Column(name = "primary_quantity")
+	private String				primaryQuantity;
+	@Column(name = "schedule_b")
+	private String				scheduleB;
+	@Column(name = "secondary_quantity")
+	private String				secondaryQuantity;
 
-	private String commodity;
-
-	private String description;
-
-	@Column(name="primary_quantity")
-	private String primaryQuantity;
-
-	@Column(name="schedule_b")
-	private String scheduleB;
-
-	@Column(name="secondary_quantity")
-	private String secondaryQuantity;
-
-	//bi-directional many-to-one association to Cargo
-	@OneToMany(mappedBy="commodity")
-	private List<Cargo> cargos;
-
-	//bi-directional many-to-one association to CargoTemplate
-	@OneToMany(mappedBy="commodity")
-	private List<CargoTemplate> cargoTemplates;
-
+	/*
+	 * //bi-directional many-to-one association to Cargo
+	 *
+	 * @OneToMany(mappedBy="commodity") private List<Cargo> cargos;
+	 *
+	 * //bi-directional many-to-one association to CargoTemplate
+	 *
+	 * @OneToOne(mappedBy="commodity") private CargoTemplate cargoTemplates;
+	 */
 	public Commodity() {
 	}
 
@@ -98,49 +90,4 @@ public class Commodity implements Serializable {
 	public void setSecondaryQuantity(String secondaryQuantity) {
 		this.secondaryQuantity = secondaryQuantity;
 	}
-
-	public List<Cargo> getCargos() {
-		return this.cargos;
-	}
-
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
-	}
-
-	public Cargo addCargo(Cargo cargo) {
-		getCargos().add(cargo);
-		cargo.setCommodity(this);
-
-		return cargo;
-	}
-
-	public Cargo removeCargo(Cargo cargo) {
-		getCargos().remove(cargo);
-		cargo.setCommodity(null);
-
-		return cargo;
-	}
-
-	public List<CargoTemplate> getCargoTemplates() {
-		return this.cargoTemplates;
-	}
-
-	public void setCargoTemplates(List<CargoTemplate> cargoTemplates) {
-		this.cargoTemplates = cargoTemplates;
-	}
-
-	public CargoTemplate addCargoTemplate(CargoTemplate cargoTemplate) {
-		getCargoTemplates().add(cargoTemplate);
-		cargoTemplate.setCommodity(this);
-
-		return cargoTemplate;
-	}
-
-	public CargoTemplate removeCargoTemplate(CargoTemplate cargoTemplate) {
-		getCargoTemplates().remove(cargoTemplate);
-		cargoTemplate.setCommodity(null);
-
-		return cargoTemplate;
-	}
-
 }

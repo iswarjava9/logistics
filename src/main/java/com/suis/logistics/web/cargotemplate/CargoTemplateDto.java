@@ -1,15 +1,52 @@
 package com.suis.logistics.web.cargotemplate;
 
-import java.util.List;
-
-import com.suis.logistics.model.Cargo;
-import com.suis.logistics.model.Commodity;
+import com.suis.logistics.web.commodity.CommodityDto;
 
 public class CargoTemplateDto {
-	private int			id;
-	private String		cargoNo;
-	private String		description;
-	private int			htsId;
-	private List<Cargo>	cargos;
-	private Commodity	commodity;
+
+	private Integer			id;
+	private String			cargoTypeCode;
+	private String			description;
+	private Integer			htsId;
+	private CommodityDto	commodity;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCargoTypeCode() {
+		return cargoTypeCode;
+	}
+
+	public void setCargoTypeCode(String cargoTypeCode) {
+		this.cargoTypeCode = cargoTypeCode;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getHtsId() {
+		return htsId;
+	}
+
+	public void setHtsId(Integer htsId) {
+		this.htsId = htsId;
+	}
+
+	public CommodityDto getCommodity() {
+		return commodity;
+	}
+
+	public void setCommodity(CommodityDto commodity) {
+		this.commodity = commodity;
+	}
 }
