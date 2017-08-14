@@ -54,7 +54,7 @@ public class ConverterUtil {
 
 	@PostConstruct
 	public void init() {
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 	}
 
 	public Client convertClientDtoToEntity(ClientDto clientDto) {
@@ -92,7 +92,9 @@ public class ConverterUtil {
 	}
 
 	public BookingDto convertBookingDetailToDto(BookingDetail bookingDetail) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 		BookingDto bookingDto = modelMapper.map(bookingDetail, BookingDto.class);
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		// DateTime conversion to any required timezone
 		// bookingDto.setDocsCutOffDateTime(dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(),"US/Arizona"));
 		return bookingDto;
