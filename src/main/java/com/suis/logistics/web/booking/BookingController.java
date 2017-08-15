@@ -1,5 +1,7 @@
 package com.suis.logistics.web.booking;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpHeaders;
@@ -37,4 +39,13 @@ public class BookingController extends BaseController {
 		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));
 		return new ResponseEntity<BookingDto>(bookingDto, HttpStatus.OK);
 	}
+
+	@Transactional
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public ResponseEntity<List<BookingDto>> getBookingList() {
+
+		List<BookingDto> bookings = converterUtil.convertBookingDetailToDtoList(bookingService.getBookingList());
+		return new ResponseEntity<List<BookingDto>>(bookings, HttpStatus.OK);
+	}
+
 }

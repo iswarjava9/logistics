@@ -1,5 +1,7 @@
 package com.suis.logistics.service.booking;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -21,5 +23,10 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public BookingDetail getBookingDetail(int bookingId) {
 		return bookingDao.findById(bookingId);
+	}
+
+	@Override
+	public List<BookingDetail> getBookingList() {
+		return bookingDao.getBookingList();
 	}
 }

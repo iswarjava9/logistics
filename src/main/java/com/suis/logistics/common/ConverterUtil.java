@@ -1,9 +1,13 @@
 package com.suis.logistics.common;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 
@@ -98,6 +102,15 @@ public class ConverterUtil {
 		// DateTime conversion to any required timezone
 		// bookingDto.setDocsCutOffDateTime(dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(),"US/Arizona"));
 		return bookingDto;
+	}
+
+	public List<BookingDto> convertBookingDetailToDtoList(List<BookingDetail> bookingList) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+		Type listType = new TypeToken<List<BookingDto>>() {}.getType();
+		List<BookingDto> bookingDtoList = modelMapper.map(bookingList, listType);
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
+
+		return bookingDtoList;
 	}
 
 	public Quotation convertQuotationDtoToEntity(QuotationDto quotationDto) {
