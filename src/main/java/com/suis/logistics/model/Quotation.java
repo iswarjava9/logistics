@@ -1,7 +1,7 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +14,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 /**
  * The persistent class for the quotation database table.
  *
  */
 @Entity
-@Table(name="quotation")
+@Table(name = "quotation")
 @NamedQuery(name = "Quotation.findAll", query = "SELECT q FROM Quotation q")
 public class Quotation implements Serializable {
 	private static final long	serialVersionUID	= 1L;
@@ -27,17 +29,16 @@ public class Quotation implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int					id;
 	@Column(name = "agent_driven")
-	private String				agentDriven;
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean				agentDriven;
 	@Column(name = "container_handling")
 	private String				containerHandling;
 	@Column(name = "customer_ref_no")
 	private String				customerRefNo;
-
 	@Column(name = "effective_date")
-	private ZonedDateTime				effectiveDate;
-
+	private LocalDateTime		effectiveDate;
 	@Column(name = "expiration_date")
-	private ZonedDateTime		expirationDate;
+	private LocalDateTime		expirationDate;
 	@Column(name = "inco_term_location")
 	private String				incoTermLocation;
 	@Column(name = "payment_term")
@@ -127,11 +128,11 @@ public class Quotation implements Serializable {
 		this.id = id;
 	}
 
-	public String getAgentDriven() {
-		return this.agentDriven;
+	public boolean isAgentDriven() {
+		return agentDriven;
 	}
 
-	public void setAgentDriven(String agentDriven) {
+	public void setAgentDriven(boolean agentDriven) {
 		this.agentDriven = agentDriven;
 	}
 
@@ -151,21 +152,19 @@ public class Quotation implements Serializable {
 		this.customerRefNo = customerRefNo;
 	}
 
-
-
-	public ZonedDateTime getEffectiveDate() {
+	public LocalDateTime getEffectiveDate() {
 		return effectiveDate;
 	}
 
-	public void setEffectiveDate(ZonedDateTime effectiveDate) {
+	public void setEffectiveDate(LocalDateTime effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 
-	public ZonedDateTime getExpirationDate() {
+	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(ZonedDateTime expirationDate) {
+	public void setExpirationDate(LocalDateTime expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 

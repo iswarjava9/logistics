@@ -1,12 +1,11 @@
 package com.suis.logistics.web.container;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import com.suis.logistics.web.booking.BookingDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.suis.logistics.web.cargo.CargoDto;
 import com.suis.logistics.web.containertype.ContainerTypeDto;
-import com.suis.logistics.web.quotation.QuotationDto;
 
 public class ContainerDto {
 	private Integer				id;
@@ -22,17 +21,26 @@ public class ContainerDto {
 	private Integer				vehicleNo;
 	private Integer				stuffingNo;
 	private Integer				railwayBillNo;
-	private Date				pickupDate;
-	private Date				plannedShipDate;
-	private Date				cusPickupLastFreeDate;
-	private Date				cusReturnLastFreeDate;
-	private Date				carPickupLastFreeDate;
-	private Date				carReturnLastFreeDate;
-	private Date				dischargeDate;
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime				pickupLocalDateTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime				plannedShipLocalDateTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime				cusPickupLastFreeLocalDateTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime				cusReturnLastFreeLocalDateTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime				carPickupLastFreeLocalDateTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime				carReturnLastFreeLocalDateTime;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime				dischargeLocalDateTime;
+
 	private List<CargoDto>		cargos;
-	private BookingDto			bookingDetail;
+	private Integer			bookingId;
 	private ContainerTypeDto	containerType;
-	private QuotationDto		quotation;
+	private Integer		quotationId;
 
 	public Integer getId() {
 		return id;
@@ -122,12 +130,13 @@ public class ContainerDto {
 		this.cargos = cargos;
 	}
 
-	public BookingDto getBookingDetail() {
-		return bookingDetail;
+
+	public Integer getBookingId() {
+		return bookingId;
 	}
 
-	public void setBookingDetail(BookingDto bookingDetail) {
-		this.bookingDetail = bookingDetail;
+	public void setBookingId(Integer bookingId) {
+		this.bookingId = bookingId;
 	}
 
 	public ContainerTypeDto getContainerType() {
@@ -138,11 +147,94 @@ public class ContainerDto {
 		this.containerType = containerType;
 	}
 
-	public QuotationDto getQuotation() {
-		return quotation;
+
+	public Integer getQuotationId() {
+		return quotationId;
 	}
 
-	public void setQuotation(QuotationDto quotation) {
-		this.quotation = quotation;
+	public void setQuotationId(Integer quotationId) {
+		this.quotationId = quotationId;
 	}
+
+	public Integer getVehicleNo() {
+		return vehicleNo;
+	}
+
+	public void setVehicleNo(Integer vehicleNo) {
+		this.vehicleNo = vehicleNo;
+	}
+
+	public Integer getStuffingNo() {
+		return stuffingNo;
+	}
+
+	public void setStuffingNo(Integer stuffingNo) {
+		this.stuffingNo = stuffingNo;
+	}
+
+	public Integer getRailwayBillNo() {
+		return railwayBillNo;
+	}
+
+	public void setRailwayBillNo(Integer railwayBillNo) {
+		this.railwayBillNo = railwayBillNo;
+	}
+
+	public LocalDateTime getPickupLocalDateTime() {
+		return pickupLocalDateTime;
+	}
+
+	public void setPickupLocalDateTime(LocalDateTime pickupLocalDateTime) {
+		this.pickupLocalDateTime = pickupLocalDateTime;
+	}
+
+	public LocalDateTime getPlannedShipLocalDateTime() {
+		return plannedShipLocalDateTime;
+	}
+
+	public void setPlannedShipLocalDateTime(LocalDateTime plannedShipLocalDateTime) {
+		this.plannedShipLocalDateTime = plannedShipLocalDateTime;
+	}
+
+	public LocalDateTime getCusPickupLastFreeLocalDateTime() {
+		return cusPickupLastFreeLocalDateTime;
+	}
+
+	public void setCusPickupLastFreeLocalDateTime(LocalDateTime cusPickupLastFreeLocalDateTime) {
+		this.cusPickupLastFreeLocalDateTime = cusPickupLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getCusReturnLastFreeLocalDateTime() {
+		return cusReturnLastFreeLocalDateTime;
+	}
+
+	public void setCusReturnLastFreeLocalDateTime(LocalDateTime cusReturnLastFreeLocalDateTime) {
+		this.cusReturnLastFreeLocalDateTime = cusReturnLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getCarPickupLastFreeLocalDateTime() {
+		return carPickupLastFreeLocalDateTime;
+	}
+
+	public void setCarPickupLastFreeLocalDateTime(LocalDateTime carPickupLastFreeLocalDateTime) {
+		this.carPickupLastFreeLocalDateTime = carPickupLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getCarReturnLastFreeLocalDateTime() {
+		return carReturnLastFreeLocalDateTime;
+	}
+
+	public void setCarReturnLastFreeLocalDateTime(LocalDateTime carReturnLastFreeLocalDateTime) {
+		this.carReturnLastFreeLocalDateTime = carReturnLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getDischargeLocalDateTime() {
+		return dischargeLocalDateTime;
+	}
+
+	public void setDischargeLocalDateTime(LocalDateTime dischargeLocalDateTime) {
+		this.dischargeLocalDateTime = dischargeLocalDateTime;
+	}
+
+
 }

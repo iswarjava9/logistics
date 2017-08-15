@@ -25,17 +25,16 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 		return getCurrentSession().load(BookingDetail.class, bookingId);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookingDetail> getBookingList() {
 		Criteria cr = getCurrentSession().createCriteria(BookingDetail.class)
-			    .setProjection(Projections.projectionList()
-			      .add(Projections.property("id"), "id")
-			      .add(Projections.property("carrierBookingNo"), "carrierBookingNo")
-			      .add(Projections.property("shipperRefNo"), "shipperRefNo")
-			      .add(Projections.property("nvoccBookingNo"), "nvoccBookingNo"))
-			    .setResultTransformer(Transformers.aliasToBean(BookingDetail.class));
-
-			  List<BookingDetail> list = cr.list();
+				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
+						.add(Projections.property("carrierBookingNo"), "carrierBookingNo")
+						.add(Projections.property("shipperRefNo"), "shipperRefNo")
+						.add(Projections.property("nvoccBookingNo"), "nvoccBookingNo"))
+				.setResultTransformer(Transformers.aliasToBean(BookingDetail.class));
+		List<BookingDetail> list = cr.list();
 		return list;
 	}
 }

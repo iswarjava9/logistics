@@ -1,12 +1,18 @@
 package com.suis.logistics.common;
 
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.modelmapper.AbstractConverter;
+import org.modelmapper.AbstractProvider;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.Provider;
 import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
@@ -121,6 +127,14 @@ public class ConverterUtil {
 		return modelMapper.map(quotation, QuotationDto.class);
 	}
 
+	public List<QuotationDto> convertQuotationToDtoList(List<Quotation> quotations) {
+		
+		Type listType = new TypeToken<List<Quotation>>() {}.getType();
+		List<QuotationDto> quotationDtoList = modelMapper.map(quotations, listType);
+		
+		return quotationDtoList;
+	}
+
 	public BusinessLine convertBusinessLineDtoToEntity(BusinessLineDto businessLineDto) {
 		return modelMapper.map(businessLineDto, BusinessLine.class);
 	}
@@ -154,6 +168,28 @@ public class ConverterUtil {
 		return modelMapper.map(containerType, ContainerTypeDto.class);
 	}
 
+	public void setLocalDateTimeToModelMapper(){
+		 Provider<LocalDateTime> localDateProvider = new AbstractProvider<LocalDateTime>() {
+		        @Override
+		        public LocalDateTime get() {
+		            return LocalDateTime.now();
+		        }
+		    };
+
+		    Converter<String, LocalDateTime> toStringDate = new AbstractConverter<String, LocalDateTime>() {
+		        @Override
+		        protected LocalDateTime convert(String source) {
+		            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		            LocalDateTime localDateTime = LocalDateTime.parse(source, format);
+		            return localDateTime;
+		        }
+		    };
+
+
+		    modelMapper.createTypeMap(String.class, LocalDateTime.class);
+		    modelMapper.addConverter(toStringDate);
+		    modelMapper.getTypeMap(String.class, LocalDateTime.class).setProvider(localDateProvider);
+	}
 	public IncoTerm convertIncoTermDtoToEntity(IncoTermDto incoTermDto) {
 		return modelMapper.map(incoTermDto, IncoTerm.class);
 	}

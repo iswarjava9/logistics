@@ -1,7 +1,8 @@
 package com.suis.logistics.web.quotation;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.suis.logistics.web.CountryDto;
 import com.suis.logistics.web.StateDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
@@ -19,17 +20,22 @@ import com.suis.logistics.web.vessel.VesselDto;
 public class QuotationDto {
 
 	private Integer			id;
-	private String			agentDriven;
+	private boolean			agentDriven;
 	private String			containerHandling;
 	private String			customerRefNo;
-	private ZonedDateTime			effectiveDate;
-	private ZonedDateTime	expirationDate;
+
+	//@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime			effectiveDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private LocalDateTime	expirationDate;
 	private String			incoTermLocation;
 	private String			paymentTerm;
 	private String			quoteNo;
 	private String			quotedBy;
 	private String			transitTime;
 	private String			voyage;
+
 	private ContainerDto	containerDetail;
 	private BusinessLineDto	businessLine;
 	private CountryDto		country;
@@ -56,10 +62,11 @@ public class QuotationDto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getAgentDriven() {
+
+	public boolean isAgentDriven() {
 		return agentDriven;
 	}
-	public void setAgentDriven(String agentDriven) {
+	public void setAgentDriven(boolean agentDriven) {
 		this.agentDriven = agentDriven;
 	}
 	public String getContainerHandling() {
@@ -75,16 +82,16 @@ public class QuotationDto {
 		this.customerRefNo = customerRefNo;
 	}
 
-	public ZonedDateTime getEffectiveDate() {
+	public LocalDateTime getEffectiveDate() {
 		return effectiveDate;
 	}
-	public void setEffectiveDate(ZonedDateTime effectiveDate) {
+	public void setEffectiveDate(LocalDateTime effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
-	public ZonedDateTime getExpirationDate() {
+	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}
-	public void setExpirationDate(ZonedDateTime expirationDate) {
+	public void setExpirationDate(LocalDateTime expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 	public String getIncoTermLocation() {

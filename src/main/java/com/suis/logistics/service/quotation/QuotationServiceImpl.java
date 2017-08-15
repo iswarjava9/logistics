@@ -1,5 +1,7 @@
 package com.suis.logistics.service.quotation;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -20,6 +22,11 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public Quotation getQuotation(int id) {
 		return quotationDao.getQuotation(id);
+	}
+
+	@Override
+	public List<Quotation> getQuotations() {
+		return quotationDao.getQuotations();
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.suis.logistics.web.quotation;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpHeaders;
@@ -28,7 +30,7 @@ public class QuotationController extends BaseController {
 
 		Integer quotationId = quotationService.createQuotation(converterUtil.convertQuotationDtoToEntity(quotationDto));
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("bookingId", String.valueOf(quotationId));
+		headers.set("quotationId", String.valueOf(quotationId));
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
@@ -38,6 +40,14 @@ public class QuotationController extends BaseController {
 
 		QuotationDto quotationDto = converterUtil.convertQuotationToDto(quotationService.getQuotation(id));
 		return new ResponseEntity<QuotationDto>(quotationDto, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public ResponseEntity<List<QuotationDto>> get() {
+
+		List<QuotationDto> quotations = converterUtil.convertQuotationToDtoList(quotationService.getQuotations());
+		return new ResponseEntity<List<QuotationDto>>(quotations, HttpStatus.OK);
 	}
 
 }

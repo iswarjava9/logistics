@@ -43,7 +43,6 @@ public class BookingController extends BaseController {
 	@Transactional
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ResponseEntity<List<BookingDto>> getBookingList() {
-
 		List<BookingDto> bookings = converterUtil.convertBookingDetailToDtoList(bookingService.getBookingList());
 		return new ResponseEntity<List<BookingDto>>(bookings, HttpStatus.OK);
 	}
