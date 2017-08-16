@@ -128,10 +128,10 @@ public class ConverterUtil {
 	}
 
 	public List<QuotationDto> convertQuotationToDtoList(List<Quotation> quotations) {
-		
-		Type listType = new TypeToken<List<Quotation>>() {}.getType();
+
+		Type listType = new TypeToken<List<QuotationDto>>() {}.getType();
 		List<QuotationDto> quotationDtoList = modelMapper.map(quotations, listType);
-		
+
 		return quotationDtoList;
 	}
 
