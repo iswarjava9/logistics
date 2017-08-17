@@ -1,12 +1,13 @@
 package com.suis.logistics.service.container;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.suis.logistics.model.ContainerDetail;
 import com.suis.logistics.model.ContainerType;
 
 
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 public interface ContainerService {
 
 	public Integer createContainer(ContainerDetail containerDetail);

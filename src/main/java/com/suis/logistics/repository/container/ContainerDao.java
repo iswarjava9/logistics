@@ -9,4 +9,6 @@ public interface ContainerDao {
 	public ContainerDetail getContainer(int containerId);
 	public Integer createContainerType(ContainerType containerType);
 	public ContainerType getContainerType(int containerTypeId);
+
+
 }

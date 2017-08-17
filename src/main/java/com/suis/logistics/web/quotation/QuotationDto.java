@@ -3,6 +3,8 @@ package com.suis.logistics.web.quotation;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.suis.logistics.web.CountryDto;
 import com.suis.logistics.web.StateDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
@@ -17,6 +19,7 @@ import com.suis.logistics.web.servicelevel.ServiceLevelDto;
 import com.suis.logistics.web.servicetype.ServiceTypeDto;
 import com.suis.logistics.web.vessel.VesselDto;
 
+//@JsonInclude(Include.NON_NULL) // Ignore fields with null vlaues and does not include as part of json
 public class QuotationDto {
 
 	private Integer			id;
@@ -25,6 +28,7 @@ public class QuotationDto {
 	private String			customerRefNo;
 
 	//@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private LocalDateTime			effectiveDate;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")

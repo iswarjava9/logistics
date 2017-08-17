@@ -51,9 +51,7 @@ public class Client implements Serializable {
 	@OneToMany(mappedBy="client")
 	private List<User> users;
 
-	//bi-directional many-to-one association to BookingDetail
-	@OneToMany(mappedBy="client")
-	private List<BookingDetail> bookingDetails;
+
 
 	@Column(name="createddate")
 	private Date createdDate;
@@ -178,27 +176,6 @@ public class Client implements Serializable {
 		return user;
 	}
 
-	public List<BookingDetail> getBookingDetails() {
-		return this.bookingDetails;
-	}
-
-	public void setBookingDetails(List<BookingDetail> bookingDetails) {
-		this.bookingDetails = bookingDetails;
-	}
-
-	public BookingDetail addBookingDetail(BookingDetail bookingDetail) {
-		getBookingDetails().add(bookingDetail);
-		bookingDetail.setClient(this);
-
-		return bookingDetail;
-	}
-
-	public BookingDetail removeBookingDetail(BookingDetail bookingDetail) {
-		getBookingDetails().remove(bookingDetail);
-		bookingDetail.setClient(null);
-
-		return bookingDetail;
-	}
 
 	public Date getCreatedDate() {
 		return createdDate;

@@ -21,26 +21,25 @@ public class ContainerDto {
 	private Integer				vehicleNo;
 	private Integer				stuffingNo;
 	private Integer				railwayBillNo;
-
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime				pickupLocalDateTime;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime				plannedShipLocalDateTime;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime				cusPickupLastFreeLocalDateTime;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime				cusReturnLastFreeLocalDateTime;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime				carPickupLastFreeLocalDateTime;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime				carReturnLastFreeLocalDateTime;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime				dischargeLocalDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		pickupLocalDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		plannedShipLocalDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		cusPickupLastFreeLocalDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		cusReturnLastFreeLocalDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		carrierPickupLastFreeLocalDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		carrierReturnLastFreeLocalDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		dischargeLocalDateTime;
 
 	private List<CargoDto>		cargos;
-	private Integer			bookingId;
+	private Integer				bookingId;
 	private ContainerTypeDto	containerType;
-	private Integer		quotationId;
+	private Integer				quotationId;
 
 	public Integer getId() {
 		return id;
@@ -130,7 +129,6 @@ public class ContainerDto {
 		this.cargos = cargos;
 	}
 
-
 	public Integer getBookingId() {
 		return bookingId;
 	}
@@ -146,7 +144,6 @@ public class ContainerDto {
 	public void setContainerType(ContainerTypeDto containerType) {
 		this.containerType = containerType;
 	}
-
 
 	public Integer getQuotationId() {
 		return quotationId;
@@ -212,20 +209,22 @@ public class ContainerDto {
 		this.cusReturnLastFreeLocalDateTime = cusReturnLastFreeLocalDateTime;
 	}
 
-	public LocalDateTime getCarPickupLastFreeLocalDateTime() {
-		return carPickupLastFreeLocalDateTime;
+
+
+	public LocalDateTime getCarrierPickupLastFreeLocalDateTime() {
+		return carrierPickupLastFreeLocalDateTime;
 	}
 
-	public void setCarPickupLastFreeLocalDateTime(LocalDateTime carPickupLastFreeLocalDateTime) {
-		this.carPickupLastFreeLocalDateTime = carPickupLastFreeLocalDateTime;
+	public void setCarrierPickupLastFreeLocalDateTime(LocalDateTime carrierPickupLastFreeLocalDateTime) {
+		this.carrierPickupLastFreeLocalDateTime = carrierPickupLastFreeLocalDateTime;
 	}
 
-	public LocalDateTime getCarReturnLastFreeLocalDateTime() {
-		return carReturnLastFreeLocalDateTime;
+	public LocalDateTime getCarrierReturnLastFreeLocalDateTime() {
+		return carrierReturnLastFreeLocalDateTime;
 	}
 
-	public void setCarReturnLastFreeLocalDateTime(LocalDateTime carReturnLastFreeLocalDateTime) {
-		this.carReturnLastFreeLocalDateTime = carReturnLastFreeLocalDateTime;
+	public void setCarrierReturnLastFreeLocalDateTime(LocalDateTime carrierReturnLastFreeLocalDateTime) {
+		this.carrierReturnLastFreeLocalDateTime = carrierReturnLastFreeLocalDateTime;
 	}
 
 	public LocalDateTime getDischargeLocalDateTime() {
@@ -235,6 +234,4 @@ public class ContainerDto {
 	public void setDischargeLocalDateTime(LocalDateTime dischargeLocalDateTime) {
 		this.dischargeLocalDateTime = dischargeLocalDateTime;
 	}
-
-
 }

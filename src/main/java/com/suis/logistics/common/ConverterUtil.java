@@ -120,10 +120,12 @@ public class ConverterUtil {
 	}
 
 	public Quotation convertQuotationDtoToEntity(QuotationDto quotationDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		return modelMapper.map(quotationDto, Quotation.class);
 	}
 
 	public QuotationDto convertQuotationToDto(Quotation quotation) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		return modelMapper.map(quotation, QuotationDto.class);
 	}
 

@@ -5,12 +5,15 @@ import javax.annotation.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.suis.logistics.model.ContainerDetail;
+import com.suis.logistics.service.cargo.CargoService;
 import com.suis.logistics.service.container.ContainerService;
 import com.suis.logistics.web.BaseController;
 
@@ -18,17 +21,21 @@ import com.suis.logistics.web.BaseController;
 @RequestMapping("/container")
 public class ContainerController extends BaseController {
 	@Resource
-	ContainerService containerService;
+	ContainerService	containerService;
+	@Resource
+	CargoService		cargoService;
+
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> createContainer(@RequestBody ContainerDto containerDto) {
-		Integer containerId = containerService.createContainer(converterUtil.convertContainerDtoToEntity(containerDto));
+		ContainerDetail containerDetail = converterUtil.convertContainerDtoToEntity(containerDto);
+		Integer containerId = containerService.createContainer(containerDetail);
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("businessLineId", String.valueOf(containerId));
+		headers.set("containerId", String.valueOf(containerId));
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-
+	@Transactional
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<ContainerDto> get(@PathVariable("id") int id) {
 		ContainerDto containerDto = converterUtil.convertContainerToDto(containerService.getContainer(id));

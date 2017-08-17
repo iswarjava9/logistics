@@ -2,6 +2,7 @@ package com.suis.logistics.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -17,24 +20,25 @@ import javax.persistence.NamedQuery;
  *
  */
 @Entity
+@Table(name="cargo")
 @NamedQuery(name="Cargo.findAll", query="SELECT c FROM Cargo c")
 public class Cargo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@Column(name="cartoon_hieght")
-	private int cartoonHieght;
+	private Double cartoonHieght;
 
 	@Column(name="cartoon_length")
-	private int cartoonLength;
+	private Double cartoonLength;
 
 	@Column(name="cartoon_width")
-	private int cartoonWidth;
+	private Double cartoonWidth;
 
-	private int cartoons;
+	private Integer cartoons;
 
 	@Column(name="contents_description")
 	private String contentsDescription;
@@ -52,7 +56,7 @@ public class Cargo implements Serializable {
 	private String grossLbs;
 
 	@Column(name="hts_id")
-	private int htsId;
+	private Integer htsId;
 
 	@Column(name="net_cbm")
 	private String netCbm;
@@ -67,70 +71,71 @@ public class Cargo implements Serializable {
 	private String netLbs;
 
 	@Column(name="no_of_pieces")
-	private int noOfPieces;
+	private Integer noOfPieces;
 
 	private String unit;
 
 	//bi-directional many-to-one association to CargoTemplate
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="cargo_template_id")
 	private CargoTemplate cargoTemplate;
 
 	//bi-directional many-to-one association to Commodity
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="schedule_b_id")
 	private Commodity commodity;
 
 	//bi-directional many-to-one association to ContainerDetail
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="container_id")
 	private ContainerDetail containerDetail;
 
 	//bi-directional many-to-one association to PieceType
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="piece_type_id")
 	private PieceType pieceType;
 
 	public Cargo() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getCartoonHieght() {
-		return this.cartoonHieght;
+
+	public Double getCartoonHieght() {
+		return cartoonHieght;
 	}
 
-	public void setCartoonHieght(int cartoonHieght) {
+	public void setCartoonHieght(Double cartoonHieght) {
 		this.cartoonHieght = cartoonHieght;
 	}
 
-	public int getCartoonLength() {
-		return this.cartoonLength;
+	public Double getCartoonLength() {
+		return cartoonLength;
 	}
 
-	public void setCartoonLength(int cartoonLength) {
+	public void setCartoonLength(Double cartoonLength) {
 		this.cartoonLength = cartoonLength;
 	}
 
-	public int getCartoonWidth() {
-		return this.cartoonWidth;
+	public Double getCartoonWidth() {
+		return cartoonWidth;
 	}
 
-	public void setCartoonWidth(int cartoonWidth) {
+	public void setCartoonWidth(Double cartoonWidth) {
 		this.cartoonWidth = cartoonWidth;
 	}
 
-	public int getCartoons() {
+	public Integer getCartoons() {
 		return this.cartoons;
 	}
 
-	public void setCartoons(int cartoons) {
+	public void setCartoons(Integer cartoons) {
 		this.cartoons = cartoons;
 	}
 
@@ -174,11 +179,11 @@ public class Cargo implements Serializable {
 		this.grossLbs = grossLbs;
 	}
 
-	public int getHtsId() {
+	public Integer getHtsId() {
 		return this.htsId;
 	}
 
-	public void setHtsId(int htsId) {
+	public void setHtsId(Integer htsId) {
 		this.htsId = htsId;
 	}
 
@@ -214,11 +219,11 @@ public class Cargo implements Serializable {
 		this.netLbs = netLbs;
 	}
 
-	public int getNoOfPieces() {
+	public Integer getNoOfPieces() {
 		return this.noOfPieces;
 	}
 
-	public void setNoOfPieces(int noOfPieces) {
+	public void setNoOfPieces(Integer noOfPieces) {
 		this.noOfPieces = noOfPieces;
 	}
 

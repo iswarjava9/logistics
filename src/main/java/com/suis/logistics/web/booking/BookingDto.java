@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.suis.logistics.web.container.ContainerDto;
 import com.suis.logistics.web.customer.AccountShortInfo;
 import com.suis.logistics.web.customer.ConsigneeShortInfo;
 import com.suis.logistics.web.customer.ForeignAgentShortInfo;
@@ -67,6 +68,8 @@ public class BookingDto {
 	private PortOfDischargeShortInfo	portOfDischargeShortInfo;
 	private PortOfLoadShortInfo			portOfLoadShortInfo;
 	private TranshipmentPortShortInfo	transhipmentPortShortInfo;
+
+	private ContainerDto containerDetail;
 
 	public Integer getId() {
 		return id;
@@ -427,4 +430,13 @@ public class BookingDto {
 	public void setTranshipmentPortShortInfo(TranshipmentPortShortInfo transhipmentPortShortInfo) {
 		this.transhipmentPortShortInfo = transhipmentPortShortInfo;
 	}
+
+	public ContainerDto getContainerDetail() {
+		return containerDetail;
+	}
+
+	public void setContainerDetail(ContainerDto containerDetail) {
+		this.containerDetail = containerDetail;
+	}
+
 }

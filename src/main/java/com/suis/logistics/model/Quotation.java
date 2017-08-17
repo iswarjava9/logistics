@@ -51,7 +51,8 @@ public class Quotation implements Serializable {
 	private String				transitTime;
 	private String				voyage;
 	// bi-directional many-to-one association to ContainerDetail
-	@OneToOne(mappedBy = "quotation")
+	@OneToOne
+	@JoinColumn(name = "container_id")
 	private ContainerDetail		containerDetail;
 	// bi-directional many-to-one association to BusinessLine
 	@ManyToOne

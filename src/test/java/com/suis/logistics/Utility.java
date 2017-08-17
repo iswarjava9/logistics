@@ -12,19 +12,11 @@ import org.modelmapper.ModelMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suis.logistics.model.Client;
-import com.suis.logistics.web.CountryDto;
-import com.suis.logistics.web.StateDto;
-import com.suis.logistics.web.businessline.BusinessLineDto;
+import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.client.ClientDto;
-import com.suis.logistics.web.container.ContainerDto;
-import com.suis.logistics.web.customer.CustomerDto;
-import com.suis.logistics.web.division.DivisionDto;
-import com.suis.logistics.web.incoterm.IncoTermDto;
-import com.suis.logistics.web.movementtype.MovementTypeDto;
-import com.suis.logistics.web.person.PersonDto;
-import com.suis.logistics.web.place.PlaceDto;
-import com.suis.logistics.web.quotation.QuotationDto;
-import com.suis.logistics.web.vessel.VesselDto;
+import com.suis.logistics.web.customer.AccountShortInfo;
+import com.suis.logistics.web.customer.ConsigneeShortInfo;
+import com.suis.logistics.web.place.LoadTerminalShortInfo;
 
 public class Utility {
 
@@ -86,29 +78,23 @@ System.out.println(ZoneId.getAvailableZoneIds());
 	public static void generateObjectToJsonString() {
 		ObjectMapper mapper = new ObjectMapper();
 		// Client obj = new Client();
-		QuotationDto obj = new QuotationDto();
+		BookingDto obj = new BookingDto();
+		obj.setAccountShortInfo(new AccountShortInfo());
+		obj.setConsigneeShortInfo(new ConsigneeShortInfo());
+		obj.setLoadTerminalShortInfo(new LoadTerminalShortInfo());
+		//obj.setContainerDetail(new ContainerDto());
 
-		obj.setAgentDriven(true);
-		obj.setBusinessLine(new BusinessLineDto());
-		obj.setContainerDetail(new ContainerDto());
-		obj.setCountry(new CountryDto());
-		obj.setCustomer(new CustomerDto());
-		obj.setDivision(new DivisionDto());
-		obj.setFinalDestination(new PlaceDto());
-		obj.setIncoTerm(new IncoTermDto());
-		obj.setMovementType(new MovementTypeDto());
-		obj.setPickupCity(new PlaceDto());
-		obj.setPortOfDischarge(new PlaceDto());
-		obj.setPortOfLoad(new PlaceDto());
-		obj.setPreferredCarrier(new PlaceDto());
-		obj.setPrimaryContact(new PersonDto());
-		obj.setSalesRepresentative(new PersonDto());
-		obj.setState(new StateDto());
-		obj.setVessel(new VesselDto());
+/*LocalDateTime curDate =  LocalDateTime.now();
+		obj.setCargoTemplate(new CargoTemplateDto());
+
+obj.setPieceType(new PieceTypeDto());
+obj.setContainerId(1);*/
+
 
 
 		// Object to JSON in String
 		try {
+			mapper.findAndRegisterModules();
 			String jsonInString = mapper.writeValueAsString(obj);
 			System.out.println(jsonInString);
 		} catch (JsonProcessingException e) {

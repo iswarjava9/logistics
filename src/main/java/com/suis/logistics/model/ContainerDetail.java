@@ -1,9 +1,10 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
@@ -57,13 +56,12 @@ public class ContainerDetail implements Serializable {
 	private double tareLbs;
 
 	//bi-directional many-to-one association to Cargo
-	@OneToMany(mappedBy="containerDetail")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "containerDetail" )
 	private List<Cargo> cargos;
 
 	//bi-directional many-to-one association to BookingDetail
-	@ManyToOne
-	@JoinColumn(name="booking_id")
-	private BookingDetail bookingDetail;
+	/*@ManyToOne
+	private BookingDetail bookingDetail;*/
 
 	//bi-directional many-to-one association to ContainerType
 	@ManyToOne
@@ -83,33 +81,33 @@ public class ContainerDetail implements Serializable {
 	@Column(name="railway_bill_no")
 	private int railwayBillNo;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="pickup_date")
-	private Date pickupDate;
+	private LocalDateTime pickupLocalDateTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="planned_ship_date")
-	private Date plannedShipDate;
+	private LocalDateTime plannedShipLocalDateTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="cus_pickup_last_free_date")
-	private Date cusPickupLastFreeDate;
+	private LocalDateTime cusPickupLastFreeLocalDateTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="cus_return_last_free_date")
-	private Date cusReturnLastFreeDate;
+	private LocalDateTime cusReturnLastFreeLocalDateTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="car_pickup_last_free_date")
-	private Date carPickupLastFreeDate;
+	private LocalDateTime carrierPickupLastFreeLocalDateTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="car_return_last_free_date")
-	private Date carReturnLastFreeDate;
+	private LocalDateTime carrierReturnLastFreeLocalDateTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="discharge_date")
-	private Date dischargeDate;
+	private LocalDateTime dischargeLocalDateTime;
 
 	public ContainerDetail() {
 	}
@@ -203,9 +201,7 @@ public class ContainerDetail implements Serializable {
 	}
 
 	public Cargo addCargo(Cargo cargo) {
-		getCargos().add(cargo);
 		cargo.setContainerDetail(this);
-
 		return cargo;
 	}
 
@@ -214,14 +210,6 @@ public class ContainerDetail implements Serializable {
 		cargo.setContainerDetail(null);
 
 		return cargo;
-	}
-
-	public BookingDetail getBookingDetail() {
-		return this.bookingDetail;
-	}
-
-	public void setBookingDetail(BookingDetail bookingDetail) {
-		this.bookingDetail = bookingDetail;
 	}
 
 	public ContainerType getContainerType() {
@@ -239,5 +227,86 @@ public class ContainerDetail implements Serializable {
 	public void setQuotation(Quotation quotation) {
 		this.quotation = quotation;
 	}
+
+	public int getVehicleNo() {
+		return vehicleNo;
+	}
+
+	public void setVehicleNo(int vehicleNo) {
+		this.vehicleNo = vehicleNo;
+	}
+
+	public int getStuffingNo() {
+		return stuffingNo;
+	}
+
+	public void setStuffingNo(int stuffingNo) {
+		this.stuffingNo = stuffingNo;
+	}
+
+	public int getRailwayBillNo() {
+		return railwayBillNo;
+	}
+
+	public void setRailwayBillNo(int railwayBillNo) {
+		this.railwayBillNo = railwayBillNo;
+	}
+
+	public LocalDateTime getPickupLocalDateTime() {
+		return pickupLocalDateTime;
+	}
+
+	public void setPickupLocalDateTime(LocalDateTime pickupLocalDateTime) {
+		this.pickupLocalDateTime = pickupLocalDateTime;
+	}
+
+	public LocalDateTime getPlannedShipLocalDateTime() {
+		return plannedShipLocalDateTime;
+	}
+
+	public void setPlannedShipLocalDateTime(LocalDateTime plannedShipLocalDateTime) {
+		this.plannedShipLocalDateTime = plannedShipLocalDateTime;
+	}
+
+	public LocalDateTime getCusPickupLastFreeLocalDateTime() {
+		return cusPickupLastFreeLocalDateTime;
+	}
+
+	public void setCusPickupLastFreeLocalDateTime(LocalDateTime cusPickupLastFreeLocalDateTime) {
+		this.cusPickupLastFreeLocalDateTime = cusPickupLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getCusReturnLastFreeLocalDateTime() {
+		return cusReturnLastFreeLocalDateTime;
+	}
+
+	public void setCusReturnLastFreeLocalDateTime(LocalDateTime cusReturnLastFreeLocalDateTime) {
+		this.cusReturnLastFreeLocalDateTime = cusReturnLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getCarrierPickupLastFreeLocalDateTime() {
+		return carrierPickupLastFreeLocalDateTime;
+	}
+
+	public void setCarrierPickupLastFreeLocalDateTime(LocalDateTime carrierPickupLastFreeLocalDateTime) {
+		this.carrierPickupLastFreeLocalDateTime = carrierPickupLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getCarrierReturnLastFreeLocalDateTime() {
+		return carrierReturnLastFreeLocalDateTime;
+	}
+
+	public void setCarrierReturnLastFreeLocalDateTime(LocalDateTime carrierReturnLastFreeLocalDateTime) {
+		this.carrierReturnLastFreeLocalDateTime = carrierReturnLastFreeLocalDateTime;
+	}
+
+	public LocalDateTime getDischargeLocalDateTime() {
+		return dischargeLocalDateTime;
+	}
+
+	public void setDischargeLocalDateTime(LocalDateTime dischargeLocalDateTime) {
+		this.dischargeLocalDateTime = dischargeLocalDateTime;
+	}
+
 
 }

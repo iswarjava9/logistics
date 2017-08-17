@@ -3,7 +3,6 @@ package com.suis.logistics.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -102,7 +101,8 @@ public class BookingDetail implements Serializable {
 	private Date					sailDate;
 
 	// bi-directional many-to-one association to Client
-	@ManyToOne
+	@OneToOne
+	@JoinColumn(name="client_id")
 	private Client					client;
 	// bi-directional many-to-one association to Customer
 	@ManyToOne
@@ -156,8 +156,9 @@ public class BookingDetail implements Serializable {
 	@JoinColumn(name = "transhipment_port_id")
 	private Place					transhipmentPort;
 	// bi-directional many-to-one association to ContainerDetail
-	@OneToMany(mappedBy = "bookingDetail")
-	private List<ContainerDetail>	containerDetails;
+	@OneToOne
+	@JoinColumn(name="container_id")
+	private ContainerDetail	containerDetail;
 
 	public BookingDetail() {
 	}
@@ -522,12 +523,14 @@ public class BookingDetail implements Serializable {
 		this.transhipmentPort = transhipmentPort;
 	}
 
-	public List<ContainerDetail> getContainerDetails() {
-		return containerDetails;
+
+
+	public ContainerDetail getContainerDetail() {
+		return containerDetail;
 	}
 
-	public void setContainerDetails(List<ContainerDetail> containerDetails) {
-		this.containerDetails = containerDetails;
+	public void setContainerDetail(ContainerDetail containerDetail) {
+		this.containerDetail = containerDetail;
 	}
 
 	@Override
