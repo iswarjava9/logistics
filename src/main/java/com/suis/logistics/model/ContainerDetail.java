@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,8 +61,9 @@ public class ContainerDetail implements Serializable {
 	private List<Cargo> cargos;
 
 	//bi-directional many-to-one association to BookingDetail
-	/*@ManyToOne
-	private BookingDetail bookingDetail;*/
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "booking_id")
+	private BookingDetail bookingDetail;
 
 	//bi-directional many-to-one association to ContainerType
 	@ManyToOne
@@ -108,6 +110,10 @@ public class ContainerDetail implements Serializable {
 
 	@Column(name="discharge_date")
 	private LocalDateTime dischargeLocalDateTime;
+
+	/*private Integer bookingId;
+
+	private Integer quotationId;*/
 
 	public ContainerDetail() {
 	}
@@ -306,6 +312,14 @@ public class ContainerDetail implements Serializable {
 
 	public void setDischargeLocalDateTime(LocalDateTime dischargeLocalDateTime) {
 		this.dischargeLocalDateTime = dischargeLocalDateTime;
+	}
+
+	public BookingDetail getBookingDetail() {
+		return bookingDetail;
+	}
+
+	public void setBookingDetail(BookingDetail bookingDetail) {
+		this.bookingDetail = bookingDetail;
 	}
 
 

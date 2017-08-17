@@ -1,13 +1,19 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
  * The persistent class for the physical_entity database table.
- * 
+ *
  */
 @Entity
 @Table(name="place")
@@ -38,29 +44,6 @@ public class Place implements Serializable {
 	@Column(name="un_code")
 	private String unCode;
 
-	/*//bi-directional many-to-one association to BookingDetail
-	@OneToMany(mappedBy="loadTerminal")
-	private List<BookingDetail> bookingDetails1;
-
-	//bi-directional many-to-one association to BookingDetail
-	@OneToMany(mappedBy="placeOfDelivery")
-	private List<BookingDetail> bookingDetails2;
-
-	//bi-directional many-to-one association to BookingDetail
-	@OneToMany(mappedBy="placeOfReceipt")
-	private List<BookingDetail> bookingDetails3;
-
-	//bi-directional many-to-one association to BookingDetail
-	@OneToMany(mappedBy="portOfDischarge")
-	private List<BookingDetail> bookingDetails4;
-
-	//bi-directional many-to-one association to BookingDetail
-	@OneToMany(mappedBy="portOfLoad")
-	private List<BookingDetail> bookingDetails5;
-
-	//bi-directional many-to-one association to BookingDetail
-	@OneToMany(mappedBy="transhipmentPort")
-	private List<BookingDetail> bookingDetails6;*/
 
 	public Place() {
 	}

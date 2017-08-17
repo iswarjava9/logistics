@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.modelmapper.ModelMapper;
@@ -14,9 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suis.logistics.model.Client;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.client.ClientDto;
-import com.suis.logistics.web.customer.AccountShortInfo;
-import com.suis.logistics.web.customer.ConsigneeShortInfo;
-import com.suis.logistics.web.place.LoadTerminalShortInfo;
+import com.suis.logistics.web.container.ContainerDto;
 
 public class Utility {
 
@@ -79,9 +78,8 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		ObjectMapper mapper = new ObjectMapper();
 		// Client obj = new Client();
 		BookingDto obj = new BookingDto();
-		obj.setAccountShortInfo(new AccountShortInfo());
-		obj.setConsigneeShortInfo(new ConsigneeShortInfo());
-		obj.setLoadTerminalShortInfo(new LoadTerminalShortInfo());
+		obj.setContainerDetails(Arrays.asList(new ContainerDto(),new ContainerDto()));
+		obj.setClient(new ClientDto());
 		//obj.setContainerDetail(new ContainerDto());
 
 /*LocalDateTime curDate =  LocalDateTime.now();

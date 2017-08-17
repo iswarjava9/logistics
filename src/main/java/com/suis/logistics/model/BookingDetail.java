@@ -2,7 +2,7 @@ package com.suis.logistics.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the booking_detail database table.
@@ -73,35 +71,35 @@ public class BookingDetail implements Serializable {
 	private Integer					vesselId;
 
 
-	// @Temporal(TemporalType.TIMESTAMP)
+	//
 	@Column(name = "docs_cut_off_date_time")
 	private LocalDateTime			docsCutOffDateTime;
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name = "docs_received_date")
-	private Date					docsReceivedDate;
-	@Temporal(TemporalType.DATE)
-	private Date					eta;
-	@Temporal(TemporalType.DATE)
+	private LocalDateTime					docsReceivedDate;
+
+	private LocalDateTime					eta;
+
 	@Column(name = "booking_date")
-	private Date					bookingDate;
-	@Temporal(TemporalType.DATE)
+	private LocalDateTime					bookingDate;
+
 	@Column(name = "cargo_moving_date")
-	private Date					cargoMovingDate;
-	@Temporal(TemporalType.DATE)
+	private LocalDateTime					cargoMovingDate;
+
 	@Column(name = "cut_off_date")
-	private Date					cutOffDate;
-	@Temporal(TemporalType.DATE)
+	private LocalDateTime					cutOffDate;
+
 	@Column(name = "delievery_eta")
-	private Date					delieveryEta;
-	@Temporal(TemporalType.DATE)
+	private LocalDateTime					delieveryEta;
+
 	@Column(name = "rate_cut_off_date_time")
-	private Date					rateCutOffDateTime;
-	@Temporal(TemporalType.DATE)
+	private LocalDateTime					rateCutOffDateTime;
+
 	@Column(name = "sail_date")
-	private Date					sailDate;
+	private LocalDateTime					sailDate;
 
 	// bi-directional many-to-one association to Client
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="client_id")
 	private Client					client;
 	// bi-directional many-to-one association to Customer
@@ -155,10 +153,10 @@ public class BookingDetail implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "transhipment_port_id")
 	private Place					transhipmentPort;
+
 	// bi-directional many-to-one association to ContainerDetail
-	@OneToOne
-	@JoinColumn(name="container_id")
-	private ContainerDetail	containerDetail;
+	@OneToMany(mappedBy = "bookingDetail")
+	private List<ContainerDetail>	containerDetails;
 
 	public BookingDetail() {
 	}
@@ -179,11 +177,11 @@ public class BookingDetail implements Serializable {
 		this.aesAuthNo = aesAuthNo;
 	}
 
-	public Date getBookingDate() {
+	public LocalDateTime getBookingDate() {
 		return this.bookingDate;
 	}
 
-	public void setBookingDate(Date bookingDate) {
+	public void setBookingDate(LocalDateTime bookingDate) {
 		this.bookingDate = bookingDate;
 	}
 
@@ -203,11 +201,11 @@ public class BookingDetail implements Serializable {
 		this.bookingStatusId = bookingStatusId;
 	}
 
-	public Date getCargoMovingDate() {
+	public LocalDateTime getCargoMovingDate() {
 		return this.cargoMovingDate;
 	}
 
-	public void setCargoMovingDate(Date cargoMovingDate) {
+	public void setCargoMovingDate(LocalDateTime cargoMovingDate) {
 		this.cargoMovingDate = cargoMovingDate;
 	}
 
@@ -251,19 +249,19 @@ public class BookingDetail implements Serializable {
 		this.controller = controller;
 	}
 
-	public Date getCutOffDate() {
+	public LocalDateTime getCutOffDate() {
 		return this.cutOffDate;
 	}
 
-	public void setCutOffDate(Date cutOffDate) {
+	public void setCutOffDate(LocalDateTime cutOffDate) {
 		this.cutOffDate = cutOffDate;
 	}
 
-	public Date getDelieveryEta() {
+	public LocalDateTime getDelieveryEta() {
 		return this.delieveryEta;
 	}
 
-	public void setDelieveryEta(Date delieveryEta) {
+	public void setDelieveryEta(LocalDateTime delieveryEta) {
 		this.delieveryEta = delieveryEta;
 	}
 
@@ -283,19 +281,19 @@ public class BookingDetail implements Serializable {
 		this.docsCutOffDateTime = docsCutOffDateTime;
 	}
 
-	public Date getDocsReceivedDate() {
+	public LocalDateTime getDocsReceivedDate() {
 		return this.docsReceivedDate;
 	}
 
-	public void setDocsReceivedDate(Date docsReceivedDate) {
+	public void setDocsReceivedDate(LocalDateTime docsReceivedDate) {
 		this.docsReceivedDate = docsReceivedDate;
 	}
 
-	public Date getEta() {
+	public LocalDateTime getEta() {
 		return this.eta;
 	}
 
-	public void setEta(Date eta) {
+	public void setEta(LocalDateTime eta) {
 		this.eta = eta;
 	}
 
@@ -347,19 +345,19 @@ public class BookingDetail implements Serializable {
 		this.nvoccBookingNo = nvoccBookingNo;
 	}
 
-	public Date getRateCutOffDateTime() {
+	public LocalDateTime getRateCutOffDateTime() {
 		return this.rateCutOffDateTime;
 	}
 
-	public void setRateCutOffDateTime(Date rateCutOffDateTime) {
+	public void setRateCutOffDateTime(LocalDateTime rateCutOffDateTime) {
 		this.rateCutOffDateTime = rateCutOffDateTime;
 	}
 
-	public Date getSailDate() {
+	public LocalDateTime getSailDate() {
 		return this.sailDate;
 	}
 
-	public void setSailDate(Date sailDate) {
+	public void setSailDate(LocalDateTime sailDate) {
 		this.sailDate = sailDate;
 	}
 
@@ -524,13 +522,12 @@ public class BookingDetail implements Serializable {
 	}
 
 
-
-	public ContainerDetail getContainerDetail() {
-		return containerDetail;
+	public List<ContainerDetail> getContainerDetails() {
+		return containerDetails;
 	}
 
-	public void setContainerDetail(ContainerDetail containerDetail) {
-		this.containerDetail = containerDetail;
+	public void setContainerDetails(List<ContainerDetail> containerDetails) {
+		this.containerDetails = containerDetails;
 	}
 
 	@Override

@@ -1,76 +1,76 @@
 package com.suis.logistics.web.booking;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.suis.logistics.web.client.ClientDto;
 import com.suis.logistics.web.container.ContainerDto;
-import com.suis.logistics.web.customer.AccountShortInfo;
-import com.suis.logistics.web.customer.ConsigneeShortInfo;
-import com.suis.logistics.web.customer.ForeignAgentShortInfo;
-import com.suis.logistics.web.customer.LocalSSLineShortInfo;
-import com.suis.logistics.web.customer.NotifyShortInfo;
-import com.suis.logistics.web.customer.ShipperShortInfo;
-import com.suis.logistics.web.place.LoadTerminalShortInfo;
-import com.suis.logistics.web.place.PlaceOfDeliveryShortInfo;
-import com.suis.logistics.web.place.PlaceOfReceiptShortInfo;
-import com.suis.logistics.web.place.PortOfDischargeShortInfo;
-import com.suis.logistics.web.place.PortOfLoadShortInfo;
-import com.suis.logistics.web.place.TranshipmentPortShortInfo;
+import com.suis.logistics.web.customer.CustomerDto;
+import com.suis.logistics.web.place.PlaceDto;
+import com.suis.logistics.web.user.UserDto;
 
 public class BookingDto {
 
-	private Integer						id;
-	private String						aesAuthNo;
-	private Integer						bookingPersonId;
-	private Integer						bookingStatusId;
-	private String						carrierBookingNo;
-	private String						carrierContact;
-	private Integer						carrierId;
-	private String						carrierVoyage;
-	private String						controller;
-	private Integer						divisionId;
-	private Integer						forwarderId;
-	private String						forwarderRefNo;
-	private String						freight;
-	private Integer						lineOfBusinessId;
-	private String						nraNumber;
-	private String						nvoccBookingNo;
-	private Integer						salesRepresentativeId;
-	private Integer						serviceContractId;
-	private String						shipperRefNo;
-	private Integer						typeOfMoveId;
-	private Integer						typeOfServiceId;
-	private Integer						vesselId;
-	private Integer						clientId;
-	private Integer						userId;
+	private Integer				id;
+	private String				aesAuthNo;
+	private Integer				bookingPersonId;
+	private Integer				bookingStatusId;
+	private String				carrierBookingNo;
+	private String				carrierContact;
+	private Integer				carrierId;
+	private String				carrierVoyage;
+	private String				controller;
+	private Integer				divisionId;
+	private Integer				forwarderId;
+	private String				forwarderRefNo;
+	private String				freight;
+	private Integer				lineOfBusinessId;
+	private String				nraNumber;
+	private String				nvoccBookingNo;
+	private Integer				salesRepresentativeId;
+	private Integer				serviceContractId;
+	private String				shipperRefNo;
+	private Integer				typeOfMoveId;
+	private Integer				typeOfServiceId;
+	private Integer				vesselId;
+	//
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		docsCutOffDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		docsReceivedDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		eta;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		bookingDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		cargoMovingDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		cutOffDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		delieveryEta;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		rateCutOffDateTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		sailDate;
+	//
+	private ClientDto			client;
+	private UserDto				user;
+	private CustomerDto			foreignAgent;
+	private CustomerDto			account;
+	private CustomerDto			consignee;
+	private CustomerDto			localSSLineOffice;
+	private CustomerDto			notify;
+	private CustomerDto			shipper;
+	private PlaceDto			loadTerminal;
+	private PlaceDto			placeOfDelivery;
+	private PlaceDto			placeOfReceipt;
+	private PlaceDto			portOfDischarge;
+	private PlaceDto			portOfLoad;
+	private PlaceDto			transhipmentPort;
+	private List<ContainerDto>	containerDetails;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime						docsCutOffDateTime;
-	private Date						rateCutOffDateTime;
-	private Date						docsReceivedDate;
-	private Date						eta;
-	private Date						sailDate;
-	private Date						cutOffDate;
-	private Date						delieveryEta;
-	private Date						cargoMovingDate;
-	private Date						bookingDate;
-
-	private ForeignAgentShortInfo		foreignAgentShortInfo;
-	private AccountShortInfo			accountShortInfo;
-	private ConsigneeShortInfo			consigneeShortInfo;
-	private LocalSSLineShortInfo		localSSLineOfficeShortInfo;
-	private NotifyShortInfo				notifyShortInfo;
-	private ShipperShortInfo			shipperShortInfo;
-	private LoadTerminalShortInfo		loadTerminalShortInfo;
-	private PlaceOfDeliveryShortInfo	placeOfDeliveryShortInfo;
-	private PlaceOfReceiptShortInfo		placeOfReceiptShortInfo;
-	private PortOfDischargeShortInfo	portOfDischargeShortInfo;
-	private PortOfLoadShortInfo			portOfLoadShortInfo;
-	private TranshipmentPortShortInfo	transhipmentPortShortInfo;
-
-	private ContainerDto containerDetail;
-
+	// getter and setter method
 	public Integer getId() {
 		return id;
 	}
@@ -87,14 +87,6 @@ public class BookingDto {
 		this.aesAuthNo = aesAuthNo;
 	}
 
-	public Date getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(Date bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-
 	public Integer getBookingPersonId() {
 		return bookingPersonId;
 	}
@@ -109,14 +101,6 @@ public class BookingDto {
 
 	public void setBookingStatusId(Integer bookingStatusId) {
 		this.bookingStatusId = bookingStatusId;
-	}
-
-	public Date getCargoMovingDate() {
-		return cargoMovingDate;
-	}
-
-	public void setCargoMovingDate(Date cargoMovingDate) {
-		this.cargoMovingDate = cargoMovingDate;
 	}
 
 	public String getCarrierBookingNo() {
@@ -263,22 +247,6 @@ public class BookingDto {
 		this.vesselId = vesselId;
 	}
 
-	public Integer getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(Integer clientId) {
-		this.clientId = clientId;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
 	public LocalDateTime getDocsCutOffDateTime() {
 		return docsCutOffDateTime;
 	}
@@ -287,156 +255,187 @@ public class BookingDto {
 		this.docsCutOffDateTime = docsCutOffDateTime;
 	}
 
-	public Date getDocsReceivedDate() {
+	public LocalDateTime getDocsReceivedDate() {
 		return docsReceivedDate;
 	}
 
-	public void setDocsReceivedDate(Date docsReceivedDate) {
+	public void setDocsReceivedDate(LocalDateTime docsReceivedDate) {
 		this.docsReceivedDate = docsReceivedDate;
 	}
 
-	public Date getEta() {
+	public LocalDateTime getEta() {
 		return eta;
 	}
 
-	public void setEta(Date eta) {
+	public void setEta(LocalDateTime eta) {
 		this.eta = eta;
 	}
 
-	public Date getRateCutOffDateTime() {
-		return rateCutOffDateTime;
+	public LocalDateTime getBookingDate() {
+		return bookingDate;
 	}
 
-	public void setRateCutOffDateTime(Date rateCutOffDateTime) {
-		this.rateCutOffDateTime = rateCutOffDateTime;
+	public void setBookingDate(LocalDateTime bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
-	public Date getSailDate() {
-		return sailDate;
+	public LocalDateTime getCargoMovingDate() {
+		return cargoMovingDate;
 	}
 
-	public void setSailDate(Date sailDate) {
-		this.sailDate = sailDate;
+	public void setCargoMovingDate(LocalDateTime cargoMovingDate) {
+		this.cargoMovingDate = cargoMovingDate;
 	}
 
-	public Date getCutOffDate() {
+	public LocalDateTime getCutOffDate() {
 		return cutOffDate;
 	}
 
-	public void setCutOffDate(Date cutOffDate) {
+	public void setCutOffDate(LocalDateTime cutOffDate) {
 		this.cutOffDate = cutOffDate;
 	}
 
-	public Date getDelieveryEta() {
+	public LocalDateTime getDelieveryEta() {
 		return delieveryEta;
 	}
 
-	public void setDelieveryEta(Date delieveryEta) {
+	public void setDelieveryEta(LocalDateTime delieveryEta) {
 		this.delieveryEta = delieveryEta;
 	}
 
-	public ForeignAgentShortInfo getForeignAgentShortInfo() {
-		return foreignAgentShortInfo;
+	public LocalDateTime getRateCutOffDateTime() {
+		return rateCutOffDateTime;
 	}
 
-	public void setForeignAgentShortInfo(ForeignAgentShortInfo foreignAgentShortInfo) {
-		this.foreignAgentShortInfo = foreignAgentShortInfo;
+	public void setRateCutOffDateTime(LocalDateTime rateCutOffDateTime) {
+		this.rateCutOffDateTime = rateCutOffDateTime;
 	}
 
-	public AccountShortInfo getAccountShortInfo() {
-		return accountShortInfo;
+	public LocalDateTime getSailDate() {
+		return sailDate;
 	}
 
-	public void setAccountShortInfo(AccountShortInfo accountShortInfo) {
-		this.accountShortInfo = accountShortInfo;
+	public void setSailDate(LocalDateTime sailDate) {
+		this.sailDate = sailDate;
 	}
 
-	public ConsigneeShortInfo getConsigneeShortInfo() {
-		return consigneeShortInfo;
+	public ClientDto getClient() {
+		return client;
 	}
 
-	public void setConsigneeShortInfo(ConsigneeShortInfo consigneeShortInfo) {
-		this.consigneeShortInfo = consigneeShortInfo;
+	public void setClient(ClientDto client) {
+		this.client = client;
 	}
 
-	public LocalSSLineShortInfo getLocalSSLineOfficeShortInfo() {
-		return localSSLineOfficeShortInfo;
+	public CustomerDto getForeignAgent() {
+		return foreignAgent;
 	}
 
-	public void setLocalSSLineOfficeShortInfo(LocalSSLineShortInfo localSSLineOfficeShortInfo) {
-		this.localSSLineOfficeShortInfo = localSSLineOfficeShortInfo;
+	public void setForeignAgent(CustomerDto foreignAgent) {
+		this.foreignAgent = foreignAgent;
 	}
 
-	public NotifyShortInfo getNotifyShortInfo() {
-		return notifyShortInfo;
+	public CustomerDto getAccount() {
+		return account;
 	}
 
-	public void setNotifyShortInfo(NotifyShortInfo notifyShortInfo) {
-		this.notifyShortInfo = notifyShortInfo;
+	public void setAccount(CustomerDto account) {
+		this.account = account;
 	}
 
-	public ShipperShortInfo getShipperShortInfo() {
-		return shipperShortInfo;
+	public CustomerDto getConsignee() {
+		return consignee;
 	}
 
-	public void setShipperShortInfo(ShipperShortInfo shipperShortInfo) {
-		this.shipperShortInfo = shipperShortInfo;
+	public void setConsignee(CustomerDto consignee) {
+		this.consignee = consignee;
 	}
 
-	public LoadTerminalShortInfo getLoadTerminalShortInfo() {
-		return loadTerminalShortInfo;
+	public CustomerDto getLocalSSLineOffice() {
+		return localSSLineOffice;
 	}
 
-	public void setLoadTerminalShortInfo(LoadTerminalShortInfo loadTerminalShortInfo) {
-		this.loadTerminalShortInfo = loadTerminalShortInfo;
+	public void setLocalSSLineOffice(CustomerDto localSSLineOffice) {
+		this.localSSLineOffice = localSSLineOffice;
 	}
 
-	public PlaceOfDeliveryShortInfo getPlaceOfDeliveryShortInfo() {
-		return placeOfDeliveryShortInfo;
+	public CustomerDto getNotify() {
+		return notify;
 	}
 
-	public void setPlaceOfDeliveryShortInfo(PlaceOfDeliveryShortInfo placeOfDeliveryShortInfo) {
-		this.placeOfDeliveryShortInfo = placeOfDeliveryShortInfo;
+	public void setNotify(CustomerDto notify) {
+		this.notify = notify;
 	}
 
-	public PlaceOfReceiptShortInfo getPlaceOfReceiptShortInfo() {
-		return placeOfReceiptShortInfo;
+	public CustomerDto getShipper() {
+		return shipper;
 	}
 
-	public void setPlaceOfReceiptShortInfo(PlaceOfReceiptShortInfo placeOfReceiptShortInfo) {
-		this.placeOfReceiptShortInfo = placeOfReceiptShortInfo;
+	public void setShipper(CustomerDto shipper) {
+		this.shipper = shipper;
 	}
 
-	public PortOfDischargeShortInfo getPortOfDischargeShortInfo() {
-		return portOfDischargeShortInfo;
+	public UserDto getUser() {
+		return user;
 	}
 
-	public void setPortOfDischargeShortInfo(PortOfDischargeShortInfo portOfDischargeShortInfo) {
-		this.portOfDischargeShortInfo = portOfDischargeShortInfo;
+	public void setUser(UserDto user) {
+		this.user = user;
 	}
 
-	public PortOfLoadShortInfo getPortOfLoadShortInfo() {
-		return portOfLoadShortInfo;
+	public PlaceDto getLoadTerminal() {
+		return loadTerminal;
 	}
 
-	public void setPortOfLoadShortInfo(PortOfLoadShortInfo portOfLoadShortInfo) {
-		this.portOfLoadShortInfo = portOfLoadShortInfo;
+	public void setLoadTerminal(PlaceDto loadTerminal) {
+		this.loadTerminal = loadTerminal;
 	}
 
-	public TranshipmentPortShortInfo getTranshipmentPortShortInfo() {
-		return transhipmentPortShortInfo;
+	public PlaceDto getPlaceOfDelivery() {
+		return placeOfDelivery;
 	}
 
-	public void setTranshipmentPortShortInfo(TranshipmentPortShortInfo transhipmentPortShortInfo) {
-		this.transhipmentPortShortInfo = transhipmentPortShortInfo;
+	public void setPlaceOfDelivery(PlaceDto placeOfDelivery) {
+		this.placeOfDelivery = placeOfDelivery;
 	}
 
-	public ContainerDto getContainerDetail() {
-		return containerDetail;
+	public PlaceDto getPlaceOfReceipt() {
+		return placeOfReceipt;
 	}
 
-	public void setContainerDetail(ContainerDto containerDetail) {
-		this.containerDetail = containerDetail;
+	public void setPlaceOfReceipt(PlaceDto placeOfReceipt) {
+		this.placeOfReceipt = placeOfReceipt;
 	}
 
+	public PlaceDto getPortOfDischarge() {
+		return portOfDischarge;
+	}
+
+	public void setPortOfDischarge(PlaceDto portOfDischarge) {
+		this.portOfDischarge = portOfDischarge;
+	}
+
+	public PlaceDto getPortOfLoad() {
+		return portOfLoad;
+	}
+
+	public void setPortOfLoad(PlaceDto portOfLoad) {
+		this.portOfLoad = portOfLoad;
+	}
+
+	public PlaceDto getTranshipmentPort() {
+		return transhipmentPort;
+	}
+
+	public void setTranshipmentPort(PlaceDto transhipmentPort) {
+		this.transhipmentPort = transhipmentPort;
+	}
+
+	public List<ContainerDto> getContainerDetails() {
+		return containerDetails;
+	}
+
+	public void setContainerDetails(List<ContainerDto> containerDetails) {
+		this.containerDetails = containerDetails;
+	}
 }

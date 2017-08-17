@@ -8,6 +8,8 @@ public class PlaceDto extends PlaceBaseDto{
 	private String	portStateCode;
 	private Integer	typeId;
 	private String	unCode;
+
+
 	public Integer getBrokerageRate() {
 		return brokerageRate;
 	}

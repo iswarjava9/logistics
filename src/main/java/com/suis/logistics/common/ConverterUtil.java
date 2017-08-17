@@ -154,8 +154,12 @@ public class ConverterUtil {
 	}
 
 	public ContainerDetail convertContainerDtoToEntity(ContainerDto containerDto) {
-
-		return modelMapper.map(containerDto, ContainerDetail.class);
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
+		ContainerDetail containerDetail = modelMapper.map(containerDto, ContainerDetail.class);
+		BookingDetail bookingDetail = new BookingDetail();
+		bookingDetail.setId(containerDto.getBookingId());
+		containerDetail.setBookingDetail(bookingDetail);
+		return containerDetail;
 	}
 
 	public ContainerDto convertContainerToDto(ContainerDetail container) {

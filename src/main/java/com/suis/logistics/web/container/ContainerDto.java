@@ -129,14 +129,6 @@ public class ContainerDto {
 		this.cargos = cargos;
 	}
 
-	public Integer getBookingId() {
-		return bookingId;
-	}
-
-	public void setBookingId(Integer bookingId) {
-		this.bookingId = bookingId;
-	}
-
 	public ContainerTypeDto getContainerType() {
 		return containerType;
 	}
@@ -234,4 +226,15 @@ public class ContainerDto {
 	public void setDischargeLocalDateTime(LocalDateTime dischargeLocalDateTime) {
 		this.dischargeLocalDateTime = dischargeLocalDateTime;
 	}
+
+	public Integer getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(Integer bookingId) {
+		this.bookingId = bookingId;
+	}
+
+
+
 }
