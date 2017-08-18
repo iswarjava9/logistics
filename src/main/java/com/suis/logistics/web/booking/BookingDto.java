@@ -4,36 +4,33 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
 import com.suis.logistics.web.container.ContainerDto;
 import com.suis.logistics.web.customer.CustomerDto;
+import com.suis.logistics.web.division.DivisionDto;
+import com.suis.logistics.web.movementtype.MovementTypeDto;
+import com.suis.logistics.web.person.PersonDto;
 import com.suis.logistics.web.place.PlaceDto;
 import com.suis.logistics.web.user.UserDto;
+import com.suis.logistics.web.vessel.VesselDto;
 
 public class BookingDto {
 
 	private Integer				id;
 	private String				aesAuthNo;
-	private Integer				bookingPersonId;
-	private Integer				bookingStatusId;
+	private String				bookingStatus;
 	private String				carrierBookingNo;
 	private String				carrierContact;
-	private Integer				carrierId;
 	private String				carrierVoyage;
 	private String				controller;
-	private Integer				divisionId;
-	private Integer				forwarderId;
 	private String				forwarderRefNo;
 	private String				freight;
-	private Integer				lineOfBusinessId;
 	private String				nraNumber;
 	private String				nvoccBookingNo;
-	private Integer				salesRepresentativeId;
 	private Integer				serviceContractId;
 	private String				shipperRefNo;
-	private Integer				typeOfMoveId;
-	private Integer				typeOfServiceId;
-	private Integer				vesselId;
+	private String				typeOfService;
 	//
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime		docsCutOffDateTime;
@@ -69,6 +66,15 @@ public class BookingDto {
 	private PlaceDto			portOfLoad;
 	private PlaceDto			transhipmentPort;
 	private List<ContainerDto>	containerDetails;
+	//
+	private CustomerDto			forwarder;
+	private BusinessLineDto		lineOfBusiness;
+	private PersonDto			salesRepresentative;
+	private MovementTypeDto		typeOfMove;
+	private VesselDto			vessel;
+	private PersonDto			bookingPerson;
+	private DivisionDto			division;
+	private PlaceDto			carrier;
 
 	// getter and setter method
 	public Integer getId() {
@@ -87,21 +93,7 @@ public class BookingDto {
 		this.aesAuthNo = aesAuthNo;
 	}
 
-	public Integer getBookingPersonId() {
-		return bookingPersonId;
-	}
 
-	public void setBookingPersonId(Integer bookingPersonId) {
-		this.bookingPersonId = bookingPersonId;
-	}
-
-	public Integer getBookingStatusId() {
-		return bookingStatusId;
-	}
-
-	public void setBookingStatusId(Integer bookingStatusId) {
-		this.bookingStatusId = bookingStatusId;
-	}
 
 	public String getCarrierBookingNo() {
 		return carrierBookingNo;
@@ -117,14 +109,6 @@ public class BookingDto {
 
 	public void setCarrierContact(String carrierContact) {
 		this.carrierContact = carrierContact;
-	}
-
-	public Integer getCarrierId() {
-		return carrierId;
-	}
-
-	public void setCarrierId(Integer carrierId) {
-		this.carrierId = carrierId;
 	}
 
 	public String getCarrierVoyage() {
@@ -143,22 +127,6 @@ public class BookingDto {
 		this.controller = controller;
 	}
 
-	public Integer getDivisionId() {
-		return divisionId;
-	}
-
-	public void setDivisionId(Integer divisionId) {
-		this.divisionId = divisionId;
-	}
-
-	public Integer getForwarderId() {
-		return forwarderId;
-	}
-
-	public void setForwarderId(Integer forwarderId) {
-		this.forwarderId = forwarderId;
-	}
-
 	public String getForwarderRefNo() {
 		return forwarderRefNo;
 	}
@@ -173,14 +141,6 @@ public class BookingDto {
 
 	public void setFreight(String freight) {
 		this.freight = freight;
-	}
-
-	public Integer getLineOfBusinessId() {
-		return lineOfBusinessId;
-	}
-
-	public void setLineOfBusinessId(Integer lineOfBusinessId) {
-		this.lineOfBusinessId = lineOfBusinessId;
 	}
 
 	public String getNraNumber() {
@@ -199,14 +159,6 @@ public class BookingDto {
 		this.nvoccBookingNo = nvoccBookingNo;
 	}
 
-	public Integer getSalesRepresentativeId() {
-		return salesRepresentativeId;
-	}
-
-	public void setSalesRepresentativeId(Integer salesRepresentativeId) {
-		this.salesRepresentativeId = salesRepresentativeId;
-	}
-
 	public Integer getServiceContractId() {
 		return serviceContractId;
 	}
@@ -223,28 +175,22 @@ public class BookingDto {
 		this.shipperRefNo = shipperRefNo;
 	}
 
-	public Integer getTypeOfMoveId() {
-		return typeOfMoveId;
+
+
+	public String getBookingStatus() {
+		return bookingStatus;
 	}
 
-	public void setTypeOfMoveId(Integer typeOfMoveId) {
-		this.typeOfMoveId = typeOfMoveId;
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
-	public Integer getTypeOfServiceId() {
-		return typeOfServiceId;
+	public String getTypeOfService() {
+		return typeOfService;
 	}
 
-	public void setTypeOfServiceId(Integer typeOfServiceId) {
-		this.typeOfServiceId = typeOfServiceId;
-	}
-
-	public Integer getVesselId() {
-		return vesselId;
-	}
-
-	public void setVesselId(Integer vesselId) {
-		this.vesselId = vesselId;
+	public void setTypeOfService(String typeOfService) {
+		this.typeOfService = typeOfService;
 	}
 
 	public LocalDateTime getDocsCutOffDateTime() {
@@ -319,12 +265,84 @@ public class BookingDto {
 		this.sailDate = sailDate;
 	}
 
+	public CustomerDto getForwarder() {
+		return forwarder;
+	}
+
+	public void setForwarder(CustomerDto forwarder) {
+		this.forwarder = forwarder;
+	}
+
+	public BusinessLineDto getLineOfBusiness() {
+		return lineOfBusiness;
+	}
+
+	public void setLineOfBusiness(BusinessLineDto lineOfBusiness) {
+		this.lineOfBusiness = lineOfBusiness;
+	}
+
+	public PersonDto getSalesRepresentative() {
+		return salesRepresentative;
+	}
+
+	public void setSalesRepresentative(PersonDto salesRepresentative) {
+		this.salesRepresentative = salesRepresentative;
+	}
+
+	public MovementTypeDto getTypeOfMove() {
+		return typeOfMove;
+	}
+
+	public void setTypeOfMove(MovementTypeDto typeOfMove) {
+		this.typeOfMove = typeOfMove;
+	}
+
+	public VesselDto getVessel() {
+		return vessel;
+	}
+
+	public void setVessel(VesselDto vessel) {
+		this.vessel = vessel;
+	}
+
+	public PersonDto getBookingPerson() {
+		return bookingPerson;
+	}
+
+	public void setBookingPerson(PersonDto bookingPerson) {
+		this.bookingPerson = bookingPerson;
+	}
+
+	public DivisionDto getDivision() {
+		return division;
+	}
+
+	public void setDivision(DivisionDto division) {
+		this.division = division;
+	}
+
+	public PlaceDto getCarrier() {
+		return carrier;
+	}
+
+	public void setCarrier(PlaceDto carrier) {
+		this.carrier = carrier;
+	}
+
 	public ClientDto getClient() {
 		return client;
 	}
 
 	public void setClient(ClientDto client) {
 		this.client = client;
+	}
+
+	public UserDto getUser() {
+		return user;
+	}
+
+	public void setUser(UserDto user) {
+		this.user = user;
 	}
 
 	public CustomerDto getForeignAgent() {
@@ -373,14 +391,6 @@ public class BookingDto {
 
 	public void setShipper(CustomerDto shipper) {
 		this.shipper = shipper;
-	}
-
-	public UserDto getUser() {
-		return user;
-	}
-
-	public void setUser(UserDto user) {
-		this.user = user;
 	}
 
 	public PlaceDto getLoadTerminal() {

@@ -14,10 +14,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suis.logistics.model.Client;
 import com.suis.logistics.web.booking.BookingDto;
+import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
 import com.suis.logistics.web.container.ContainerDto;
 import com.suis.logistics.web.customer.CustomerDto;
+import com.suis.logistics.web.division.DivisionDto;
+import com.suis.logistics.web.movementtype.MovementTypeDto;
+import com.suis.logistics.web.person.PersonDto;
 import com.suis.logistics.web.place.PlaceDto;
+import com.suis.logistics.web.vessel.VesselDto;
 
 public class Utility {
 
@@ -95,6 +100,15 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		obj.setPlaceOfDelivery(new PlaceDto());
 		obj.setNotify(new CustomerDto());
 		obj.setLocalSSLineOffice(new CustomerDto());
+
+		obj.setForwarder(new CustomerDto());
+		obj.setLineOfBusiness(new BusinessLineDto());
+		obj.setSalesRepresentative(new PersonDto());
+		obj.setVessel(new VesselDto());
+		obj.setDivision(new DivisionDto());
+		obj.setTypeOfMove(new MovementTypeDto());
+		obj.setBookingPerson(new PersonDto());
+		obj.setCarrier(new PlaceDto());
 
 
 

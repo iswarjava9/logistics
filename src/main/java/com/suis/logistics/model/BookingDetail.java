@@ -31,131 +31,113 @@ public class BookingDetail implements Serializable {
 	private Integer					id;
 	@Column(name = "aes_auth_no")
 	private String					aesAuthNo;
-	@Column(name = "booking_person_id")
-	private Integer					bookingPersonId;
-	@Column(name = "booking_status_id")
-	private Integer					bookingStatusId;
+	@Column(name = "booking_status")
+	private String					bookingStatus;
 	@Column(name = "carrier_booking_no")
 	private String					carrierBookingNo;
 	@Column(name = "carrier_contact")
 	private String					carrierContact;
-	@Column(name = "carrier_id")
-	private Integer					carrierId;
 	@Column(name = "carrier_voyage")
 	private String					carrierVoyage;
 	private String					controller;
-	@Column(name = "division_id")
-	private Integer					divisionId;
-
-	@Column(name = "forwarder_id")
-	private Integer					forwarderId;
 	@Column(name = "forwarder_ref_no")
 	private String					forwarderRefNo;
 	private String					freight;
-	@Column(name = "line_of_business_id")
-	private Integer					lineOfBusinessId;
+	@Column(name = "type_of_service")
+	private String					typeOfService;
 	@Column(name = "nra_number")
 	private String					nraNumber;
 	@Column(name = "nvocc_booking_no")
 	private String					nvoccBookingNo;
-	@Column(name = "sales_representative_id")
-	private Integer					salesRepresentativeId;
 	@Column(name = "service_contract_id")
 	private Integer					serviceContractId;
 	@Column(name = "shipper_ref_no")
 	private String					shipperRefNo;
-	@Column(name = "type_of_move_id")
-	private Integer					typeOfMoveId;
-	@Column(name = "type_of_service_id")
-	private Integer					typeOfServiceId;
-	@Column(name = "vessel_id")
-	private Integer					vesselId;
-
-
 	//
 	@Column(name = "docs_cut_off_date_time")
 	private LocalDateTime			docsCutOffDateTime;
-
 	@Column(name = "docs_received_date")
-	private LocalDateTime					docsReceivedDate;
-
-	private LocalDateTime					eta;
-
+	private LocalDateTime			docsReceivedDate;
+	private LocalDateTime			eta;
 	@Column(name = "booking_date")
-	private LocalDateTime					bookingDate;
-
+	private LocalDateTime			bookingDate;
 	@Column(name = "cargo_moving_date")
-	private LocalDateTime					cargoMovingDate;
-
+	private LocalDateTime			cargoMovingDate;
 	@Column(name = "cut_off_date")
-	private LocalDateTime					cutOffDate;
-
+	private LocalDateTime			cutOffDate;
 	@Column(name = "delievery_eta")
-	private LocalDateTime					delieveryEta;
-
+	private LocalDateTime			delieveryEta;
 	@Column(name = "rate_cut_off_date_time")
-	private LocalDateTime					rateCutOffDateTime;
-
+	private LocalDateTime			rateCutOffDateTime;
 	@Column(name = "sail_date")
-	private LocalDateTime					sailDate;
-
-
+	private LocalDateTime			sailDate;
+	//
 	@ManyToOne
-	@JoinColumn(name="client_id")
+	@JoinColumn(name = "client_id")
 	private Client					client;
+	@OneToOne
+	@JoinColumn(name = "forwarder_id")
+	private Customer				forwarder;
+	@OneToOne
+	@JoinColumn(name = "line_of_business_id")
+	private BusinessLine			lineOfBusiness;
+	@OneToOne
+	@JoinColumn(name = "sales_representative_id")
+	private Person					salesRepresentative;
+	@OneToOne
+	@JoinColumn(name = "type_of_move_id")
+	private MovementType			typeOfMove;
+	@OneToOne
+	@JoinColumn(name = "vessel_id")
+	private Vessel					vessel;
+	@OneToOne
+	@JoinColumn(name = "booking_person_id")
+	private Person					bookingPerson;
 
+	@OneToOne
+	@JoinColumn(name = "division_id")
+	private Division				division;
+	@OneToOne
+	@JoinColumn(name = "carrier_id")
+	private Place					carrier;
 	@OneToOne
 	@JoinColumn(name = "foreign_agent_id")
 	private Customer				foreignAgent;
-
 	@OneToOne
 	@JoinColumn(name = "account_id")
 	private Customer				account;
-
 	@OneToOne
 	@JoinColumn(name = "consignee_id")
 	private Customer				consignee;
-
 	@OneToOne
 	@JoinColumn(name = "local_ss_line_office_id")
 	private Customer				localSSLineOffice;
-
 	@OneToOne
 	@JoinColumn(name = "notify_id")
 	private Customer				notify;
-
 	@OneToOne
 	@JoinColumn(name = "shipper_id")
 	private Customer				shipper;
-
 	@OneToOne
 	private User					user;
-
 	@OneToOne
 	@JoinColumn(name = "load_terminal_id")
 	private Place					loadTerminal;
-
 	@OneToOne
 	@JoinColumn(name = "place_of_delivery_id")
 	private Place					placeOfDelivery;
-
 	@OneToOne
 	@JoinColumn(name = "place_of_receipt_id")
 	private Place					placeOfReceipt;
-
 	@OneToOne
 	@JoinColumn(name = "port_of_discharge_id")
 	private Place					portOfDischarge;
-
 	@OneToOne
 	@JoinColumn(name = "port_of_load_id")
 	private Place					portOfLoad;
-
 	@OneToOne
 	@JoinColumn(name = "transhipment_port_id")
 	private Place					transhipmentPort;
-
-
 	@OneToMany(mappedBy = "bookingDetail")
 	private List<ContainerDetail>	containerDetails;
 
@@ -163,7 +145,7 @@ public class BookingDetail implements Serializable {
 	}
 
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Integer id) {
@@ -171,47 +153,23 @@ public class BookingDetail implements Serializable {
 	}
 
 	public String getAesAuthNo() {
-		return this.aesAuthNo;
+		return aesAuthNo;
 	}
 
 	public void setAesAuthNo(String aesAuthNo) {
 		this.aesAuthNo = aesAuthNo;
 	}
 
-	public LocalDateTime getBookingDate() {
-		return this.bookingDate;
+	public String getBookingStatus() {
+		return bookingStatus;
 	}
 
-	public void setBookingDate(LocalDateTime bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-
-	public Integer getBookingPersonId() {
-		return this.bookingPersonId;
-	}
-
-	public void setBookingPersonId(Integer bookingPersonId) {
-		this.bookingPersonId = bookingPersonId;
-	}
-
-	public Integer getBookingStatusId() {
-		return this.bookingStatusId;
-	}
-
-	public void setBookingStatusId(Integer bookingStatusId) {
-		this.bookingStatusId = bookingStatusId;
-	}
-
-	public LocalDateTime getCargoMovingDate() {
-		return this.cargoMovingDate;
-	}
-
-	public void setCargoMovingDate(LocalDateTime cargoMovingDate) {
-		this.cargoMovingDate = cargoMovingDate;
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
 	public String getCarrierBookingNo() {
-		return this.carrierBookingNo;
+		return carrierBookingNo;
 	}
 
 	public void setCarrierBookingNo(String carrierBookingNo) {
@@ -219,23 +177,15 @@ public class BookingDetail implements Serializable {
 	}
 
 	public String getCarrierContact() {
-		return this.carrierContact;
+		return carrierContact;
 	}
 
 	public void setCarrierContact(String carrierContact) {
 		this.carrierContact = carrierContact;
 	}
 
-	public Integer getCarrierId() {
-		return this.carrierId;
-	}
-
-	public void setCarrierId(Integer carrierId) {
-		this.carrierId = carrierId;
-	}
-
 	public String getCarrierVoyage() {
-		return this.carrierVoyage;
+		return carrierVoyage;
 	}
 
 	public void setCarrierVoyage(String carrierVoyage) {
@@ -243,71 +193,15 @@ public class BookingDetail implements Serializable {
 	}
 
 	public String getController() {
-		return this.controller;
+		return controller;
 	}
 
 	public void setController(String controller) {
 		this.controller = controller;
 	}
 
-	public LocalDateTime getCutOffDate() {
-		return this.cutOffDate;
-	}
-
-	public void setCutOffDate(LocalDateTime cutOffDate) {
-		this.cutOffDate = cutOffDate;
-	}
-
-	public LocalDateTime getDelieveryEta() {
-		return this.delieveryEta;
-	}
-
-	public void setDelieveryEta(LocalDateTime delieveryEta) {
-		this.delieveryEta = delieveryEta;
-	}
-
-	public Integer getDivisionId() {
-		return this.divisionId;
-	}
-
-	public void setDivisionId(Integer divisionId) {
-		this.divisionId = divisionId;
-	}
-
-	public LocalDateTime getDocsCutOffDateTime() {
-		return this.docsCutOffDateTime;
-	}
-
-	public void setDocsCutOffDateTime(LocalDateTime docsCutOffDateTime) {
-		this.docsCutOffDateTime = docsCutOffDateTime;
-	}
-
-	public LocalDateTime getDocsReceivedDate() {
-		return this.docsReceivedDate;
-	}
-
-	public void setDocsReceivedDate(LocalDateTime docsReceivedDate) {
-		this.docsReceivedDate = docsReceivedDate;
-	}
-
-	public LocalDateTime getEta() {
-		return this.eta;
-	}
-
-	public void setEta(LocalDateTime eta) {
-		this.eta = eta;
-	}
-
-	public Integer getForwarderId() {
-		return this.forwarderId;
-	}
-
-	public void setForwarderId(Integer forwarderId) {
-		this.forwarderId = forwarderId;
-	}
-
 	public String getForwarderRefNo() {
-		return this.forwarderRefNo;
+		return forwarderRefNo;
 	}
 
 	public void setForwarderRefNo(String forwarderRefNo) {
@@ -315,23 +209,23 @@ public class BookingDetail implements Serializable {
 	}
 
 	public String getFreight() {
-		return this.freight;
+		return freight;
 	}
 
 	public void setFreight(String freight) {
 		this.freight = freight;
 	}
 
-	public Integer getLineOfBusinessId() {
-		return this.lineOfBusinessId;
+	public String getTypeOfService() {
+		return typeOfService;
 	}
 
-	public void setLineOfBusinessId(Integer lineOfBusinessId) {
-		this.lineOfBusinessId = lineOfBusinessId;
+	public void setTypeOfService(String typeOfService) {
+		this.typeOfService = typeOfService;
 	}
 
 	public String getNraNumber() {
-		return this.nraNumber;
+		return nraNumber;
 	}
 
 	public void setNraNumber(String nraNumber) {
@@ -339,39 +233,15 @@ public class BookingDetail implements Serializable {
 	}
 
 	public String getNvoccBookingNo() {
-		return this.nvoccBookingNo;
+		return nvoccBookingNo;
 	}
 
 	public void setNvoccBookingNo(String nvoccBookingNo) {
 		this.nvoccBookingNo = nvoccBookingNo;
 	}
 
-	public LocalDateTime getRateCutOffDateTime() {
-		return this.rateCutOffDateTime;
-	}
-
-	public void setRateCutOffDateTime(LocalDateTime rateCutOffDateTime) {
-		this.rateCutOffDateTime = rateCutOffDateTime;
-	}
-
-	public LocalDateTime getSailDate() {
-		return this.sailDate;
-	}
-
-	public void setSailDate(LocalDateTime sailDate) {
-		this.sailDate = sailDate;
-	}
-
-	public Integer getSalesRepresentativeId() {
-		return this.salesRepresentativeId;
-	}
-
-	public void setSalesRepresentativeId(Integer salesRepresentativeId) {
-		this.salesRepresentativeId = salesRepresentativeId;
-	}
-
 	public Integer getServiceContractId() {
-		return this.serviceContractId;
+		return serviceContractId;
 	}
 
 	public void setServiceContractId(Integer serviceContractId) {
@@ -379,43 +249,155 @@ public class BookingDetail implements Serializable {
 	}
 
 	public String getShipperRefNo() {
-		return this.shipperRefNo;
+		return shipperRefNo;
 	}
 
 	public void setShipperRefNo(String shipperRefNo) {
 		this.shipperRefNo = shipperRefNo;
 	}
 
-	public Integer getTypeOfMoveId() {
-		return this.typeOfMoveId;
+	public LocalDateTime getDocsCutOffDateTime() {
+		return docsCutOffDateTime;
 	}
 
-	public void setTypeOfMoveId(Integer typeOfMoveId) {
-		this.typeOfMoveId = typeOfMoveId;
+	public void setDocsCutOffDateTime(LocalDateTime docsCutOffDateTime) {
+		this.docsCutOffDateTime = docsCutOffDateTime;
 	}
 
-	public Integer getTypeOfServiceId() {
-		return this.typeOfServiceId;
+	public LocalDateTime getDocsReceivedDate() {
+		return docsReceivedDate;
 	}
 
-	public void setTypeOfServiceId(Integer typeOfServiceId) {
-		this.typeOfServiceId = typeOfServiceId;
+	public void setDocsReceivedDate(LocalDateTime docsReceivedDate) {
+		this.docsReceivedDate = docsReceivedDate;
 	}
 
-	public Integer getVesselId() {
-		return this.vesselId;
+	public LocalDateTime getEta() {
+		return eta;
 	}
 
-	public void setVesselId(Integer vesselId) {
-		this.vesselId = vesselId;
+	public void setEta(LocalDateTime eta) {
+		this.eta = eta;
+	}
+
+	public LocalDateTime getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(LocalDateTime bookingDate) {
+		this.bookingDate = bookingDate;
+	}
+
+	public LocalDateTime getCargoMovingDate() {
+		return cargoMovingDate;
+	}
+
+	public void setCargoMovingDate(LocalDateTime cargoMovingDate) {
+		this.cargoMovingDate = cargoMovingDate;
+	}
+
+	public LocalDateTime getCutOffDate() {
+		return cutOffDate;
+	}
+
+	public void setCutOffDate(LocalDateTime cutOffDate) {
+		this.cutOffDate = cutOffDate;
+	}
+
+	public LocalDateTime getDelieveryEta() {
+		return delieveryEta;
+	}
+
+	public void setDelieveryEta(LocalDateTime delieveryEta) {
+		this.delieveryEta = delieveryEta;
+	}
+
+	public LocalDateTime getRateCutOffDateTime() {
+		return rateCutOffDateTime;
+	}
+
+	public void setRateCutOffDateTime(LocalDateTime rateCutOffDateTime) {
+		this.rateCutOffDateTime = rateCutOffDateTime;
+	}
+
+	public LocalDateTime getSailDate() {
+		return sailDate;
+	}
+
+	public void setSailDate(LocalDateTime sailDate) {
+		this.sailDate = sailDate;
 	}
 
 	public Client getClient() {
-		return this.client;
+		return client;
 	}
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public Customer getForwarder() {
+		return forwarder;
+	}
+
+	public void setForwarder(Customer forwarder) {
+		this.forwarder = forwarder;
+	}
+
+	public BusinessLine getLineOfBusiness() {
+		return lineOfBusiness;
+	}
+
+	public void setLineOfBusiness(BusinessLine lineOfBusiness) {
+		this.lineOfBusiness = lineOfBusiness;
+	}
+
+	public Person getSalesRepresentative() {
+		return salesRepresentative;
+	}
+
+	public void setSalesRepresentative(Person salesRepresentative) {
+		this.salesRepresentative = salesRepresentative;
+	}
+
+	public MovementType getTypeOfMove() {
+		return typeOfMove;
+	}
+
+	public void setTypeOfMove(MovementType typeOfMove) {
+		this.typeOfMove = typeOfMove;
+	}
+
+	public Vessel getVessel() {
+		return vessel;
+	}
+
+	public void setVessel(Vessel vessel) {
+		this.vessel = vessel;
+	}
+
+	public Person getBookingPerson() {
+		return bookingPerson;
+	}
+
+	public void setBookingPerson(Person bookingPerson) {
+		this.bookingPerson = bookingPerson;
+	}
+
+	public Division getDivision() {
+		return division;
+	}
+
+	public void setDivision(Division division) {
+		this.division = division;
+	}
+
+	public Place getCarrier() {
+		return carrier;
+	}
+
+	public void setCarrier(Place carrier) {
+		this.carrier = carrier;
 	}
 
 	public Customer getForeignAgent() {
@@ -467,7 +449,7 @@ public class BookingDetail implements Serializable {
 	}
 
 	public User getUser() {
-		return this.user;
+		return user;
 	}
 
 	public void setUser(User user) {
@@ -522,7 +504,6 @@ public class BookingDetail implements Serializable {
 		this.transhipmentPort = transhipmentPort;
 	}
 
-
 	public List<ContainerDetail> getContainerDetails() {
 		return containerDetails;
 	}
@@ -531,23 +512,5 @@ public class BookingDetail implements Serializable {
 		this.containerDetails = containerDetails;
 	}
 
-	@Override
-	public String toString() {
-		return "BookingDetail [id=" + id + ", aesAuthNo=" + aesAuthNo + ", bookingDate=" + bookingDate
-				+ ", bookingPersonId=" + bookingPersonId + ", bookingStatusId=" + bookingStatusId + ", cargoMovingDate="
-				+ cargoMovingDate + ", carrierBookingNo=" + carrierBookingNo + ", carrierContact=" + carrierContact
-				+ ", carrierId=" + carrierId + ", carrierVoyage=" + carrierVoyage + ", controller=" + controller
-				+ ", cutOffDate=" + cutOffDate + ", delieveryEta=" + delieveryEta + ", divisionId=" + divisionId
-				+ ", docsCutOffDateTime=" + docsCutOffDateTime + ", docsReceivedDate=" + docsReceivedDate + ", eta="
-				+ eta + ", forwarderId=" + forwarderId + ", forwarderRefNo=" + forwarderRefNo + ", freight=" + freight
-				+ ", lineOfBusinessId=" + lineOfBusinessId + ", nraNumber=" + nraNumber + ", nvoccBookingNo="
-				+ nvoccBookingNo + ", rateCutOffDateTime=" + rateCutOffDateTime + ", sailDate=" + sailDate
-				+ ", salesRepresentativeId=" + salesRepresentativeId + ", serviceContractId=" + serviceContractId
-				+ ", shipperRefNo=" + shipperRefNo + ", typeOfMoveId=" + typeOfMoveId + ", typeOfServiceId="
-				+ typeOfServiceId + ", vesselId=" + vesselId + ", client=" + client + ", foreignAgent=" + foreignAgent
-				+ ", account=" + account + ", consignee=" + consignee + ", localSSLineOffice=" + localSSLineOffice
-				+ ", notify=" + notify + ", shipper=" + shipper + ", user=" + user + ", loadTerminal=" + loadTerminal
-				+ ", placeOfDelivery=" + placeOfDelivery + ", placeOfReceipt=" + placeOfReceipt + ", portOfDischarge="
-				+ portOfDischarge + ", portOfLoad=" + portOfLoad + ", transhipmentPort=" + transhipmentPort + "]";
-	}
+
 }
