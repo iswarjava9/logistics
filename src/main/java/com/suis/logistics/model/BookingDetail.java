@@ -99,7 +99,7 @@ public class BookingDetail implements Serializable {
 	private Division				division;
 	@OneToOne
 	@JoinColumn(name = "carrier_id")
-	private Place					carrier;
+	private Customer				carrier;
 	@OneToOne
 	@JoinColumn(name = "foreign_agent_id")
 	private Customer				foreignAgent;
@@ -392,11 +392,12 @@ public class BookingDetail implements Serializable {
 		this.division = division;
 	}
 
-	public Place getCarrier() {
+
+	public Customer getCarrier() {
 		return carrier;
 	}
 
-	public void setCarrier(Place carrier) {
+	public void setCarrier(Customer carrier) {
 		this.carrier = carrier;
 	}
 

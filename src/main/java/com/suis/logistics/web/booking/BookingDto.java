@@ -74,7 +74,7 @@ public class BookingDto {
 	private VesselDto			vessel;
 	private PersonDto			bookingPerson;
 	private DivisionDto			division;
-	private PlaceDto			carrier;
+	private CustomerDto			carrier;
 
 	// getter and setter method
 	public Integer getId() {
@@ -321,13 +321,6 @@ public class BookingDto {
 		this.division = division;
 	}
 
-	public PlaceDto getCarrier() {
-		return carrier;
-	}
-
-	public void setCarrier(PlaceDto carrier) {
-		this.carrier = carrier;
-	}
 
 	public ClientDto getClient() {
 		return client;
