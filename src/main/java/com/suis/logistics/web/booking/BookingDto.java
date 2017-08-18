@@ -441,4 +441,14 @@ public class BookingDto {
 	public void setContainerDetails(List<ContainerDto> containerDetails) {
 		this.containerDetails = containerDetails;
 	}
+
+	public CustomerDto getCarrier() {
+		return carrier;
+	}
+
+	public void setCarrier(CustomerDto carrier) {
+		this.carrier = carrier;
+	}
+
+
 }
