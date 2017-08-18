@@ -263,4 +263,10 @@ public class ConverterUtil {
 		List<PlaceDto> placeList= modelMapper.map(places, listType);
 		return placeList;
 	}
+
+	public List<VesselDto> convertVesselListToDto(List<Vessel> allVessels) {
+		Type listType = new TypeToken<List<VesselDto>>() {}.getType();
+		List<VesselDto> vessels = modelMapper.map(allVessels, listType);
+		return vessels;
+	}
 }

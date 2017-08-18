@@ -1,5 +1,7 @@
 package com.suis.logistics.web.vessel;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpHeaders;
@@ -37,5 +39,12 @@ public class VesselController extends BaseController {
 
 		VesselDto vesselDto = converterUtil.convertVesselToDto(vesselService.getVessel(id));
 		return new ResponseEntity<VesselDto>(vesselDto, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public ResponseEntity<List<VesselDto>> getBookingList() {
+		List<VesselDto> vessels = converterUtil.convertVesselListToDto(vesselService.getAllVessels());
+		return new ResponseEntity<List<VesselDto>>(vessels, HttpStatus.OK);
 	}
 }

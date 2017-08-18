@@ -1,5 +1,7 @@
 package com.suis.logistics.service.vessel;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -21,4 +23,10 @@ VesselDao vesselDao;
 	public Vessel getVessel(int id) {
 		return vesselDao.findById(id);
 	}
+
+	@Override
+	public List<Vessel> getAllVessels() {
+		return vesselDao.getAllVessels();
+	}
+
 }
