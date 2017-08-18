@@ -1,5 +1,7 @@
 package com.suis.logistics.service.customer;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -16,6 +18,16 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Integer addCustomer(Customer customer) {
 		return customerDao.createCustomer(customer);
+	}
+
+	@Override
+	public Customer getCustomer(int id) {
+		return customerDao.findById(id);
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		return customerDao.getAllCustomers();
 	}
 
 }

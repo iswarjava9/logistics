@@ -1,5 +1,7 @@
 package com.suis.logistics.service.place;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -16,5 +18,15 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public Integer addPlace(Place place) {
 		return placeDao.createPlace(place);
+	}
+
+	@Override
+	public Place getPlace(int id) {
+		return placeDao.findById(id);
+	}
+
+	@Override
+	public List<Place> getAllPlaces() {
+		return placeDao.getAllPlaces();
 	}
 }

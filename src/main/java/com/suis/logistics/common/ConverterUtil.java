@@ -243,4 +243,24 @@ public class ConverterUtil {
 	public CargoTemplateDto convertCargoTemplateToDto(CargoTemplate cargoTemplate) {
 		return modelMapper.map(cargoTemplate, CargoTemplateDto.class);
 	}
+
+	public CustomerDto convertCustomerToDto(Customer customer) {
+		return modelMapper.map(customer, CustomerDto.class);
+	}
+
+	public List<CustomerDto> convertCustomerListToDto(List<Customer> customers) {
+		Type listType = new TypeToken<List<CustomerDto>>() {}.getType();
+		List<CustomerDto> customerList = modelMapper.map(customers, listType);
+		return customerList;
+	}
+
+	public PlaceDto convertPlaceToDto(Place place) {
+		return modelMapper.map(place, PlaceDto.class);
+	}
+
+	public List<PlaceDto> convertPlaceListToDto(List<Place> places) {
+		Type listType = new TypeToken<List<PlaceDto>>() {}.getType();
+		List<PlaceDto> placeList= modelMapper.map(places, listType);
+		return placeList;
+	}
 }
