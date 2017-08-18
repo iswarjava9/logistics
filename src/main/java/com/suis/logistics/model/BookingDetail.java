@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -98,63 +99,63 @@ public class BookingDetail implements Serializable {
 	@Column(name = "sail_date")
 	private LocalDateTime					sailDate;
 
-	// bi-directional many-to-one association to Client
+
 	@ManyToOne
 	@JoinColumn(name="client_id")
 	private Client					client;
-	// bi-directional many-to-one association to Customer
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "foreign_agent_id")
 	private Customer				foreignAgent;
-	// bi-directional many-to-one association to Customer
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "account_id")
 	private Customer				account;
-	// bi-directional many-to-one association to Customer
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "consignee_id")
 	private Customer				consignee;
-	// bi-directional many-to-one association to Customer
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "local_ss_line_office_id")
 	private Customer				localSSLineOffice;
-	// bi-directional many-to-one association to Customer
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "notify_id")
 	private Customer				notify;
-	// bi-directional many-to-one association to Customer
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "shipper_id")
 	private Customer				shipper;
-	// bi-directional many-to-one association to User
-	@ManyToOne
+
+	@OneToOne
 	private User					user;
-	// bi-directional many-to-one association to PhysicalEntity
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "load_terminal_id")
 	private Place					loadTerminal;
-	// bi-directional many-to-one association to PhysicalEntity
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "place_of_delivery_id")
 	private Place					placeOfDelivery;
-	// bi-directional many-to-one association to PhysicalEntity
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "place_of_receipt_id")
 	private Place					placeOfReceipt;
-	// bi-directional many-to-one association to PhysicalEntity
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "port_of_discharge_id")
 	private Place					portOfDischarge;
-	// bi-directional many-to-one association to PhysicalEntity
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "port_of_load_id")
 	private Place					portOfLoad;
-	// bi-directional many-to-one association to PhysicalEntity
-	@ManyToOne
+
+	@OneToOne
 	@JoinColumn(name = "transhipment_port_id")
 	private Place					transhipmentPort;
 
-	// bi-directional many-to-one association to ContainerDetail
+
 	@OneToMany(mappedBy = "bookingDetail")
 	private List<ContainerDetail>	containerDetails;
 

@@ -16,12 +16,14 @@ import com.suis.logistics.model.Client;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.client.ClientDto;
 import com.suis.logistics.web.container.ContainerDto;
+import com.suis.logistics.web.customer.CustomerDto;
+import com.suis.logistics.web.place.PlaceDto;
 
 public class Utility {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		generateObjectToJsonString();
+		generateBookingToJsonString();
 		// convertDtoToEntity();
 
 		//date();
@@ -74,19 +76,27 @@ System.out.println(ZoneId.getAvailableZoneIds());
 
 	}
 
-	public static void generateObjectToJsonString() {
+	public static void generateBookingToJsonString() {
 		ObjectMapper mapper = new ObjectMapper();
 		// Client obj = new Client();
 		BookingDto obj = new BookingDto();
 		obj.setContainerDetails(Arrays.asList(new ContainerDto(),new ContainerDto()));
 		obj.setClient(new ClientDto());
-		//obj.setContainerDetail(new ContainerDto());
+		obj.setAccount(new CustomerDto());
+		obj.setAesAuthNo("aes-auth-002");
+		obj.setConsignee(new CustomerDto());
+		obj.setForeignAgent(new CustomerDto());
+		obj.setLoadTerminal(new PlaceDto());
+		obj.setTranshipmentPort(new PlaceDto());
+		obj.setShipper(new CustomerDto());
+		obj.setPortOfLoad(new PlaceDto());
+		obj.setPortOfDischarge(new PlaceDto());
+		obj.setPlaceOfReceipt(new PlaceDto());
+		obj.setPlaceOfDelivery(new PlaceDto());
+		obj.setNotify(new CustomerDto());
+		obj.setLocalSSLineOffice(new CustomerDto());
 
-/*LocalDateTime curDate =  LocalDateTime.now();
-		obj.setCargoTemplate(new CargoTemplateDto());
 
-obj.setPieceType(new PieceTypeDto());
-obj.setContainerId(1);*/
 
 
 
