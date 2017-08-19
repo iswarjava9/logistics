@@ -1,5 +1,8 @@
 package com.suis.logistics.repository.businessline;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.BusinessLine;
@@ -18,5 +21,13 @@ public class BusinessLineDaoImpl extends BaseDao implements BusinessLineDao {
 	public BusinessLine findById(int businessId) {
 
 		return getCurrentSession().load(BusinessLine.class, businessId);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BusinessLine> getAllBusinessLines() {
+		Query query = getCurrentSession().getNamedQuery("BusinessLine.findAll");
+		List<BusinessLine> businessLines = query.list();
+		return businessLines;
 	}
 }

@@ -1,5 +1,7 @@
 package com.suis.logistics.service.movementtype;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -20,5 +22,10 @@ public class MovementTypeServiceImpl implements MovementTypeService {
 	@Override
 	public MovementType getMovementType(int id) {
 		return movementTypeDao.findById(id);
+	}
+
+	@Override
+	public List<MovementType> getAllMovementTypes() {
+		return movementTypeDao.getAllMovementTypes();
 	}
 }

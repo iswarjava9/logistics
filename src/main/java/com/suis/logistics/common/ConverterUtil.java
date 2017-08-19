@@ -264,9 +264,44 @@ public class ConverterUtil {
 		return placeList;
 	}
 
-	public List<VesselDto> convertVesselListToDto(List<Vessel> allVessels) {
+	public List<VesselDto> convertVesselListToDto(List<Vessel> vessels) {
 		Type listType = new TypeToken<List<VesselDto>>() {}.getType();
-		List<VesselDto> vessels = modelMapper.map(allVessels, listType);
-		return vessels;
+		List<VesselDto> vesselList = modelMapper.map(vessels, listType);
+		return vesselList;
+	}
+
+	public DivisionDto convertDivisionToDto(Division division) {
+		return modelMapper.map(division, DivisionDto.class);
+	}
+
+	public List<DivisionDto> convertDivisionListToDto(List<Division> allDivisions) {
+		Type listType = new TypeToken<List<DivisionDto>>() {}.getType();
+		List<DivisionDto> divisionList = modelMapper.map(allDivisions, listType);
+		return divisionList;
+	}
+
+	public PersonDto convertPersonToDto(Person person) {
+		return modelMapper.map(person, PersonDto.class);
+	}
+
+	public List<PersonDto> convertPersonListToDto(List<Person> persons) {
+		Type listType = new TypeToken<List<PersonDto>>() {}.getType();
+		List<PersonDto> personList = modelMapper.map(persons, listType);
+		return personList;
+	}
+
+
+	public List<BusinessLineDto> convertBusinessLineListToDto(List<BusinessLine> businessLines) {
+		Type listType = new TypeToken<List<BusinessLineDto>>() {}.getType();
+		List<BusinessLineDto> businessLineList = modelMapper.map(businessLines, listType);
+		return businessLineList;
+	}
+
+
+
+	public List<MovementTypeDto> convertMovementTypeListToDto(List<MovementType> movementTypes) {
+		Type listType = new TypeToken<List<MovementTypeDto>>() {}.getType();
+		List<MovementTypeDto> movementTypeList = modelMapper.map(movementTypes, listType);
+		return movementTypeList;
 	}
 }

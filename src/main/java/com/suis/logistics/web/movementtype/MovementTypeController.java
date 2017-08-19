@@ -1,5 +1,7 @@
 package com.suis.logistics.web.movementtype;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpHeaders;
@@ -37,5 +39,12 @@ public class MovementTypeController extends BaseController {
 
 		MovementTypeDto movementTypeDto = converterUtil.convertMovementTypeToDto(movementTypeService.getMovementType(id));
 		return new ResponseEntity<MovementTypeDto>(movementTypeDto, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public ResponseEntity<List<MovementTypeDto>> getMovementTypes() {
+		List<MovementTypeDto> movementTypes = converterUtil.convertMovementTypeListToDto(movementTypeService.getAllMovementTypes());
+		return new ResponseEntity<List<MovementTypeDto>>(movementTypes, HttpStatus.OK);
 	}
 }

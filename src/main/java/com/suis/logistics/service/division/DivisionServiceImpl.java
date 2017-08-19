@@ -1,5 +1,7 @@
 package com.suis.logistics.service.division;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -16,5 +18,15 @@ public class DivisionServiceImpl implements DivisionService {
 	public Integer addDivision(Division division) {
 
 		return divisionDao.createDivision(division);
+	}
+
+	@Override
+	public Division getDivision(int id) {
+		return divisionDao.findById(id);
+	}
+
+	@Override
+	public List<Division> getAllDivisions() {
+		return divisionDao.getAllDivisions();
 	}
 }

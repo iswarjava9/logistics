@@ -1,5 +1,7 @@
 package com.suis.logistics.web.businessline;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpHeaders;
@@ -22,7 +24,7 @@ public class BusinessController extends BaseController {
 	BusinessLineService businessLineService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> createBooking(@RequestBody BusinessLineDto businessLineDto) {
+	public ResponseEntity<Void> createBusinessLine(@RequestBody BusinessLineDto businessLineDto) {
 		Integer businessLineId = businessLineService.createBusinessLine(converterUtil.convertBusinessLineDtoToEntity(businessLineDto));
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("businessLineId", String.valueOf(businessLineId));
@@ -34,5 +36,12 @@ public class BusinessController extends BaseController {
 	public ResponseEntity<BusinessLineDto> get(@PathVariable("id") int id) {
 		BusinessLineDto businessLineDto = converterUtil.convertBusinessLineToDto(businessLineService.getBusinessLine(id));
 		return new ResponseEntity<BusinessLineDto>(businessLineDto, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public ResponseEntity<List<BusinessLineDto>> getBusinessLines() {
+		List<BusinessLineDto> businessLines = converterUtil.convertBusinessLineListToDto(businessLineService.getAllBusinessLines());
+		return new ResponseEntity<List<BusinessLineDto>>(businessLines, HttpStatus.OK);
 	}
 }

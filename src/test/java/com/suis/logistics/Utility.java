@@ -28,7 +28,8 @@ public class Utility {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		generateBookingToJsonString();
+		//generateBookingToJsonString();
+		generateDivisonDtoToJsonString();
 		// convertDtoToEntity();
 
 		//date();
@@ -108,7 +109,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		obj.setDivision(new DivisionDto());
 		obj.setTypeOfMove(new MovementTypeDto());
 		obj.setBookingPerson(new PersonDto());
-		obj.setCarrier(new PlaceDto());
+		obj.setCarrier(new CustomerDto());
 
 
 
@@ -118,6 +119,19 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		try {
 			mapper.findAndRegisterModules();
 			String jsonInString = mapper.writeValueAsString(obj);
+			System.out.println(jsonInString);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void generateDivisonDtoToJsonString(){
+		DivisionDto div = new DivisionDto();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.findAndRegisterModules();
+			String jsonInString = mapper.writeValueAsString(div);
 			System.out.println(jsonInString);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block

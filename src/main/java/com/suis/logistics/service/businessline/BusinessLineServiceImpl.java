@@ -1,5 +1,7 @@
 package com.suis.logistics.service.businessline;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -21,5 +23,10 @@ public class BusinessLineServiceImpl implements BusinessLineService {
 	@Override
 	public BusinessLine getBusinessLine(int id) {
 		return businessLineDao.findById(id);
+	}
+
+	@Override
+	public List<BusinessLine> getAllBusinessLines() {
+		return businessLineDao.getAllBusinessLines();
 	}
 }

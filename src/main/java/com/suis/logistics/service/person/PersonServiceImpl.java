@@ -1,5 +1,7 @@
 package com.suis.logistics.service.person;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -16,5 +18,15 @@ public class PersonServiceImpl implements PersonService {
 	@Override
 	public Integer addPerson(Person person) {
 		return personDao.createPerson(person);
+	}
+
+	@Override
+	public Person getPerson(int id) {
+		return personDao.findById(id);
+	}
+
+	@Override
+	public List<Person> getAllPersons() {
+		return personDao.getAllPersons();
 	}
 }
