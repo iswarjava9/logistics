@@ -15,4 +15,6 @@ public interface BookingService {
 
 	public List<BookingDetail> getBookingList();
 
+	public String generateUniqueBookingNo();
+
 }

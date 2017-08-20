@@ -10,4 +10,6 @@ public interface BookingDao {
 	public BookingDetail findById(int bookingId);
 
 	public List<BookingDetail> getBookingList();
+
+	public Integer getLastInsertedPrimaryKey();
 }

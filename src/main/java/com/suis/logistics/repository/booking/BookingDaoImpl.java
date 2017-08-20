@@ -3,6 +3,7 @@ package com.suis.logistics.repository.booking;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
@@ -32,9 +33,17 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
 						.add(Projections.property("carrierBookingNo"), "carrierBookingNo")
 						.add(Projections.property("shipperRefNo"), "shipperRefNo")
-						.add(Projections.property("nvoccBookingNo"), "nvoccBookingNo"))
+						.add(Projections.property("nvoccBookingNo"), "nvoccBookingNo")
+						.add(Projections.property("forwarderRefNo"), "forwarderRefNo"))
 				.setResultTransformer(Transformers.aliasToBean(BookingDetail.class));
 		List<BookingDetail> list = cr.list();
 		return list;
+	}
+
+	@Override
+	public Integer getLastInsertedPrimaryKey() {
+		Query query = getCurrentSession().getNamedQuery("BookingDetail.findLastPrimaryKey");
+		Integer lastBookingId = (Integer) query.uniqueResult();
+		return lastBookingId;
 	}
 }

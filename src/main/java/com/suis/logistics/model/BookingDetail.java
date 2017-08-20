@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -22,7 +23,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "booking_detail")
-@NamedQuery(name = "BookingDetail.findAll", query = "SELECT b FROM BookingDetail b")
+@NamedQueries({
+	  @NamedQuery(name="BookingDetail.findAll",
+	              query="SELECT b FROM BookingDetail b"),
+	  @NamedQuery(name="BookingDetail.findLastPrimaryKey",
+	              query="SELECT max( b.id ) FROM BookingDetail b")
+	})
 public class BookingDetail implements Serializable {
 
 	private static final long		serialVersionUID	= 1L;

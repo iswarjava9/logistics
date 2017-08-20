@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Date;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,10 +30,12 @@ public class Utility {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//generateBookingToJsonString();
-		generateDivisonDtoToJsonString();
+		//generateDivisonDtoToJsonString();
 		// convertDtoToEntity();
 
 		//date();
+
+		generateUniqueAlphaNumeric();
 
 	}
 
@@ -157,5 +160,12 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		Client client = modelMapper.map(clientDto, Client.class);
 
 		System.out.println(client);
+	}
+
+	public static void generateUniqueAlphaNumeric(){
+		String k = RandomStringUtils.random(8, false, true);
+
+
+		System.out.println(k);
 	}
 }
