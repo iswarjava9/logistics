@@ -17,7 +17,8 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 	@Override
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
 		getCurrentSession().save(bookingDetail);
-		return bookingDetail;
+		getCurrentSession().evict(bookingDetail);
+		return getCurrentSession().load(BookingDetail.class, bookingDetail.getId());
 	}
 
 	@Override
