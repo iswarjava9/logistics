@@ -22,7 +22,6 @@ public class BookingController extends BaseController {
 	@Resource
 	BookingService bookingService;
 
-	@Transactional
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto) {
 
