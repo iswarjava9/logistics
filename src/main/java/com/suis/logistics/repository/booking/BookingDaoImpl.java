@@ -15,9 +15,9 @@ import com.suis.logistics.repository.BaseDao;
 public class BookingDaoImpl extends BaseDao implements BookingDao {
 
 	@Override
-	public Integer createBooking(BookingDetail bookingDetail) {
+	public BookingDetail createBooking(BookingDetail bookingDetail) {
 		getCurrentSession().save(bookingDetail);
-		return bookingDetail.getId();
+		return bookingDetail;
 	}
 
 	@Override

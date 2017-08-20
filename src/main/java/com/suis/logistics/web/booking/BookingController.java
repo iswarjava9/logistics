@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +23,13 @@ public class BookingController extends BaseController {
 	BookingService bookingService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> createBooking(@RequestBody BookingDto bookingDto) {
+	public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto) {
 
-		Integer bookingId = bookingService.createBooking(converterUtil.convertBookingDtoToEntity(bookingDto));
-		HttpHeaders headers = new HttpHeaders();
+		BookingDto bookingDtoResponse = converterUtil.convertBookingDetailToDto(bookingService.createBooking(converterUtil.convertBookingDtoToEntity(bookingDto)));
+		return new ResponseEntity<BookingDto>(bookingDtoResponse, HttpStatus.OK);
+		/*HttpHeaders headers = new HttpHeaders();
 		headers.set("bookingId", String.valueOf(bookingId));
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);*/
 	}
 
 	@Transactional

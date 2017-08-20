@@ -24,7 +24,7 @@ public class BookingServiceImpl implements BookingService {
 	private String bookingNoPrefix;
 
 	@Override
-	public Integer createBooking(BookingDetail bookingDetail) {
+	public BookingDetail createBooking(BookingDetail bookingDetail) {
 		String bookingNo = generateUniqueBookingNo();
 		bookingDetail.setNvoccBookingNo(bookingNo);
 		bookingDetail.setForwarderRefNo(bookingNo);

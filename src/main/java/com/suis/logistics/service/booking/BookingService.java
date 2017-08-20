@@ -9,7 +9,7 @@ import com.suis.logistics.model.BookingDetail;
 
 @Transactional(propagation=Propagation.REQUIRED)
 public interface BookingService {
-	public Integer createBooking(BookingDetail bookingDetail);
+	public BookingDetail createBooking(BookingDetail bookingDetail);
 
 	public BookingDetail getBookingDetail(int id);
 
