@@ -33,8 +33,10 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
 						.add(Projections.property("carrierBookingNo"), "carrierBookingNo")
 						.add(Projections.property("shipperRefNo"), "shipperRefNo")
+						.add(Projections.property("bookingStatus"), "bookingStatus")
 						.add(Projections.property("nvoccBookingNo"), "nvoccBookingNo")
-						.add(Projections.property("forwarderRefNo"), "forwarderRefNo"))
+						.add(Projections.property("forwarderRefNo"), "forwarderRefNo")
+						.add(Projections.property("bookingDate"), "bookingDate"))
 				.setResultTransformer(Transformers.aliasToBean(BookingDetail.class));
 		List<BookingDetail> list = cr.list();
 		return list;
