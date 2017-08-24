@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xsl-fo:presentation output-format="fo" xmlns:xsl-fo="http://www.stylusstudio.com/xml_publishing/xsl-fo" version="2.0" signed="4C5773A879B5FFF0E623E2A6F6B39D1A">
+	<text>
+		<document>
+			<props>
+				<prop name="Page Height" value="11in"/>
+				<prop name="Page Width" value="8.5in"/>
+				<prop name="Margin Left" value="0.6in"/>
+				<prop name="Margin Right" value="0.6in"/>
+				<prop name="Margin Top" value="0.79in"/>
+				<prop name="Margin Bottom" value="0.79in"/>
+			</props>
+		</document>
+		<decimal-format>
+			<props>
+				<prop name="Zero Digit" value="0"/>
+				<prop name="Digit" value="#"/>
+				<prop name="Decimal Separator" value="."/>
+				<prop name="Grouping Separator" value=","/>
+				<prop name="Pattern Separator" value=";"/>
+				<prop name="Minus Sign" value="-"/>
+				<prop name="Percent" value="%"/>
+				<prop name="Per mille" value="‰"/>
+				<prop name="Infinity" value="Infinity"/>
+				<prop name="NaN" value="NaN"/>
+			</props>
+		</decimal-format>
+		<props>
+			<prop name="Alignment" value="none"/>
+		</props>
+		<styles/>
+		<data xml:space="preserve">@&lt;br&gt;</data>
+		<components>
+			<image position="0">
+				<icon>
+					<props>
+						<prop name="Width" value="400"/>
+						<prop name="Height" value="85"/>
+						<prop name="Source" value="file://c:\My Drive\WORKSPACEs\Logistics\logistics\src\main\resources\xsl-templates\li-logo.png"/>
+					</props>
+				</icon>
+			</image>
+		</components>
+		<values/>
+	</text>
+	<datasources>
+		<datasource url="..\xml-data\booking-dto.xml"/>
+	</datasources>
+</xsl-fo:presentation>

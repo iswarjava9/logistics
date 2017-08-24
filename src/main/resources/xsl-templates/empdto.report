@@ -1,0 +1,365 @@
+<?xml version="1.0"?>
+<xsl-fo:presentation output-format="fo" xmlns:xsl-fo="http://www.stylusstudio.com/xml_publishing/xsl-fo" version="2.0" signed="8BE42BF21D48873FD0EE9EFA14CF5C10">
+	<text>
+		<document>
+			<props>
+				<prop name="Page Height" value="11in"/>
+				<prop name="Page Width" value="8.5in"/>
+				<prop name="Margin Left" value="0.6in"/>
+				<prop name="Margin Right" value="0.6in"/>
+				<prop name="Margin Top" value="0.79in"/>
+				<prop name="Margin Bottom" value="0.79in"/>
+			</props>
+		</document>
+		<decimal-format>
+			<props>
+				<prop name="Zero Digit" value="0"/>
+				<prop name="Digit" value="#"/>
+				<prop name="Decimal Separator" value="."/>
+				<prop name="Grouping Separator" value=","/>
+				<prop name="Pattern Separator" value=";"/>
+				<prop name="Minus Sign" value="-"/>
+				<prop name="Percent" value="%"/>
+				<prop name="Per mille" value="‰"/>
+				<prop name="Infinity" value="Infinity"/>
+				<prop name="NaN" value="NaN"/>
+			</props>
+		</decimal-format>
+		<props>
+			<prop name="Alignment" value="none"/>
+		</props>
+		<styles/>
+		<data xml:space="preserve">@@&lt;br&gt;</data>
+		<components>
+			<table position="0">
+				<table>
+					<props>
+						<prop name="Width" value="100%"/>
+						<prop name="background-repeat" value="repeat"/>
+						<prop name="CellSpacing" value="1"/>
+						<prop name="Alignment" value="none"/>
+						<prop name="table-borders">
+							<props>
+								<prop name="table-border-style" value="outset"/>
+								<prop name="table-border-width" value="2"/>
+							</props>
+						</prop>
+						<prop name="cell-borders">
+							<props>
+								<prop name="cell-border-style" value="inset"/>
+								<prop name="cell-border-width" value="2"/>
+							</props>
+						</prop>
+						<prop name="cell-paddings">
+							<props>
+								<prop name="cell-padding-width" value="2"/>
+							</props>
+						</prop>
+					</props>
+					<rows>
+						<row>
+							<props/>
+						</row>
+						<row>
+							<props/>
+						</row>
+					</rows>
+					<cols>
+						<column>
+							<props/>
+						</column>
+						<column>
+							<props/>
+						</column>
+						<column>
+							<props/>
+						</column>
+						<column>
+							<props/>
+						</column>
+						<column>
+							<props/>
+						</column>
+					</cols>
+					<data>
+						<row>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">Age&lt;br&gt;</data>
+									<components/>
+									<values/>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">date&lt;br&gt;</data>
+									<components/>
+									<values/>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">department&lt;br&gt;</data>
+									<components/>
+									<values/>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">name&lt;br&gt;</data>
+									<components/>
+									<values/>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">salary&lt;br&gt;</data>
+									<components/>
+									<values/>
+								</text>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">@&lt;br&gt;</data>
+									<components/>
+									<values>
+										<value position="0" xpath="..\xml-data\employeedto.xml,,/EmployeeDto/age">
+											<props>
+												<prop name="XPath" url="..\xml-data\employeedto.xml" xpath="/EmployeeDto/age"/>
+											</props>
+										</value>
+									</values>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">@&lt;br&gt;</data>
+									<components/>
+									<values>
+										<value position="0" xpath="..\xml-data\employeedto.xml,,/EmployeeDto/date">
+											<props>
+												<prop name="XPath" url="..\xml-data\employeedto.xml" xpath="/EmployeeDto/date"/>
+											</props>
+										</value>
+									</values>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">@&lt;br&gt;</data>
+									<components/>
+									<values>
+										<value position="0" xpath="..\xml-data\employeedto.xml,,/EmployeeDto/departmentName">
+											<props>
+												<prop name="XPath" url="..\xml-data\employeedto.xml" xpath="/EmployeeDto/departmentName"/>
+											</props>
+										</value>
+									</values>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">@&lt;br&gt;</data>
+									<components/>
+									<values>
+										<value position="0" xpath="..\xml-data\employeedto.xml,,/EmployeeDto/name">
+											<props>
+												<prop name="XPath" url="..\xml-data\employeedto.xml" xpath="/EmployeeDto/name"/>
+											</props>
+										</value>
+									</values>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">@&lt;br&gt;</data>
+									<components/>
+									<values>
+										<value position="0" xpath="..\xml-data\employeedto.xml,,/EmployeeDto/salary">
+											<props>
+												<prop name="XPath" url="..\xml-data\employeedto.xml" xpath="/EmployeeDto/salary"/>
+											</props>
+										</value>
+									</values>
+								</text>
+							</cell>
+						</row>
+					</data>
+				</table>
+			</table>
+			<table position="1">
+				<table>
+					<props>
+						<prop name="Component Name" value="addressList"/>
+						<prop name="Width" value="100%"/>
+						<prop name="background-repeat" value="repeat"/>
+						<prop name="CellSpacing" value="1"/>
+						<prop name="Alignment" value="none"/>
+						<prop name="table-borders">
+							<props>
+								<prop name="table-border-style" value="outset"/>
+								<prop name="table-border-width" value="2"/>
+							</props>
+						</prop>
+						<prop name="cell-borders">
+							<props>
+								<prop name="cell-border-style" value="inset"/>
+								<prop name="cell-border-width" value="2"/>
+							</props>
+						</prop>
+						<prop name="cell-paddings">
+							<props>
+								<prop name="cell-padding-width" value="2"/>
+							</props>
+						</prop>
+					</props>
+					<rows>
+						<row xpath="..\xml-data\employeedto.xml,,/EmployeeDto/addressList" xsort=",,">
+							<props/>
+						</row>
+					</rows>
+					<cols>
+						<column>
+							<props/>
+						</column>
+						<column>
+							<props/>
+						</column>
+					</cols>
+					<data>
+						<row>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">@&lt;br&gt;</data>
+									<components/>
+									<values>
+										<value position="0" xpath="..\xml-data\employeedto.xml,addressList,/EmployeeDto/addressList/details">
+											<props>
+												<prop name="XPath" url="..\xml-data\employeedto.xml" context="addressList" xpath="details"/>
+											</props>
+										</value>
+									</values>
+								</text>
+							</cell>
+							<cell>
+								<props>
+									<prop name="background-repeat" value="repeat"/>
+									<prop name="vertical-align" value="middle"/>
+								</props>
+								<text>
+									<props>
+										<prop name="Alignment" value="none"/>
+									</props>
+									<styles/>
+									<data xml:space="preserve">@&lt;br&gt;</data>
+									<components/>
+									<values>
+										<value position="0" xpath="..\xml-data\employeedto.xml,addressList,/EmployeeDto/addressList/pin">
+											<props>
+												<prop name="XPath" url="..\xml-data\employeedto.xml" context="addressList" xpath="pin"/>
+											</props>
+										</value>
+									</values>
+								</text>
+							</cell>
+						</row>
+					</data>
+				</table>
+			</table>
+		</components>
+		<values/>
+	</text>
+	<datasources>
+		<datasource url="..\xml-data\employeedto.xml"/>
+	</datasources>
+</xsl-fo:presentation>

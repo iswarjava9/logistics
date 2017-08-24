@@ -51,8 +51,6 @@ public class Client implements Serializable {
 	@OneToMany(mappedBy="client")
 	private List<User> users;
 
-
-
 	@Column(name="createddate")
 	private Date createdDate;
 
@@ -192,9 +190,5 @@ public class Client implements Serializable {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-
-
-
-
 
 }

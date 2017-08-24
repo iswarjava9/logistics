@@ -33,7 +33,8 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public BookingDetail getBookingDetail(int bookingId) {
-		return bookingDao.findById(bookingId);
+		BookingDetail bookingDetail = bookingDao.findById(bookingId);
+		return bookingDetail;
 	}
 
 	@Override
@@ -47,4 +48,6 @@ public class BookingServiceImpl implements BookingService {
 		String bookingNo = keyGenerator.generateUniqueKey(bookingNoPrefix, lastId);
 		return bookingNo;
 	}
+
+
 }

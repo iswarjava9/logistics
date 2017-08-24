@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<EmployeeDto>
+    <addressList>
+        <details>chennai address</details>
+        <pin>77878</pin>
+    </addressList>
+    <addressList>
+        <details>bangalore1</details>
+        <pin>635353</pin>
+    </addressList>
+    <age>34</age>
+    <date/>
+    <departmentName>Department1</departmentName>
+    <name>JOHN</name>
+    <salary>25000.5</salary>
+</EmployeeDto>

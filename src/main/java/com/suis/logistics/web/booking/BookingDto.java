@@ -15,6 +15,7 @@ import com.suis.logistics.web.place.PlaceDto;
 import com.suis.logistics.web.user.UserDto;
 import com.suis.logistics.web.vessel.VesselDto;
 
+
 public class BookingDto {
 
 	private Integer				id;
@@ -32,6 +33,7 @@ public class BookingDto {
 	private String				shipperRefNo;
 	private String				typeOfService;
 	//
+	//@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime		docsCutOffDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
