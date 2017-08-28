@@ -2,15 +2,21 @@ package com.suis.logistics.web.booking;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,16 +33,16 @@ import com.suis.logistics.web.BaseController;
 @RequestMapping("/booking")
 public class BookingController extends BaseController {
 	@Resource
-	BookingService bookingService;
+	BookingService	bookingService;
+	@Autowired
+	ServletContext	context;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto) {
 
-		BookingDto bookingDtoResponse = converterUtil.convertBookingDetailToDto(bookingService.createBooking(converterUtil.convertBookingDtoToEntity(bookingDto)));
+		BookingDto bookingDtoResponse = converterUtil.convertBookingDetailToDto(
+				bookingService.createBooking(converterUtil.convertBookingDtoToEntity(bookingDto)));
 		return new ResponseEntity<BookingDto>(bookingDtoResponse, HttpStatus.OK);
-		/*HttpHeaders headers = new HttpHeaders();
-		headers.set("bookingId", String.valueOf(bookingId));
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);*/
 	}
 
 	@Transactional
@@ -55,32 +61,36 @@ public class BookingController extends BaseController {
 		return new ResponseEntity<List<BookingDto>>(bookings, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/download/{bookingNo}", method = RequestMethod.GET, produces = "application/pdf")
+	public ResponseEntity<InputStreamResource> download(@PathVariable("bookingNo") String bookingNo)
+			throws IOException {
+		HttpHeaders headers = new HttpHeaders();
+		InputStream bookingConfirmationPDF = bookingService.downloadBookingConfirmation(bookingNo, headers);
+		ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
+				new InputStreamResource(bookingConfirmationPDF), headers, HttpStatus.OK);
+		return response;
+	}
+
 	private void generateBookingXml(BookingDto bookingDto) {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(BookingDto.class);
-			JAXBElement<BookingDto> jaxbElement = new JAXBElement<BookingDto>(new QName("bookinginfo"), BookingDto.class,
-					bookingDto);
+			JAXBElement<BookingDto> jaxbElement = new JAXBElement<BookingDto>(new QName("bookinginfo"),
+					BookingDto.class, bookingDto);
 			Marshaller marshaller = jc.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			//URL url = this.getClass().getResource("/resources");
-
-
-
-				//	File xmlDataFile = new File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
-
-			File xmlDataFile = new File("C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//xml-data//booking-dto1.xml");
-			xmlDataFile.createNewFile(); // if file already exists will do nothing
-
+			// URL url = this.getClass().getResource("/resources");
+			// File xmlDataFile = new
+			// File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
+			File xmlDataFile = new File(
+					"C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//xml-data//booking-dto1.xml");
+			xmlDataFile.createNewFile(); // if file already exists will do
+											// nothing
 			OutputStream out = new FileOutputStream(xmlDataFile);
-
 			marshaller.marshal(jaxbElement, out);
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-
 }
