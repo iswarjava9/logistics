@@ -59,6 +59,8 @@ public class BookingDetail implements Serializable {
 	private Integer					serviceContractId;
 	@Column(name = "shipper_ref_no")
 	private String					shipperRefNo;
+	@Column(name = "remarks")
+	private String					remarks;
 	//
 	@Column(name = "docs_cut_off_date_time")
 	private LocalDateTime			docsCutOffDateTime;
@@ -517,6 +519,14 @@ public class BookingDetail implements Serializable {
 
 	public void setContainerDetails(List<ContainerDetail> containerDetails) {
 		this.containerDetails = containerDetails;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 

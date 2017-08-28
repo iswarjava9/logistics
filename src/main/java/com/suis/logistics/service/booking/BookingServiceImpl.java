@@ -1,5 +1,7 @@
 package com.suis.logistics.service.booking;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -7,7 +9,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -54,17 +55,21 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public InputStream downloadBookingConfirmation(String bookingNo, HttpHeaders headers) throws IOException {
-		String fileName = "booking-" + bookingNo + ".pdf";
-		ClassPathResource bookingPDF = new ClassPathResource("generated-pdf/" + fileName);
+		File pdf = new File(
+				"C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//generated-pdf//booking-"
+						+ bookingNo + ".pdf");
+		/*ClassPathResource bookingPDF = new ClassPathResource("generated-pdf/" + pdf.getName());*/
 		headers.setContentType(MediaType.parseMediaType("application/pdf"));
 		headers.add("Access-Control-Allow-Origin", "*");
 		headers.add("Access-Control-Allow-Methods", "GET, POST, PUT");
 		headers.add("Access-Control-Allow-Headers", "Content-Type");
-		headers.add("Content-Disposition", "inline; filename=" + fileName);
+		headers.add("Content-Disposition", "inline; filename=" + pdf.getName());
 		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
 		headers.add("Pragma", "no-cache");
 		headers.add("Expires", "0");
-		headers.setContentLength(bookingPDF.contentLength());
-		return bookingPDF.getInputStream();
+		headers.setContentLength(pdf.length());
+		InputStream  bookingPDF= new FileInputStream(pdf);
+		return bookingPDF;
 	}
+
 }

@@ -35,6 +35,7 @@ public class BookingDto {
 	private Integer				serviceContractId;
 	private String				shipperRefNo;
 	private String				typeOfService;
+	private String				remarks;
 	//
 	//@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
@@ -453,6 +454,14 @@ public class BookingDto {
 
 	public void setCarrier(CustomerDto carrier) {
 		this.carrier = carrier;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 

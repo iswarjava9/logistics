@@ -2,7 +2,6 @@ package com.suis.logistics.web.booking;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
@@ -26,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.suis.logistics.common.PDFGeneratorUtil;
 import com.suis.logistics.service.booking.BookingService;
 import com.suis.logistics.web.BaseController;
 
@@ -36,6 +36,8 @@ public class BookingController extends BaseController {
 	BookingService	bookingService;
 	@Autowired
 	ServletContext	context;
+	@Resource
+	PDFGeneratorUtil pdfGeneratorUtil;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto) {
@@ -61,11 +63,14 @@ public class BookingController extends BaseController {
 		return new ResponseEntity<List<BookingDto>>(bookings, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/download/{bookingNo}", method = RequestMethod.GET, produces = "application/pdf")
-	public ResponseEntity<InputStreamResource> download(@PathVariable("bookingNo") String bookingNo)
-			throws IOException {
+	@Transactional
+	@RequestMapping(value = "/download/{id}", method = RequestMethod.GET, produces = "application/pdf")
+	public ResponseEntity<InputStreamResource> download(@PathVariable("id") int id)
+			throws Exception {
+		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));
+		pdfGeneratorUtil.generateBookingConfirmationPDF(bookingDto);
 		HttpHeaders headers = new HttpHeaders();
-		InputStream bookingConfirmationPDF = bookingService.downloadBookingConfirmation(bookingNo, headers);
+		InputStream bookingConfirmationPDF = bookingService.downloadBookingConfirmation(bookingDto.getForwarderRefNo(), headers);
 		ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
 				new InputStreamResource(bookingConfirmationPDF), headers, HttpStatus.OK);
 		return response;
@@ -83,7 +88,7 @@ public class BookingController extends BaseController {
 			// File xmlDataFile = new
 			// File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
 			File xmlDataFile = new File(
-					"C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//xml-data//booking-dto1.xml");
+					"C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//xml-data//booking-"+bookingDto.getForwarderRefNo()+".xml");
 			xmlDataFile.createNewFile(); // if file already exists will do
 											// nothing
 			OutputStream out = new FileOutputStream(xmlDataFile);
