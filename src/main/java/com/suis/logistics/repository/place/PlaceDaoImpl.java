@@ -30,4 +30,11 @@ public class PlaceDaoImpl extends BaseDao implements PlaceDao {
 		List<Place> places = query.list();
 		return places;
 	}
+
+	@Override
+	public List<Place> getPlacesByName(String name) {
+		Query query = getCurrentSession().getNamedQuery("Place.findByName").setParameter("name", name+"%");
+		List<Place> places = query.list();
+		return places;
+	}
 }

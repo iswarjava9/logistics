@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -17,7 +18,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="place")
-@NamedQuery(name="Place.findAll", query="SELECT p FROM Place p")
+@NamedQueries({@NamedQuery(name="Place.findAll", query="SELECT p FROM Place p"),
+	@NamedQuery(name="Place.findByName", query="SELECT p FROM Place p where p.name like :name")})
+
 public class Place implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -43,6 +46,9 @@ public class Place implements Serializable {
 
 	@Column(name="un_code")
 	private String unCode;
+
+	@Column(name="address")
+	private String address;
 
 
 	public Place() {
@@ -110,6 +116,14 @@ public class Place implements Serializable {
 
 	public void setUnCode(String unCode) {
 		this.unCode = unCode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	/*public List<BookingDetail> getBookingDetails1() {

@@ -12,4 +12,5 @@ public interface PlaceService {
 	public Integer addPlace(Place place);
 	public Place getPlace(int id);
 	public List<Place> getAllPlaces();
+	public List<Place> getPlacesByName(String name);
 }

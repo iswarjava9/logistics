@@ -8,6 +8,7 @@ public class PlaceDto extends PlaceBaseDto{
 	private String	portStateCode;
 	private Integer	typeId;
 	private String	unCode;
+	private String address;
 
 
 	public Integer getBrokerageRate() {
@@ -45,6 +46,12 @@ public class PlaceDto extends PlaceBaseDto{
 	}
 	public void setUnCode(String unCode) {
 		this.unCode = unCode;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 

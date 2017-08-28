@@ -43,8 +43,15 @@ public class PlaceController extends BaseController {
 
 	@Transactional
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ResponseEntity<List<PlaceDto>> getBookingList() {
+	public ResponseEntity<List<PlaceDto>> getPlaces() {
 		List<PlaceDto> places = converterUtil.convertPlaceListToDto(placeService.getAllPlaces());
+		return new ResponseEntity<List<PlaceDto>>(places, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "byname/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<PlaceDto>> getPlacesByName(@PathVariable("name") String name) {
+		List<PlaceDto> places = converterUtil.convertPlaceListToDto(placeService.getPlacesByName(name));
 		return new ResponseEntity<List<PlaceDto>>(places, HttpStatus.OK);
 	}
 }
