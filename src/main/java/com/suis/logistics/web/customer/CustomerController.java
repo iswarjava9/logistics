@@ -45,8 +45,15 @@ public class CustomerController extends BaseController {
 
 	@Transactional
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ResponseEntity<List<CustomerDto>> getBookingList() {
+	public ResponseEntity<List<CustomerDto>> getAllCustomers() {
 		List<CustomerDto> customers = converterUtil.convertCustomerListToDto(customerService.getAllCustomers());
+		return new ResponseEntity<List<CustomerDto>>(customers, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "byname/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<CustomerDto>> getCustomersByName(@PathVariable("name") String name) {
+		List<CustomerDto> customers = converterUtil.convertCustomerListToDto(customerService.getCustomersByName(name));
 		return new ResponseEntity<List<CustomerDto>>(customers, HttpStatus.OK);
 	}
 

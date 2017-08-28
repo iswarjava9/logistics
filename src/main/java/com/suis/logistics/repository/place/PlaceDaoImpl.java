@@ -31,6 +31,7 @@ public class PlaceDaoImpl extends BaseDao implements PlaceDao {
 		return places;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Place> getPlacesByName(String name) {
 		Query query = getCurrentSession().getNamedQuery("Place.findByName").setParameter("name", name+"%");

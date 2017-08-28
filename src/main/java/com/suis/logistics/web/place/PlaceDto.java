@@ -54,5 +54,4 @@ public class PlaceDto extends PlaceBaseDto{
 		this.address = address;
 	}
 
-
 }

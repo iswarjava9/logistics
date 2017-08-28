@@ -11,4 +11,5 @@ public interface CustomerService {
 	public Integer addCustomer(Customer customer);
 	public Customer getCustomer(int id);
 	public List<Customer> getAllCustomers();
+	public List<Customer> getCustomersByName(String name);
 }

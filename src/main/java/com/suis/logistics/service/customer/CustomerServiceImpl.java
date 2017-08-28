@@ -30,4 +30,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.getAllCustomers();
 	}
 
+	@Override
+	public List<Customer> getCustomersByName(String name) {
+		return customerDao.getCustomersByName(name);
+	}
+
 }

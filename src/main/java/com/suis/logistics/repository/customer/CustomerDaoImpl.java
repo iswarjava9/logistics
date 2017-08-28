@@ -31,4 +31,13 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		return customerList;
 	}
 
+	@Override
+	public List<Customer> getCustomersByName(String name) {
+		Query query = getCurrentSession().getNamedQuery("Customer.findByName").setParameter("name", name+"%");
+		List<Customer> customers = query.list();
+		return customers;
+	}
+
+
+
 }

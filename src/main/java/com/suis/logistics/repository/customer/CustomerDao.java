@@ -12,4 +12,6 @@ public interface CustomerDao {
 
 	public List<Customer> getAllCustomers();
 
+	public List<Customer> getCustomersByName(String name);
+
 }
