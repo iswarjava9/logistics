@@ -32,8 +32,9 @@
 
 										</fo:block>
 									</fo:table-cell>
-									<fo:table-cell border-style="inset" border-width="0pt"
-										padding="0pt" background-repeat="repeat" display-align="before">
+									<fo:table-cell text-indent="2pt" border-style="inset"
+										border-width="0pt" padding="0pt" background-repeat="repeat"
+										display-align="before">
 
 										<fo:block font-size="14pt" font-weight="bold"
 											text-align="left" border="2pt solid grey">
@@ -55,22 +56,29 @@
 
 						<!-- Body Table -->
 
-						<fo:table width="100%" border-style="outset"
+						<fo:table text-indent="2pt" width="100%" border-style="outset"
 							border-width="2pt" background-repeat="repeat">
 							<fo:table-column column-width="40%" />
 							<fo:table-column />
 							<fo:table-body>
 								<fo:table-row>
-									<fo:table-cell border-style="inset" border-width="0pt"
-										border-right="1pt" padding="0pt" background-repeat="repeat"
-										display-align="center" border-color="grey">
-										<fo:block />
+									<fo:table-cell font-size="x-small" border-style="inset"
+										border-width="0pt" border-right="1pt" padding="0pt"
+										background-repeat="repeat" display-align="center"
+										border-color="grey">
+										<fo:block text-indent="2pc" space-after="7pt"
+											space-before.minimum="6pt" space-before.optimum="8pt"
+											space-before.maximum="10pt">
+										</fo:block>
+
+										<fo:block>Shipper</fo:block>
 									</fo:table-cell>
 									<fo:table-cell border-style="inset" border-width="0pt"
 										padding="0pt" background-repeat="repeat" display-align="center">
 										<fo:block>
-											<fo:table width="100%" border-style="inset"
-												border-width="0pt" background-repeat="repeat" border-color="grey">
+											<fo:table text-indent="2pt" width="100%"
+												border-style="inset" border-width="0pt" background-repeat="repeat"
+												border-color="grey">
 												<fo:table-column />
 												<fo:table-column />
 												<fo:table-column />
@@ -80,8 +88,8 @@
 													<fo:table-row height="auto" font-size="x-small">
 														<fo:table-cell border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
-															display-align="center" border-right=".75pt"
-															border-bottom="1pt" border-color="grey">
+															display-align="center" border-right="1pt" border-bottom="1pt"
+															border-color="grey">
 															<fo:block>
 																Carrier
 															</fo:block>
@@ -92,8 +100,8 @@
 														</fo:table-cell>
 														<fo:table-cell border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
-															display-align="center" border-right=".75pt"
-															border-bottom="1pt" border-color="grey">
+															display-align="center" border-right="1pt" border-bottom="1pt"
+															border-color="grey">
 															<fo:block>
 																Carrier Booking No#
 															</fo:block>
@@ -130,8 +138,9 @@
 										border-color="grey" border-right="1pt">
 										<fo:block>
 
-											<fo:table display-align="before" width="100%"
-												border-style="inset" border-width="0pt" border-color="grey">
+											<fo:table text-indent="2pt" display-align="before"
+												width="100%" border-style="inset" border-width="0pt"
+												border-color="grey">
 												<fo:table-column column-width="100%" />
 
 												<!-- <fo:table-column column-width="50%" /> <fo:table-column 
@@ -141,13 +150,9 @@
 														border-bottom-width="thick">
 														<fo:table-cell border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right=".75pt" border-bottom="1pt" border-color="grey"
+															border-right="0pt" border-bottom="1pt" border-color="grey"
 															border-top="1pt">
-															<fo:block font-size="x-small">
 
-																Shipper
-
-															</fo:block>
 															<fo:block font-size="small" font-weight="bold">
 																<fo:block>
 
@@ -167,7 +172,7 @@
 													<fo:table-row height="100pt">
 														<fo:table-cell border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right=".75pt" border-top="1pt" border-color="grey">
+															border-right="0pt" border-top="1pt" border-color="grey">
 															<fo:block font-size="x-small">
 
 																Forwarding Agent
@@ -195,8 +200,8 @@
 									</fo:table-cell>
 									<fo:table-cell>
 										<fo:block>
-											<fo:table width="100%" border-style="inset"
-												border-width="0pt" border-color="grey">
+											<fo:table text-indent="2pt" width="100%"
+												border-style="inset" border-width="0pt" border-color="grey">
 												<fo:table-column column-width="50%" />
 												<fo:table-column column-width="50%" />
 												<!-- <fo:table-column column-width="50%" /> <fo:table-column 
@@ -206,10 +211,10 @@
 														border-bottom-width="thick">
 														<fo:table-cell border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right=".75pt" border-bottom="1pt" border-color="grey">
+															border-right="1pt" border-bottom="1pt" border-color="grey">
 															<fo:block font-size="x-small">
 
-																Depot
+																Empty Container Pick up
 
 															</fo:block>
 															<fo:block font-size="small" font-weight="bold">
@@ -227,11 +232,11 @@
 														</fo:table-cell>
 														<fo:table-cell border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right=".75pt" border-bottom="1pt" border-color="grey">
+															border-right="0pt" border-bottom="1pt" border-color="grey">
 
 															<fo:block font-size="x-small">
 
-																Loading Terminal
+																Ingate At Terminal
 
 															</fo:block>
 															<fo:block font-size="small" font-weight="bold">
@@ -252,7 +257,7 @@
 													<fo:table-row height="100pt">
 														<fo:table-cell border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right=".75pt" border-color="grey">
+															border-right="1pt" border-color="grey">
 															<fo:block font-size="x-small">
 
 																Cargo Supplier
@@ -302,8 +307,8 @@
 							</fo:table-body>
 						</fo:table>
 
-						<fo:table width="100%" border-style="inset" border-width="2pt"
-							border-color="grey" border-top="1pt">
+						<fo:table text-indent="2pt" width="100%" border-style="inset"
+							border-width="2pt" border-color="grey" border-top="1pt">
 							<fo:table-column column-width="20%" />
 							<fo:table-column column-width="20%" />
 							<fo:table-column column-width="60%" />
@@ -326,7 +331,7 @@
 										</fo:block>
 									</fo:table-cell>
 									<fo:table-cell border-color="grey" border-style="inset"
-										border-right="1pt">
+										border-right="0pt">
 										<fo:block font-size="x-small">
 
 											Port Of Loading
@@ -342,8 +347,33 @@
 										</fo:block>
 									</fo:table-cell>
 									<fo:table-cell border-color="grey" border-style="inset">
-										<fo:block>Vessel</fo:block>
-										<fo:block>Vessel Value</fo:block>
+										<fo:block>
+											<fo:table text-indent="2pt" width="100%"
+												border-style="inset" border-width="0pt" border-color="grey"
+												border-top="1pt">
+												<fo:table-column />
+												<fo:table-column />
+
+												<fo:table-body>
+													<fo:table-row>
+														<fo:table-cell border-color="grey"
+															border-style="inset" border-right="1pt">
+															<fo:block font-size="x-small">Vessel</fo:block>
+															<fo:block font-size="small" font-weight="bold">Vessel
+																Value
+															</fo:block>
+														</fo:table-cell>
+														<fo:table-cell>
+															<fo:block font-size="x-small">Voyage No</fo:block>
+															<fo:block font-size="small" font-weight="bold">Voyage
+																No
+															</fo:block>
+														</fo:table-cell>
+													</fo:table-row>
+												</fo:table-body>
+											</fo:table>
+										</fo:block>
+
 									</fo:table-cell>
 								</fo:table-row>
 								<fo:table-row>
@@ -380,8 +410,53 @@
 										</fo:block>
 									</fo:table-cell>
 									<fo:table-cell border-color="grey" border-style="inset">
-										<fo:block>Cut Off Date</fo:block>
-										<fo:block>Cut Off Date</fo:block>
+
+
+										<fo:block>
+											<fo:table text-indent="2pt" width="100%"
+												border-style="inset" border-width="0pt" border-color="grey"
+												border-top="1pt">
+												<fo:table-column />
+												<fo:table-column />
+												<fo:table-column />
+												<fo:table-column />
+
+												<fo:table-body>
+													<fo:table-row>
+														<fo:table-cell border-color="grey"
+															border-style="inset" border-right="1pt">
+															<fo:block font-size="x-small">Cut Off Date</fo:block>
+															<fo:block font-size="small" font-weight="bold">
+																<xsl:value-of select="/bookinginfo/cutOffDate" />
+
+															</fo:block>
+														</fo:table-cell>
+														<fo:table-cell border-color="grey"
+															border-style="inset" border-right="1pt">
+															<fo:block font-size="x-small">Docs Cut Off Date</fo:block>
+															<fo:block font-size="small" font-weight="bold">
+																<xsl:value-of select="/bookinginfo/docsCutOffDateTime" />
+															</fo:block>
+														</fo:table-cell>
+														<fo:table-cell border-color="grey"
+															border-style="inset" border-right="1pt">
+															<fo:block font-size="x-small">ETS</fo:block>
+															<fo:block font-size="small" font-weight="bold">
+																<xsl:value-of select="/bookinginfo/sailDate" />
+															</fo:block>
+														</fo:table-cell>
+														<fo:table-cell>
+															<fo:block font-size="x-small">ETA</fo:block>
+															<fo:block font-size="small" font-weight="bold">
+																<xsl:value-of select="/bookinginfo/eta" />
+															</fo:block>
+														</fo:table-cell>
+													</fo:table-row>
+												</fo:table-body>
+											</fo:table>
+										</fo:block>
+
+
 									</fo:table-cell>
 								</fo:table-row>
 							</fo:table-body>
@@ -389,14 +464,14 @@
 						</fo:table>
 
 						<!-- Tableeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee -->
-						
+
 						<fo:block text-indent="2pc" space-after="7pt"
 							space-before.minimum="6pt" space-before.optimum="8pt"
 							space-before.maximum="10pt">
 						</fo:block>
 						<fo:block>
 
-							<fo:table width="100%" border-style="inset"
+							<fo:table text-indent="2pt" width="100%" border-style="inset"
 								border-width="2pt" border-color="grey" border-top="1pt">
 								<fo:table-column column-width="50%" />
 								<fo:table-column column-width="50%" />
@@ -412,7 +487,6 @@
 											</fo:block>
 											<fo:block font-size="small" font-weight="bold">
 												<fo:block>
-
 
 
 												</fo:block>
@@ -469,15 +543,19 @@
 
 								<fo:table-body>
 									<fo:table-row>
-										<fo:table-cell border-color="grey" border-style="inset"
-											border-right="1pt">
+										<fo:table-cell padding-left="1mm" border-color="grey"
+											border-style="inset" border-right="1pt">
 											<fo:block font-size="x-small">
 
 												Remarks
 
 											</fo:block>
-											<fo:block font-size="small" font-weight="bold">
-												<fo:block>
+											<fo:block font-size="x-small" font-weight="bold">
+												<fo:block linefeed-treatment="preserve">
+
+													<xsl:call-template name="split">
+														<xsl:with-param name="text" select="/bookinginfo/remarks" />
+													</xsl:call-template>
 
 
 
@@ -497,5 +575,25 @@
 				</fo:flow>
 			</fo:page-sequence>
 		</fo:root>
+	</xsl:template>
+
+	<xsl:template name="split">
+		<xsl:param name="text" select="." />
+
+		<xsl:if test="string-length($text) > 0">
+			<xsl:variable name="output-text">
+				<xsl:value-of
+					select="normalize-space(substring-before(concat($text, '\n'), '\n'))" />
+			</xsl:variable>
+
+			<xsl:if test="normalize-space($output-text) != ''">
+				<xsl:value-of select="$output-text" />
+				<xsl:text>&#xA;</xsl:text>
+			</xsl:if>
+
+			<xsl:call-template name="split">
+				<xsl:with-param name="text" select="substring-after($text, '\n')" />
+			</xsl:call-template>
+		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

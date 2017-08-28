@@ -69,7 +69,7 @@ public class BookingController extends BaseController {
 
 				//	File xmlDataFile = new File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
 
-			File xmlDataFile = new File("C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//xml-data//booking-"+bookingDto.getId()+".xml");
+			File xmlDataFile = new File("C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//xml-data//booking-dto1.xml");
 			xmlDataFile.createNewFile(); // if file already exists will do nothing
 
 			OutputStream out = new FileOutputStream(xmlDataFile);

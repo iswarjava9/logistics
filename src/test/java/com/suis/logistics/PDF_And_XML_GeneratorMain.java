@@ -43,6 +43,8 @@ public class PDF_And_XML_GeneratorMain {
 
 	public static void generateJavaToPDF() {
 		try {
+			//File xslt = new File("src//main//resources//xsl-templates//booking-dto.xsl");
+
 			File xslt = new File("src//main//resources//xsl-templates//final-booking-template.xsl");
 			File pdf = new File("src//main//resources//generated-pdf//booking-confirmation.pdf");
 			// outDir.mkdirs();

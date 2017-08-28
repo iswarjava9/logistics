@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<xsl-fo:presentation output-format="fo" xmlns:xsl-fo="http://www.stylusstudio.com/xml_publishing/xsl-fo" version="2.0" signed="4C5773A879B5FFF0E623E2A6F6B39D1A">
+<xsl-fo:presentation output-format="fo" xmlns:xsl-fo="http://www.stylusstudio.com/xml_publishing/xsl-fo" version="2.0" signed="931AEAF2C15D317F8128D0FDE0ACAFA0">
 	<text>
 		<document>
 			<props>
 				<prop name="Page Height" value="11in"/>
 				<prop name="Page Width" value="8.5in"/>
-				<prop name="Margin Left" value="0.6in"/>
-				<prop name="Margin Right" value="0.6in"/>
-				<prop name="Margin Top" value="0.79in"/>
-				<prop name="Margin Bottom" value="0.79in"/>
+				<prop name="Margin Left" value="0.2in"/>
+				<prop name="Margin Right" value="0.2in"/>
+				<prop name="Margin Top" value="0.2in"/>
+				<prop name="Margin Bottom" value="0.2in"/>
 			</props>
 		</document>
 		<decimal-format>
@@ -29,19 +29,63 @@
 			<prop name="Alignment" value="none"/>
 		</props>
 		<styles/>
-		<data xml:space="preserve">@&lt;br&gt;</data>
-		<components>
-			<image position="0">
-				<icon>
-					<props>
-						<prop name="Width" value="400"/>
-						<prop name="Height" value="85"/>
-						<prop name="Source" value="file://c:\My Drive\WORKSPACEs\Logistics\logistics\src\main\resources\xsl-templates\li-logo.png"/>
-					</props>
-				</icon>
-			</image>
-		</components>
-		<values/>
+		<data xml:space="preserve">@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;@&lt;br&gt;&lt;br&gt;&lt;br&gt;</data>
+		<components/>
+		<values>
+			<value position="0" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/carrierBookingNo">
+				<props/>
+			</value>
+			<value position="2" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/carrierVoyage">
+				<props/>
+			</value>
+			<value position="4" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/forwarderRefNo">
+				<props/>
+			</value>
+			<value position="6" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/shipperRefNo">
+				<props/>
+			</value>
+			<value position="8" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/bookingDate">
+				<props/>
+			</value>
+			<value position="10" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/delieveryEta">
+				<props/>
+			</value>
+			<value position="12" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/shipper/name">
+				<props/>
+			</value>
+			<value position="14" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/shipper/address">
+				<props/>
+			</value>
+			<value position="16" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/loadTerminal/name">
+				<props/>
+			</value>
+			<value position="18" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/placeOfDelivery/name">
+				<props/>
+			</value>
+			<value position="20" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/portOfDischarge/name">
+				<props/>
+			</value>
+			<value position="22" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/portOfLoad/name">
+				<props/>
+			</value>
+			<value position="24" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/forwarder/name">
+				<props/>
+			</value>
+			<value position="26" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/forwarder/address">
+				<props/>
+			</value>
+			<value position="28" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/vessel/name">
+				<props/>
+			</value>
+			<value position="30" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/carrier/name">
+				<props>
+					<prop name="XPath" url="..\xml-data\booking-dto.xml" xpath="/bookinginfo/carrier/name"/>
+				</props>
+			</value>
+			<value position="32" xpath="..\xml-data\booking-dto.xml,,/bookinginfo/carrier/address">
+				<props/>
+			</value>
+		</values>
 	</text>
 	<datasources>
 		<datasource url="..\xml-data\booking-dto.xml"/>

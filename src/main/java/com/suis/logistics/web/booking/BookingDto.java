@@ -3,6 +3,9 @@ package com.suis.logistics.web.booking;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
@@ -15,7 +18,7 @@ import com.suis.logistics.web.place.PlaceDto;
 import com.suis.logistics.web.user.UserDto;
 import com.suis.logistics.web.vessel.VesselDto;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BookingDto {
 
 	private Integer				id;
