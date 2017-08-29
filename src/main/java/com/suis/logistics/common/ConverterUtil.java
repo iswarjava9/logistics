@@ -98,12 +98,20 @@ public class ConverterUtil {
 
 	public BookingDetail convertBookingDtoToEntity(BookingDto bookingDto) {
 		BookingDetail bookingDetail = modelMapper.map(bookingDto, BookingDetail.class);
+		String remarks = bookingDetail.getRemarks();
+		if(remarks != null) {
+			bookingDetail.setRemarks(remarks.replace("\n", "\\n"));
+		}
+		
+	
 		return bookingDetail;
 	}
 
 	public BookingDto convertBookingDetailToDto(BookingDetail bookingDetail) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 		BookingDto bookingDto = modelMapper.map(bookingDetail, BookingDto.class);
+		String remarks = bookingDto.getRemarks();	
+		
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		// DateTime conversion to any required timezone
 		// bookingDto.setDocsCutOffDateTime(dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(),"US/Arizona"));

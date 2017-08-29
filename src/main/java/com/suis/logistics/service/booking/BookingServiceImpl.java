@@ -26,6 +26,8 @@ public class BookingServiceImpl implements BookingService {
 	UniqueKeyGenerator	keyGenerator;
 	@Value("${bookingno.ocean.export.prefix}")
 	private String		bookingNoOceanExportPrefix;
+	@Value("${booking.pdf.url}")
+	private String	bookingPDFUrl;
 
 	@Override
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
@@ -56,7 +58,7 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public InputStream downloadBookingConfirmation(String bookingNo, HttpHeaders headers) throws IOException {
 		File pdf = new File(
-				"C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//generated-pdf//booking-"
+				bookingPDFUrl+"//booking-"
 						+ bookingNo + ".pdf");
 		/*ClassPathResource bookingPDF = new ClassPathResource("generated-pdf/" + pdf.getName());*/
 		headers.setContentType(MediaType.parseMediaType("application/pdf"));
