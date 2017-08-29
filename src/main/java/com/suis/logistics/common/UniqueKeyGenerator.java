@@ -19,7 +19,8 @@ public class UniqueKeyGenerator {
 		int randomKeyLength = length - lastPrimaryKeyText.length();
 		String randomNumber = RandomStringUtils.random(randomKeyLength, false, true);
 		StringBuilder finalUniqueKey = new StringBuilder(prefix);
-		finalUniqueKey.append(keySeparator).append(randomNumber).append(lastPrimaryKeyText);
+		finalUniqueKey.append(keySeparator).append(lastPrimaryKeyText).append(randomNumber);
+
 		return finalUniqueKey.toString();
 	}
 
