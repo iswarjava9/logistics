@@ -34,9 +34,20 @@ public class Utility {
 		// convertDtoToEntity();
 
 		//date();
+		stringManipulation();
 
 		generateUniqueAlphaNumeric();
 
+	}
+
+	public static void stringManipulation(){
+		StringBuilder st = new StringBuilder("hello1234");
+		int length= 6;
+		String k = null;
+		if(st.length() > length){
+			k = st.substring(st.length()-length, st.length());
+		}
+		System.out.println(k);
 	}
 
 	public static void workingOnDate(){

@@ -13,9 +13,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import com.suis.logistics.common.UniqueKeyGenerator;
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.repository.booking.BookingDao;
-import com.suis.logistics.service.UniqueKeyGenerator;
 
 @Component
 public class BookingServiceImpl implements BookingService {
@@ -24,8 +24,8 @@ public class BookingServiceImpl implements BookingService {
 	BookingDao			bookingDao;
 	@Resource
 	UniqueKeyGenerator	keyGenerator;
-	@Value("${booking.no.prefix}")
-	private String		bookingNoPrefix;
+	@Value("${bookingno.ocean.export.prefix}")
+	private String		bookingNoOceanExportPrefix;
 
 	@Override
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
@@ -49,7 +49,7 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public String generateUniqueBookingNo() {
 		Integer lastId = bookingDao.getLastInsertedPrimaryKey();
-		String bookingNo = keyGenerator.generateUniqueKey(bookingNoPrefix, lastId);
+		String bookingNo = keyGenerator.generateUniqueKey(bookingNoOceanExportPrefix, lastId);
 		return bookingNo;
 	}
 

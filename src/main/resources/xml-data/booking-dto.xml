@@ -36,7 +36,7 @@
 	<foreignAgent>
 		<id>1</id>
 		<name>customer-1</name>
-		<address>address-shipper</address>
+		<address>address-shipper bangalore east state:karnataka pin-756066 </address>
 		<city>chennai</city>
 		<clientId>2</clientId>
 		<contactId>3</contactId>
@@ -91,7 +91,7 @@
 	<shipper>
 		<id>2</id>
 		<name>customer-2</name>
-		<address>address-shipper2</address>
+		<address>address-shipper bangalore east state:karnataka pin-756066 </address>
 		<city>kolkata</city>
 		<clientId>2</clientId>
 		<contactId>2</contactId>
