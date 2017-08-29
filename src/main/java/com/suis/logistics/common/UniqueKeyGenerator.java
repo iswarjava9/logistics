@@ -7,8 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class UniqueKeyGenerator {
 
-	@Value("${unique.no.length}")
+	@Value("${unique.key.length}")
 	private Integer length;
+
+	@Value("${unique.key.separator}")
+	private String keySeparator;
 
 	public String generateUniqueKey(String prefix, int lastPrimaryKey) {
 
@@ -16,7 +19,7 @@ public class UniqueKeyGenerator {
 		int randomKeyLength = length - lastPrimaryKeyText.length();
 		String randomNumber = RandomStringUtils.random(randomKeyLength, false, true);
 		StringBuilder finalUniqueKey = new StringBuilder(prefix);
-		finalUniqueKey.append("-").append(randomNumber).append(lastPrimaryKeyText);
+		finalUniqueKey.append(keySeparator).append(randomNumber).append(lastPrimaryKeyText);
 		return finalUniqueKey.toString();
 	}
 
