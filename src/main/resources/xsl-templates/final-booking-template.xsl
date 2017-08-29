@@ -56,17 +56,17 @@
 
 						<!-- Body Table -->
 
-						<fo:table text-indent="2pt" width="100%" border-style="outset"
+						<fo:table width="100%" border-style="outset"
 							border-width="2pt" background-repeat="repeat">
 							<fo:table-column column-width="40%" />
 							<fo:table-column />
 							<fo:table-body>
 								<fo:table-row>
-									<fo:table-cell font-size="x-small" border-style="inset"
+									<fo:table-cell padding-left="1mm" font-size="x-small" border-style="inset"
 										border-width="0pt" border-right="1pt" padding="0pt"
 										background-repeat="repeat" display-align="center"
 										border-color="grey">
-										<fo:block text-indent="2pc" space-after="7pt"
+										<fo:block space-after="7pt"
 											space-before.minimum="6pt" space-before.optimum="8pt"
 											space-before.maximum="10pt">
 										</fo:block>
@@ -76,7 +76,7 @@
 									<fo:table-cell border-style="inset" border-width="0pt"
 										padding="0pt" background-repeat="repeat" display-align="center">
 										<fo:block>
-											<fo:table text-indent="2pt" width="100%"
+											<fo:table width="100%"
 												border-style="inset" border-width="0pt" background-repeat="repeat"
 												border-color="grey">
 												<fo:table-column />
@@ -86,7 +86,7 @@
 
 
 													<fo:table-row height="auto" font-size="x-small">
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															display-align="center" border-right="1pt" border-bottom="1pt"
 															border-color="grey">
@@ -98,7 +98,7 @@
 																<xsl:value-of select="/bookinginfo/carrier/name" />
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															display-align="center" border-right="1pt" border-bottom="1pt"
 															border-color="grey">
@@ -110,7 +110,7 @@
 																<xsl:value-of select="/bookinginfo/carrierBookingNo" />
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															display-align="center" border-bottom="1pt" border-color="grey">
 															<fo:block>
@@ -138,7 +138,7 @@
 										border-color="grey" border-right="1pt">
 										<fo:block>
 
-											<fo:table text-indent="2pt" display-align="before"
+											<fo:table display-align="before"
 												width="100%" border-style="inset" border-width="0pt"
 												border-color="grey">
 												<fo:table-column column-width="100%" />
@@ -148,7 +148,7 @@
 												<fo:table-body>
 													<fo:table-row height="100pt"
 														border-bottom-width="thick">
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															border-right="0pt" border-bottom="1pt" border-color="grey"
 															border-top="1pt">
@@ -170,7 +170,7 @@
 													</fo:table-row>
 
 													<fo:table-row height="100pt">
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															border-right="0pt" border-top="1pt" border-color="grey">
 															<fo:block font-size="x-small">
@@ -200,7 +200,7 @@
 									</fo:table-cell>
 									<fo:table-cell>
 										<fo:block>
-											<fo:table text-indent="2pt" width="100%"
+											<fo:table width="100%"
 												border-style="inset" border-width="0pt" border-color="grey">
 												<fo:table-column column-width="50%" />
 												<fo:table-column column-width="50%" />
@@ -209,7 +209,7 @@
 												<fo:table-body>
 													<fo:table-row height="100pt"
 														border-bottom-width="thick">
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															border-right="1pt" border-bottom="1pt" border-color="grey">
 															<fo:block font-size="x-small">
@@ -230,7 +230,7 @@
 																</fo:block>
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															border-right="0pt" border-bottom="1pt" border-color="grey">
 
@@ -255,7 +255,7 @@
 													</fo:table-row>
 
 													<fo:table-row height="100pt">
-														<fo:table-cell border-style="inset"
+														<fo:table-cell padding-left="1mm" border-style="inset"
 															border-width="0pt" padding="0pt" background-repeat="repeat"
 															border-right="1pt" border-color="grey">
 															<fo:block font-size="x-small">
@@ -276,7 +276,7 @@
 																</fo:block>
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell>
+														<fo:table-cell padding-left="1mm" >
 															<fo:block font-size="x-small">
 
 																Service Provider
