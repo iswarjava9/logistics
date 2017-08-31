@@ -357,16 +357,16 @@
 												<fo:table-body>
 													<fo:table-row>
 														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt">
+															border-style="inset" border-right="1pt" border-bottom="0pt">
 															<fo:block font-size="x-small">Vessel</fo:block>
-															<fo:block font-size="small" font-weight="bold">Vessel
-																Value
+															<fo:block font-size="small" font-weight="bold">
+															<xsl:value-of select="/bookinginfo/vessel/name" />
 															</fo:block>
 														</fo:table-cell>
 														<fo:table-cell>
 															<fo:block font-size="x-small">Voyage No</fo:block>
-															<fo:block font-size="small" font-weight="bold">Voyage
-																No
+															<fo:block font-size="small" font-weight="bold" border-bottom="0pt">
+															<xsl:value-of select="/bookinginfo/carrierVoyage" />
 															</fo:block>
 														</fo:table-cell>
 													</fo:table-row>
