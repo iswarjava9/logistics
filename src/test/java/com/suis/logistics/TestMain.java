@@ -19,7 +19,6 @@ import com.suis.logistics.service.container.ContainerService;
 public class TestMain {
 
 	public static void main(String[] args) {
-
 		AbstractApplicationContext context = new AnnotationConfigApplicationContext(HibernateConfiguration.class);
 		createContainer(context);
 	}
