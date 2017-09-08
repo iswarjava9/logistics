@@ -3,6 +3,8 @@ package com.suis.logistics.repository.customer;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.Customer;
@@ -10,10 +12,16 @@ import com.suis.logistics.repository.BaseDao;
 
 @Repository
 public class CustomerDaoImpl extends BaseDao implements CustomerDao {
+	@Autowired
+	Environment env;
 
 	@Override
 	public Integer createCustomer(Customer customer) {
+		try{
 		getCurrentSession().save(customer);
+		}catch(Exception e){
+			throw new AddCustomerFailedException(e, env);
+		}
 		return customer.getId();
 
 	}
@@ -33,11 +41,8 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 
 	@Override
 	public List<Customer> getCustomersByName(String name) {
-		Query query = getCurrentSession().getNamedQuery("Customer.findByName").setParameter("name", name+"%");
+		Query query = getCurrentSession().getNamedQuery("Customer.findByName").setParameter("name", name + "%");
 		List<Customer> customers = query.list();
 		return customers;
 	}
-
-
-
 }

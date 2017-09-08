@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.BookingDetail;
@@ -14,9 +16,18 @@ import com.suis.logistics.repository.BaseDao;
 @Repository
 public class BookingDaoImpl extends BaseDao implements BookingDao {
 
+	@Autowired
+	Environment env;
+
 	@Override
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
-		getCurrentSession().save(bookingDetail);
+		try {
+			getCurrentSession().save(bookingDetail);
+			//bookingDetail.getUser().getId();// simulate booking creation exception scenario
+		} catch (Exception e) {
+			//bookingDetail.getUser().getId(); // Simulate unknown error
+			throw new CreateBookingFailedException(e,env);
+		}
 		return bookingDetail;
 	}
 

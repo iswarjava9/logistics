@@ -3,6 +3,8 @@ package com.suis.logistics.repository.place;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.Place;
@@ -10,10 +12,16 @@ import com.suis.logistics.repository.BaseDao;
 
 @Repository
 public class PlaceDaoImpl extends BaseDao implements PlaceDao {
+	@Autowired
+	Environment env;
 
 	@Override
 	public Integer createPlace(Place place) {
+		try{
 		getCurrentSession().save(place);
+		}catch(Exception e){
+			throw new AddPlaceFailedException(e, env);
+		}
 		return place.getId();
 	}
 

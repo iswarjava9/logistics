@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableTransactionManagement
 @ComponentScan({ "com.suis.logistics" })
 @PropertySource(value = { "classpath:application.properties" })
+@PropertySource(value = { "classpath:errormsg.properties" })
 public class HibernateConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
@@ -71,34 +72,33 @@ public class HibernateConfiguration extends WebMvcConfigurerAdapter {
 		txManager.setSessionFactory(s);
 		return txManager;
 	}
-
-
-
-	/*@Bean
-	@Primary
-	@Autowired(required=true)
-	public Jackson2ObjectMapperBuilder objectMapperBuilder() {
-	    Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
-	    builder.serializationInclusion(JsonInclude.Include.NON_NULL);
-	    return builder;
-	}*/
-
-	/*@Bean
-	 public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
-	  MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-	  ObjectMapper objectMapper = new ObjectMapper();
-	  objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	  objectMapper.setSerializationInclusion(Include.NON_NULL);
-	  jsonConverter.setObjectMapper(objectMapper);
-	  return jsonConverter;
-	 }
-
-	 @Override
-	 public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-	  converters.add(customJackson2HttpMessageConverter());
-
-	 }*/
-
+	/*
+	 * @Bean
+	 *
+	 * @Primary
+	 *
+	 * @Autowired(required=true) public Jackson2ObjectMapperBuilder
+	 * objectMapperBuilder() { Jackson2ObjectMapperBuilder builder = new
+	 * Jackson2ObjectMapperBuilder();
+	 * builder.serializationInclusion(JsonInclude.Include.NON_NULL); return
+	 * builder; }
+	 */
+	/*
+	 * @Bean public MappingJackson2HttpMessageConverter
+	 * customJackson2HttpMessageConverter() {
+	 * MappingJackson2HttpMessageConverter jsonConverter = new
+	 * MappingJackson2HttpMessageConverter(); ObjectMapper objectMapper = new
+	 * ObjectMapper();
+	 * objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+	 * false); objectMapper.setSerializationInclusion(Include.NON_NULL);
+	 * jsonConverter.setObjectMapper(objectMapper); return jsonConverter; }
+	 *
+	 * @Override public void
+	 * configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+	 * converters.add(customJackson2HttpMessageConverter());
+	 *
+	 * }
+	 */
 	/*
 	 * @Bean
 	 *
@@ -108,7 +108,6 @@ public class HibernateConfiguration extends WebMvcConfigurerAdapter {
 	 * objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
 	 * false); return objectMapper; }
 	 */
-
 	/*
 	 * @Override public void
 	 * configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -122,60 +121,56 @@ public class HibernateConfiguration extends WebMvcConfigurerAdapter {
 	 *
 	 * }
 	 */
-
-	/* @Override
-	    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-		 MappingJackson2HttpMessageConverter converter2 = null;
-		 for(HttpMessageConverter converter : converters){
-	    		if(converter instanceof MappingJackson2HttpMessageConverter){
-	    			converter2 = (MappingJackson2HttpMessageConverter) converter;
-	    			//converters.remove(converter);
-	    			ObjectMapper objectMapper = converter2.getObjectMapper();
-	    			 objectMapper.setSerializationInclusion(Include.NON_NULL);
-	    			 converter2.setObjectMapper(objectMapper);
-	    		}
-	    	}
-		 converters.add(0, converter2);
-       System.out.println(converters);
-	       // converters.add(mappingJackson2HttpMessageConverter());
-	    }*/
-
-/*
-	    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-	        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        objectMapper.setSerializationInclusion(Include.NON_NULL);
-
-	        converter.setObjectMapper(objectMapper);
-	        return converter;
-	    }
-
-	    @Override
-	    public void addReturnValueHandlers(final List<HandlerMethodReturnValueHandler> returnValueHandlers) {
-	        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-	        messageConverters.add(mappingJackson2HttpMessageConverter());
-	        returnValueHandlers.add(new ResultResponseHandlerMethodProcessor(messageConverters));
-	    }*/
-
-	/*@Bean
-	public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
-		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		objectMapper.findAndRegisterModules();
-		objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-		objectMapper.configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, true);
-		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		objectMapper.setSerializationInclusion(Include.NON_NULL);
-		SerializationConfig se = objectMapper.getSerializationConfig();
-		jsonConverter.setObjectMapper(objectMapper);
-		return jsonConverter;
-	}
-
-	@Override
-	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(customJackson2HttpMessageConverter());
-	}*/
+	/*
+	 * @Override public void
+	 * extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+	 * MappingJackson2HttpMessageConverter converter2 = null;
+	 * for(HttpMessageConverter converter : converters){ if(converter instanceof
+	 * MappingJackson2HttpMessageConverter){ converter2 =
+	 * (MappingJackson2HttpMessageConverter) converter;
+	 * //converters.remove(converter); ObjectMapper objectMapper =
+	 * converter2.getObjectMapper();
+	 * objectMapper.setSerializationInclusion(Include.NON_NULL);
+	 * converter2.setObjectMapper(objectMapper); } } converters.add(0,
+	 * converter2); System.out.println(converters); //
+	 * converters.add(mappingJackson2HttpMessageConverter()); }
+	 */
+	/*
+	 * public MappingJackson2HttpMessageConverter
+	 * mappingJackson2HttpMessageConverter() {
+	 * MappingJackson2HttpMessageConverter converter = new
+	 * MappingJackson2HttpMessageConverter(); ObjectMapper objectMapper = new
+	 * ObjectMapper(); objectMapper.setSerializationInclusion(Include.NON_NULL);
+	 *
+	 * converter.setObjectMapper(objectMapper); return converter; }
+	 *
+	 * @Override public void addReturnValueHandlers(final
+	 * List<HandlerMethodReturnValueHandler> returnValueHandlers) {
+	 * List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+	 * messageConverters.add(mappingJackson2HttpMessageConverter());
+	 * returnValueHandlers.add(new
+	 * ResultResponseHandlerMethodProcessor(messageConverters)); }
+	 */
+	/*
+	 * @Bean public MappingJackson2HttpMessageConverter
+	 * customJackson2HttpMessageConverter() {
+	 * MappingJackson2HttpMessageConverter jsonConverter = new
+	 * MappingJackson2HttpMessageConverter(); ObjectMapper objectMapper = new
+	 * ObjectMapper();
+	 * objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+	 * false); objectMapper.findAndRegisterModules();
+	 * objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
+	 * true); objectMapper.configure(SerializationFeature.
+	 * WRITE_DATE_KEYS_AS_TIMESTAMPS, true);
+	 * objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+	 * objectMapper.setSerializationInclusion(Include.NON_NULL);
+	 * SerializationConfig se = objectMapper.getSerializationConfig();
+	 * jsonConverter.setObjectMapper(objectMapper); return jsonConverter; }
+	 *
+	 * @Override public void
+	 * configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+	 * converters.add(customJackson2HttpMessageConverter()); }
+	 */
 	/*
 	 * @Override public void
 	 * extendMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -183,6 +178,4 @@ public class HibernateConfiguration extends WebMvcConfigurerAdapter {
 	 *
 	 * }
 	 */
-
-
 }
