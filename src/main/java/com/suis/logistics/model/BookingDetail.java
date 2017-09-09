@@ -69,14 +69,16 @@ public class BookingDetail implements Serializable {
 	private LocalDateTime			eta;
 	@Column(name = "booking_date")
 	private LocalDateTime			bookingDate;
+	@Column(name = "amendment_date")
+	private LocalDateTime			amendmentDate;
 	@Column(name = "cargo_moving_date")
 	private LocalDateTime			cargoMovingDate;
 	@Column(name = "cut_off_date")
-	private LocalDateTime			cutOffDate;
+	private LocalDateTime			portCutOffDate;
 	@Column(name = "delievery_eta")
 	private LocalDateTime			delieveryEta;
-	@Column(name = "rate_cut_off_date_time")
-	private LocalDateTime			rateCutOffDateTime;
+	@Column(name = "rail_cut_off_date_time")
+	private LocalDateTime			railCutOffDateTime;
 	@Column(name = "sail_date")
 	private LocalDateTime			sailDate;
 	//
@@ -109,11 +111,14 @@ public class BookingDetail implements Serializable {
 	@JoinColumn(name = "carrier_id")
 	private Customer				carrier;
 	@OneToOne
-	@JoinColumn(name = "foreign_agent_id")
-	private Customer				foreignAgent;
+	@JoinColumn(name = "delivery_agent_id")
+	private Customer				deliveryAgent;
+	@OneToOne
+	@JoinColumn(name = "booking_agent_id")
+	private Customer				bookingAgent;
 	@OneToOne
 	@JoinColumn(name = "account_id")
-	private Customer				account;
+	private Customer				billTo;
 	@OneToOne
 	@JoinColumn(name = "consignee_id")
 	private Customer				consignee;
@@ -121,8 +126,11 @@ public class BookingDetail implements Serializable {
 	@JoinColumn(name = "local_ss_line_office_id")
 	private Customer				localSSLineOffice;
 	@OneToOne
-	@JoinColumn(name = "notify_id")
-	private Customer				notify;
+	@JoinColumn(name = "notify1_id")
+	private Customer				notify1;
+	@OneToOne
+	@JoinColumn(name = "notify2_id")
+	private Customer				notify2;
 	@OneToOne
 	@JoinColumn(name = "shipper_id")
 	private Customer				shipper;
@@ -130,7 +138,10 @@ public class BookingDetail implements Serializable {
 	private User					user;
 	@OneToOne
 	@JoinColumn(name = "load_terminal_id")
-	private Place					loadTerminal;
+	private Place					emptyContainerPickup;
+	@OneToOne
+	@JoinColumn(name = "ingate_terminal_id")
+	private Place					ingateAtTerminal;
 	@OneToOne
 	@JoinColumn(name = "place_of_delivery_id")
 	private Place					placeOfDelivery;
@@ -288,12 +299,30 @@ public class BookingDetail implements Serializable {
 		this.eta = eta;
 	}
 
+	public Place getIngateAtTerminal() {
+		return ingateAtTerminal;
+	}
+
+	public void setIngateAtTerminal(Place ingateAtTerminal) {
+		this.ingateAtTerminal = ingateAtTerminal;
+	}
+
 	public LocalDateTime getBookingDate() {
 		return bookingDate;
 	}
 
 	public void setBookingDate(LocalDateTime bookingDate) {
 		this.bookingDate = bookingDate;
+	}
+
+
+
+	public LocalDateTime getAmendmentDate() {
+		return amendmentDate;
+	}
+
+	public void setAmendmentDate(LocalDateTime amendmentDate) {
+		this.amendmentDate = amendmentDate;
 	}
 
 	public LocalDateTime getCargoMovingDate() {
@@ -304,12 +333,13 @@ public class BookingDetail implements Serializable {
 		this.cargoMovingDate = cargoMovingDate;
 	}
 
-	public LocalDateTime getCutOffDate() {
-		return cutOffDate;
+
+	public LocalDateTime getPortCutOffDate() {
+		return portCutOffDate;
 	}
 
-	public void setCutOffDate(LocalDateTime cutOffDate) {
-		this.cutOffDate = cutOffDate;
+	public void setPortCutOffDate(LocalDateTime portCutOffDate) {
+		this.portCutOffDate = portCutOffDate;
 	}
 
 	public LocalDateTime getDelieveryEta() {
@@ -320,12 +350,13 @@ public class BookingDetail implements Serializable {
 		this.delieveryEta = delieveryEta;
 	}
 
-	public LocalDateTime getRateCutOffDateTime() {
-		return rateCutOffDateTime;
+
+	public LocalDateTime getRailCutOffDateTime() {
+		return railCutOffDateTime;
 	}
 
-	public void setRateCutOffDateTime(LocalDateTime rateCutOffDateTime) {
-		this.rateCutOffDateTime = rateCutOffDateTime;
+	public void setRailCutOffDateTime(LocalDateTime railCutOffDateTime) {
+		this.railCutOffDateTime = railCutOffDateTime;
 	}
 
 	public LocalDateTime getSailDate() {
@@ -409,20 +440,32 @@ public class BookingDetail implements Serializable {
 		this.carrier = carrier;
 	}
 
-	public Customer getForeignAgent() {
-		return foreignAgent;
+
+
+	public Customer getDeliveryAgent() {
+		return deliveryAgent;
 	}
 
-	public void setForeignAgent(Customer foreignAgent) {
-		this.foreignAgent = foreignAgent;
+	public void setDeliveryAgent(Customer deliveryAgent) {
+		this.deliveryAgent = deliveryAgent;
 	}
 
-	public Customer getAccount() {
-		return account;
+	public Customer getBookingAgent() {
+		return bookingAgent;
 	}
 
-	public void setAccount(Customer account) {
-		this.account = account;
+	public void setBookingAgent(Customer bookingAgent) {
+		this.bookingAgent = bookingAgent;
+	}
+
+
+
+	public Customer getBillTo() {
+		return billTo;
+	}
+
+	public void setBillTo(Customer billTo) {
+		this.billTo = billTo;
 	}
 
 	public Customer getConsignee() {
@@ -441,12 +484,22 @@ public class BookingDetail implements Serializable {
 		this.localSSLineOffice = localSSLineOffice;
 	}
 
-	public Customer getNotify() {
-		return notify;
+
+
+	public Customer getNotify1() {
+		return notify1;
 	}
 
-	public void setNotify(Customer notify) {
-		this.notify = notify;
+	public void setNotify1(Customer notify1) {
+		this.notify1 = notify1;
+	}
+
+	public Customer getNotify2() {
+		return notify2;
+	}
+
+	public void setNotify2(Customer notify2) {
+		this.notify2 = notify2;
 	}
 
 	public Customer getShipper() {
@@ -465,12 +518,13 @@ public class BookingDetail implements Serializable {
 		this.user = user;
 	}
 
-	public Place getLoadTerminal() {
-		return loadTerminal;
+
+	public Place getEmptyContainerPickup() {
+		return emptyContainerPickup;
 	}
 
-	public void setLoadTerminal(Place loadTerminal) {
-		this.loadTerminal = loadTerminal;
+	public void setEmptyContainerPickup(Place emptyContainerPickup) {
+		this.emptyContainerPickup = emptyContainerPickup;
 	}
 
 	public Place getPlaceOfDelivery() {

@@ -34,7 +34,7 @@ public class BookingDto {
 	private String				nvoccBookingNo;
 	private Integer				serviceContractId;
 	private String				shipperRefNo;
-	private String				typeOfService;
+	private String				serviceType;
 	private String				remarks;
 	//
 	//@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
@@ -47,25 +47,30 @@ public class BookingDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime		bookingDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime		amendmentDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime		cargoMovingDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		cutOffDate;
+	private LocalDateTime		portCutOffDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime		delieveryEta;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		rateCutOffDateTime;
+	private LocalDateTime		railCutOffDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime		sailDate;
 	//
 	private ClientDto			client;
 	private UserDto				user;
-	private CustomerDto			foreignAgent;
-	private CustomerDto			account;
+	private CustomerDto			deliveryAgent;
+	private CustomerDto			bookingAgent;
+	private CustomerDto			billTo;
 	private CustomerDto			consignee;
 	private CustomerDto			localSSLineOffice;
-	private CustomerDto			notify;
+	private CustomerDto			notify1;
+	private CustomerDto			notify2;
 	private CustomerDto			shipper;
-	private PlaceDto			loadTerminal;
+	private PlaceDto			emptyContainerPickup;
+	private PlaceDto			ingateAtTerminal;
 	private PlaceDto			placeOfDelivery;
 	private PlaceDto			placeOfReceipt;
 	private PlaceDto			portOfDischarge;
@@ -191,12 +196,14 @@ public class BookingDto {
 		this.bookingStatus = bookingStatus;
 	}
 
-	public String getTypeOfService() {
-		return typeOfService;
+
+
+	public String getServiceType() {
+		return serviceType;
 	}
 
-	public void setTypeOfService(String typeOfService) {
-		this.typeOfService = typeOfService;
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
 	}
 
 	public LocalDateTime getDocsCutOffDateTime() {
@@ -231,6 +238,16 @@ public class BookingDto {
 		this.bookingDate = bookingDate;
 	}
 
+
+
+	public LocalDateTime getAmendmentDate() {
+		return amendmentDate;
+	}
+
+	public void setAmendmentDate(LocalDateTime amendmentDate) {
+		this.amendmentDate = amendmentDate;
+	}
+
 	public LocalDateTime getCargoMovingDate() {
 		return cargoMovingDate;
 	}
@@ -239,12 +256,14 @@ public class BookingDto {
 		this.cargoMovingDate = cargoMovingDate;
 	}
 
-	public LocalDateTime getCutOffDate() {
-		return cutOffDate;
+
+
+	public LocalDateTime getPortCutOffDate() {
+		return portCutOffDate;
 	}
 
-	public void setCutOffDate(LocalDateTime cutOffDate) {
-		this.cutOffDate = cutOffDate;
+	public void setPortCutOffDate(LocalDateTime portCutOffDate) {
+		this.portCutOffDate = portCutOffDate;
 	}
 
 	public LocalDateTime getDelieveryEta() {
@@ -255,12 +274,23 @@ public class BookingDto {
 		this.delieveryEta = delieveryEta;
 	}
 
-	public LocalDateTime getRateCutOffDateTime() {
-		return rateCutOffDateTime;
+
+
+	public CustomerDto getBookingAgent() {
+		return bookingAgent;
 	}
 
-	public void setRateCutOffDateTime(LocalDateTime rateCutOffDateTime) {
-		this.rateCutOffDateTime = rateCutOffDateTime;
+	public void setBookingAgent(CustomerDto bookingAgent) {
+		this.bookingAgent = bookingAgent;
+	}
+
+
+	public LocalDateTime getRailCutOffDateTime() {
+		return railCutOffDateTime;
+	}
+
+	public void setRailCutOffDateTime(LocalDateTime railCutOffDateTime) {
+		this.railCutOffDateTime = railCutOffDateTime;
 	}
 
 	public LocalDateTime getSailDate() {
@@ -344,20 +374,21 @@ public class BookingDto {
 		this.user = user;
 	}
 
-	public CustomerDto getForeignAgent() {
-		return foreignAgent;
+	public CustomerDto getDeliveryAgent() {
+		return deliveryAgent;
 	}
 
-	public void setForeignAgent(CustomerDto foreignAgent) {
-		this.foreignAgent = foreignAgent;
+	public void setDeliveryAgent(CustomerDto deliveryAgent) {
+		this.deliveryAgent = deliveryAgent;
 	}
 
-	public CustomerDto getAccount() {
-		return account;
+
+	public CustomerDto getBillTo() {
+		return billTo;
 	}
 
-	public void setAccount(CustomerDto account) {
-		this.account = account;
+	public void setBillTo(CustomerDto billTo) {
+		this.billTo = billTo;
 	}
 
 	public CustomerDto getConsignee() {
@@ -376,12 +407,20 @@ public class BookingDto {
 		this.localSSLineOffice = localSSLineOffice;
 	}
 
-	public CustomerDto getNotify() {
-		return notify;
+	public CustomerDto getNotify1() {
+		return notify1;
 	}
 
-	public void setNotify(CustomerDto notify) {
-		this.notify = notify;
+	public void setNotify1(CustomerDto notify1) {
+		this.notify1 = notify1;
+	}
+
+	public CustomerDto getNotify2() {
+		return notify2;
+	}
+
+	public void setNotify2(CustomerDto notify2) {
+		this.notify2 = notify2;
 	}
 
 	public CustomerDto getShipper() {
@@ -392,12 +431,21 @@ public class BookingDto {
 		this.shipper = shipper;
 	}
 
-	public PlaceDto getLoadTerminal() {
-		return loadTerminal;
+
+	public PlaceDto getEmptyContainerPickup() {
+		return emptyContainerPickup;
 	}
 
-	public void setLoadTerminal(PlaceDto loadTerminal) {
-		this.loadTerminal = loadTerminal;
+	public void setEmptyContainerPickup(PlaceDto emptyContainerPickup) {
+		this.emptyContainerPickup = emptyContainerPickup;
+	}
+
+	public PlaceDto getIngateAtTerminal() {
+		return ingateAtTerminal;
+	}
+
+	public void setIngateAtTerminal(PlaceDto ingateAtTerminal) {
+		this.ingateAtTerminal = ingateAtTerminal;
 	}
 
 	public PlaceDto getPlaceOfDelivery() {
