@@ -1,5 +1,7 @@
 package com.suis.logistics.repository.container;
 
+import java.util.List;
+
 import com.suis.logistics.model.ContainerDetail;
 import com.suis.logistics.model.ContainerType;
 
@@ -9,6 +11,7 @@ public interface ContainerDao {
 	public ContainerDetail getContainer(int containerId);
 	public Integer createContainerType(ContainerType containerType);
 	public ContainerType getContainerType(int containerTypeId);
+	public List<ContainerType> getContainerTypesByType(String type);
 
 
 }

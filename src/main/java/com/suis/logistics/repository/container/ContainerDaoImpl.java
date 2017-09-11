@@ -2,6 +2,9 @@ package com.suis.logistics.repository.container;
 
 
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.ContainerDetail;
@@ -31,6 +34,15 @@ public class ContainerDaoImpl extends BaseDao implements ContainerDao {
 	@Override
 	public ContainerType getContainerType(int containerTypeId) {
 		return getCurrentSession().load(ContainerType.class, containerTypeId);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ContainerType> getContainerTypesByType(String type) {
+		Query query = getCurrentSession().getNamedQuery("ContainerType.findByType").setParameter("type", type + "%");
+		List<ContainerType> containerTypes = query.list();
+
+		return containerTypes;
 	}
 
 

@@ -1,5 +1,7 @@
 package com.suis.logistics.web.containertype;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpHeaders;
@@ -34,5 +36,12 @@ public class ContainerTypeController extends BaseController {
 	public ResponseEntity<ContainerTypeDto> get(@PathVariable("id") int id) {
 		ContainerTypeDto containerTypeDto = converterUtil.convertContainerTypeToDto(containerService.getContainerType(id));
 		return new ResponseEntity<ContainerTypeDto>(containerTypeDto, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "bytype/{type}", method = RequestMethod.GET)
+	public ResponseEntity<List<ContainerTypeDto>> getContainerTypeByName(@PathVariable("type") String type) {
+		List<ContainerTypeDto> containerTypes = converterUtil.convertContainerTypeListToDto(containerService.getContainerTypesByType(type));
+		return new ResponseEntity<List<ContainerTypeDto>>(containerTypes, HttpStatus.OK);
 	}
 }

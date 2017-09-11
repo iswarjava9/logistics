@@ -46,4 +46,9 @@ public class ContainerServiceImpl implements ContainerService {
 	public ContainerType getContainerType(int id) {
 		return containerDao.getContainerType(id);
 	}
+
+	@Override
+	public List<ContainerType> getContainerTypesByType(String type) {
+		return containerDao.getContainerTypesByType(type);
+	}
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -16,13 +17,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "commodity")
-@NamedQuery(name = "Commodity.findAll", query = "SELECT c FROM Commodity c")
+@NamedQueries({@NamedQuery(name = "Commodity.findAll", query = "SELECT c FROM Commodity c"),
+	@NamedQuery(name = "Commodity.findByName", query = "SELECT c FROM Commodity c where c.name like :name")})
 public class Commodity implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int					id;
-	private String				commodity;
+	private String				name;
 	private String				description;
 	@Column(name = "primary_quantity")
 	private String				primaryQuantity;
@@ -51,12 +53,14 @@ public class Commodity implements Serializable {
 		this.id = id;
 	}
 
-	public String getCommodity() {
-		return this.commodity;
+
+
+	public String getName() {
+		return name;
 	}
 
-	public void setCommodity(String commodity) {
-		this.commodity = commodity;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {

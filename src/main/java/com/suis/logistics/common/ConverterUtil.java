@@ -82,9 +82,9 @@ public class ConverterUtil {
 
 	public Customer convertCustomerDtoToEntity(CustomerDto customerDto) {
 		Customer customer = modelMapper.map(customerDto, Customer.class);
-		Person primaryContact = new Person();
+		/*Person primaryContact = new Person();
 		primaryContact.setId(customerDto.getContactId());
-		customer.setPrimaryContact(primaryContact);
+		customer.setPrimaryContact(primaryContact);*/
 		return customer;
 	}
 
@@ -102,15 +102,15 @@ public class ConverterUtil {
 		String remarks = bookingDetail.getRemarks();
 		if(remarks != null) {
 			bookingDetail.setRemarks(remarks.replace("\n", "\\n"));
-		}		
-	
+		}
+
 		return bookingDetail;
 	}
 
 	public BookingDto convertBookingDetailToDto(BookingDetail bookingDetail) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-		BookingDto bookingDto = modelMapper.map(bookingDetail, BookingDto.class);	
-		
+		BookingDto bookingDto = modelMapper.map(bookingDetail, BookingDto.class);
+
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		// DateTime conversion to any required timezone
 		// bookingDto.setDocsCutOffDateTime(dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(),"US/Arizona"));
@@ -304,11 +304,27 @@ public class ConverterUtil {
 		return businessLineList;
 	}
 
-
-
 	public List<MovementTypeDto> convertMovementTypeListToDto(List<MovementType> movementTypes) {
 		Type listType = new TypeToken<List<MovementTypeDto>>() {}.getType();
 		List<MovementTypeDto> movementTypeList = modelMapper.map(movementTypes, listType);
 		return movementTypeList;
+	}
+
+	/*public List<CityDto> convertCityListToDto(List<City> citiesByName) {
+		Type listType = new TypeToken<List<CityDto>>() {}.getType();
+		List<CityDto> cities = modelMapper.map(citiesByName, listType);
+		return cities;
+	}*/
+
+	public List<ContainerTypeDto> convertContainerTypeListToDto(List<ContainerType> containerTypesByType) {
+		Type listType = new TypeToken<List<ContainerTypeDto>>() {}.getType();
+		List<ContainerTypeDto> containerTypes = modelMapper.map(containerTypesByType, listType);
+		return containerTypes;
+	}
+
+	public List<CommodityDto> convertCommodityListToDto(List<Commodity> commoditiesByName) {
+		Type listType = new TypeToken<List<CommodityDto>>() {}.getType();
+		List<CommodityDto> commodities = modelMapper.map(commoditiesByName, listType);
+		return commodities;
 	}
 }

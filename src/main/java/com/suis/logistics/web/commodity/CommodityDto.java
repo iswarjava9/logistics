@@ -2,7 +2,7 @@ package com.suis.logistics.web.commodity;
 
 public class CommodityDto {
 	private int					id;
-	private String				commodity;
+	private String				name;
 	private String				description;
 	private String				primaryQuantity;
 	private String				scheduleB;
@@ -14,11 +14,12 @@ public class CommodityDto {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCommodity() {
-		return commodity;
+
+	public String getName() {
+		return name;
 	}
-	public void setCommodity(String commodity) {
-		this.commodity = commodity;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDescription() {
 		return description;

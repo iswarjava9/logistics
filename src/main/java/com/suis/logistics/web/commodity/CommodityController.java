@@ -1,5 +1,7 @@
 package com.suis.logistics.web.commodity;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpHeaders;
@@ -34,5 +36,12 @@ CommodityService commodityService;
 	public ResponseEntity<CommodityDto> get(@PathVariable("id") int id) {
 		CommodityDto commodityDto = converterUtil.convertCommodityToDto(commodityService.getCommodity(id));
 		return new ResponseEntity<CommodityDto>(commodityDto, HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "byname/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<CommodityDto>> getContainerTypeByName(@PathVariable("name") String name) {
+		List<CommodityDto> commodities = converterUtil.convertCommodityListToDto(commodityService.getCommoditiesByName(name));
+		return new ResponseEntity<List<CommodityDto>>(commodities, HttpStatus.OK);
 	}
 }

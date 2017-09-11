@@ -1,5 +1,7 @@
 package com.suis.logistics.service.container;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,5 +19,7 @@ public interface ContainerService {
 	public Integer createContainerType(ContainerType containerType);
 
 	public ContainerType getContainerType(int id);
+
+	public List<ContainerType> getContainerTypesByType(String type);
 
 }

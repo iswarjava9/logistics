@@ -1,5 +1,7 @@
 package com.suis.logistics.service.commodity;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -21,5 +23,10 @@ public class CommodityServiceImpl implements CommodityService {
 	@Override
 	public Commodity getCommodity(int id) {
 		return commodityDao.findById(id);
+	}
+
+	@Override
+	public List<Commodity> getCommoditiesByName(String name) {
+		return commodityDao.findCommodityByName(name);
 	}
 }
