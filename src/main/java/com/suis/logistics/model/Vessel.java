@@ -10,41 +10,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 /**
  * The persistent class for the vessel database table.
  *
  */
 @Entity
-@Table(name="vessel")
-@NamedQuery(name="Vessel.findAll", query="SELECT v FROM Vessel v")
+@Table(name = "vessel")
+@NamedQueries({ @NamedQuery(name = "Vessel.findAll", query = "SELECT v FROM Vessel v"),
+		@NamedQuery(name = "Vessel.findByName", query = "SELECT v FROM Vessel v where v.name like :name") })
 public class Vessel implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+	private static final long	serialVersionUID	= 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-
-	@Column(name="`lloyds _code`")
-	private String lloydsCode;
-
-	private String name;
-
-	@Column(name="vessel_no")
-	private String vesselNo;
-
-	//bi-directional many-to-one association to Quotation
-	@OneToMany(mappedBy="vessel")
-	private List<Quotation> quotations;
-
-	//bi-directional many-to-one association to Country
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int					id;
+	@Column(name = "`lloyds _code`")
+	private String				lloydsCode;
+	private String				name;
+	@Column(name = "vessel_no")
+	private String				vesselNo;
+	// bi-directional many-to-one association to Quotation
+	@OneToMany(mappedBy = "vessel")
+	private List<Quotation>		quotations;
+	// bi-directional many-to-one association to Country
 	@ManyToOne
-	@JoinColumn(name="flag_id")
-	private Country country;
+	@JoinColumn(name = "flag_id")
+	private Country				country;
 
 	public Vessel() {
 	}
@@ -56,8 +51,6 @@ public class Vessel implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	public String getLloydsCode() {
 		return lloydsCode;
@@ -94,14 +87,12 @@ public class Vessel implements Serializable {
 	public Quotation addQuotation(Quotation quotation) {
 		getQuotations().add(quotation);
 		quotation.setVessel(this);
-
 		return quotation;
 	}
 
 	public Quotation removeQuotation(Quotation quotation) {
 		getQuotations().remove(quotation);
 		quotation.setVessel(null);
-
 		return quotation;
 	}
 
@@ -112,5 +103,4 @@ public class Vessel implements Serializable {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
 }

@@ -42,9 +42,9 @@ public class VesselController extends BaseController {
 	}
 
 	@Transactional
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ResponseEntity<List<VesselDto>> getBookingList() {
-		List<VesselDto> vessels = converterUtil.convertVesselListToDto(vesselService.getAllVessels());
+	@RequestMapping(value = "byname/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<VesselDto>> getAllVesselsByName(@PathVariable("name") String name) {
+		List<VesselDto> vessels = converterUtil.convertVesselListToDto(vesselService.getVesselsByName(name));
 		return new ResponseEntity<List<VesselDto>>(vessels, HttpStatus.OK);
 	}
 }

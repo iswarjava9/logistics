@@ -27,7 +27,7 @@ public class DateUtil {
 
 	public List<TimeZoneDto> getAvailableTimeZones() {
 		Set<String> zoneIds = ZoneId.getAvailableZoneIds();
-		List<TimeZoneDto> timeZoneList = new ArrayList();
+		List<TimeZoneDto> timeZoneList = new ArrayList<TimeZoneDto>();
 		for (String zoneId : zoneIds) {
 			ZoneId zone = ZoneId.of(zoneId);
 			ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);

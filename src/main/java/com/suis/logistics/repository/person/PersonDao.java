@@ -8,6 +8,6 @@ public interface PersonDao {
 
 	public Integer createPerson(Person person);
 	public Person findById(int id);
-	public List<Person> getAllPersons();
+	public List<Person> getPersonsByName(String name);
 
 }

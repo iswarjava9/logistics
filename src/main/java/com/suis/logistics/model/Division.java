@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,29 +20,23 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "division")
-@NamedQuery(name = "Division.findAll", query = "SELECT d FROM Division d")
+@NamedQueries({ @NamedQuery(name = "Division.findAll", query = "SELECT d FROM Division d"),
+		@NamedQuery(name = "Division.findByName", query = "SELECT d FROM Division d where d.name like :name") })
 public class Division implements Serializable {
 	private static final long	serialVersionUID	= 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int					id;
-
 	@Column(name = "branch_address")
 	private String				branchAddress;
-
 	private String				code;
-
 	private String				name;
-
 	// bi-directional many-to-one association to Client
 	@ManyToOne
 	private Client				client;
-
 	// bi-directional many-to-one association to Quotation
 	@OneToMany(mappedBy = "division")
 	private List<Quotation>		quotations;
-
 
 	public Division() {
 	}
@@ -93,5 +88,4 @@ public class Division implements Serializable {
 	public void setQuotations(List<Quotation> quotations) {
 		this.quotations = quotations;
 	}
-
 }

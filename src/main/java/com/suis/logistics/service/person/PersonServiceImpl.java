@@ -26,7 +26,7 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public List<Person> getAllPersons() {
-		return personDao.getAllPersons();
+	public List<Person> getPersonsByName(String name) {
+		return personDao.getPersonsByName(name);
 	}
 }

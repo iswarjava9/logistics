@@ -11,8 +11,8 @@ import com.suis.logistics.repository.vessel.VesselDao;
 
 @Component
 public class VesselServiceImpl implements VesselService {
-@Resource
-VesselDao vesselDao;
+	@Resource
+	VesselDao vesselDao;
 
 	@Override
 	public Integer createVessel(Vessel vessel) {
@@ -25,8 +25,7 @@ VesselDao vesselDao;
 	}
 
 	@Override
-	public List<Vessel> getAllVessels() {
-		return vesselDao.getAllVessels();
+	public List<Vessel> getVesselsByName(String name) {
+		return vesselDao.getVesselsByName(name);
 	}
-
 }

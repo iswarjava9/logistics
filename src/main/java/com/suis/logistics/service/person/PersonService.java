@@ -11,5 +11,5 @@ public interface PersonService {
 
 	public Integer addPerson(Person person);
 	public Person getPerson(int id);
-	public List<Person> getAllPersons();
+	public List<Person> getPersonsByName(String name);
 }

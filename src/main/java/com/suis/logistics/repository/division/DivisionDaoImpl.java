@@ -23,12 +23,9 @@ public class DivisionDaoImpl extends BaseDao implements DivisionDao {
 	}
 
 	@Override
-	public List<Division> getAllDivisions() {
-		Query query = getCurrentSession().getNamedQuery("Division.findAll");
+	public List<Division> getDivisionsByName(String name) {
+		Query query = getCurrentSession().getNamedQuery("Division.findByName").setParameter("name", name + "%");
 		List<Division> divisionList = query.list();
 		return divisionList;
 	}
-
-
-
 }

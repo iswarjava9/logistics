@@ -42,9 +42,9 @@ public class DivisionController extends BaseController {
 	}
 
 	@Transactional
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ResponseEntity<List<DivisionDto>> getAllDivisions() {
-		List<DivisionDto> divisions = converterUtil.convertDivisionListToDto(divisionService.getAllDivisions());
+	@RequestMapping(value = "byname/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<DivisionDto>> getAllDivisionsByName(@PathVariable("name") String name) {
+		List<DivisionDto> divisions = converterUtil.convertDivisionListToDto(divisionService.getDivisionsByName(name));
 		return new ResponseEntity<List<DivisionDto>>(divisions, HttpStatus.OK);
 	}
 }

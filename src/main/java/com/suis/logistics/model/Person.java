@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -15,24 +16,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "person")
-@NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+@NamedQueries({ @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
+		@NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p where p.name like :name") })
 public class Person implements Serializable {
 	private static final long	serialVersionUID	= 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int					id;
-
 	private String				email;
-
 	private String				fax;
-
 	private String				mobile;
-
 	private String				name;
-
 	private String				phone;
-
 
 	public Person() {
 	}
@@ -84,5 +79,4 @@ public class Person implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 }

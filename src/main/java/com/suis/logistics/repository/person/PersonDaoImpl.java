@@ -24,10 +24,9 @@ public class PersonDaoImpl extends BaseDao implements PersonDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Person> getAllPersons() {
-		Query query = getCurrentSession().getNamedQuery("Person.findAll");
+	public List<Person> getPersonsByName(String name) {
+		Query query = getCurrentSession().getNamedQuery("Person.findByName").setParameter("name", name + "%");
 		List<Person> personList = query.list();
 		return personList;
 	}
-
 }

@@ -10,5 +10,5 @@ public interface DivisionService {
 
 	public Integer addDivision(Division division);
 	public Division getDivision(int id);
-	public List<Division> getAllDivisions();
+	public List<Division> getDivisionsByName(String name);
 }

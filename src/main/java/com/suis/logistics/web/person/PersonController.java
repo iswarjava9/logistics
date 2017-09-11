@@ -29,7 +29,6 @@ public class PersonController extends BaseController {
 		Integer personId = personService.addPerson(converterUtil.convertPersonDtoToEntity(personDto));
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("personId", String.valueOf(personId));
-
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
@@ -42,9 +41,9 @@ public class PersonController extends BaseController {
 	}
 
 	@Transactional
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ResponseEntity<List<PersonDto>> getAllPersons() {
-		List<PersonDto> persons = converterUtil.convertPersonListToDto(personService.getAllPersons());
+	@RequestMapping(value = "byname/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<PersonDto>> getAllPersonsByName(@PathVariable("name") String name) {
+		List<PersonDto> persons = converterUtil.convertPersonListToDto(personService.getPersonsByName(name));
 		return new ResponseEntity<List<PersonDto>>(persons, HttpStatus.OK);
 	}
 }

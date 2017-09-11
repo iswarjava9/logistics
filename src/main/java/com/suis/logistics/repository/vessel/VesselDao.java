@@ -9,5 +9,5 @@ public interface VesselDao {
 
 	public Vessel findById(int id);
 
-	public List<Vessel> getAllVessels();
+	public List<Vessel> getVesselsByName(String name);
 }

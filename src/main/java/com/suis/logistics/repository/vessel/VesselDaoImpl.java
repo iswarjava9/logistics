@@ -24,8 +24,8 @@ public class VesselDaoImpl extends BaseDao implements VesselDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Vessel> getAllVessels() {
-		Query query = getCurrentSession().getNamedQuery("Vessel.findAll");
+	public List<Vessel> getVesselsByName(String name) {
+		Query query = getCurrentSession().getNamedQuery("Vessel.findByName").setParameter("name", name + "%");
 		List<Vessel> vesselList = query.list();
 		return vesselList;
 	}

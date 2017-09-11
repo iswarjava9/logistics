@@ -26,7 +26,7 @@ public class DivisionServiceImpl implements DivisionService {
 	}
 
 	@Override
-	public List<Division> getAllDivisions() {
-		return divisionDao.getAllDivisions();
+	public List<Division> getDivisionsByName(String name) {
+		return divisionDao.getDivisionsByName(name);
 	}
 }

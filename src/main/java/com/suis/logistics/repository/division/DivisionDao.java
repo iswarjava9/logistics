@@ -8,5 +8,5 @@ public interface DivisionDao {
 
 	public Integer createDivision(Division division);
 	public Division findById(int id);
-	public List<Division> getAllDivisions();
+	public List<Division> getDivisionsByName(String name);
 }
