@@ -1,20 +1,32 @@
 package com.suis.logistics.web.customer;
 
-public class CustomerDto extends CustomerBaseDto{
+import com.suis.logistics.web.CityDto;
+
+public class CustomerDto extends CustomerBaseDto {
 
 	private String	address;
-	private String	ams2OpsController;
-	private String	city;
-	private String	countryCode;
-	private Integer	industryId;
-	private String	stateCode;
-	private String	street;
-	private String	type;
+	private String	personInCharge;
+	private CityDto	city;
 	private String	zipCode;
+	private String	emailId;
+	private String	phoneNo;
 	private Integer	clientId;
-	private Integer	contactId;
 
+	public String getEmailId() {
+		return emailId;
+	}
 
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
 
 	public String getAddress() {
 		return address;
@@ -24,60 +36,20 @@ public class CustomerDto extends CustomerBaseDto{
 		this.address = address;
 	}
 
-	public String getAms2OpsController() {
-		return ams2OpsController;
+	public String getPersonInCharge() {
+		return personInCharge;
 	}
 
-	public void setAms2OpsController(String ams2OpsController) {
-		this.ams2OpsController = ams2OpsController;
+	public void setPersonInCharge(String personInCharge) {
+		this.personInCharge = personInCharge;
 	}
 
-	public String getCity() {
+	public CityDto getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(CityDto city) {
 		this.city = city;
-	}
-
-	public String getCountryCode() {
-		return countryCode;
-	}
-
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
-
-	public Integer getIndustryId() {
-		return industryId;
-	}
-
-	public void setIndustryId(Integer industryId) {
-		this.industryId = industryId;
-	}
-
-	public String getStateCode() {
-		return stateCode;
-	}
-
-	public void setStateCode(String stateCode) {
-		this.stateCode = stateCode;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getZipCode() {
@@ -95,13 +67,4 @@ public class CustomerDto extends CustomerBaseDto{
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
-
-	public Integer getContactId() {
-		return contactId;
-	}
-
-	public void setContactId(Integer contactId) {
-		this.contactId = contactId;
-	}
-
 }

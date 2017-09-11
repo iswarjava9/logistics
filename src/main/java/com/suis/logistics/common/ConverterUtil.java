@@ -21,6 +21,7 @@ import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.BusinessLine;
 import com.suis.logistics.model.Cargo;
 import com.suis.logistics.model.CargoTemplate;
+import com.suis.logistics.model.City;
 import com.suis.logistics.model.Client;
 import com.suis.logistics.model.Commodity;
 import com.suis.logistics.model.ContainerDetail;
@@ -35,6 +36,7 @@ import com.suis.logistics.model.Place;
 import com.suis.logistics.model.Quotation;
 import com.suis.logistics.model.User;
 import com.suis.logistics.model.Vessel;
+import com.suis.logistics.web.CityDto;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.cargo.CargoDto;
@@ -310,11 +312,14 @@ public class ConverterUtil {
 		return movementTypeList;
 	}
 
-	/*public List<CityDto> convertCityListToDto(List<City> citiesByName) {
+	public List<CityDto> convertCityListToDto(List<City> citiesByName) {
+		for(City city : citiesByName ){
+			System.out.println("------------------------------------------"+city.getState().getCountry().getName());
+		}
 		Type listType = new TypeToken<List<CityDto>>() {}.getType();
 		List<CityDto> cities = modelMapper.map(citiesByName, listType);
 		return cities;
-	}*/
+	}
 
 	public List<ContainerTypeDto> convertContainerTypeListToDto(List<ContainerType> containerTypesByType) {
 		Type listType = new TypeToken<List<ContainerTypeDto>>() {}.getType();
