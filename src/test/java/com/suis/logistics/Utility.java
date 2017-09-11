@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suis.logistics.model.Client;
+import com.suis.logistics.web.CityDto;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
@@ -27,16 +28,18 @@ import com.suis.logistics.web.vessel.VesselDto;
 
 public class Utility {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		//generateBookingToJsonString();
 		//generateDivisonDtoToJsonString();
 		// convertDtoToEntity();
 
 		//date();
-		stringManipulation();
+		//stringManipulation();
 
-		generateUniqueAlphaNumeric();
+		//generateUniqueAlphaNumeric();
+
+		generateCustomerDtoToJsonString();
 
 	}
 
@@ -152,6 +155,16 @@ System.out.println(ZoneId.getAvailableZoneIds());
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void generateCustomerDtoToJsonString() throws Exception{
+
+		CustomerDto cus = new CustomerDto();
+		cus.setCity(new CityDto());
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.findAndRegisterModules();
+		String jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(cus);
+		System.out.println(jsonInString);
 	}
 
 	public static void convertDtoToEntity() {

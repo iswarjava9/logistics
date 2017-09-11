@@ -1,14 +1,12 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -35,9 +33,6 @@ public class Person implements Serializable {
 
 	private String				phone;
 
-	// bi-directional many-to-one association to Customer
-	@OneToMany(mappedBy = "primaryContact")
-	private List<Customer>		customers;
 
 	public Person() {
 	}
@@ -88,28 +83,6 @@ public class Person implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public List<Customer> getCustomers() {
-		return this.customers;
-	}
-
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
-	}
-
-	public Customer addCustomer(Customer customer) {
-		getCustomers().add(customer);
-		customer.setPrimaryContact(this);
-
-		return customer;
-	}
-
-	public Customer removeCustomer(Customer customer) {
-		getCustomers().remove(customer);
-		customer.setPrimaryContact(null);
-
-		return customer;
 	}
 
 }

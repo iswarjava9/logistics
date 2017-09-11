@@ -18,16 +18,19 @@ public class ExceptionControllerAdvice {
 
 	@ExceptionHandler(CreateBookingFailedException.class)
 	public ResponseEntity<ErrorResponse> exceptionHandler(CreateBookingFailedException ex) {
+		ex.printStackTrace();
 		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(AddCustomerFailedException.class)
 	public ResponseEntity<ErrorResponse> exceptionHandler(AddCustomerFailedException ex) {
+		ex.printStackTrace();
 		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(AddPlaceFailedException.class)
 	public ResponseEntity<ErrorResponse> exceptionHandler(AddPlaceFailedException ex) {
+		ex.printStackTrace();
 		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 

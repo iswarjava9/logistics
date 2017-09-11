@@ -4,6 +4,7 @@ import com.suis.logistics.web.CityDto;
 
 public class CustomerDto extends CustomerBaseDto {
 
+
 	private String	address;
 	private String	personInCharge;
 	private CityDto	city;
@@ -11,6 +12,7 @@ public class CustomerDto extends CustomerBaseDto {
 	private String	emailId;
 	private String	phoneNo;
 	private Integer	clientId;
+
 
 	public String getEmailId() {
 		return emailId;
