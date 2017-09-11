@@ -313,9 +313,6 @@ public class ConverterUtil {
 	}
 
 	public List<CityDto> convertCityListToDto(List<City> citiesByName) {
-		for(City city : citiesByName ){
-			System.out.println("------------------------------------------"+city.getState().getCountry().getName());
-		}
 		Type listType = new TypeToken<List<CityDto>>() {}.getType();
 		List<CityDto> cities = modelMapper.map(citiesByName, listType);
 		return cities;
