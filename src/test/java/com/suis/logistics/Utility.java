@@ -39,7 +39,9 @@ public class Utility {
 
 		//generateUniqueAlphaNumeric();
 
-		generateCustomerDtoToJsonString();
+		//generateCustomerDtoToJsonString();
+
+		generatePlaceDtoToJsonString();
 
 	}
 
@@ -166,6 +168,17 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		String jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(cus);
 		System.out.println(jsonInString);
 	}
+
+	public static void generatePlaceDtoToJsonString() throws Exception{
+
+		PlaceDto cus = new PlaceDto();
+		cus.setCity(new CityDto());
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.findAndRegisterModules();
+		String jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(cus);
+		System.out.println(jsonInString);
+	}
+
 
 	public static void convertDtoToEntity() {
 		ModelMapper modelMapper = new ModelMapper();
