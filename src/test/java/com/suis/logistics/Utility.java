@@ -4,9 +4,14 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.TextStyle;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TimeZone;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
@@ -41,8 +46,24 @@ public class Utility {
 
 		//generateCustomerDtoToJsonString();
 
-		generatePlaceDtoToJsonString();
+	//	generatePlaceDtoToJsonString();
 
+
+		printAllTimeZones();
+	}
+
+	public static void printAllTimeZones(){
+		Set<String> zoneIds = ZoneId.getAvailableZoneIds();
+
+		for (String zoneId : zoneIds) {
+		    ZoneId zone = ZoneId.of(zoneId);
+		    ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);
+
+		    ZoneOffset offset = zonedDateTime.getOffset();
+		    String longName = zone.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+		    String shortDisplayName = TimeZone.getTimeZone(offset).getDisplayName(false, TimeZone.SHORT);
+		    System.out.println("(" + offset + ") " + zoneId + ", " + longName + "  "+shortDisplayName);
+		}
 	}
 
 	public static void stringManipulation(){

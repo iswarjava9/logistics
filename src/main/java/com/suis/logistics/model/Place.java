@@ -28,7 +28,10 @@ public class Place implements Serializable {
 	private int					id;
 	private String				code;
 	private String				name;
-	private String				timezone;
+	@Column(name = "timezone_id")
+	private String				timeZoneId;
+	@Column(name = "timezone_shortname")
+	private String				timeZoneShortName;
 	@Column(name = "address")
 	private String				address;
 	@OneToOne
@@ -62,12 +65,20 @@ public class Place implements Serializable {
 		this.name = name;
 	}
 
-	public String getTimezone() {
-		return timezone;
+	public String getTimeZoneId() {
+		return timeZoneId;
 	}
 
-	public void setTimezone(String timezone) {
-		this.timezone = timezone;
+	public void setTimeZoneId(String timeZoneId) {
+		this.timeZoneId = timeZoneId;
+	}
+
+	public String getTimeZoneShortName() {
+		return timeZoneShortName;
+	}
+
+	public void setTimeZoneShortName(String timeZoneShortName) {
+		this.timeZoneShortName = timeZoneShortName;
 	}
 
 	public String getAddress() {

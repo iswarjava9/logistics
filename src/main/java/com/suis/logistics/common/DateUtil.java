@@ -2,14 +2,21 @@ package com.suis.logistics.common;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TimeZone;
 
 import org.springframework.stereotype.Component;
+
+import com.suis.logistics.web.TimeZoneDto;
 
 @Component
 public class DateUtil {
 
-	public LocalDateTime convertDateToSpecificTimeZone(LocalDateTime date,String timeZoneId){
+	public LocalDateTime convertDateToSpecificTimeZone(LocalDateTime date, String timeZoneId) {
 
 		ZonedDateTime current = date.atZone(ZoneId.systemDefault());
 		System.out.println(current);
@@ -18,4 +25,17 @@ public class DateUtil {
 		return zdt.toLocalDateTime();
 	}
 
+	public List<TimeZoneDto> getAvailableTimeZones() {
+		Set<String> zoneIds = ZoneId.getAvailableZoneIds();
+		List<TimeZoneDto> timeZoneList = new ArrayList();
+		for (String zoneId : zoneIds) {
+			ZoneId zone = ZoneId.of(zoneId);
+			ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);
+			ZoneOffset offset = zonedDateTime.getOffset();
+			String shortDisplayName = TimeZone.getTimeZone(offset).getDisplayName(false, TimeZone.SHORT);
+			TimeZoneDto timeZone = new TimeZoneDto(zone.getId(), shortDisplayName);
+			timeZoneList.add(timeZone);
+		}
+		return timeZoneList;
+	}
 }
