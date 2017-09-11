@@ -23,10 +23,21 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
 		try {
 			getCurrentSession().save(bookingDetail);
-			//bookingDetail.getUser().getId();// simulate booking creation exception scenario
+			// bookingDetail.getUser().getId();// simulate booking creation
+			// exception scenario
 		} catch (Exception e) {
-			//bookingDetail.getUser().getId(); // Simulate unknown error
-			throw new CreateBookingFailedException(e,env);
+			// bookingDetail.getUser().getId(); // Simulate unknown error
+			throw new CreateBookingFailedException(e, env);
+		}
+		return bookingDetail;
+	}
+
+	@Override
+	public BookingDetail updateBooking(BookingDetail bookingDetail) {
+		try {
+			getCurrentSession().update(bookingDetail);
+		} catch (Exception e) {
+			throw new UpdateBookingFailedException(e, env);
 		}
 		return bookingDetail;
 	}

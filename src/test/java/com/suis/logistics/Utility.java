@@ -35,7 +35,7 @@ public class Utility {
 
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
-		//generateBookingToJsonString();
+		generateBookingToJsonString();
 		//generateDivisonDtoToJsonString();
 		// convertDtoToEntity();
 
@@ -49,7 +49,7 @@ public class Utility {
 	//	generatePlaceDtoToJsonString();
 
 
-		printAllTimeZones();
+	//	printAllTimeZones();
 	}
 
 	public static void printAllTimeZones(){
@@ -159,7 +159,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		// Object to JSON in String
 		try {
 			mapper.findAndRegisterModules();
-			String jsonInString = mapper.writeValueAsString(obj);
+			String jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
 			System.out.println(jsonInString);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block

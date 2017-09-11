@@ -41,9 +41,21 @@ public class BookingController extends BaseController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto) {
-		
+
 		BookingDto bookingDtoResponse = converterUtil.convertBookingDetailToDto(
 				bookingService.createBooking(converterUtil.convertBookingDtoToEntity(bookingDto)));
+		String remarks = bookingDtoResponse.getRemarks();
+		if(remarks != null) {
+			bookingDtoResponse.setRemarks(remarks.replace("\\n", "\n"));
+		}
+		return new ResponseEntity<BookingDto>(bookingDtoResponse, HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity<BookingDto> updateBooking(@RequestBody BookingDto bookingDto) {
+
+		BookingDto bookingDtoResponse = converterUtil.convertBookingDetailToDto(
+				bookingService.updateBooking(converterUtil.convertBookingDtoToEntity(bookingDto)));
 		String remarks = bookingDtoResponse.getRemarks();
 		if(remarks != null) {
 			bookingDtoResponse.setRemarks(remarks.replace("\\n", "\n"));
@@ -55,7 +67,7 @@ public class BookingController extends BaseController {
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<BookingDto> get(@PathVariable("id") int id) {
 
-		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));		
+		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));
 		generateBookingXml(bookingDto);
 		return new ResponseEntity<BookingDto>(bookingDto, HttpStatus.OK);
 	}

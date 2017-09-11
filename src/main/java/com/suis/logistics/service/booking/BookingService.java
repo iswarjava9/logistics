@@ -14,6 +14,8 @@ import com.suis.logistics.model.BookingDetail;
 public interface BookingService {
 	public BookingDetail createBooking(BookingDetail bookingDetail);
 
+	public BookingDetail updateBooking(BookingDetail bookingDetail);
+
 	public BookingDetail getBookingDetail(int id);
 
 	public List<BookingDetail> getBookingList();

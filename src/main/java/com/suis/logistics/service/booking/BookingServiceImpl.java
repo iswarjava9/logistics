@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,14 +28,21 @@ public class BookingServiceImpl implements BookingService {
 	@Value("${bookingno.ocean.export.prefix}")
 	private String		bookingNoOceanExportPrefix;
 	@Value("${booking.pdf.url}")
-	private String	bookingPDFUrl;
+	private String		bookingPDFUrl;
 
 	@Override
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
 		String bookingNo = generateUniqueBookingNo();
 		bookingDetail.setNvoccBookingNo(bookingNo);
 		bookingDetail.setForwarderRefNo(bookingNo);
+		bookingDetail.setBookingDate(LocalDateTime.now());
 		return bookingDao.createBooking(bookingDetail);
+	}
+
+	@Override
+	public BookingDetail updateBooking(BookingDetail bookingDetail) {
+		bookingDetail.setAmendmentDate(LocalDateTime.now());
+		return bookingDao.updateBooking(bookingDetail);
 	}
 
 	@Override
@@ -57,10 +65,11 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public InputStream downloadBookingConfirmation(String bookingNo, HttpHeaders headers) throws IOException {
-		File pdf = new File(
-				bookingPDFUrl+"//booking-"
-						+ bookingNo + ".pdf");
-		/*ClassPathResource bookingPDF = new ClassPathResource("generated-pdf/" + pdf.getName());*/
+		File pdf = new File(bookingPDFUrl + "//booking-" + bookingNo + ".pdf");
+		/*
+		 * ClassPathResource bookingPDF = new ClassPathResource("generated-pdf/"
+		 * + pdf.getName());
+		 */
 		headers.setContentType(MediaType.parseMediaType("application/pdf"));
 		headers.add("Access-Control-Allow-Origin", "*");
 		headers.add("Access-Control-Allow-Methods", "GET, POST, PUT");
@@ -70,8 +79,7 @@ public class BookingServiceImpl implements BookingService {
 		headers.add("Pragma", "no-cache");
 		headers.add("Expires", "0");
 		headers.setContentLength(pdf.length());
-		InputStream  bookingPDF= new FileInputStream(pdf);
+		InputStream bookingPDF = new FileInputStream(pdf);
 		return bookingPDF;
 	}
-
 }

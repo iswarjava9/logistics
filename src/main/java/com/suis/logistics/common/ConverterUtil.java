@@ -100,7 +100,6 @@ public class ConverterUtil {
 
 	public BookingDetail convertBookingDtoToEntity(BookingDto bookingDto) {
 		BookingDetail bookingDetail = modelMapper.map(bookingDto, BookingDetail.class);
-		bookingDetail.setBookingDate(LocalDateTime.now());
 		String remarks = bookingDetail.getRemarks();
 		if(remarks != null) {
 			bookingDetail.setRemarks(remarks.replace("\n", "\\n"));
