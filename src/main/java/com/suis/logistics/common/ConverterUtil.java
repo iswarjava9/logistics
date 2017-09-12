@@ -109,7 +109,7 @@ public class ConverterUtil {
 	}
 
 	public BookingDto convertBookingDetailToDto(BookingDetail bookingDetail) {
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		BookingDto bookingDto = modelMapper.map(bookingDetail, BookingDto.class);
 
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
