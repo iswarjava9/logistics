@@ -62,13 +62,12 @@
 							<fo:table-column />
 							<fo:table-body>
 								<fo:table-row>
-									<fo:table-cell padding-left="1mm" font-size="x-small" border-style="inset"
-										border-width="0pt" border-right="1pt" padding="0pt"
-										background-repeat="repeat" display-align="center"
+									<fo:table-cell padding-left="1mm" font-size="x-small"
+										border-style="inset" border-width="0pt" border-right="1pt"
+										padding="0pt" background-repeat="repeat" display-align="center"
 										border-color="grey">
-										<fo:block space-after="7pt"
-											space-before.minimum="6pt" space-before.optimum="8pt"
-											space-before.maximum="10pt">
+										<fo:block space-after="7pt" space-before.minimum="6pt"
+											space-before.optimum="8pt" space-before.maximum="10pt">
 										</fo:block>
 
 										<fo:block>Shipper</fo:block>
@@ -76,9 +75,8 @@
 									<fo:table-cell border-style="inset" border-width="0pt"
 										padding="0pt" background-repeat="repeat" display-align="center">
 										<fo:block>
-											<fo:table width="100%"
-												border-style="inset" border-width="0pt" background-repeat="repeat"
-												border-color="grey">
+											<fo:table width="100%" border-style="inset"
+												border-width="0pt" background-repeat="repeat" border-color="grey">
 												<fo:table-column />
 												<fo:table-column />
 												<fo:table-column />
@@ -86,10 +84,10 @@
 
 
 													<fo:table-row height="auto" font-size="x-small">
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															display-align="center" border-right="1pt" border-bottom="1pt"
-															border-color="grey">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" display-align="center"
+															border-right="1pt" border-bottom="1pt" border-color="grey">
 															<fo:block>
 																Carrier
 															</fo:block>
@@ -98,10 +96,10 @@
 																<xsl:value-of select="/bookinginfo/carrier/name" />
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															display-align="center" border-right="1pt" border-bottom="1pt"
-															border-color="grey">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" display-align="center"
+															border-right="1pt" border-bottom="1pt" border-color="grey">
 															<fo:block>
 																Carrier Booking No#
 															</fo:block>
@@ -110,9 +108,10 @@
 																<xsl:value-of select="/bookinginfo/carrierBookingNo" />
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															display-align="center" border-bottom="1pt" border-color="grey">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" display-align="center"
+															border-bottom="1pt" border-color="grey">
 															<fo:block>
 																Forwarder Booking No#
 															</fo:block>
@@ -138,9 +137,8 @@
 										border-color="grey" border-right="1pt">
 										<fo:block>
 
-											<fo:table display-align="before"
-												width="100%" border-style="inset" border-width="0pt"
-												border-color="grey">
+											<fo:table display-align="before" width="100%"
+												border-style="inset" border-width="0pt" border-color="grey">
 												<fo:table-column column-width="100%" />
 
 												<!-- <fo:table-column column-width="50%" /> <fo:table-column 
@@ -148,10 +146,10 @@
 												<fo:table-body>
 													<fo:table-row height="100pt"
 														border-bottom-width="thick">
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right="0pt" border-bottom="1pt" border-color="grey"
-															border-top="1pt">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" border-right="0pt"
+															border-bottom="1pt" border-color="grey" border-top="1pt">
 
 															<fo:block font-size="small" font-weight="bold">
 																<fo:block>
@@ -170,9 +168,10 @@
 													</fo:table-row>
 
 													<fo:table-row height="100pt">
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right="0pt" border-top="1pt" border-color="grey">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" border-right="0pt" border-top="1pt"
+															border-color="grey">
 															<fo:block font-size="x-small">
 
 																Forwarding Agent
@@ -200,8 +199,8 @@
 									</fo:table-cell>
 									<fo:table-cell>
 										<fo:block>
-											<fo:table width="100%"
-												border-style="inset" border-width="0pt" border-color="grey">
+											<fo:table width="100%" border-style="inset"
+												border-width="0pt" border-color="grey">
 												<fo:table-column column-width="50%" />
 												<fo:table-column column-width="50%" />
 												<!-- <fo:table-column column-width="50%" /> <fo:table-column 
@@ -209,9 +208,10 @@
 												<fo:table-body>
 													<fo:table-row height="100pt"
 														border-bottom-width="thick">
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right="1pt" border-bottom="1pt" border-color="grey">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" border-right="1pt"
+															border-bottom="1pt" border-color="grey">
 															<fo:block font-size="x-small">
 
 																Empty Container Pick up
@@ -230,9 +230,10 @@
 																</fo:block>
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right="0pt" border-bottom="1pt" border-color="grey">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" border-right="0pt"
+															border-bottom="1pt" border-color="grey">
 
 															<fo:block font-size="x-small">
 
@@ -255,9 +256,10 @@
 													</fo:table-row>
 
 													<fo:table-row height="100pt">
-														<fo:table-cell padding-left="1mm" border-style="inset"
-															border-width="0pt" padding="0pt" background-repeat="repeat"
-															border-right="1pt" border-color="grey">
+														<fo:table-cell padding-left="1mm"
+															border-style="inset" border-width="0pt" padding="0pt"
+															background-repeat="repeat" border-right="1pt"
+															border-color="grey">
 															<fo:block font-size="x-small">
 
 																Cargo Supplier
@@ -276,7 +278,7 @@
 																</fo:block>
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell padding-left="1mm" >
+														<fo:table-cell padding-left="1mm">
 															<fo:block font-size="x-small">
 
 																Service Provider
@@ -360,13 +362,14 @@
 															border-style="inset" border-right="1pt" border-bottom="0pt">
 															<fo:block font-size="x-small">Vessel</fo:block>
 															<fo:block font-size="small" font-weight="bold">
-															<xsl:value-of select="/bookinginfo/vessel/name" />
+																<xsl:value-of select="/bookinginfo/vessel/name" />
 															</fo:block>
 														</fo:table-cell>
 														<fo:table-cell>
 															<fo:block font-size="x-small">Voyage No</fo:block>
-															<fo:block font-size="small" font-weight="bold" border-bottom="0pt">
-															<xsl:value-of select="/bookinginfo/carrierVoyage" />
+															<fo:block font-size="small" font-weight="bold"
+																border-bottom="0pt">
+																<xsl:value-of select="/bookinginfo/carrierVoyage" />
 															</fo:block>
 														</fo:table-cell>
 													</fo:table-row>
@@ -509,9 +512,15 @@
 											border-right="1pt">
 											<fo:block font-size="small" font-weight="bold">
 												<!-- type container value comes here TBD -->
-												1 x 20 FT DRY
+												<xsl:for-each select="bookinginfo/containerDetails">
+													<fo:block>
+														<xsl:value-of select="containerType/type" />
+													</fo:block>
+												</xsl:for-each>
+
 
 											</fo:block>
+
 
 
 
@@ -521,7 +530,11 @@
 											border-right="1pt">
 											<fo:block font-size="small" font-weight="bold">
 												<!-- commodity value comes here TBD -->
-												INDUSTRIL SAND
+												<xsl:for-each select="bookinginfo/containerDetails">
+													<fo:block>
+														<xsl:value-of select="commodity/name" />
+													</fo:block>
+												</xsl:for-each>
 
 											</fo:block>
 
