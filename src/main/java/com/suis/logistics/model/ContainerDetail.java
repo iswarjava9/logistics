@@ -69,6 +69,10 @@ public class ContainerDetail implements Serializable {
 	@JoinColumn(name="container_type_id")
 	private ContainerType containerType;
 
+	@ManyToOne
+	@JoinColumn(name="commodity_id")
+	private Commodity commodity;
+
 	//bi-directional many-to-one association to Quotation
 	/*@OneToOne
 	private Quotation quotation;
@@ -225,6 +229,14 @@ public class ContainerDetail implements Serializable {
 		this.containerType = containerType;
 	}
 
+
+	public Commodity getCommodity() {
+		return commodity;
+	}
+
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
+	}
 
 	public int getVehicleNo() {
 		return vehicleNo;

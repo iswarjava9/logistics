@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.suis.logistics.web.cargo.CargoDto;
+import com.suis.logistics.web.commodity.CommodityDto;
 import com.suis.logistics.web.containertype.ContainerTypeDto;
 
 public class ContainerDto {
@@ -39,6 +40,7 @@ public class ContainerDto {
 	private List<CargoDto>		cargos;
 	private Integer				bookingId;
 	private ContainerTypeDto	containerType;
+	private CommodityDto		commodity;
 	private Integer				quotationId;
 
 	public Integer getId() {
@@ -135,6 +137,14 @@ public class ContainerDto {
 
 	public void setContainerType(ContainerTypeDto containerType) {
 		this.containerType = containerType;
+	}
+
+	public CommodityDto getCommodity() {
+		return commodity;
+	}
+
+	public void setCommodity(CommodityDto commodity) {
+		this.commodity = commodity;
 	}
 
 	public Integer getQuotationId() {
