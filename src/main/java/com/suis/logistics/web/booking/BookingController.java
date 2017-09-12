@@ -68,7 +68,11 @@ public class BookingController extends BaseController {
 	public ResponseEntity<BookingDto> get(@PathVariable("id") int id) {
 
 		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));
-		generateBookingXml(bookingDto);
+		String remarks = bookingDto.getRemarks();
+		if(remarks != null) {
+			bookingDto.setRemarks(remarks.replace("\\n", "\n"));
+		}
+		//generateBookingXml(bookingDto);
 		return new ResponseEntity<BookingDto>(bookingDto, HttpStatus.OK);
 	}
 
