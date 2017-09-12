@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -71,9 +70,9 @@ public class ContainerDetail implements Serializable {
 	private ContainerType containerType;
 
 	//bi-directional many-to-one association to Quotation
-	@OneToOne
+	/*@OneToOne
 	private Quotation quotation;
-
+*/
 	@Column(name="vehicle_no")
 	private int vehicleNo;
 
@@ -226,13 +225,6 @@ public class ContainerDetail implements Serializable {
 		this.containerType = containerType;
 	}
 
-	public Quotation getQuotation() {
-		return this.quotation;
-	}
-
-	public void setQuotation(Quotation quotation) {
-		this.quotation = quotation;
-	}
 
 	public int getVehicleNo() {
 		return vehicleNo;
