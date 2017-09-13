@@ -1,15 +1,20 @@
 package com.suis.logistics.web.booking;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
 import com.suis.logistics.web.container.ContainerDto;
+import com.suis.logistics.web.container.ContainerShortDto;
 import com.suis.logistics.web.customer.CustomerDto;
 import com.suis.logistics.web.division.DivisionDto;
 import com.suis.logistics.web.movementtype.MovementTypeDto;
@@ -21,71 +26,83 @@ import com.suis.logistics.web.vessel.VesselDto;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BookingDto {
 
-	private Integer				id;
-	private String				aesAuthNo;
-	private String				bookingStatus;
-	private String				carrierBookingNo;
-	private String				carrierContact;
-	private String				carrierVoyage;
-	private String				controller;
-	private String				forwarderRefNo;
-	private String				freight;
-	private String				nraNumber;
-	private String				nvoccBookingNo;
-	private Integer				serviceContractId;
-	private String				shipperRefNo;
-	private String				serviceType;
-	private String				remarks;
+	private Integer					id;
+	private String					aesAuthNo;
+	private String					bookingStatus;
+	private String					carrierBookingNo;
+	private String					carrierContact;
+	private String					carrierVoyage;
+	private String					controller;
+	private String					forwarderRefNo;
+	private String					freight;
+	private String					nraNumber;
+	private String					nvoccBookingNo;
+	private Integer					serviceContractId;
+	private String					shipperRefNo;
+	private String					serviceType;
+	private String					remarks;
 	//
-	//@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+	// @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		docsCutOffDateTime;
+	private LocalDateTime			docsCutOffDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		docsReceivedDate;
+	private LocalDateTime			docsReceivedDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		eta;
+	private LocalDateTime			eta;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		bookingDate;
+	private LocalDateTime			bookingDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		amendmentDate;
+	private LocalDateTime			amendmentDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		cargoMovingDate;
+	private LocalDateTime			cargoMovingDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		portCutOffDate;
+	private LocalDateTime			portCutOffDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		delieveryEta;
+	private LocalDateTime			delieveryEta;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		railCutOffDateTime;
+	private LocalDateTime			railCutOffDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime		sailDate;
+	private LocalDateTime			sailDate;
 	//
-	private ClientDto			client;
-	private UserDto				user;
-	private CustomerDto			deliveryAgent;
-	private CustomerDto			bookingAgent;
-	private CustomerDto			billTo;
-	private CustomerDto			consignee;
-	private CustomerDto			localSSLineOffice;
-	private CustomerDto			notify1;
-	private CustomerDto			notify2;
-	private CustomerDto			shipper;
-	private PlaceDto			emptyContainerPickup;
-	private PlaceDto			ingateAtTerminal;
-	private PlaceDto			placeOfDelivery;
-	private PlaceDto			placeOfReceipt;
-	private PlaceDto			portOfDischarge;
-	private PlaceDto			portOfLoad;
-	private PlaceDto			transhipmentPort;
-	private List<ContainerDto>	containerDetails;
+	private ClientDto				client;
+	private UserDto					user;
+	private CustomerDto				deliveryAgent;
+	private CustomerDto				bookingAgent;
+	private CustomerDto				billTo;
+	private CustomerDto				consignee;
+	private CustomerDto				localSSLineOffice;
+	private CustomerDto				notify1;
+	private CustomerDto				notify2;
+	private CustomerDto				shipper;
+	private PlaceDto				emptyContainerPickup;
+	private PlaceDto				ingateAtTerminal;
+	private PlaceDto				placeOfDelivery;
+	private PlaceDto				placeOfReceipt;
+	private PlaceDto				portOfDischarge;
+	private PlaceDto				portOfLoad;
+	private PlaceDto				transhipmentPort;
+	private List<ContainerDto>		containerDetails;
 	//
-	private CustomerDto			forwarder;
-	private BusinessLineDto		lineOfBusiness;
-	private PersonDto			salesRepresentative;
-	private MovementTypeDto		typeOfMove;
-	private VesselDto			vessel;
-	private PersonDto			bookingPerson;
-	private DivisionDto			division;
-	private CustomerDto			carrier;
+	private CustomerDto				forwarder;
+	private BusinessLineDto			lineOfBusiness;
+	private PersonDto				salesRepresentative;
+	private MovementTypeDto			typeOfMove;
+	private VesselDto				vessel;
+	private PersonDto				bookingPerson;
+	private DivisionDto				division;
+	private CustomerDto				carrier;
+	@JsonIgnore
+	private List<ContainerShortDto>	containerTypes;
+
+	public List<ContainerShortDto> getContainerTypes() {
+
+		return containerTypes;
+	}
+
+	public void setContainerTypes(List<ContainerShortDto> containerTypes) {
+
+		this.containerTypes = containerTypes;
+	}
 
 	// getter and setter method
 	public Integer getId() {
@@ -103,8 +120,6 @@ public class BookingDto {
 	public void setAesAuthNo(String aesAuthNo) {
 		this.aesAuthNo = aesAuthNo;
 	}
-
-
 
 	public String getCarrierBookingNo() {
 		return carrierBookingNo;
@@ -186,8 +201,6 @@ public class BookingDto {
 		this.shipperRefNo = shipperRefNo;
 	}
 
-
-
 	public String getBookingStatus() {
 		return bookingStatus;
 	}
@@ -195,8 +208,6 @@ public class BookingDto {
 	public void setBookingStatus(String bookingStatus) {
 		this.bookingStatus = bookingStatus;
 	}
-
-
 
 	public String getServiceType() {
 		return serviceType;
@@ -238,8 +249,6 @@ public class BookingDto {
 		this.bookingDate = bookingDate;
 	}
 
-
-
 	public LocalDateTime getAmendmentDate() {
 		return amendmentDate;
 	}
@@ -255,8 +264,6 @@ public class BookingDto {
 	public void setCargoMovingDate(LocalDateTime cargoMovingDate) {
 		this.cargoMovingDate = cargoMovingDate;
 	}
-
-
 
 	public LocalDateTime getPortCutOffDate() {
 		return portCutOffDate;
@@ -274,8 +281,6 @@ public class BookingDto {
 		this.delieveryEta = delieveryEta;
 	}
 
-
-
 	public CustomerDto getBookingAgent() {
 		return bookingAgent;
 	}
@@ -283,7 +288,6 @@ public class BookingDto {
 	public void setBookingAgent(CustomerDto bookingAgent) {
 		this.bookingAgent = bookingAgent;
 	}
-
 
 	public LocalDateTime getRailCutOffDateTime() {
 		return railCutOffDateTime;
@@ -357,7 +361,6 @@ public class BookingDto {
 		this.division = division;
 	}
 
-
 	public ClientDto getClient() {
 		return client;
 	}
@@ -381,7 +384,6 @@ public class BookingDto {
 	public void setDeliveryAgent(CustomerDto deliveryAgent) {
 		this.deliveryAgent = deliveryAgent;
 	}
-
 
 	public CustomerDto getBillTo() {
 		return billTo;
@@ -430,7 +432,6 @@ public class BookingDto {
 	public void setShipper(CustomerDto shipper) {
 		this.shipper = shipper;
 	}
-
 
 	public PlaceDto getEmptyContainerPickup() {
 		return emptyContainerPickup;
@@ -493,6 +494,30 @@ public class BookingDto {
 	}
 
 	public void setContainerDetails(List<ContainerDto> containerDetails) {
+		// This logic is to print noOfContainer X ContainerType i.e. 2X20 in
+		// booking pdf
+		List<ContainerShortDto> containerShortDtoList = new ArrayList<>();
+		Map<String, ContainerShortDto> noOfContainerTypeMap = new HashMap<>();
+		for (ContainerDto containerDto : containerDetails) {
+			String containerTypeText = containerDto.getContainerType().getType();
+			ContainerShortDto containerShortInfo = null;
+			if (noOfContainerTypeMap.containsKey(containerTypeText)) {
+				containerShortInfo = noOfContainerTypeMap.get(containerTypeText);
+				int count = containerShortInfo.getNoOfContainer() + 1;
+				containerShortInfo.setNoOfContainer(count);
+			} else {
+
+				containerShortInfo = new ContainerShortDto();
+				if (containerDto.getContainerType() != null && containerDto.getCommodity() != null) {
+					containerShortInfo.setCommodity(containerDto.getCommodity().getName());
+					containerShortInfo.setContainerType(containerDto.getContainerType().getType());
+					containerShortInfo.setNoOfContainer(1);
+					noOfContainerTypeMap.put(containerTypeText, containerShortInfo);
+					containerShortDtoList.add(containerShortInfo);
+				}
+			}
+		}
+		setContainerTypes(containerShortDtoList);
 		this.containerDetails = containerDetails;
 	}
 
@@ -511,6 +536,4 @@ public class BookingDto {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-
 }

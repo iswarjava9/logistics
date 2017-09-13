@@ -180,12 +180,12 @@
 															<fo:block font-size="small" font-weight="bold">
 																<fo:block>
 
-																	<xsl:value-of select="/bookinginfo/forwarder/name" />
+																	<xsl:value-of select="/bookinginfo/bookingAgent/name" />
 
 																</fo:block>
 																<fo:block>
 
-																	<xsl:value-of select="/bookinginfo/forwarder/address" />
+																	<xsl:value-of select="/bookinginfo/bookingAgent/address" />
 
 																</fo:block>
 															</fo:block>
@@ -220,12 +220,12 @@
 															<fo:block font-size="small" font-weight="bold">
 																<fo:block>
 
-
+																	<xsl:value-of select="/bookinginfo/emptyContainerPickup/name" />
 
 																</fo:block>
 																<fo:block>
 
-
+																	<xsl:value-of select="/bookinginfo/emptyContainerPickup/address" />
 
 																</fo:block>
 															</fo:block>
@@ -243,12 +243,12 @@
 															<fo:block font-size="small" font-weight="bold">
 																<fo:block>
 
-																	<xsl:value-of select="/bookinginfo/portOfLoad/name" />
+																	<xsl:value-of select="/bookinginfo/ingateAtTerminal/name" />
 
 																</fo:block>
 																<fo:block>
 
-																	<xsl:value-of select="/bookinginfo/portOfLoad/address" />
+																	<xsl:value-of select="/bookinginfo/ingateAtTerminal/address" />
 
 																</fo:block>
 															</fo:block>
@@ -379,7 +379,7 @@
 
 									</fo:table-cell>
 								</fo:table-row>
-								<fo:table-row>
+								<fo:table-row height="auto">
 									<fo:table-cell border-color="grey" border-style="inset"
 										border-right="1pt">
 										<fo:block font-size="x-small">
@@ -412,11 +412,11 @@
 
 										</fo:block>
 									</fo:table-cell>
-									<fo:table-cell border-color="grey" border-style="inset">
+									<fo:table-cell height="inherit" border-color="grey" border-style="inset">
 
 
 										<fo:block>
-											<fo:table text-indent="2pt" width="100%"
+											<fo:table height="auto" text-indent="2pt" width="100%"
 												border-style="inset" border-width="0pt" border-color="grey"
 												border-top="1pt">
 												<fo:table-column />
@@ -425,36 +425,37 @@
 												<fo:table-column />
 
 												<fo:table-body>
-													<fo:table-row>
+													<fo:table-row >
 														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt">
+															border-style="inset" border-right="1pt" border-bottom="1pt">
 															<fo:block font-size="x-small">Cut Off Date</fo:block>
 															<fo:block font-size="small" font-weight="bold">
-																<xsl:value-of select="/bookinginfo/cutOffDate" />
+																<xsl:value-of select="/bookinginfo/portCutOffDate" />
 
 															</fo:block>
 														</fo:table-cell>
 														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt">
+															border-style="inset" border-right="1pt"  border-bottom="1pt">
 															<fo:block font-size="x-small">Docs Cut Off Date</fo:block>
 															<fo:block font-size="small" font-weight="bold">
 																<xsl:value-of select="/bookinginfo/docsCutOffDateTime" />
 															</fo:block>
 														</fo:table-cell>
 														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt">
+															border-style="inset" border-right="1pt"  border-bottom="1pt">
 															<fo:block font-size="x-small">ETS</fo:block>
 															<fo:block font-size="small" font-weight="bold">
 																<xsl:value-of select="/bookinginfo/sailDate" />
 															</fo:block>
 														</fo:table-cell>
-														<fo:table-cell>
+														<fo:table-cell border-width="0pt" border-style="inset" border-bottom="1pt" border-color="grey">
 															<fo:block font-size="x-small">ETA</fo:block>
 															<fo:block font-size="small" font-weight="bold">
 																<xsl:value-of select="/bookinginfo/eta" />
 															</fo:block>
 														</fo:table-cell>
 													</fo:table-row>
+													
 												</fo:table-body>
 											</fo:table>
 										</fo:block>
@@ -512,27 +513,23 @@
 											border-right="1pt">
 											<fo:block font-size="small" font-weight="bold">
 												<!-- type container value comes here TBD -->
-												<xsl:for-each select="bookinginfo/containerDetails">
+												<xsl:for-each select="bookinginfo/containerTypes">
 													<fo:block>
-														<xsl:value-of select="containerType/type" />
+														<xsl:value-of select="noOfContainer" />X<xsl:value-of select="containerType" />
 													</fo:block>
 												</xsl:for-each>
 
 
 											</fo:block>
 
-
-
-
-
 										</fo:table-cell>
 										<fo:table-cell border-color="grey" border-style="inset"
 											border-right="1pt">
 											<fo:block font-size="small" font-weight="bold">
 												<!-- commodity value comes here TBD -->
-												<xsl:for-each select="bookinginfo/containerDetails">
+												<xsl:for-each select="bookinginfo/containerTypes">
 													<fo:block>
-														<xsl:value-of select="commodity/name" />
+														<xsl:value-of select="commodity" />
 													</fo:block>
 												</xsl:for-each>
 
