@@ -498,22 +498,24 @@ public class BookingDto {
 		// booking pdf
 		List<ContainerShortDto> containerShortDtoList = new ArrayList<>();
 		Map<String, ContainerShortDto> noOfContainerTypeMap = new HashMap<>();
-		for (ContainerDto containerDto : containerDetails) {
-			String containerTypeText = containerDto.getContainerType().getType();
-			ContainerShortDto containerShortInfo = null;
-			if (noOfContainerTypeMap.containsKey(containerTypeText)) {
-				containerShortInfo = noOfContainerTypeMap.get(containerTypeText);
-				int count = containerShortInfo.getNoOfContainer() + 1;
-				containerShortInfo.setNoOfContainer(count);
-			} else {
+		if (containerDetails != null) {
+			for (ContainerDto containerDto : containerDetails) {
+				String containerTypeText = containerDto.getContainerType().getType();
+				ContainerShortDto containerShortInfo = null;
+				if (noOfContainerTypeMap.containsKey(containerTypeText)) {
+					containerShortInfo = noOfContainerTypeMap.get(containerTypeText);
+					int count = containerShortInfo.getNoOfContainer() + 1;
+					containerShortInfo.setNoOfContainer(count);
+				} else {
 
-				containerShortInfo = new ContainerShortDto();
-				if (containerDto.getContainerType() != null && containerDto.getCommodity() != null) {
-					containerShortInfo.setCommodity(containerDto.getCommodity().getName());
-					containerShortInfo.setContainerType(containerDto.getContainerType().getType());
-					containerShortInfo.setNoOfContainer(1);
-					noOfContainerTypeMap.put(containerTypeText, containerShortInfo);
-					containerShortDtoList.add(containerShortInfo);
+					containerShortInfo = new ContainerShortDto();
+					if (containerDto.getContainerType() != null && containerDto.getCommodity() != null) {
+						containerShortInfo.setCommodity(containerDto.getCommodity().getName());
+						containerShortInfo.setContainerType(containerDto.getContainerType().getType());
+						containerShortInfo.setNoOfContainer(1);
+						noOfContainerTypeMap.put(containerTypeText, containerShortInfo);
+						containerShortDtoList.add(containerShortInfo);
+					}
 				}
 			}
 		}
