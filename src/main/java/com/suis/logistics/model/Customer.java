@@ -44,6 +44,9 @@ public class Customer implements Serializable {
 	private String				emailId;
 	@Column(name = "phone_no")
 	private String				phoneNo;
+	@Column(name = "tax_id")
+	private String					taxId;
+
 	// bi-directional many-to-one association to Quotation
 	@OneToMany(mappedBy = "customer")
 	private List<Quotation>		quotations;
@@ -124,6 +127,14 @@ public class Customer implements Serializable {
 
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
+	}
+
+	public String getTaxId() {
+		return taxId;
+	}
+
+	public void setTaxId(String taxId) {
+		this.taxId = taxId;
 	}
 
 	public List<Quotation> getQuotations() {

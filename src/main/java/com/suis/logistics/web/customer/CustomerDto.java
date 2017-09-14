@@ -4,15 +4,14 @@ import com.suis.logistics.web.CityDto;
 
 public class CustomerDto extends CustomerBaseDto {
 
-
 	private String	address;
 	private String	personInCharge;
 	private CityDto	city;
 	private String	zipCode;
 	private String	emailId;
 	private String	phoneNo;
+	private String	taxId;
 	private Integer	clientId;
-
 
 	public String getEmailId() {
 		return emailId;
@@ -28,6 +27,14 @@ public class CustomerDto extends CustomerBaseDto {
 
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
+	}
+
+	public String getTaxId() {
+		return taxId;
+	}
+
+	public void setTaxId(String taxId) {
+		this.taxId = taxId;
 	}
 
 	public String getAddress() {
