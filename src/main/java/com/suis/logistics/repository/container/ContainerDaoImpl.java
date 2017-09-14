@@ -24,6 +24,13 @@ public class ContainerDaoImpl extends BaseDao implements ContainerDao {
 	public ContainerDetail getContainer(int containerId) {
 		return getCurrentSession().load(ContainerDetail.class, containerId);
 	}
+	
+	@Override
+	public ContainerDetail deleteContainer(int containerId) {
+		ContainerDetail container = getCurrentSession().load(ContainerDetail.class, containerId);
+		getCurrentSession().delete(container);
+		return container;
+	}
 
 	@Override
 	public Integer createContainerType(ContainerType containerType) {

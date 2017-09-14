@@ -41,4 +41,11 @@ public class ContainerController extends BaseController {
 		ContainerDto containerDto = converterUtil.convertContainerToDto(containerService.getContainer(id));
 		return new ResponseEntity<ContainerDto>(containerDto, HttpStatus.OK);
 	}
+	
+	@Transactional
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<ContainerDto> delete(@PathVariable("id") int id) {
+		ContainerDto containerDto = converterUtil.convertContainerToDto(containerService.deleteContainer(id));
+		return new ResponseEntity<ContainerDto>(containerDto, HttpStatus.OK);
+	}
 }

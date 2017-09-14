@@ -21,5 +21,7 @@ public interface ContainerService {
 	public ContainerType getContainerType(int id);
 
 	public List<ContainerType> getContainerTypesByType(String type);
+	
+	public ContainerDetail deleteContainer(int id);
 
 }

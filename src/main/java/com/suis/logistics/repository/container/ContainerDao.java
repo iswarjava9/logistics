@@ -9,6 +9,7 @@ public interface ContainerDao {
 
 	public Integer createContainer(ContainerDetail containerDetail);
 	public ContainerDetail getContainer(int containerId);
+	public ContainerDetail deleteContainer(int containerId);
 	public Integer createContainerType(ContainerType containerType);
 	public ContainerType getContainerType(int containerTypeId);
 	public List<ContainerType> getContainerTypesByType(String type);
