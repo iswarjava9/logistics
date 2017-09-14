@@ -498,7 +498,7 @@ public class BookingDto {
 		// booking pdf
 		List<ContainerShortDto> containerShortDtoList = new ArrayList<>();
 		Map<String, ContainerShortDto> noOfContainerTypeMap = new HashMap<>();
-		if (containerDetails != null) {
+		if (containerDetails != null && !containerDetails.isEmpty()) {
 			for (ContainerDto containerDto : containerDetails) {
 				String containerTypeText = containerDto.getContainerType().getType();
 				ContainerShortDto containerShortInfo = null;
