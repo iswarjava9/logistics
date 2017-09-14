@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 						.add(Projections.property("nvoccBookingNo"), "nvoccBookingNo")
 						.add(Projections.property("forwarderRefNo"), "forwarderRefNo")
 						.add(Projections.property("bookingDate"), "bookingDate"))
+						.addOrder(Order.desc("bookingDate"))
 				.setResultTransformer(Transformers.aliasToBean(BookingDetail.class));
 		List<BookingDetail> list = cr.list();
 		return list;
