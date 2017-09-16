@@ -63,6 +63,10 @@ public class BookingDto {
 	private LocalDateTime			railCutOffDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime			sailDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime			emptyPickupDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime			earlyReceivingDate;
 	//
 	private ClientDto				client;
 	private UserDto					user;
@@ -74,6 +78,7 @@ public class BookingDto {
 	private CustomerDto				notify1;
 	private CustomerDto				notify2;
 	private CustomerDto				shipper;
+	private CustomerDto				cargoSupplier;
 	private PlaceDto				emptyContainerPickup;
 	private PlaceDto				ingateAtTerminal;
 	private PlaceDto				placeOfDelivery;
@@ -305,6 +310,22 @@ public class BookingDto {
 		this.sailDate = sailDate;
 	}
 
+	public LocalDateTime getEmptyPickupDate() {
+		return emptyPickupDate;
+	}
+
+	public void setEmptyPickupDate(LocalDateTime emptyPickupDate) {
+		this.emptyPickupDate = emptyPickupDate;
+	}
+
+	public LocalDateTime getEarlyReceivingDate() {
+		return earlyReceivingDate;
+	}
+
+	public void setEarlyReceivingDate(LocalDateTime earlyReceivingDate) {
+		this.earlyReceivingDate = earlyReceivingDate;
+	}
+
 	public CustomerDto getForwarder() {
 		return forwarder;
 	}
@@ -431,6 +452,14 @@ public class BookingDto {
 
 	public void setShipper(CustomerDto shipper) {
 		this.shipper = shipper;
+	}
+
+	public CustomerDto getCargoSupplier() {
+		return cargoSupplier;
+	}
+
+	public void setCargoSupplier(CustomerDto cargoSupplier) {
+		this.cargoSupplier = cargoSupplier;
 	}
 
 	public PlaceDto getEmptyContainerPickup() {

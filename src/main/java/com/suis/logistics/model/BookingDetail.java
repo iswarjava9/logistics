@@ -23,12 +23,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "booking_detail")
-@NamedQueries({
-	  @NamedQuery(name="BookingDetail.findAll",
-	              query="SELECT b FROM BookingDetail b"),
-	  @NamedQuery(name="BookingDetail.findLastPrimaryKey",
-	              query="SELECT max( b.id ) FROM BookingDetail b")
-	})
+@NamedQueries({ @NamedQuery(name = "BookingDetail.findAll", query = "SELECT b FROM BookingDetail b"),
+		@NamedQuery(name = "BookingDetail.findLastPrimaryKey", query = "SELECT max( b.id ) FROM BookingDetail b") })
 public class BookingDetail implements Serializable {
 
 	private static final long		serialVersionUID	= 1L;
@@ -81,6 +77,10 @@ public class BookingDetail implements Serializable {
 	private LocalDateTime			railCutOffDateTime;
 	@Column(name = "sail_date")
 	private LocalDateTime			sailDate;
+	@Column(name = "empty_pickup_date")
+	private LocalDateTime			emptyPickupDate;
+	@Column(name = "early_receiving_date")
+	private LocalDateTime			earlyReceivingDate;
 	//
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -103,7 +103,6 @@ public class BookingDetail implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "booking_person_id")
 	private Person					bookingPerson;
-
 	@OneToOne
 	@JoinColumn(name = "division_id")
 	private Division				division;
@@ -134,6 +133,9 @@ public class BookingDetail implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "shipper_id")
 	private Customer				shipper;
+	@OneToOne
+	@JoinColumn(name = "cargo_supplier_id")
+	private Customer				cargoSupplier;
 	@OneToOne
 	private User					user;
 	@OneToOne
@@ -315,8 +317,6 @@ public class BookingDetail implements Serializable {
 		this.bookingDate = bookingDate;
 	}
 
-
-
 	public LocalDateTime getAmendmentDate() {
 		return amendmentDate;
 	}
@@ -332,7 +332,6 @@ public class BookingDetail implements Serializable {
 	public void setCargoMovingDate(LocalDateTime cargoMovingDate) {
 		this.cargoMovingDate = cargoMovingDate;
 	}
-
 
 	public LocalDateTime getPortCutOffDate() {
 		return portCutOffDate;
@@ -350,7 +349,6 @@ public class BookingDetail implements Serializable {
 		this.delieveryEta = delieveryEta;
 	}
 
-
 	public LocalDateTime getRailCutOffDateTime() {
 		return railCutOffDateTime;
 	}
@@ -365,6 +363,22 @@ public class BookingDetail implements Serializable {
 
 	public void setSailDate(LocalDateTime sailDate) {
 		this.sailDate = sailDate;
+	}
+
+	public LocalDateTime getEmptyPickupDate() {
+		return emptyPickupDate;
+	}
+
+	public void setEmptyPickupDate(LocalDateTime emptyPickupDate) {
+		this.emptyPickupDate = emptyPickupDate;
+	}
+
+	public LocalDateTime getEarlyReceivingDate() {
+		return earlyReceivingDate;
+	}
+
+	public void setEarlyReceivingDate(LocalDateTime earlyReceivingDate) {
+		this.earlyReceivingDate = earlyReceivingDate;
 	}
 
 	public Client getClient() {
@@ -431,7 +445,6 @@ public class BookingDetail implements Serializable {
 		this.division = division;
 	}
 
-
 	public Customer getCarrier() {
 		return carrier;
 	}
@@ -439,8 +452,6 @@ public class BookingDetail implements Serializable {
 	public void setCarrier(Customer carrier) {
 		this.carrier = carrier;
 	}
-
-
 
 	public Customer getDeliveryAgent() {
 		return deliveryAgent;
@@ -457,8 +468,6 @@ public class BookingDetail implements Serializable {
 	public void setBookingAgent(Customer bookingAgent) {
 		this.bookingAgent = bookingAgent;
 	}
-
-
 
 	public Customer getBillTo() {
 		return billTo;
@@ -484,8 +493,6 @@ public class BookingDetail implements Serializable {
 		this.localSSLineOffice = localSSLineOffice;
 	}
 
-
-
 	public Customer getNotify1() {
 		return notify1;
 	}
@@ -510,6 +517,14 @@ public class BookingDetail implements Serializable {
 		this.shipper = shipper;
 	}
 
+	public Customer getCargoSupplier() {
+		return cargoSupplier;
+	}
+
+	public void setCargoSupplier(Customer cargoSupplier) {
+		this.cargoSupplier = cargoSupplier;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -517,7 +532,6 @@ public class BookingDetail implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 	public Place getEmptyContainerPickup() {
 		return emptyContainerPickup;
@@ -582,6 +596,4 @@ public class BookingDetail implements Serializable {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-
 }
