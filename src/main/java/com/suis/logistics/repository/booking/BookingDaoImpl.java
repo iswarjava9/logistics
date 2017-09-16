@@ -8,6 +8,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +31,7 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 			// bookingDetail.getUser().getId(); // Simulate unknown error
 			throw new CreateBookingFailedException(e, env);
 		}
+		clearCache("bookingList");
 		return bookingDetail;
 	}
 
@@ -51,6 +53,7 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Cacheable(value = "bookingList")
 	public List<BookingDetail> getBookingList() {
 		Criteria cr = getCurrentSession().createCriteria(BookingDetail.class)
 				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
