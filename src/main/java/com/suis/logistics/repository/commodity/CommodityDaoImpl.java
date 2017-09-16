@@ -3,6 +3,7 @@ package com.suis.logistics.repository.commodity;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.Commodity;
@@ -14,6 +15,7 @@ public class CommodityDaoImpl extends BaseDao implements CommodityDao{
 	@Override
 	public Integer createCommodity(Commodity commodity) {
 		getCurrentSession().save(commodity);
+		clearCache("commodityByName");
 		return commodity.getId();
 	}
 
@@ -23,6 +25,7 @@ public class CommodityDaoImpl extends BaseDao implements CommodityDao{
 	}
 
 	@Override
+	@Cacheable(value = "commodityByName", key = "#type")
 	public List<Commodity> findCommodityByName(String name) {
 		Query query = getCurrentSession().getNamedQuery("Commodity.findByName").setParameter("name", name + "%");
 		List<Commodity> commodities = query.list();

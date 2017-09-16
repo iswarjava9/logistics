@@ -5,6 +5,7 @@ package com.suis.logistics.repository.container;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.ContainerDetail;
@@ -17,6 +18,7 @@ public class ContainerDaoImpl extends BaseDao implements ContainerDao {
 	@Override
 	public Integer createContainer(ContainerDetail containerDetail) {
 		getCurrentSession().save(containerDetail);
+		clearCache("containerTypeByType");
 		return containerDetail.getId();
 	}
 
@@ -24,7 +26,7 @@ public class ContainerDaoImpl extends BaseDao implements ContainerDao {
 	public ContainerDetail getContainer(int containerId) {
 		return getCurrentSession().load(ContainerDetail.class, containerId);
 	}
-	
+
 	@Override
 	public ContainerDetail deleteContainer(int containerId) {
 		ContainerDetail container = getCurrentSession().load(ContainerDetail.class, containerId);
@@ -45,6 +47,7 @@ public class ContainerDaoImpl extends BaseDao implements ContainerDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Cacheable(value = "containerTypeByType", key = "#type")
 	public List<ContainerType> getContainerTypesByType(String type) {
 		Query query = getCurrentSession().getNamedQuery("ContainerType.findByType").setParameter("type", type + "%");
 		List<ContainerType> containerTypes = query.list();

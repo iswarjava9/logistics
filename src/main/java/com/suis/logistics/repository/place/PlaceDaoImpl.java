@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,7 @@ public class PlaceDaoImpl extends BaseDao implements PlaceDao {
 		}catch(Exception e){
 			throw new AddPlaceFailedException(e, env);
 		}
+		clearCache("placeByName");
 		return place.getId();
 	}
 
@@ -41,6 +43,7 @@ public class PlaceDaoImpl extends BaseDao implements PlaceDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Cacheable(value = "placeByName", key = "#name")
 	public List<Place> getPlacesByName(String name) {
 		Query query = getCurrentSession().getNamedQuery("Place.findByName").setParameter("name", name+"%");
 		List<Place> places = query.list();

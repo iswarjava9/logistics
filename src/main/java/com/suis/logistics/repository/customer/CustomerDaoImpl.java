@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
@@ -16,8 +15,6 @@ import com.suis.logistics.repository.BaseDao;
 public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	@Autowired
 	Environment		env;
-	@Autowired
-	CacheManager	cacheManager;
 
 	@Override
 	public Integer createCustomer(Customer customer) {
@@ -26,7 +23,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		}catch(Exception e){
 			throw new AddCustomerFailedException(e, env);
 		}
-		cacheManager.getCache("customer").clear();
+		clearCache("customerByName");
 		return customer.getId();
 	}
 
@@ -44,7 +41,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	}
 
 	@Override
-	@Cacheable(value = "customer", key = "#name")
+	@Cacheable(value = "customerByName", key = "#name")
 	public List<Customer> getCustomersByName(String name) {
 
 		Query query = getCurrentSession().getNamedQuery("Customer.findByName").setParameter("name", name + "%");
