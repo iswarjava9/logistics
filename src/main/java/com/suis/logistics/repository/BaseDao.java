@@ -8,7 +8,7 @@ import org.springframework.cache.CacheManager;
 public abstract class BaseDao {
 
 	@Autowired
-	CacheManager	cacheManager;
+	protected CacheManager	cacheManager;
 	@Autowired
 	SessionFactory	sessionFactory;
 
@@ -19,4 +19,5 @@ public abstract class BaseDao {
 	protected void clearCache(String cacheName) {
 		cacheManager.getCache(cacheName).clear();
 	}
+
 }

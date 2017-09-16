@@ -75,9 +75,21 @@
 	<cache name="bookingList" 
 		maxEntriesLocalHeap="10000"
 		maxEntriesLocalDisk="1000" 
-		eternal="true" 
+		eternal="false" 
 		diskSpoolBufferSizeMB="30"	
 		memoryStoreEvictionPolicy="LFU" 
+		timeToIdleSeconds="300" timeToLiveSeconds="600"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<cache name="getBooking" 
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="1000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="30"	
+		memoryStoreEvictionPolicy="LFU" 
+		timeToIdleSeconds="300" timeToLiveSeconds="600"
 		transactionalMode="off">
 		<persistence strategy="localTempSwap" />
 	</cache>
