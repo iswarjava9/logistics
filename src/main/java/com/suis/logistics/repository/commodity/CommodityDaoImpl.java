@@ -25,7 +25,7 @@ public class CommodityDaoImpl extends BaseDao implements CommodityDao{
 	}
 
 	@Override
-	@Cacheable(value = "commodityByName", key = "#type")
+	@Cacheable(value = "commodityByName", key = "#name")
 	public List<Commodity> findCommodityByName(String name) {
 		Query query = getCurrentSession().getNamedQuery("Commodity.findByName").setParameter("name", name + "%");
 		List<Commodity> commodities = query.list();
