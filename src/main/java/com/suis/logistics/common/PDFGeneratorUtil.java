@@ -31,8 +31,11 @@ public class PDFGeneratorUtil {
 	private String	bookingXSLUrl;
 	@Value("${booking.xmldata.url}")
 	private String	bookingXMLDataUrl;
+	@Value("${logo.image.url}")
+	private String	logoPath;
 
 	public void generateBookingConfirmationPDF(BookingDto bookingDto) throws Exception {
+		bookingDto.setLogoPath(logoPath);
 		File bookingXML = parseBookingDtoToXML(bookingDto);
 		createBookingConfirmationPDFfromXML(bookingXML, bookingDto.getForwarderRefNo());
 	}

@@ -25,10 +25,11 @@
 									<fo:table-cell border-style="inset" border-width="0pt"
 										padding="0pt" background-repeat="repeat" display-align="center">
 										<fo:block>
+										<xsl:variable name="logo" select="/bookinginfo/logoPath"/>
 											<fo:external-graphic background="transparent"
 												width="320pt" content-width="scale-to-fit" height="50pt"
 												content-height="scale-to-fit" scaling="non-uniform"
-												src="url(file:///c:/My%20Drive/WORKSPACEs/Logistics/logistics/src/main/resources/images/li-logo.jpg)" />
+												src="url(file:///{/bookinginfo/logoPath})" />
 
 										</fo:block>
 									</fo:table-cell>

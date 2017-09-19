@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.suis.logistics.web.businessline.BusinessLineDto;
@@ -41,6 +43,11 @@ public class BookingDto {
 	private String					shipperRefNo;
 	private String					serviceType;
 	private String					remarks;
+
+	@JsonIgnore
+	@Value("${logo.image.url}")
+	private String					logoPath;
+
 	//
 	// @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
@@ -567,4 +574,14 @@ public class BookingDto {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+	public String getLogoPath() {
+		return logoPath;
+	}
+
+	public void setLogoPath(String logoPath) {
+		this.logoPath = logoPath;
+	}
+
+
 }

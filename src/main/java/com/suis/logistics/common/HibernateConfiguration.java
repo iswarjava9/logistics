@@ -28,7 +28,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableTransactionManagement
 @EnableCaching
 @ComponentScan({ "com.suis.logistics" })
-@PropertySource(value = { "classpath:application.properties" })
+@PropertySource(value = { "file:${envfile}" })
 @PropertySource(value = { "classpath:errormsg.properties" })
 public class HibernateConfiguration extends WebMvcConfigurerAdapter {
 
