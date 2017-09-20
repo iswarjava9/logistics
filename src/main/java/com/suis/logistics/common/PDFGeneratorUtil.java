@@ -3,6 +3,10 @@ package com.suis.logistics.common;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -20,8 +24,11 @@ import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.suis.logistics.web.booking.BookingDto;
+import com.suis.logistics.web.container.ContainerDto;
+import com.suis.logistics.web.container.ContainerShortDto;
 
 @Component
 public class PDFGeneratorUtil {
@@ -36,6 +43,7 @@ public class PDFGeneratorUtil {
 
 	public void generateBookingConfirmationPDF(BookingDto bookingDto) throws Exception {
 		bookingDto.setLogoPath(logoPath);
+		setContainerDetailsToBookingDto(bookingDto);
 		File bookingXML = parseBookingDtoToXML(bookingDto);
 		createBookingConfirmationPDFfromXML(bookingXML, bookingDto.getForwarderRefNo());
 	}
@@ -50,7 +58,7 @@ public class PDFGeneratorUtil {
 		// URL url = this.getClass().getResource("/resources");
 		// File xmlDataFile = new
 		// File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
-		File xmlDataFile = new File(bookingXMLDataUrl + "//booking-" + bookingDto.getForwarderRefNo() + ".xml");
+		File xmlDataFile = new File(bookingXMLDataUrl + "/booking-" + bookingDto.getForwarderRefNo() + ".xml");
 		xmlDataFile.createNewFile(); // if file already exists will do
 										// nothing
 		OutputStream out = new FileOutputStream(xmlDataFile);
@@ -60,8 +68,8 @@ public class PDFGeneratorUtil {
 	}
 
 	private void createBookingConfirmationPDFfromXML(File bookingXML, String bookingNo) throws Exception {
-		File xslt = new File(bookingXSLUrl + "//final-booking-template.xsl");
-		File pdf = new File(bookingPDFUrl + "//booking-" + bookingNo + ".pdf");
+		File xslt = new File(bookingXSLUrl + "/final-booking-template.xsl");
+		File pdf = new File(bookingPDFUrl + "/booking-" + bookingNo + ".pdf");
 		// outDir.mkdirs();
 		// Setup input and output
 		FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
@@ -79,5 +87,38 @@ public class PDFGeneratorUtil {
 		// PDF is created
 		transformer.transform(xmlSource, res);
 		System.out.println(pdf.getName() + " PDF Generated");
+	}
+
+	/**
+	 * This method is used to implement the logic to print (noOfContainer X
+	 * ContainerType) format i.e. 2X20 in booking confirmation pdf
+	 *
+	 * @param bookingDto
+	 */
+	private void setContainerDetailsToBookingDto(BookingDto bookingDto) {
+		List<ContainerDto> containerDetails = bookingDto.getContainerDetails();
+		List<ContainerShortDto> containerShortDtoList = new ArrayList<>();
+		Map<String, ContainerShortDto> noOfContainerTypeMap = new HashMap<>();
+		if (! CollectionUtils.isEmpty(containerDetails)) {
+			for (ContainerDto containerDto : containerDetails) {
+				String containerTypeText = containerDto.getContainerType().getType();
+				ContainerShortDto containerShortInfo = null;
+				if (noOfContainerTypeMap.containsKey(containerTypeText)) {
+					containerShortInfo = noOfContainerTypeMap.get(containerTypeText);
+					int count = containerShortInfo.getNoOfContainer() + 1;
+					containerShortInfo.setNoOfContainer(count);
+				} else {
+					containerShortInfo = new ContainerShortDto();
+					if (containerDto.getContainerType() != null && containerDto.getCommodity() != null) {
+						containerShortInfo.setCommodity(containerDto.getCommodity().getName());
+						containerShortInfo.setContainerType(containerDto.getContainerType().getType());
+						containerShortInfo.setNoOfContainer(1);
+						noOfContainerTypeMap.put(containerTypeText, containerShortInfo);
+						containerShortDtoList.add(containerShortInfo);
+					}
+				}
+			}
+		}
+		bookingDto.setContainerTypes(containerShortDtoList);
 	}
 }
