@@ -40,7 +40,9 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 
 	@SuppressWarnings("unchecked")
 	@CachePut(value = "bookingList", key = "#root.targetClass")
-	public List<BookingDetail> updateCache(String cacheName, BookingDetail newBooking) {
+	public List<BookingDetail> updateCache(String cacheName, BookingDetail booking) {
+		BookingDetail bookingDetail = new BookingDetail();
+		populateBookingDetailWithLessData(bookingDetail,booking);
 		Cache cache = cacheManager.getCache(cacheName);
 		Object nativeCache = cache.getNativeCache();
 		Class<?> key = null;
@@ -53,11 +55,35 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 		if (key != null) {
 			ValueWrapper val = cache.get(key);
 			List<BookingDetail> bookings = (List<BookingDetail>) val.get();
-			bookings.add(0, newBooking);
+			if (bookings.contains(bookingDetail)) {
+				int index = bookings.indexOf(bookingDetail);
+				bookings.remove(index);
+				bookings.add(index, bookingDetail);
+			} else {
+				bookings.add(0, bookingDetail);
+			}
 			// cache.put(key, bookings);
 			return bookings;
 		}
 		return null;
+	}
+
+	/**
+	 * This method is used to populate bookingDetail with less data which is meant for displaying booking list.
+	 * Refer getBookingList() method.
+	 * If there is a change in getBookingList() method then this method also needs to be updated
+	 * @param bookingDetail
+	 * @param booking
+	 */
+	private void populateBookingDetailWithLessData(BookingDetail bookingDetail, BookingDetail booking) {
+		bookingDetail.setId(booking.getId());
+		bookingDetail.setCarrierBookingNo(booking.getCarrierBookingNo());
+		bookingDetail.setShipperRefNo(booking.getShipperRefNo());
+		bookingDetail.setBookingStatus(booking.getBookingStatus());
+		bookingDetail.setNvoccBookingNo(booking.getNvoccBookingNo());
+		bookingDetail.setForwarderRefNo(booking.getForwarderRefNo());
+		bookingDetail.setBookingDate(booking.getBookingDate());
+
 	}
 
 	@Override

@@ -596,4 +596,37 @@ public class BookingDetail implements Serializable {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((forwarderRefNo == null) ? 0 : forwarderRefNo.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BookingDetail other = (BookingDetail) obj;
+		if (forwarderRefNo == null) {
+			if (other.forwarderRefNo != null)
+				return false;
+		} else if (!forwarderRefNo.equals(other.forwarderRefNo))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+
 }

@@ -1,17 +1,10 @@
 package com.suis.logistics.web.booking;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -96,7 +89,7 @@ public class BookingController extends BaseController {
 		return response;
 	}
 
-	private void generateBookingXml(BookingDto bookingDto) {
+	/*private void generateBookingXml(BookingDto bookingDto) {
 		JAXBContext jc;
 		try {
 			jc = JAXBContext.newInstance(BookingDto.class);
@@ -117,5 +110,5 @@ public class BookingController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
