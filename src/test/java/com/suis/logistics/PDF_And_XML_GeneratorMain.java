@@ -63,7 +63,7 @@ public class PDF_And_XML_GeneratorMain {
 			 * Source xmlSource=new StreamSource(new StringReader(xmlString));
 			 */
 			generateXMLFileFromJavaObject();
-			StreamSource xmlSource = new StreamSource(new File("src//main//resources//xml-data//booking-dto.xml"));
+			StreamSource xmlSource = new StreamSource(new File("src//main//resources//xml-data//booking-USOE-1437842627.xml"));
 			Result res = new SAXResult(fop.getDefaultHandler());
 			// Start XSLT transformation and FOP processing
 			// That's where the XML is first transformed to XSL-FO and then

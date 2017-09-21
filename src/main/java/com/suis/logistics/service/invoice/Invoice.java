@@ -3,8 +3,11 @@ package com.suis.logistics.service.invoice;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class Invoice {
 
 private String invoice_id;
@@ -18,33 +21,36 @@ private String invoice_id;
 	    private String reference_number;
 	    private String template_id;
 	    private String date;// "2013-11-17",
-	    private int payment_terms;
+	    private Integer payment_terms;
 	    private String payment_terms_label;
 	    private String due_date; // "2013-12-03",
-	    private int discount;
-	    private boolean is_discount_before_tax;
+	    private Integer discount;
+	    private Boolean is_discount_before_tax;
 	    private String discount_type;
-	    private boolean is_inclusive_tax;
-	    private int exchange_rate;
+	    private Boolean is_inclusive_tax;
+	    private Double exchange_rate;
 	    private String recurring_invoice_id;
 	    private String invoiced_estimate_id;
 	    private String salesperson_name;
 	    //private Map<String,String> custom_fields;
-	    private int project_id;
+	    private Integer project_id;
 	    private List<LineItem> line_items;
 
 
 	   // private "payment_options":
 
-	    private boolean allow_partial_payments;
+	    private Boolean allow_partial_payments;
 	    private String custom_body;
 	    private String custom_subject;
 	    private String notes;
 	    private String terms;
-	    private int shipping_charge;
-	    private int adjustment;
+	    private Integer shipping_charge;
+	    private Integer adjustment;
 	    private String adjustment_description;
 
+	    private List<CustomField> custom_fields;
+
+	    // Setters and getters
 
 		public String getInvoice_id() {
 			return invoice_id;
@@ -52,7 +58,6 @@ private String invoice_id;
 		public void setInvoice_id(String invoice_id) {
 			this.invoice_id = invoice_id;
 		}
-
 		public String getCustomer_id() {
 			return customer_id;
 		}
@@ -95,7 +100,6 @@ private String invoice_id;
 		public void setReference_number(String reference_number) {
 			this.reference_number = reference_number;
 		}
-
 		public String getTemplate_id() {
 			return template_id;
 		}
@@ -108,10 +112,10 @@ private String invoice_id;
 		public void setDate(String date) {
 			this.date = date;
 		}
-		public int getPayment_terms() {
+		public Integer getPayment_terms() {
 			return payment_terms;
 		}
-		public void setPayment_terms(int payment_terms) {
+		public void setPayment_terms(Integer payment_terms) {
 			this.payment_terms = payment_terms;
 		}
 		public String getPayment_terms_label() {
@@ -126,16 +130,16 @@ private String invoice_id;
 		public void setDue_date(String due_date) {
 			this.due_date = due_date;
 		}
-		public int getDiscount() {
+		public Integer getDiscount() {
 			return discount;
 		}
-		public void setDiscount(int discount) {
+		public void setDiscount(Integer discount) {
 			this.discount = discount;
 		}
-		public boolean isIs_discount_before_tax() {
+		public Boolean getIs_discount_before_tax() {
 			return is_discount_before_tax;
 		}
-		public void setIs_discount_before_tax(boolean is_discount_before_tax) {
+		public void setIs_discount_before_tax(Boolean is_discount_before_tax) {
 			this.is_discount_before_tax = is_discount_before_tax;
 		}
 		public String getDiscount_type() {
@@ -144,16 +148,17 @@ private String invoice_id;
 		public void setDiscount_type(String discount_type) {
 			this.discount_type = discount_type;
 		}
-		public boolean isIs_inclusive_tax() {
+		public Boolean getIs_inclusive_tax() {
 			return is_inclusive_tax;
 		}
-		public void setIs_inclusive_tax(boolean is_inclusive_tax) {
+		public void setIs_inclusive_tax(Boolean is_inclusive_tax) {
 			this.is_inclusive_tax = is_inclusive_tax;
 		}
-		public int getExchange_rate() {
+
+		public Double getExchange_rate() {
 			return exchange_rate;
 		}
-		public void setExchange_rate(int exchange_rate) {
+		public void setExchange_rate(Double exchange_rate) {
 			this.exchange_rate = exchange_rate;
 		}
 		public String getRecurring_invoice_id() {
@@ -174,16 +179,10 @@ private String invoice_id;
 		public void setSalesperson_name(String salesperson_name) {
 			this.salesperson_name = salesperson_name;
 		}
-		/*public Map<String, String> getCustom_fields() {
-			return custom_fields;
-		}
-		public void setCustom_fields(Map<String, String> custom_fields) {
-			this.custom_fields = custom_fields;
-		}*/
-		public int getProject_id() {
+		public Integer getProject_id() {
 			return project_id;
 		}
-		public void setProject_id(int project_id) {
+		public void setProject_id(Integer project_id) {
 			this.project_id = project_id;
 		}
 		public List<LineItem> getLine_items() {
@@ -192,10 +191,10 @@ private String invoice_id;
 		public void setLine_items(List<LineItem> line_items) {
 			this.line_items = line_items;
 		}
-		public boolean isAllow_partial_payments() {
+		public Boolean getAllow_partial_payments() {
 			return allow_partial_payments;
 		}
-		public void setAllow_partial_payments(boolean allow_partial_payments) {
+		public void setAllow_partial_payments(Boolean allow_partial_payments) {
 			this.allow_partial_payments = allow_partial_payments;
 		}
 		public String getCustom_body() {
@@ -222,16 +221,16 @@ private String invoice_id;
 		public void setTerms(String terms) {
 			this.terms = terms;
 		}
-		public int getShipping_charge() {
+		public Integer getShipping_charge() {
 			return shipping_charge;
 		}
-		public void setShipping_charge(int shipping_charge) {
+		public void setShipping_charge(Integer shipping_charge) {
 			this.shipping_charge = shipping_charge;
 		}
-		public int getAdjustment() {
+		public Integer getAdjustment() {
 			return adjustment;
 		}
-		public void setAdjustment(int adjustment) {
+		public void setAdjustment(Integer adjustment) {
 			this.adjustment = adjustment;
 		}
 		public String getAdjustment_description() {
@@ -239,6 +238,12 @@ private String invoice_id;
 		}
 		public void setAdjustment_description(String adjustment_description) {
 			this.adjustment_description = adjustment_description;
+		}
+		public List<CustomField> getCustom_fields() {
+			return custom_fields;
+		}
+		public void setCustom_fields(List<CustomField> custom_fields) {
+			this.custom_fields = custom_fields;
 		}
 
 

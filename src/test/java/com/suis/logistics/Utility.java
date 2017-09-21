@@ -123,7 +123,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 	}
 
 	public static void generateBookingToJsonString() {
-		ObjectMapper mapper = new ObjectMapper();
+
 		// Client obj = new Client();
 		BookingDto obj = new BookingDto();
 		obj.setContainerDetails(Arrays.asList(new ContainerDto(),new ContainerDto()));
@@ -158,6 +158,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 
 		// Object to JSON in String
 		try {
+			ObjectMapper mapper = new ObjectMapper();
 			mapper.findAndRegisterModules();
 			String jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
 			System.out.println(jsonInString);
