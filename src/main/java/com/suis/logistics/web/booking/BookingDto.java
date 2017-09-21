@@ -1,10 +1,7 @@
 package com.suis.logistics.web.booking;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -530,32 +527,6 @@ public class BookingDto {
 	}
 
 	public void setContainerDetails(List<ContainerDto> containerDetails) {
-		// This logic is to print noOfContainer X ContainerType i.e. 2X20 in
-		// booking pdf
-		List<ContainerShortDto> containerShortDtoList = new ArrayList<>();
-		Map<String, ContainerShortDto> noOfContainerTypeMap = new HashMap<>();
-		if (containerDetails != null && !containerDetails.isEmpty()) {
-			for (ContainerDto containerDto : containerDetails) {
-				String containerTypeText = containerDto.getContainerType().getType();
-				ContainerShortDto containerShortInfo = null;
-				if (noOfContainerTypeMap.containsKey(containerTypeText)) {
-					containerShortInfo = noOfContainerTypeMap.get(containerTypeText);
-					int count = containerShortInfo.getNoOfContainer() + 1;
-					containerShortInfo.setNoOfContainer(count);
-				} else {
-
-					containerShortInfo = new ContainerShortDto();
-					if (containerDto.getContainerType() != null && containerDto.getCommodity() != null) {
-						containerShortInfo.setCommodity(containerDto.getCommodity().getName());
-						containerShortInfo.setContainerType(containerDto.getContainerType().getType());
-						containerShortInfo.setNoOfContainer(1);
-						noOfContainerTypeMap.put(containerTypeText, containerShortInfo);
-						containerShortDtoList.add(containerShortInfo);
-					}
-				}
-			}
-		}
-		setContainerTypes(containerShortDtoList);
 		this.containerDetails = containerDetails;
 	}
 
