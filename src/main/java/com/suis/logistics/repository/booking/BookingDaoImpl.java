@@ -34,12 +34,12 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 			// bookingDetail.getUser().getId(); // Simulate unknown error
 			throw new CreateBookingFailedException(e, env);
 		}
-		updateCache("bookingList", bookingDetail);
+		updateCache("BookingList", bookingDetail);
 		return bookingDetail;
 	}
 
 	@SuppressWarnings("unchecked")
-	@CachePut(value = "bookingList", key = "#root.targetClass")
+	@CachePut(value = "BookingList", key = "#root.targetClass")
 	public List<BookingDetail> updateCache(String cacheName, BookingDetail booking) {
 		BookingDetail bookingDetail = new BookingDetail();
 		populateBookingDetailWithLessData(bookingDetail,booking);
@@ -87,19 +87,19 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 	}
 
 	@Override
-	@CachePut(value = "getBooking", key = "#bookingDetail.id")
+	@CachePut(value = "BookingDetail", key = "#bookingDetail.id")
 	public BookingDetail updateBooking(BookingDetail bookingDetail) {
 		try {
 			getCurrentSession().update(bookingDetail);
 		} catch (Exception e) {
 			throw new UpdateBookingFailedException(e, env);
 		}
-		updateCache("bookingList", bookingDetail);
+		updateCache("BookingList", bookingDetail);
 		return bookingDetail;
 	}
 
 	@Override
-	@Cacheable(value = "getBooking", key = "#bookingId")
+	@Cacheable(value = "BookingDetail", key = "#bookingId")
 	public BookingDetail findById(int bookingId) {
 
 		return getCurrentSession().load(BookingDetail.class, bookingId);
@@ -107,7 +107,7 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Cacheable(value = "bookingList", key = "#root.targetClass")
+	@Cacheable(value = "BookingList", key = "#root.targetClass")
 	public List<BookingDetail> getBookingList() {
 		Criteria cr = getCurrentSession().createCriteria(BookingDetail.class)
 				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")

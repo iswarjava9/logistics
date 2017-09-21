@@ -72,7 +72,7 @@
 		<persistence strategy="localTempSwap" />
 	</cache>
 	
-	<cache name="bookingList" 
+	<cache name="BookingList" 
 		maxEntriesLocalHeap="10000"
 		maxEntriesLocalDisk="1000" 
 		eternal="true" 
@@ -83,7 +83,7 @@
 		<persistence strategy="localTempSwap" />
 	</cache>
 	
-	<cache name="getBooking" 
+	<cache name="BookingDetail" 
 		maxEntriesLocalHeap="10000"
 		maxEntriesLocalDisk="1000" 
 		eternal="true" 

@@ -12,14 +12,18 @@ import com.suis.logistics.model.ContainerDetail;
 import com.suis.logistics.model.ContainerType;
 import com.suis.logistics.repository.cargo.CargoDao;
 import com.suis.logistics.repository.container.ContainerDao;
+import com.suis.logistics.service.cache.CacheService;
 
 @Component
 public class ContainerServiceImpl implements ContainerService {
 
 	@Resource
-	ContainerDao	containerDao;
+	private ContainerDao	containerDao;
 	@Resource
-	CargoDao		cargoDao;
+	private CargoDao		cargoDao;
+	@Resource
+	private CacheService    cacheService;
+
 
 	@Override
 	public Integer createContainer(ContainerDetail containerDetail) {
@@ -29,7 +33,9 @@ public class ContainerServiceImpl implements ContainerService {
 				containerDetail.addCargo(cargo);
 			}
 		}
-		return containerDao.createContainer(containerDetail);
+		Integer containerId = containerDao.createContainer(containerDetail);
+		cacheService.updateBookingDetailCacheOnAddContainerDetail(containerDetail);
+		return containerId;
 	}
 
 	@Override
@@ -51,9 +57,11 @@ public class ContainerServiceImpl implements ContainerService {
 	public List<ContainerType> getContainerTypesByType(String type) {
 		return containerDao.getContainerTypesByType(type);
 	}
-	
+
 	@Override
 	public ContainerDetail deleteContainer(int containerId) {
-		return containerDao.deleteContainer(containerId);
+		ContainerDetail containerDetail = containerDao.deleteContainer(containerId);
+        cacheService.updateBookingDetailCacheOnDeleteContainerDetail(containerDetail);
+		return containerDetail;
 	}
 }
