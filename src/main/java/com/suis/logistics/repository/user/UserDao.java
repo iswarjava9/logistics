@@ -7,4 +7,5 @@ import com.suis.logistics.model.User;
 public interface UserDao {
 	
 	public Integer createUser(User user);
+	public User getUserByUserName(String userName);
 }

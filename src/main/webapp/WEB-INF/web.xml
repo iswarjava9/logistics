@@ -19,7 +19,7 @@
     </init-param>
     <init-param>
         <param-name>cors.supportedHeaders</param-name>
-        <param-value>*, Observe, accept, authorization, origin,Content-Type,X-Requested-With,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization</param-value>
+        <param-value>*, Observe, accept, authorization, origin,Content-Type,X-Requested-With,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization, username, password</param-value>
     </init-param>
     <init-param>
         <param-name>cors.supportedMethods</param-name>
@@ -27,11 +27,11 @@
     </init-param>
     <init-param>
     	<param-name>cors.allowed.headers</param-name>
-    	<param-value>Observe, Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization,OPTIONS,authorization</param-value>
+    	<param-value>Observe, Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization,OPTIONS,authorization, username, password</param-value>
     </init-param>
         <init-param>
         <param-name>cors.exposedHeaders</param-name>
-        <param-value>bookingid, bookingId, placeId, placeid, Placeid, PlaceId, customerId, customerid, vesselId, vesselid, personId, personid, commodityId, commodityid, containerId, containerid, containerTypeId, containerTypeid, containertypeid, authorization</param-value>
+        <param-value>bookingid, bookingId, placeId, placeid, Placeid, PlaceId, customerId, customerid, vesselId, vesselid, personId, personid, commodityId, commodityid, containerId, containerid, containerTypeId, containerTypeid, containertypeid, authorization, username, password</param-value>
     </init-param>
 	</filter>
 

@@ -17,6 +17,7 @@ import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 
+import com.suis.logistics.model.Auth;
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.BusinessLine;
 import com.suis.logistics.model.Cargo;
@@ -37,6 +38,7 @@ import com.suis.logistics.model.Quotation;
 import com.suis.logistics.model.User;
 import com.suis.logistics.model.Vessel;
 import com.suis.logistics.web.CityDto;
+import com.suis.logistics.web.authentication.AuthDto;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.cargo.CargoDto;
@@ -288,6 +290,12 @@ public class ConverterUtil {
 		return divisionList;
 	}
 
+	public UserDto convertUserToDto(User user) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
+		UserDto userDto = modelMapper.map(user, UserDto.class);
+		return userDto;
+	}
+
 	public PersonDto convertPersonToDto(Person person) {
 		return modelMapper.map(person, PersonDto.class);
 	}
@@ -327,5 +335,10 @@ public class ConverterUtil {
 		Type listType = new TypeToken<List<CommodityDto>>() {}.getType();
 		List<CommodityDto> commodities = modelMapper.map(commoditiesByName, listType);
 		return commodities;
+	}
+	
+	public AuthDto convertAuthToDto(Auth auth) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
+		return modelMapper.map(auth, AuthDto.class);
 	}
 }
