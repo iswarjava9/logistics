@@ -7,4 +7,5 @@ public interface CacheService {
 
 	BookingDetail updateBookingDetailCacheOnAddContainerDetail(ContainerDetail containerDetail);
 	BookingDetail updateBookingDetailCacheOnDeleteContainerDetail(ContainerDetail containerDetail);
+	BookingDetail addBookingDetailToCacheOnBookingCreation(BookingDetail bookingDetail);
 }

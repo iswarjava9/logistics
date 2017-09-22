@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.suis.logistics.common.UniqueKeyGenerator;
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.repository.booking.BookingDao;
+import com.suis.logistics.service.cache.CacheService;
 
 @Component
 public class BookingServiceImpl implements BookingService {
@@ -25,10 +26,13 @@ public class BookingServiceImpl implements BookingService {
 	BookingDao			bookingDao;
 	@Resource
 	UniqueKeyGenerator	keyGenerator;
+	@Resource
+	CacheService 		cacheService;
 	@Value("${bookingno.ocean.export.prefix}")
 	private String		bookingNoOceanExportPrefix;
 	@Value("${booking.pdf.url}")
 	private String		bookingPDFUrl;
+
 
 	@Override
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
@@ -36,7 +40,9 @@ public class BookingServiceImpl implements BookingService {
 		bookingDetail.setNvoccBookingNo(bookingNo);
 		bookingDetail.setForwarderRefNo(bookingNo);
 		bookingDetail.setBookingDate(LocalDateTime.now());
-		return bookingDao.createBooking(bookingDetail);
+		BookingDetail bookingDetailCreated = bookingDao.createBooking(bookingDetail);
+		cacheService.addBookingDetailToCacheOnBookingCreation(bookingDetail);
+		return bookingDetailCreated;
 	}
 
 	@Override
