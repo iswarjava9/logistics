@@ -1,11 +1,8 @@
 package com.suis.logistics.service.authentication;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.suis.logistics.model.Auth;
 import com.suis.logistics.model.User;
@@ -27,7 +24,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				//User Details
 				auth.setUser(buildUserResponse(userDB));
 				
-				auth.setExpiresAt(120);
+				auth.setExpiresAt(86000);
 				
 				auth.setAccessToken(username + System.currentTimeMillis());
 				
@@ -60,4 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		return false;
 	}
 
+	public void buildUserSessions() {
+		
+	}
 }
