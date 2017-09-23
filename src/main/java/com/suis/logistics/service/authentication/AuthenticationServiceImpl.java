@@ -12,26 +12,23 @@ import com.suis.logistics.service.user.UserService;
 @Component
 public class AuthenticationServiceImpl implements AuthenticationService {
 	@Resource
-	UserService userService;
-
+	UserService		userService;
 	@Value("${session.timeout}")
-	private long sessionTimeout;
+	private long	sessionTimeout;
 
 	@Override
 	public Auth login(String username, String password) {
 		Auth auth = null;
 		User userDB = userService.getUserByUserName(username);
-		if(userDB != null && userDB.getUserName() != null  && userDB.getUserName().equals(username) && userDB.getStaus().equals("ACTIVE")) {
-			if(userDB.getPassword().equals(password)) {
+		if (userDB != null && userDB.getUserName() != null && userDB.getUserName().equals(username)
+				&& userDB.getStaus().equals("ACTIVE")) {
+			if (userDB.getPassword().equals(password)) {
 				auth = new Auth();
-
-				//User Details
+				// User Details
 				auth.setUser(buildUserResponse(userDB));
-
 				auth.setExpiresAt(sessionTimeout);
-
+				auth.setExpiresAt(86000);
 				auth.setAccessToken(username + System.currentTimeMillis());
-
 			}
 		}
 		return auth;
@@ -52,7 +49,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Override
 	public void logout() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -61,4 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		return false;
 	}
 
+	public void buildUserSessions() {
+
+	}
 }
