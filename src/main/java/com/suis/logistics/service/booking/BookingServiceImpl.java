@@ -65,6 +65,9 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public String generateUniqueBookingNo() {
 		Integer lastId = bookingDao.getLastInsertedPrimaryKey();
+		if(lastId == null){
+			lastId = 0;
+		}
 		String bookingNo = keyGenerator.generateUniqueKey(bookingNoOceanExportPrefix, lastId);
 		return bookingNo;
 	}
