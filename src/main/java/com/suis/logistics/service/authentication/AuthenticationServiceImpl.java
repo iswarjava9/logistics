@@ -1,11 +1,9 @@
 package com.suis.logistics.service.authentication;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.suis.logistics.model.Auth;
 import com.suis.logistics.model.User;
@@ -16,21 +14,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Resource
 	UserService userService;
 
+	@Value("${session.timeout}")
+	private long sessionTimeout;
+
 	@Override
 	public Auth login(String username, String password) {
 		Auth auth = null;
-		User userDB = userService.getUserByUserName(username); 
+		User userDB = userService.getUserByUserName(username);
 		if(userDB != null && userDB.getUserName() != null  && userDB.getUserName().equals(username) && userDB.getStaus().equals("ACTIVE")) {
 			if(userDB.getPassword().equals(password)) {
 				auth = new Auth();
-				
+
 				//User Details
 				auth.setUser(buildUserResponse(userDB));
-				
-				auth.setExpiresAt(120);
-				
+
+				auth.setExpiresAt(sessionTimeout);
+
 				auth.setAccessToken(username + System.currentTimeMillis());
-				
+
 			}
 		}
 		return auth;
@@ -51,7 +52,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Override
 	public void logout() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package com.suis.logistics.model;
 
 public class Auth {
 	private String accessToken;
-	private int expiresAt;
+	private long expiresAt;
 	private User user;
 
 	public String getAccessToken() {
@@ -11,10 +11,10 @@ public class Auth {
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
-	public int getExpiresAt() {
+	public long getExpiresAt() {
 		return expiresAt;
 	}
-	public void setExpiresAt(int expiresAt) {
+	public void setExpiresAt(long expiresAt) {
 		this.expiresAt = expiresAt;
 	}
 	public User getUser() {
