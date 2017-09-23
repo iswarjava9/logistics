@@ -27,7 +27,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				// User Details
 				auth.setUser(buildUserResponse(userDB));
 				auth.setExpiresAt(sessionTimeout);
-				auth.setExpiresAt(86000);
 				auth.setAccessToken(username + System.currentTimeMillis());
 			}
 		}
