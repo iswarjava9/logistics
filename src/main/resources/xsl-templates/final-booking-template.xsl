@@ -18,7 +18,8 @@
 						<!-- Header Table -->
 						<fo:table width="100%" border-style="inset" border-width="0pt"
 							background-repeat="repeat">
-							<fo:table-column column-width="60%" />
+							<fo:table-column column-width="30%" />
+							<fo:table-column column-width="30%" />
 							<fo:table-column column-width="40%" />
 							<fo:table-body>
 								<fo:table-row>
@@ -27,11 +28,29 @@
 										<fo:block>
 											<xsl:variable name="logo" select="/bookinginfo/logoPath" />
 											<fo:external-graphic background="transparent"
-												width="320pt" content-width="scale-to-fit" height="50pt"
+												width="180pt" content-width="scale-to-fit" height="50pt"
 												content-height="scale-to-fit" scaling="non-uniform"
 												src="url(file:///{/bookinginfo/logoPath})" />
+																						</fo:block>
+										<fo:block text-indent="10pt">
+										FMC-OTI No. <fo:inline font-weight="bold">026642NF</fo:inline>
+										</fo:block>
+									</fo:table-cell>
+									
+									<fo:table-cell text-indent="1pt" border-style="inset"
+										border-width="0pt" padding="0pt" background-repeat="repeat"
+										display-align="center">
+
+										<fo:block font-size="9pt" font-weight="normal"
+											text-align="left" color="blue">
+
+											<xsl:text>operations@logiisticsinternational.com</xsl:text>
+											<fo:block>Tel: (814) 580-0466</fo:block>
 
 										</fo:block>
+
+
+
 									</fo:table-cell>
 									<fo:table-cell text-indent="2pt" border-style="inset"
 										border-width="0pt" padding="0pt" background-repeat="repeat"
@@ -227,7 +246,7 @@
 																		<fo:table-cell>
 																			<fo:block font-size="x-small">
 
-																				Empty Container Pick up
+																				Empty Container Pickup Depot
 
 																			</fo:block>
 																			<fo:block font-size="small" font-weight="bold">
@@ -497,7 +516,7 @@
 													<fo:table-row>
 														<fo:table-cell border-color="grey"
 															border-style="inset" border-right="1pt" border-bottom="1pt">
-															<fo:block font-size="x-small">Cut Off Date</fo:block>
+															<fo:block font-size="x-small">Port Cut Off Date</fo:block>
 															<fo:block font-size="small" font-weight="bold">
 																<xsl:value-of select="/bookinginfo/portCutOffDate" />
 
