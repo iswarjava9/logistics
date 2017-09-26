@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.suis.logistics.model.City;
+import com.suis.logistics.model.TimeZone;
 import com.suis.logistics.repository.common.RegionDao;
 
 @Component
@@ -17,5 +18,10 @@ public class RegionServiceImpl implements RegionService {
 	@Override
 	public List<City> getCitiesByName(String name) {
 		return regionDao.getCitiesByName(name);
+	}
+
+	@Override
+	public List<TimeZone> getAvailableTimeZonesByCountry(String countryCode) {
+		return regionDao.findAvailableTimeZonesByCountry(countryCode);
 	}
 }

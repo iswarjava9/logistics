@@ -35,9 +35,11 @@ import com.suis.logistics.model.Person;
 import com.suis.logistics.model.PieceType;
 import com.suis.logistics.model.Place;
 import com.suis.logistics.model.Quotation;
+import com.suis.logistics.model.TimeZone;
 import com.suis.logistics.model.User;
 import com.suis.logistics.model.Vessel;
 import com.suis.logistics.web.CityDto;
+import com.suis.logistics.web.TimeZoneDto;
 import com.suis.logistics.web.authentication.AuthDto;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
@@ -336,9 +338,15 @@ public class ConverterUtil {
 		List<CommodityDto> commodities = modelMapper.map(commoditiesByName, listType);
 		return commodities;
 	}
-	
+
 	public AuthDto convertAuthToDto(Auth auth) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		return modelMapper.map(auth, AuthDto.class);
+	}
+
+	public List<TimeZoneDto> convertListTimeZoneToDto(List<TimeZone> availableTimeZonesByCountry) {
+		Type listType = new TypeToken<List<TimeZoneDto>>() {}.getType();
+		List<TimeZoneDto> timeZones = modelMapper.map(availableTimeZonesByCountry, listType);
+		return timeZones;
 	}
 }

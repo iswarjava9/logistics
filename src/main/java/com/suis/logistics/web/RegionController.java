@@ -30,9 +30,9 @@ public class RegionController extends BaseController {
 		return new ResponseEntity<List<CityDto>>(cities, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/timezones", method = RequestMethod.GET)
-	public ResponseEntity<List<TimeZoneDto>> getAllTimeZones() {
-		List<TimeZoneDto> timeZones = dateUtil.getAvailableTimeZones();
+	@RequestMapping(value = "/timezones/{countryCode}", method = RequestMethod.GET)
+	public ResponseEntity<List<TimeZoneDto>> getAllTimeZones(@PathVariable("countryCode") String countryCode) {
+		List<TimeZoneDto> timeZones = converterUtil.convertListTimeZoneToDto(regionService.getAvailableTimeZonesByCountry(countryCode));
 		return new ResponseEntity<List<TimeZoneDto>>(timeZones, HttpStatus.OK);
 	}
 

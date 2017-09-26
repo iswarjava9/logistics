@@ -33,7 +33,7 @@ public class DateUtil {
 			ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);
 			ZoneOffset offset = zonedDateTime.getOffset();
 			String shortDisplayName = TimeZone.getTimeZone(offset).getDisplayName(false, TimeZone.SHORT);
-			TimeZoneDto timeZone = new TimeZoneDto(zone.getId(), shortDisplayName);
+			TimeZoneDto timeZone = new TimeZoneDto(zone.getId());
 			timeZoneList.add(timeZone);
 		}
 		return timeZoneList;
