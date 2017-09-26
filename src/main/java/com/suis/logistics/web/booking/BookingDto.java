@@ -1,5 +1,6 @@
 package com.suis.logistics.web.booking;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -51,8 +52,8 @@ public class BookingDto {
 	private LocalDateTime			docsCutOffDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime			docsReceivedDate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime			eta;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate				eta;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime			bookingDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
@@ -65,12 +66,12 @@ public class BookingDto {
 	private LocalDateTime			delieveryEta;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime			railCutOffDateTime;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime			sailDate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime			emptyPickupDate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime			earlyReceivingDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate				sailDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate				emptyPickupDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate				earlyReceivingDate;
 	//
 	private ClientDto				client;
 	private UserDto					user;
@@ -242,13 +243,6 @@ public class BookingDto {
 		this.docsReceivedDate = docsReceivedDate;
 	}
 
-	public LocalDateTime getEta() {
-		return eta;
-	}
-
-	public void setEta(LocalDateTime eta) {
-		this.eta = eta;
-	}
 
 	public LocalDateTime getBookingDate() {
 		return bookingDate;
@@ -306,27 +300,35 @@ public class BookingDto {
 		this.railCutOffDateTime = railCutOffDateTime;
 	}
 
-	public LocalDateTime getSailDate() {
+	public LocalDate getEta() {
+		return eta;
+	}
+
+	public void setEta(LocalDate eta) {
+		this.eta = eta;
+	}
+
+	public LocalDate getSailDate() {
 		return sailDate;
 	}
 
-	public void setSailDate(LocalDateTime sailDate) {
+	public void setSailDate(LocalDate sailDate) {
 		this.sailDate = sailDate;
 	}
 
-	public LocalDateTime getEmptyPickupDate() {
+	public LocalDate getEmptyPickupDate() {
 		return emptyPickupDate;
 	}
 
-	public void setEmptyPickupDate(LocalDateTime emptyPickupDate) {
+	public void setEmptyPickupDate(LocalDate emptyPickupDate) {
 		this.emptyPickupDate = emptyPickupDate;
 	}
 
-	public LocalDateTime getEarlyReceivingDate() {
+	public LocalDate getEarlyReceivingDate() {
 		return earlyReceivingDate;
 	}
 
-	public void setEarlyReceivingDate(LocalDateTime earlyReceivingDate) {
+	public void setEarlyReceivingDate(LocalDate earlyReceivingDate) {
 		this.earlyReceivingDate = earlyReceivingDate;
 	}
 
