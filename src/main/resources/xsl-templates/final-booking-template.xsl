@@ -57,7 +57,7 @@
 										display-align="before">
 
 										<fo:block font-size="14pt" font-weight="bold"
-											text-align="left" border="2pt solid grey">
+											text-align="center" border="2pt solid grey">
 
 											<xsl:text>BOOKING CONFIRMATION</xsl:text>
 
@@ -531,7 +531,7 @@
 														</fo:table-cell>
 														<fo:table-cell border-color="grey"
 															border-style="inset" border-right="1pt" border-bottom="1pt">
-															<fo:block font-size="x-small">ETS</fo:block>
+															<fo:block font-size="x-small">ETD</fo:block>
 															<fo:block font-size="small" font-weight="bold">
 																<xsl:value-of select="/bookinginfo/sailDate" />
 															</fo:block>
