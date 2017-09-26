@@ -31,12 +31,13 @@
 												width="180pt" content-width="scale-to-fit" height="50pt"
 												content-height="scale-to-fit" scaling="non-uniform"
 												src="url(file:///{/bookinginfo/logoPath})" />
-																						</fo:block>
+										</fo:block>
 										<fo:block text-indent="10pt">
-										FMC-OTI No. <fo:inline font-weight="bold">026642NF</fo:inline>
+											FMC-OTI No.
+											<fo:inline font-weight="bold">026642NF</fo:inline>
 										</fo:block>
 									</fo:table-cell>
-									
+
 									<fo:table-cell text-indent="1pt" border-style="inset"
 										border-width="0pt" padding="0pt" background-repeat="repeat"
 										display-align="center">
@@ -77,7 +78,7 @@
 						<!-- Body Table -->
 
 						<fo:table width="100%" border-style="outset"
-							border-width="2pt" background-repeat="repeat">
+							border-width="1pt" background-repeat="repeat">
 							<fo:table-column column-width="40%" />
 							<fo:table-column />
 							<fo:table-body>
@@ -231,7 +232,7 @@
 														<fo:table-cell padding-left="1mm"
 															border-style="inset" border-width="0pt" padding="0pt"
 															background-repeat="repeat" border-right="1pt"
-															border-bottom="1pt" border-color="grey">														
+															border-bottom="1pt" border-color="grey">
 
 
 															<fo:table display-align="before" width="100%"
@@ -246,7 +247,8 @@
 																		<fo:table-cell>
 																			<fo:block font-size="x-small">
 
-																				Empty Container Pickup Depot
+																				Empty Container Pickup
+																				Depot
 
 																			</fo:block>
 																			<fo:block font-size="small" font-weight="bold">
@@ -271,7 +273,9 @@
 																			<fo:block space-before="1em" font-weight="normal"
 																				font-size="x-small">
 																				Empty Container Pickup Date:
-																				<fo:inline font-weight="bold"> <xsl:value-of select="/bookinginfo/emptyPickupDate" /></fo:inline>
+																				<fo:inline font-weight="bold">
+																					<xsl:value-of select="/bookinginfo/emptyPickupDate" />
+																				</fo:inline>
 																			</fo:block>
 																		</fo:table-cell>
 																	</fo:table-row>
@@ -289,10 +293,10 @@
 															background-repeat="repeat" border-right="0pt"
 															border-bottom="1pt" border-color="grey">
 
-															
-															
-															
-															
+
+
+
+
 															<fo:table display-align="before" width="100%"
 																border-style="inset" border-width="0pt" border-color="grey">
 																<fo:table-column column-width="100%" />
@@ -311,14 +315,15 @@
 																			<fo:block font-size="small" font-weight="bold">
 																				<fo:block>
 
-																				
-																						<xsl:value-of select="/bookinginfo/ingateAtTerminal/name" />
+
+																					<xsl:value-of select="/bookinginfo/ingateAtTerminal/name" />
 
 																				</fo:block>
 																				<fo:block>
 
-																				
-																						<xsl:value-of select="/bookinginfo/ingateAtTerminal/address" />
+
+																					<xsl:value-of
+																						select="/bookinginfo/ingateAtTerminal/address" />
 
 																				</fo:block>
 																			</fo:block>
@@ -330,15 +335,17 @@
 																			<fo:block space-before="1em" font-weight="normal"
 																				font-size="x-small">
 																				Early Receiving Date:
-																				<fo:inline font-weight="bold"> <xsl:value-of select="/bookinginfo/earlyReceivingDate" /></fo:inline>
+																				<fo:inline font-weight="bold">
+																					<xsl:value-of select="/bookinginfo/earlyReceivingDate" />
+																				</fo:inline>
 																			</fo:block>
 																		</fo:table-cell>
 																	</fo:table-row>
 																</fo:table-body>
 															</fo:table>
-															
-															
-															
+
+
+
 														</fo:table-cell>
 													</fo:table-row>
 
@@ -397,14 +404,15 @@
 						</fo:table>
 
 						<fo:table text-indent="2pt" width="100%" border-style="inset"
-							border-width="2pt" border-color="grey" border-top="1pt">
+							border-width="1pt" border-color="grey" border-top="0pt">
 							<fo:table-column column-width="20%" />
 							<fo:table-column column-width="20%" />
-							<fo:table-column column-width="60%" />
+							<fo:table-column column-width="30%" />
+							<fo:table-column column-width="30%" />
 							<fo:table-body>
-								<fo:table-row>
+								<fo:table-row border-style="inset" border-color="grey">
 									<fo:table-cell border-color="grey" border-style="inset"
-										border-right="1pt">
+										border-right="1pt" border-bottom="0pt">
 										<fo:block font-size="x-small">
 
 											Place Of Receipt
@@ -420,7 +428,7 @@
 										</fo:block>
 									</fo:table-cell>
 									<fo:table-cell border-color="grey" border-style="inset"
-										border-right="0pt">
+										border-right="0pt" border-bottom="0pt">
 										<fo:block font-size="x-small">
 
 											Port Of Loading
@@ -435,40 +443,45 @@
 
 										</fo:block>
 									</fo:table-cell>
-									<fo:table-cell border-color="grey" border-style="inset">
-										<fo:block>
-											<fo:table text-indent="2pt" width="100%"
-												border-style="inset" border-width="0pt" border-color="grey"
-												border-top="1pt">
-												<fo:table-column />
-												<fo:table-column />
 
-												<fo:table-body>
-													<fo:table-row>
-														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt" border-bottom="0pt">
-															<fo:block font-size="x-small">Vessel</fo:block>
-															<fo:block font-size="small" font-weight="bold">
-																<xsl:value-of select="/bookinginfo/vessel/name" />
-															</fo:block>
-														</fo:table-cell>
-														<fo:table-cell>
-															<fo:block font-size="x-small">Voyage No</fo:block>
-															<fo:block font-size="small" font-weight="bold"
-																border-bottom="0pt">
-																<xsl:value-of select="/bookinginfo/carrierVoyage" />
-															</fo:block>
-														</fo:table-cell>
-													</fo:table-row>
-												</fo:table-body>
-											</fo:table>
+									<fo:table-cell border-color="grey" border-style="inset"
+										border-right="1pt" border-bottom="0pt">
+										<fo:block font-size="x-small">Vessel</fo:block>
+										<fo:block font-size="small" font-weight="bold">
+											<xsl:value-of select="/bookinginfo/vessel/name" />
+
 										</fo:block>
-
 									</fo:table-cell>
+									<fo:table-cell border-style="inset"
+										border-bottom="0pt" border-color="grey">
+										<fo:block font-size="x-small">Voyage No</fo:block>
+										<fo:block font-size="small" font-weight="bold"
+											border-bottom="0pt">
+											<xsl:value-of select="/bookinginfo/carrierVoyage" />
+										</fo:block>
+									</fo:table-cell>
+
 								</fo:table-row>
+
+
+							</fo:table-body>
+
+						</fo:table>
+
+						<fo:table text-indent="2pt" width="100%" border-style="inset"
+							border-width="0pt" border-top="0pt">
+							<fo:table-column column-width="20%" />
+							<fo:table-column column-width="20%" />
+							<fo:table-column column-width="15%" />
+							<fo:table-column column-width="15%" />
+							<fo:table-column column-width="15%" />
+							<fo:table-column column-width="15%" />
+							<fo:table-body>
+
+
 								<fo:table-row height="auto">
 									<fo:table-cell border-color="grey" border-style="inset"
-										border-right="1pt">
+										border-right="1pt" border-top="0pt">
 										<fo:block font-size="x-small">
 
 											Port Of Discharge
@@ -484,7 +497,7 @@
 										</fo:block>
 									</fo:table-cell>
 									<fo:table-cell border-color="grey" border-style="inset"
-										border-right="1pt">
+										border-right="1pt" border-top="0pt">
 										<fo:block font-size="x-small">
 
 											Place Of Delivery
@@ -499,58 +512,51 @@
 
 										</fo:block>
 									</fo:table-cell>
-									<fo:table-cell height="inherit" border-color="grey"
-										border-style="inset">
 
 
-										<fo:block>
-											<fo:table height="auto" text-indent="2pt" width="100%"
-												border-style="inset" border-width="0pt" border-color="grey"
-												border-top="1pt">
-												<fo:table-column />
-												<fo:table-column />
-												<fo:table-column />
-												<fo:table-column />
 
-												<fo:table-body>
-													<fo:table-row>
-														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt" border-bottom="1pt">
-															<fo:block font-size="x-small">Port Cut Off Date</fo:block>
-															<fo:block font-size="small" font-weight="bold">
-																<xsl:value-of select="/bookinginfo/portCutOffDate" />
+									<fo:table-cell border-color="grey" border-style="inset"
+										border-right="1pt" border-bottom="1pt" border-top="0pt">
+										<fo:block font-size="x-small">Port Cut Off Date</fo:block>
+										<fo:block font-size="small" font-weight="bold">
+											<xsl:value-of select="/bookinginfo/portCutOffDate" />
 
-															</fo:block>
-														</fo:table-cell>
-														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt" border-bottom="1pt">
-															<fo:block font-size="x-small">Docs Cut Off Date</fo:block>
-															<fo:block font-size="small" font-weight="bold">
-																<xsl:value-of select="/bookinginfo/docsCutOffDateTime" />
-															</fo:block>
-														</fo:table-cell>
-														<fo:table-cell border-color="grey"
-															border-style="inset" border-right="1pt" border-bottom="1pt">
-															<fo:block font-size="x-small">ETD</fo:block>
-															<fo:block font-size="small" font-weight="bold">
-																<xsl:value-of select="/bookinginfo/sailDate" />
-															</fo:block>
-														</fo:table-cell>
-														<fo:table-cell border-width="0pt"
-															border-style="inset" border-bottom="1pt" border-color="grey">
-															<fo:block font-size="x-small">ETA</fo:block>
-															<fo:block font-size="small" font-weight="bold">
-																<xsl:value-of select="/bookinginfo/eta" />
-															</fo:block>
-														</fo:table-cell>
-													</fo:table-row>
-
-												</fo:table-body>
-											</fo:table>
 										</fo:block>
-
-
 									</fo:table-cell>
+									<fo:table-cell border-color="grey" border-style="inset"
+										border-right="1pt" border-bottom="1pt" border-top="0pt">
+										<fo:block font-size="x-small">Docs Cut Off Date</fo:block>
+										<fo:block font-size="small" font-weight="bold">
+											<xsl:value-of select="/bookinginfo/docsCutOffDateTime" />
+										</fo:block>
+									</fo:table-cell>
+									<fo:table-cell border-color="grey" border-style="inset"
+										border-right="1pt" border-bottom="1pt" border-top="0pt">
+										<fo:block font-size="x-small">ETD</fo:block>
+										<fo:block font-size="small" font-weight="bold">
+											<xsl:value-of select="/bookinginfo/sailDate" />
+										</fo:block>
+									</fo:table-cell>
+									<fo:table-cell border-width="0pt" border-style="inset"
+										border-bottom="1pt" border-color="grey" border-right="1pt"
+										border-top="0pt">
+										<fo:block font-size="x-small">ETA</fo:block>
+										<fo:block font-size="small" font-weight="bold">
+											<xsl:value-of select="/bookinginfo/eta" />
+										</fo:block>
+									</fo:table-cell>
+
+
+
+
+
+
+
+
+
+
+
+
 								</fo:table-row>
 							</fo:table-body>
 
@@ -565,14 +571,15 @@
 						<fo:block>
 
 							<fo:table text-indent="2pt" width="100%" border-style="inset"
-								border-width="2pt" border-color="grey" border-top="1pt">
+								border-width="1pt" border-color="grey" border-top="1pt"
+								border-bottom="0pt">
 								<fo:table-column column-width="50%" />
 								<fo:table-column column-width="50%" />
 
 								<fo:table-body>
 									<fo:table-row>
 										<fo:table-cell border-color="grey" border-style="inset"
-											border-right="1pt">
+											border-right="1pt" border-bottom="0pt">
 											<fo:block font-size="x-small">
 
 												Number/Type of Containers
@@ -587,7 +594,7 @@
 											</fo:block>
 										</fo:table-cell>
 										<fo:table-cell border-color="grey" border-style="inset"
-											border-right="1pt">
+											border-right="1pt" border-bottom="0pt">
 											<fo:block font-size="x-small">
 
 												Commodity
@@ -599,7 +606,7 @@
 									</fo:table-row>
 									<fo:table-row>
 										<fo:table-cell border-color="grey" border-style="inset"
-											border-right="1pt">
+											border-right="1pt" border-bottom="0pt">
 											<fo:block font-size="small" font-weight="bold">
 												<!-- type container value comes here TBD -->
 												<xsl:for-each select="bookinginfo/containerTypes">
@@ -615,7 +622,7 @@
 
 										</fo:table-cell>
 										<fo:table-cell border-color="grey" border-style="inset"
-											border-right="1pt">
+											border-right="1pt" border-bottom="0pt">
 											<fo:block font-size="small" font-weight="bold">
 												<!-- commodity value comes here TBD -->
 												<xsl:for-each select="bookinginfo/containerTypes">
@@ -638,14 +645,14 @@
 
 						<fo:block>
 							<fo:table width="100%" border-style="inset"
-								border-width="2pt" border-color="grey" border-top="1pt">
+								border-width="1pt" border-color="grey" border-top="0pt">
 								<fo:table-column />
 
 
 								<fo:table-body>
 									<fo:table-row>
 										<fo:table-cell padding-left="1mm" border-color="grey"
-											border-style="inset" border-right="1pt">
+											border-style="inset" border-right="1pt" border-top="0pt">
 											<fo:block font-size="x-small">
 
 												Remarks
