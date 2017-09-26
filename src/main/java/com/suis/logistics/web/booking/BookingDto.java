@@ -1,16 +1,17 @@
 package com.suis.logistics.web.booking;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.suis.logistics.common.CustomDateAdapter;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
 import com.suis.logistics.web.container.ContainerDto;
@@ -52,8 +53,9 @@ public class BookingDto {
 	private LocalDateTime			docsCutOffDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime			docsReceivedDate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate				eta;
+	@XmlJavaTypeAdapter(CustomDateAdapter.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime				eta;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime			bookingDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
@@ -66,12 +68,15 @@ public class BookingDto {
 	private LocalDateTime			delieveryEta;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime			railCutOffDateTime;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate				sailDate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate				emptyPickupDate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate				earlyReceivingDate;
+	@XmlJavaTypeAdapter(CustomDateAdapter.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime				sailDate;
+	@XmlJavaTypeAdapter(CustomDateAdapter.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime				emptyPickupDate;
+	@XmlJavaTypeAdapter(CustomDateAdapter.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime				earlyReceivingDate;
 	//
 	private ClientDto				client;
 	private UserDto					user;
@@ -300,35 +305,36 @@ public class BookingDto {
 		this.railCutOffDateTime = railCutOffDateTime;
 	}
 
-	public LocalDate getEta() {
+
+	public LocalDateTime getEta() {
 		return eta;
 	}
 
-	public void setEta(LocalDate eta) {
+	public void setEta(LocalDateTime eta) {
 		this.eta = eta;
 	}
 
-	public LocalDate getSailDate() {
+	public LocalDateTime getSailDate() {
 		return sailDate;
 	}
 
-	public void setSailDate(LocalDate sailDate) {
+	public void setSailDate(LocalDateTime sailDate) {
 		this.sailDate = sailDate;
 	}
 
-	public LocalDate getEmptyPickupDate() {
+	public LocalDateTime getEmptyPickupDate() {
 		return emptyPickupDate;
 	}
 
-	public void setEmptyPickupDate(LocalDate emptyPickupDate) {
+	public void setEmptyPickupDate(LocalDateTime emptyPickupDate) {
 		this.emptyPickupDate = emptyPickupDate;
 	}
 
-	public LocalDate getEarlyReceivingDate() {
+	public LocalDateTime getEarlyReceivingDate() {
 		return earlyReceivingDate;
 	}
 
-	public void setEarlyReceivingDate(LocalDate earlyReceivingDate) {
+	public void setEarlyReceivingDate(LocalDateTime earlyReceivingDate) {
 		this.earlyReceivingDate = earlyReceivingDate;
 	}
 

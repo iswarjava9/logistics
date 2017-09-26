@@ -1,7 +1,6 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -63,7 +62,7 @@ public class BookingDetail implements Serializable {
 	private LocalDateTime			docsCutOffDateTime;
 	@Column(name = "docs_received_date")
 	private LocalDateTime			docsReceivedDate;
-	private LocalDate				eta;
+	private LocalDateTime			eta;
 	@Column(name = "booking_date")
 	private LocalDateTime			bookingDate;
 	@Column(name = "amendment_date")
@@ -77,11 +76,11 @@ public class BookingDetail implements Serializable {
 	@Column(name = "rail_cut_off_date_time")
 	private LocalDateTime			railCutOffDateTime;
 	@Column(name = "sail_date")
-	private LocalDate				sailDate;
+	private LocalDateTime			sailDate;
 	@Column(name = "empty_pickup_date")
-	private LocalDate				emptyPickupDate;
+	private LocalDateTime			emptyPickupDate;
 	@Column(name = "early_receiving_date")
-	private LocalDate				earlyReceivingDate;
+	private LocalDateTime			earlyReceivingDate;
 	//
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -294,8 +293,6 @@ public class BookingDetail implements Serializable {
 		this.docsReceivedDate = docsReceivedDate;
 	}
 
-
-
 	public Place getIngateAtTerminal() {
 		return ingateAtTerminal;
 	}
@@ -352,35 +349,35 @@ public class BookingDetail implements Serializable {
 		this.railCutOffDateTime = railCutOffDateTime;
 	}
 
-	public LocalDate getEta() {
+	public LocalDateTime getEta() {
 		return eta;
 	}
 
-	public void setEta(LocalDate eta) {
+	public void setEta(LocalDateTime eta) {
 		this.eta = eta;
 	}
 
-	public LocalDate getSailDate() {
+	public LocalDateTime getSailDate() {
 		return sailDate;
 	}
 
-	public void setSailDate(LocalDate sailDate) {
+	public void setSailDate(LocalDateTime sailDate) {
 		this.sailDate = sailDate;
 	}
 
-	public LocalDate getEmptyPickupDate() {
+	public LocalDateTime getEmptyPickupDate() {
 		return emptyPickupDate;
 	}
 
-	public void setEmptyPickupDate(LocalDate emptyPickupDate) {
+	public void setEmptyPickupDate(LocalDateTime emptyPickupDate) {
 		this.emptyPickupDate = emptyPickupDate;
 	}
 
-	public LocalDate getEarlyReceivingDate() {
+	public LocalDateTime getEarlyReceivingDate() {
 		return earlyReceivingDate;
 	}
 
-	public void setEarlyReceivingDate(LocalDate earlyReceivingDate) {
+	public void setEarlyReceivingDate(LocalDateTime earlyReceivingDate) {
 		this.earlyReceivingDate = earlyReceivingDate;
 	}
 
@@ -630,6 +627,4 @@ public class BookingDetail implements Serializable {
 			return false;
 		return true;
 	}
-
-
 }

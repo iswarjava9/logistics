@@ -1,14 +1,14 @@
 package com.suis.logistics.common;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class LocalDateAdapter extends  XmlAdapter<String, LocalDate> {
+public class CustomDateAdapter extends  XmlAdapter<String, LocalDateTime> {
 
 	@Override
-	public String marshal(LocalDate v) throws Exception {
+	public String marshal(LocalDateTime v) throws Exception {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String dateAsString = v.format(formatter);
 
@@ -16,9 +16,9 @@ public class LocalDateAdapter extends  XmlAdapter<String, LocalDate> {
 	}
 
 	@Override
-	public LocalDate unmarshal(String v) throws Exception {
+	public LocalDateTime unmarshal(String v) throws Exception {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate date = LocalDate.parse(v, formatter);
+		LocalDateTime date = LocalDateTime.parse(v, formatter);
 		return date;
 	}
 
