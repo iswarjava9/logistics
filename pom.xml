@@ -21,7 +21,7 @@
 		<jcl.slf4j.version>1.7.12</jcl.slf4j.version>
 		<apache-commons>3.5</apache-commons>
 		<apache-fop>2.2</apache-fop>
-		<apache-httpcomponents>4.1.1</apache-httpcomponents>
+		<apache-httpcomponents>4.5</apache-httpcomponents>
 	</properties>
 
 	<dependencies>

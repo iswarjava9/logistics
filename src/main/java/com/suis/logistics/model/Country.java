@@ -135,4 +135,9 @@ public class Country implements Serializable {
 		return vessel;
 	}
 
+	@Override
+	public String toString() {
+		return "Country [code=" + code + ", name=" + name + "]";
+	}
+
 }

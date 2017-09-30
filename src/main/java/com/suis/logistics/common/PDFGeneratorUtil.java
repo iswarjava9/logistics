@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
@@ -41,8 +42,12 @@ public class PDFGeneratorUtil {
 	@Value("${logo.image.url}")
 	private String	logoPath;
 
+	@Resource
+	ConverterUtil converterUtil;
+
 	public void generateBookingConfirmationPDF(BookingDto bookingDto) throws Exception {
 		bookingDto.setLogoPath(logoPath);
+		converterUtil.convertDateTimeFromUTCtoPlaceTimeZone(bookingDto);
 		setContainerDetailsToBookingDto(bookingDto);
 		File bookingXML = parseBookingDtoToXML(bookingDto);
 		createBookingConfirmationPDFfromXML(bookingXML, bookingDto.getForwarderRefNo());

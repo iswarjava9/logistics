@@ -4,9 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,8 +25,7 @@ import com.suis.logistics.web.BaseController;
 public class BookingController extends BaseController {
 	@Resource
 	BookingService	bookingService;
-	@Autowired
-	ServletContext	context;
+
 	@Resource
 	PDFGeneratorUtil pdfGeneratorUtil;
 

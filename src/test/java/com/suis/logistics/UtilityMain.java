@@ -31,82 +31,69 @@ import com.suis.logistics.web.person.PersonDto;
 import com.suis.logistics.web.place.PlaceDto;
 import com.suis.logistics.web.vessel.VesselDto;
 
-public class Utility {
+public class UtilityMain {
 
-	public static void main(String[] args) throws Exception{
-		// TODO Auto-generated method stub
-		generateBookingToJsonString();
-		//generateDivisonDtoToJsonString();
+	public static void main(String[] args) throws Exception {
+
+		// generateBookingToJsonString();
+		// generateDivisonDtoToJsonString();
 		// convertDtoToEntity();
-
-		//date();
-		//stringManipulation();
-
-		//generateUniqueAlphaNumeric();
-
-		//generateCustomerDtoToJsonString();
-
-	//	generatePlaceDtoToJsonString();
-
-
-	//	printAllTimeZones();
+		// date();
+		// stringManipulation();
+		// generateUniqueAlphaNumeric();
+		// generateCustomerDtoToJsonString();
+		// generatePlaceDtoToJsonString();
+		//printAllTimeZones();
+		//geoNamesAPI();
 	}
 
-	public static void printAllTimeZones(){
+	public static void printAllTimeZones() {
 		Set<String> zoneIds = ZoneId.getAvailableZoneIds();
-
 		for (String zoneId : zoneIds) {
-		    ZoneId zone = ZoneId.of(zoneId);
-		    ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);
-
-		    ZoneOffset offset = zonedDateTime.getOffset();
-		    String longName = zone.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
-		    String shortDisplayName = TimeZone.getTimeZone(offset).getDisplayName(false, TimeZone.SHORT);
-		    System.out.println("(" + offset + ") " + zoneId + ", " + longName + "  "+shortDisplayName);
+			ZoneId zone = ZoneId.of(zoneId);
+			ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);
+			ZoneOffset offset = zonedDateTime.getOffset();
+			String longName = zone.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+			String shortDisplayName = TimeZone.getTimeZone(offset).getDisplayName(false, TimeZone.SHORT);
+			System.out.println("(" + offset + ") " + zoneId + ", " + longName + "  " + shortDisplayName);
 		}
 	}
 
-	public static void stringManipulation(){
+	public static void stringManipulation() {
 		StringBuilder st = new StringBuilder("hello1234");
-		int length= 6;
+		int length = 6;
 		String k = null;
-		if(st.length() > length){
-			k = st.substring(st.length()-length, st.length());
+		if (st.length() > length) {
+			k = st.substring(st.length() - length, st.length());
 		}
 		System.out.println(k);
 	}
 
-	public static void workingOnDate(){
-		//Asia/Kuala_Lumpur +8
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        System.out.println("System Default TimeZone : " + defaultZoneId);
-
-        //toString() append +8 automatically.
-        Date date = new Date();
-        System.out.println("date : " + date);
-
-        //1. Convert Date -> Instant
-        Instant instant = date.toInstant();
-        System.out.println("instant : " + instant); //Zone : UTC+0
-
-        //2. Instant + system default time zone + toLocalDate() = LocalDate
-        LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
-        System.out.println("localDate : " + localDate);
-
-        //3. Instant + system default time zone + toLocalDateTime() = LocalDateTime
-        LocalDateTime localDateTime = instant.atZone(defaultZoneId).toLocalDateTime();
-        System.out.println("localDateTime : " + localDateTime);
-
-        //4. Instant + system default time zone = ZonedDateTime
-        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of("UTC"));
-        System.out.println("zonedDateTime : " + zonedDateTime);
-        System.out.println(Date.from(zonedDateTime.toInstant()));
-
-
+	public static void workingOnDate() {
+		// Asia/Kuala_Lumpur +8
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		System.out.println("System Default TimeZone : " + defaultZoneId);
+		// toString() append +8 automatically.
+		Date date = new Date();
+		System.out.println("date : " + date);
+		// 1. Convert Date -> Instant
+		Instant instant = date.toInstant();
+		System.out.println("instant : " + instant); // Zone : UTC+0
+		// 2. Instant + system default time zone + toLocalDate() = LocalDate
+		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+		System.out.println("localDate : " + localDate);
+		// 3. Instant + system default time zone + toLocalDateTime() =
+		// LocalDateTime
+		LocalDateTime localDateTime = instant.atZone(defaultZoneId).toLocalDateTime();
+		System.out.println("localDateTime : " + localDateTime);
+		// 4. Instant + system default time zone = ZonedDateTime
+		ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of("UTC"));
+		System.out.println("zonedDateTime : " + zonedDateTime);
+		System.out.println(Date.from(zonedDateTime.toInstant()));
 	}
 
-	public static void date(){
-System.out.println(ZoneId.getAvailableZoneIds());
+	public static void date() {
+		System.out.println(ZoneId.getAvailableZoneIds());
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println(now);
 		System.out.println(ZoneId.systemDefault());
@@ -114,19 +101,13 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		System.out.println(current);
 		ZonedDateTime zdt = current.withZoneSameInstant(ZoneId.of("UTC"));
 		System.out.println(zdt.toLocalDateTime());
-
-
-
-
-
-
 	}
 
 	public static void generateBookingToJsonString() {
 
 		// Client obj = new Client();
 		BookingDto obj = new BookingDto();
-		obj.setContainerDetails(Arrays.asList(new ContainerDto(),new ContainerDto()));
+		obj.setContainerDetails(Arrays.asList(new ContainerDto(), new ContainerDto()));
 		obj.setClient(new ClientDto());
 		obj.setBillTo(new CustomerDto());
 		obj.setAesAuthNo("aes-auth-002");
@@ -142,7 +123,6 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		obj.setNotify1(new CustomerDto());
 		obj.setNotify2(new CustomerDto());
 		obj.setLocalSSLineOffice(new CustomerDto());
-
 		obj.setForwarder(new CustomerDto());
 		obj.setLineOfBusiness(new BusinessLineDto());
 		obj.setSalesRepresentative(new PersonDto());
@@ -151,11 +131,6 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		obj.setTypeOfMove(new MovementTypeDto());
 		obj.setBookingPerson(new PersonDto());
 		obj.setCarrier(new CustomerDto());
-
-
-
-
-
 		// Object to JSON in String
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -168,7 +143,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		}
 	}
 
-	public static void generateDivisonDtoToJsonString(){
+	public static void generateDivisonDtoToJsonString() {
 		DivisionDto div = new DivisionDto();
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -181,7 +156,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		}
 	}
 
-	public static void generateCustomerDtoToJsonString() throws Exception{
+	public static void generateCustomerDtoToJsonString() throws Exception {
 
 		CustomerDto cus = new CustomerDto();
 		cus.setCity(new CityDto());
@@ -191,7 +166,7 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		System.out.println(jsonInString);
 	}
 
-	public static void generatePlaceDtoToJsonString() throws Exception{
+	public static void generatePlaceDtoToJsonString() throws Exception {
 
 		PlaceDto cus = new PlaceDto();
 		cus.setCity(new CityDto());
@@ -201,14 +176,12 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		System.out.println(jsonInString);
 	}
 
-
 	public static void convertDtoToEntity() {
 		ModelMapper modelMapper = new ModelMapper();
 		ClientDto clientDto = new ClientDto();
 		clientDto.setAddress("address");
 		clientDto.setId(787);
 		Client client = modelMapper.map(clientDto, Client.class);
-
 		System.out.println(client);
 	}
 
@@ -218,14 +191,24 @@ System.out.println(ZoneId.getAvailableZoneIds());
 		clientDto.setAddress("address");
 		clientDto.setId(787);
 		Client client = modelMapper.map(clientDto, Client.class);
-
 		System.out.println(client);
 	}
 
-	public static void generateUniqueAlphaNumeric(){
+	public static void generateUniqueAlphaNumeric() {
 		String k = RandomStringUtils.random(8, false, true);
-
-
 		System.out.println(k);
 	}
+
+	/*public static void geoNamesAPI() throws Exception{
+		WebService.setUserName("demo"); // add your username here
+Timezone tz = WebService.timezone(42.773333, 21.286111);
+System.out.println(tz.getTimezoneId());
+		  ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria();
+		  searchCriteria.setQ("new Jersey");
+
+		  ToponymSearchResult searchResult = WebService.search(searchCriteria);
+		  for (Toponym toponym : searchResult.getToponyms()) {
+		     System.out.println(toponym.getName()+" "+ toponym.getCountryName()+ "");
+		  }
+	}*/
 }

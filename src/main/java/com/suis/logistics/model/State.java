@@ -31,8 +31,8 @@ public class State implements Serializable {
 	// bi-directional many-to-one association to Country
 	@ManyToOne
 	private Country				country;
-	@OneToMany(mappedBy = "state")
-	private List<City>			cities;
+	/*@OneToMany(mappedBy = "state")
+	private List<City>			cities;*/
 
 	public State() {
 	}
@@ -80,4 +80,11 @@ public class State implements Serializable {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
+
+	@Override
+	public String toString() {
+		return "State [name=" + name + ", country=" + country + "]";
+	}
+
+
 }

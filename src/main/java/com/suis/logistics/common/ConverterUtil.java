@@ -349,4 +349,24 @@ public class ConverterUtil {
 		List<TimeZoneDto> timeZones = modelMapper.map(availableTimeZonesByCountry, listType);
 		return timeZones;
 	}
+
+	public void convertDateTimeFromUTCtoPlaceTimeZone(BookingDto bookingDto) {
+
+		// as per port of load
+		PlaceDto portOfLoad = bookingDto.getPortOfLoad();
+		if (portOfLoad != null && portOfLoad.getCity() != null) {
+			String timeZonePortOfLoad = portOfLoad.getCity().getTimeZone();
+			bookingDto.setPortCutOffDate(
+					dateUtil.convertDateToSpecificTimeZone(bookingDto.getPortCutOffDate(), timeZonePortOfLoad));
+			bookingDto.setDocsCutOffDateTime(
+					dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(), timeZonePortOfLoad));
+			bookingDto.setSailDate(dateUtil.convertDateToSpecificTimeZone(bookingDto.getSailDate(), timeZonePortOfLoad));
+		}
+		PlaceDto portOfDischarge = bookingDto.getPortOfDischarge();
+		if (portOfDischarge != null && portOfDischarge.getCity() != null) {
+			String tzPortOfDischarge = portOfDischarge.getCity().getTimeZone();
+			bookingDto.setEta(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEta(), tzPortOfDischarge));
+		}
+
+	}
 }

@@ -19,10 +19,9 @@ import com.suis.logistics.service.common.RegionService;
 public class RegionController extends BaseController {
 
 	@Resource
-	RegionService regionService;
-
+	RegionService	regionService;
 	@Resource
-	DateUtil dateUtil;
+	DateUtil		dateUtil;
 
 	@RequestMapping(value = "/city/byname/{name}", method = RequestMethod.GET)
 	public ResponseEntity<List<CityDto>> getCitiesByName(@PathVariable("name") String name) {
@@ -32,9 +31,18 @@ public class RegionController extends BaseController {
 
 	@RequestMapping(value = "/timezones/{countryCode}", method = RequestMethod.GET)
 	public ResponseEntity<List<TimeZoneDto>> getAllTimeZones(@PathVariable("countryCode") String countryCode) {
-		List<TimeZoneDto> timeZones = converterUtil.convertListTimeZoneToDto(regionService.getAvailableTimeZonesByCountry(countryCode));
+		List<TimeZoneDto> timeZones = converterUtil
+				.convertListTimeZoneToDto(regionService.getAvailableTimeZonesByCountry(countryCode));
 		return new ResponseEntity<List<TimeZoneDto>>(timeZones, HttpStatus.OK);
 	}
 
-
+	@RequestMapping(value = "/cities/timezone", method = RequestMethod.PUT)
+	public ResponseEntity<Void> runTimeZoneEntry() {
+      //regionService.updateCityWithOneTimeZone_LeftOut();
+		regionService.updateCityWithTimeZoneForCountryWithMultipleTimeZone("");
+		/*new Thread(() -> {
+	  			regionService.updateCityWithTimeZoneForCountryWithMultipleTimeZone("");
+		}).start();*/
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 }
