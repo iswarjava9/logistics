@@ -19,10 +19,7 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 	@Override
 	public List<City> getCitiesByName(String name) {
 		Query query = getCurrentSession().getNamedQuery("City.findByName").setParameter("name", name + "%");
-		List<City> allCities = query.list();
-		for(City city : allCities){
-			city.setName(city.getName()+"  "+city.getStateName()+"  "+city.getCountryName());
-		}
+		List<City> allCities = query.list();		
 		return allCities;
 	}
 

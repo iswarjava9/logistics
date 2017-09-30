@@ -2,12 +2,10 @@ package com.suis.logistics.repository.common;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.suis.logistics.model.City;
 import com.suis.logistics.model.TimeZone;
 
-@Transactional
+
 public interface RegionDao {
 
 	public List<City> getCitiesByName(String name);
