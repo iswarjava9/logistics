@@ -17,12 +17,13 @@ import com.suis.logistics.web.TimeZoneDto;
 public class DateUtil {
 
 	public LocalDateTime convertDateToSpecificTimeZone(LocalDateTime date, String timeZoneId) {
-
-		ZonedDateTime current = date.atZone(ZoneId.systemDefault());
-		System.out.println(current);
-		ZonedDateTime zdt = current.withZoneSameInstant(ZoneId.of(timeZoneId));
-		System.out.println(zdt.toLocalDateTime());
-		return zdt.toLocalDateTime();
+		if (date != null && timeZoneId != null) {
+			ZonedDateTime current = date.atZone(ZoneId.systemDefault());
+			ZonedDateTime zdt = current.withZoneSameInstant(ZoneId.of(timeZoneId));
+			System.out.println(zdt.toLocalDateTime());
+			return zdt.toLocalDateTime();
+		}
+		return null;
 	}
 
 	public List<TimeZoneDto> getAvailableTimeZones() {

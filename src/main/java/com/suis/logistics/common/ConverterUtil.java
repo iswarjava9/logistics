@@ -367,6 +367,16 @@ public class ConverterUtil {
 			String tzPortOfDischarge = portOfDischarge.getCity().getTimeZone();
 			bookingDto.setEta(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEta(), tzPortOfDischarge));
 		}
+		PlaceDto emptyPickupDepot = bookingDto.getEmptyContainerPickup();
+		if(emptyPickupDepot != null && emptyPickupDepot.getCity() != null){
+			String tzEmptyPickupDepot = emptyPickupDepot.getCity().getTimeZone();
+			bookingDto.setEmptyPickupDate(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEmptyPickupDate(), tzEmptyPickupDepot));
+		}
+		PlaceDto ingateTerminal = bookingDto.getIngateAtTerminal();
+		if(ingateTerminal != null && ingateTerminal.getCity() != null){
+			String tzIngateTerminal = ingateTerminal.getCity().getTimeZone();
+			bookingDto.setEarlyReceivingDate(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEarlyReceivingDate(), tzIngateTerminal));
+		}
 
 	}
 }
