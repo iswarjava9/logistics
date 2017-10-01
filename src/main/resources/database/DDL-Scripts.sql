@@ -96,7 +96,7 @@ CREATE TABLE `booking_detail` (
   CONSTRAINT `physical_entity_port_of_dis_fk` FOREIGN KEY (`port_of_discharge_id`) REFERENCES `place` (`id`),
   CONSTRAINT `physical_entity_port_of_load_fk` FOREIGN KEY (`port_of_load_id`) REFERENCES `place` (`id`),
   CONSTRAINT `physical_entity_transhipment_port_fk` FOREIGN KEY (`transhipment_port_id`) REFERENCES `place` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=243 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `business_line` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -153,6 +153,8 @@ CREATE TABLE `city` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) DEFAULT NULL,
   `state_id` int(11) DEFAULT NULL,
+  `timezone_id` varchar(50) DEFAULT NULL,
+  `timezone_abbreviation` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `state_id_FK` (`state_id`),
   KEY `name` (`name`)
@@ -181,7 +183,7 @@ CREATE TABLE `commodity` (
   `secondary_quantity` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `container_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -218,7 +220,7 @@ CREATE TABLE `container_detail` (
   CONSTRAINT `booking_container_FK` FOREIGN KEY (`booking_id`) REFERENCES `booking_detail` (`id`),
   CONSTRAINT `container_to_commodity_FK` FOREIGN KEY (`commodity_id`) REFERENCES `commodity` (`id`),
   CONSTRAINT `container_type_FK` FOREIGN KEY (`container_type_id`) REFERENCES `container_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `container_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -231,7 +233,7 @@ CREATE TABLE `container_type` (
   `descirption` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `country` (
   `id` int(11) NOT NULL DEFAULT '0',
@@ -259,7 +261,7 @@ CREATE TABLE `customer` (
   KEY `customer_to_city_FK` (`city_id`),
   CONSTRAINT `customer_to_city_FK` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `customer_to_client_FK` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `division` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -280,6 +282,50 @@ CREATE TABLE `inco_term` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+CREATE TABLE `m_city` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `state_id` int(11) unsigned NOT NULL,
+  `country_id` smallint(5) unsigned NOT NULL,
+  `latitude` decimal(10,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `country_region_name` (`country_id`,`state_id`,`name`),
+  KEY `m_city_to_m_state_FK` (`state_id`),
+  CONSTRAINT `m_city_to_m_state_FK` FOREIGN KEY (`state_id`) REFERENCES `m_state` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2790952 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `m_city_state_country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_iso_code` varchar(20) DEFAULT NULL,
+  `country_name` varchar(50) DEFAULT NULL,
+  `state_iso_code` varchar(20) DEFAULT NULL,
+  `state_name` varchar(50) DEFAULT NULL,
+  `subdivision_2_name` varchar(50) DEFAULT NULL,
+  `city_name` varchar(50) DEFAULT NULL,
+  `time_zone` varchar(50) DEFAULT NULL,
+  `timezone_abbereviation` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=96476 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `m_country` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `m_state` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `country_id` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `country_name` (`country_id`,`name`),
+  CONSTRAINT `m_state_to_m_country_FK` FOREIGN KEY (`country_id`) REFERENCES `m_country` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3889 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
 CREATE TABLE `movement_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_of_service` varchar(20) DEFAULT NULL,
@@ -299,7 +345,7 @@ CREATE TABLE `person` (
   `fax` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `person__idx` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `piece_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -326,7 +372,20 @@ CREATE TABLE `place` (
   KEY `index_name` (`name`) USING BTREE,
   KEY `place_to_city_FK` (`city_id`),
   CONSTRAINT `place_to_city_FK` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `place_copy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(25) DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `timezone_id` varchar(50) DEFAULT NULL,
+  `timezone_shortname` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `place_copy_to_city_FK` (`city_id`),
+  CONSTRAINT `place_copy_to_city_FK` FOREIGN KEY (`city_id`) REFERENCES `m_city_state_country` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `quotation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -362,9 +421,9 @@ CREATE TABLE `quotation` (
   PRIMARY KEY (`id`),
   KEY `state_FK` (`state_id`),
   KEY `quotation_country_FK` (`country_id`),
+  KEY `container_FK` (`container_id`),
   KEY `business_line_FK` (`business_line_id`),
   KEY `contact_FK` (`contact_id`),
-  KEY `container_FK` (`container_id`),
   KEY `customer_FK` (`customer_id`),
   KEY `division_FK` (`division_id`),
   KEY `final_destination_FK` (`final_destination_id`),
@@ -380,7 +439,6 @@ CREATE TABLE `quotation` (
   KEY `vessel_FK` (`vessel_id`),
   CONSTRAINT `business_line_FK` FOREIGN KEY (`business_line_id`) REFERENCES `business_line` (`id`),
   CONSTRAINT `contact_FK` FOREIGN KEY (`contact_id`) REFERENCES `person` (`id`),
-  CONSTRAINT `container_FK` FOREIGN KEY (`container_id`) REFERENCES `container_detail` (`id`),
   CONSTRAINT `customer_FK` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `division_FK` FOREIGN KEY (`division_id`) REFERENCES `division` (`id`),
   CONSTRAINT `final_destination_FK` FOREIGN KEY (`final_destination_id`) REFERENCES `place` (`id`),
@@ -426,6 +484,13 @@ CREATE TABLE `temporary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `timezone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_code` varchar(20) DEFAULT NULL,
+  `zone_id` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=425 DEFAULT CHARSET=latin1;
+
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -449,5 +514,5 @@ CREATE TABLE `vessel` (
   `lloyds _code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `flag_country_FK` (`flag_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
