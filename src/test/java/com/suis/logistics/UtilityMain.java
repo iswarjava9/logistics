@@ -45,6 +45,19 @@ public class UtilityMain {
 		// generatePlaceDtoToJsonString();
 		//printAllTimeZones();
 		//geoNamesAPI();
+		//workingOnDate();
+		assocaiteTimeZone();
+	}
+
+	public static void assocaiteTimeZone(){
+		LocalDateTime dt = LocalDateTime.now();
+		System.out.println(dt);
+		System.out.println(dt.atZone(ZoneId.of("Asia/Kolkata")).toLocalDateTime());
+
+		ZonedDateTime current = dt.atZone(ZoneId.systemDefault());
+		ZonedDateTime zdt = current.withZoneSameInstant(ZoneId.of("UTC"));
+		System.out.println(zdt.toLocalDateTime());
+
 	}
 
 	public static void printAllTimeZones() {

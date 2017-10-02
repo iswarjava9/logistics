@@ -58,6 +58,7 @@ public class BookingController extends BaseController {
 	public ResponseEntity<BookingDto> get(@PathVariable("id") int id) {
 
 		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));
+		converterUtil.convertDateTimeFromUTCtoPlaceTimeZone(bookingDto);
 		String remarks = bookingDto.getRemarks();
 		if(remarks != null) {
 			bookingDto.setRemarks(remarks.replace("\\n", "\n"));

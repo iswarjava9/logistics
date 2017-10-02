@@ -2,6 +2,8 @@ package com.suis.logistics.common;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -103,6 +105,7 @@ public class ConverterUtil {
 	}
 
 	public BookingDetail convertBookingDtoToEntity(BookingDto bookingDto) {
+		associateTimeZoneWithRespectToPlace(bookingDto);
 		BookingDetail bookingDetail = modelMapper.map(bookingDto, BookingDetail.class);
 		String remarks = bookingDetail.getRemarks();
 		if(remarks != null) {
@@ -378,5 +381,48 @@ public class ConverterUtil {
 			bookingDto.setEarlyReceivingDate(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEarlyReceivingDate(), tzIngateTerminal));
 		}
 
+	}
+
+	public void associateTimeZoneWithRespectToPlace(BookingDto bookingDto){
+
+	    PlaceDto portOfLoad = bookingDto.getPortOfLoad();
+		if (portOfLoad != null && portOfLoad.getCity() != null) {
+			String timeZonePortOfLoad = portOfLoad.getCity().getTimeZone();
+
+			LocalDateTime portCutDate = bookingDto.getPortCutOffDate();
+			ZonedDateTime portCutDateWithZone = portCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
+			bookingDto.setPortCutOffDate(
+					portCutDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			LocalDateTime docsCutDate = bookingDto.getDocsCutOffDateTime();
+			ZonedDateTime dateWithPlaceTimeZone = docsCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
+			bookingDto.setDocsCutOffDateTime(
+					dateWithPlaceTimeZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			LocalDateTime sailDate = bookingDto.getSailDate();
+			ZonedDateTime sailDateWithZone = sailDate.atZone(ZoneId.of(timeZonePortOfLoad));
+			bookingDto.setSailDate(sailDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+		}
+
+		PlaceDto portOfDischarge = bookingDto.getPortOfDischarge();
+		if (portOfDischarge != null && portOfDischarge.getCity() != null) {
+			String tzPortOfDischarge = portOfDischarge.getCity().getTimeZone();
+			LocalDateTime eta = bookingDto.getEta();
+			ZonedDateTime etaWithZone = eta.atZone(ZoneId.of(tzPortOfDischarge));
+			bookingDto.setEta(etaWithZone.withZoneSameInstant(ZoneId.of(tzPortOfDischarge)).toLocalDateTime());
+		}
+		PlaceDto emptyPickupDepot = bookingDto.getEmptyContainerPickup();
+		if(emptyPickupDepot != null && emptyPickupDepot.getCity() != null){
+			String tzEmptyPickupDepot = emptyPickupDepot.getCity().getTimeZone();
+			LocalDateTime emptyPickupDate = bookingDto.getEmptyPickupDate();
+			ZonedDateTime emptyPickupDateWithZone = emptyPickupDate.atZone(ZoneId.of(tzEmptyPickupDepot));
+			bookingDto.setEmptyPickupDate(emptyPickupDateWithZone.withZoneSameInstant(ZoneId.of(tzEmptyPickupDepot)).toLocalDateTime());
+
+		}
+		PlaceDto ingateTerminal = bookingDto.getIngateAtTerminal();
+		if(ingateTerminal != null && ingateTerminal.getCity() != null){
+			String tzIngateTerminal = ingateTerminal.getCity().getTimeZone();
+			LocalDateTime earlyReceivingDate = bookingDto.getEarlyReceivingDate();
+			ZonedDateTime earlyReceivingDateWithZone = earlyReceivingDate.atZone(ZoneId.of(tzIngateTerminal));
+			bookingDto.setEarlyReceivingDate(earlyReceivingDateWithZone.withZoneSameInstant(ZoneId.of(tzIngateTerminal)).toLocalDateTime());
+		}
 	}
 }
