@@ -26,6 +26,15 @@ public class DateUtil {
 		return null;
 	}
 
+	public LocalDateTime convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(LocalDateTime dateTime,
+			String timeZoneId) {
+		if (dateTime != null && timeZoneId != null) {
+			ZonedDateTime dateTimeWithZone = dateTime.atZone(ZoneId.of(timeZoneId));
+			return dateTimeWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+		}
+		return null;
+	}
+
 	public List<TimeZoneDto> getAvailableTimeZones() {
 		Set<String> zoneIds = ZoneId.getAvailableZoneIds();
 		List<TimeZoneDto> timeZoneList = new ArrayList<TimeZoneDto>();
