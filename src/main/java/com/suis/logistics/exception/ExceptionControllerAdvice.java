@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.suis.logistics.repository.booking.BookingNotFoundException;
 import com.suis.logistics.repository.booking.CreateBookingFailedException;
 import com.suis.logistics.repository.customer.AddCustomerFailedException;
 import com.suis.logistics.repository.place.AddPlaceFailedException;
@@ -39,5 +40,11 @@ public class ExceptionControllerAdvice {
 		ex.printStackTrace();
 		ErrorResponse errorResponse = new ErrorResponse(5000, env);
 		return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(BookingNotFoundException.class)
+	public ResponseEntity<ErrorResponse> exceptionHandler(BookingNotFoundException ex) {
+		ex.printStackTrace();
+		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.NOT_FOUND);
 	}
 }

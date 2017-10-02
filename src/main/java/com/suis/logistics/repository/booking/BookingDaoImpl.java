@@ -3,6 +3,7 @@ package com.suis.logistics.repository.booking;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -101,8 +102,13 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 	@Override
 	@Cacheable(value = "BookingDetail", key = "#bookingId")
 	public BookingDetail findById(int bookingId) {
-
-		return getCurrentSession().load(BookingDetail.class, bookingId);
+		BookingDetail bookingDetail = null;
+		try {
+			bookingDetail = getCurrentSession().load(BookingDetail.class, bookingId);
+		} catch (ObjectNotFoundException e) {
+			throw new BookingNotFoundException(e,env);
+		}
+		return bookingDetail;
 	}
 
 	@SuppressWarnings("unchecked")
