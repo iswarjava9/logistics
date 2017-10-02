@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,23 +17,32 @@ import org.springframework.stereotype.Component;
 
 import com.suis.logistics.common.UniqueKeyGenerator;
 import com.suis.logistics.model.BookingDetail;
+import com.suis.logistics.model.Customer;
+import com.suis.logistics.model.thirdparty.ThirdPartyAddress;
+import com.suis.logistics.model.thirdparty.ThirdPartyCustomer;
+import com.suis.logistics.model.thirdparty.ThirdPartyPerson;
 import com.suis.logistics.repository.booking.BookingDao;
 import com.suis.logistics.service.cache.CacheService;
+import com.suis.logistics.service.customer.CustomerService;
+import com.suis.logistics.service.customer.ThirdPartyCustomerService;
 
 @Component
 public class BookingServiceImpl implements BookingService {
 
 	@Resource
-	BookingDao			bookingDao;
+	BookingDao					bookingDao;
 	@Resource
-	UniqueKeyGenerator	keyGenerator;
+	UniqueKeyGenerator			keyGenerator;
 	@Resource
-	CacheService 		cacheService;
+	CacheService				cacheService;
 	@Value("${bookingno.ocean.export.prefix}")
-	private String		bookingNoOceanExportPrefix;
+	private String				bookingNoOceanExportPrefix;
 	@Value("${booking.pdf.url}")
-	private String		bookingPDFUrl;
-
+	private String				bookingPDFUrl;
+	@Resource
+	ThirdPartyCustomerService	tpCustomerService;
+	@Resource
+	CustomerService				customerService;
 
 	@Override
 	public BookingDetail createBooking(BookingDetail bookingDetail) {
@@ -42,13 +52,56 @@ public class BookingServiceImpl implements BookingService {
 		bookingDetail.setBookingDate(LocalDateTime.now());
 		BookingDetail bookingDetailCreated = bookingDao.createBooking(bookingDetail);
 		cacheService.addBookingDetailToCacheOnBookingCreation(bookingDetail);
+		// Create Customer in Zoho Books for BillTo which is required to create
+		// a invoice in Zoho
+		Customer billTo = bookingDetail.getBillTo();
+		new Thread(() -> {
+			ThirdPartyCustomer tpCustomerResponse = tpCustomerService
+					.createCustomer(populateThirdPartyCustomer(billTo));
+			if (tpCustomerResponse != null) {
+				billTo.setTpCustomerId(tpCustomerResponse.getCustomerId());
+				customerService.updateCustomer(billTo);
+			}
+		}).start();
 		return bookingDetailCreated;
+	}
+
+	private ThirdPartyCustomer populateThirdPartyCustomer(Customer customer) {
+		ThirdPartyCustomer tpCustomer = new ThirdPartyCustomer();
+		tpCustomer.setCompanyName(customer.getName());
+		tpCustomer.setContactName(customer.getPersonInCharge());
+		List<ThirdPartyPerson> contacts = new ArrayList<>();
+		ThirdPartyPerson contact1 = new ThirdPartyPerson();
+		contact1.setEmail(customer.getEmailId());
+		contact1.setIsPrimaryContact(true);
+		contact1.setPhone(customer.getPhoneNo());
+		contact1.setFirstName(customer.getPersonInCharge());
+		contacts.add(contact1);
+		tpCustomer.setContacts(contacts);
+		ThirdPartyAddress billingAddress = new ThirdPartyAddress();
+		billingAddress.setAddress(customer.getAddress());
+		billingAddress.setCity(customer.getCity().getName());
+		billingAddress.setCountry(customer.getCity().getCountryName());
+		billingAddress.setState(customer.getCity().getStateName());
+		tpCustomer.setBillingAddress(billingAddress);
+		tpCustomer.setShippingAddress(billingAddress);
+		return tpCustomer;
 	}
 
 	@Override
 	public BookingDetail updateBooking(BookingDetail bookingDetail) {
 		bookingDetail.setAmendmentDate(LocalDateTime.now());
-		return bookingDao.updateBooking(bookingDetail);
+		BookingDetail updatedBookingDetail = bookingDao.updateBooking(bookingDetail);
+		Customer billTo = updatedBookingDetail.getBillTo();
+		new Thread(() -> {
+			ThirdPartyCustomer tpCustomerResponse = tpCustomerService
+					.createCustomer(populateThirdPartyCustomer(billTo));
+			if (tpCustomerResponse != null) {
+				billTo.setTpCustomerId(tpCustomerResponse.getCustomerId());
+				customerService.updateCustomer(billTo);
+			}
+		}).start();
+		return updatedBookingDetail;
 	}
 
 	@Override
@@ -65,7 +118,7 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public String generateUniqueBookingNo() {
 		Integer lastId = bookingDao.getLastInsertedPrimaryKey();
-		if(lastId == null){
+		if (lastId == null) {
 			lastId = 0;
 		}
 		String bookingNo = keyGenerator.generateUniqueKey(bookingNoOceanExportPrefix, lastId);

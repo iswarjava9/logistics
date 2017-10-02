@@ -18,7 +18,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Integer addCustomer(Customer customer) {
-		//TODO  This needs to be changed based on login User belongs to whichf Client
+		// TODO This needs to be changed based on login User belongs to whichf
+		// Client
 		Client client = new Client();
 		client.setId(1);
 		customer.setClient(client);
@@ -40,4 +41,8 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.getCustomersByName(name);
 	}
 
+	@Override
+	public void updateCustomer(Customer customer) {
+		customerDao.updateCustomer(customer);
+	}
 }

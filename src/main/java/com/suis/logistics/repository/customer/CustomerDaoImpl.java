@@ -14,13 +14,13 @@ import com.suis.logistics.repository.BaseDao;
 @Repository
 public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	@Autowired
-	Environment		env;
+	Environment env;
 
 	@Override
 	public Integer createCustomer(Customer customer) {
-		try{
-		getCurrentSession().save(customer);
-		}catch(Exception e){
+		try {
+			getCurrentSession().save(customer);
+		} catch (Exception e) {
 			throw new AddCustomerFailedException(e, env);
 		}
 		clearCache("customerByName");
@@ -47,5 +47,10 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		Query query = getCurrentSession().getNamedQuery("Customer.findByName").setParameter("name", name + "%");
 		List<Customer> customers = query.list();
 		return customers;
+	}
+
+	@Override
+	public void updateCustomer(Customer customer) {
+		getCurrentSession().update(customer);
 	}
 }

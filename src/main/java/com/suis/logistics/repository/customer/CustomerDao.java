@@ -8,10 +8,11 @@ public interface CustomerDao {
 
 	public Integer createCustomer(Customer customer);
 
+	public void updateCustomer(Customer customer);
+
 	public Customer findById(int id);
 
 	public List<Customer> getAllCustomers();
 
 	public List<Customer> getCustomersByName(String name);
-
 }

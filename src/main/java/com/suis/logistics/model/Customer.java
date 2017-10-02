@@ -45,13 +45,13 @@ public class Customer implements Serializable {
 	@Column(name = "phone_no")
 	private String				phoneNo;
 	@Column(name = "tax_id")
-	private String					taxId;
-
+	private String				taxId;
 	// bi-directional many-to-one association to Quotation
 	@OneToMany(mappedBy = "customer")
 	private List<Quotation>		quotations;
-
-	private String name;
+	@Column(name = "tp_customer_id")
+	private String				tpCustomerId;
+	private String				name;
 
 	public Customer() {
 	}
@@ -63,7 +63,6 @@ public class Customer implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
@@ -143,5 +142,13 @@ public class Customer implements Serializable {
 
 	public void setQuotations(List<Quotation> quotations) {
 		this.quotations = quotations;
+	}
+
+	public String getTpCustomerId() {
+		return tpCustomerId;
+	}
+
+	public void setTpCustomerId(String tpCustomerId) {
+		this.tpCustomerId = tpCustomerId;
 	}
 }
