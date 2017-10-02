@@ -90,9 +90,11 @@ public class ConverterUtil {
 
 	public Customer convertCustomerDtoToEntity(CustomerDto customerDto) {
 		Customer customer = modelMapper.map(customerDto, Customer.class);
-		/*Person primaryContact = new Person();
-		primaryContact.setId(customerDto.getContactId());
-		customer.setPrimaryContact(primaryContact);*/
+		/*
+		 * Person primaryContact = new Person();
+		 * primaryContact.setId(customerDto.getContactId());
+		 * customer.setPrimaryContact(primaryContact);
+		 */
 		return customer;
 	}
 
@@ -108,17 +110,15 @@ public class ConverterUtil {
 		associateTimeZoneWithRespectToPlace(bookingDto);
 		BookingDetail bookingDetail = modelMapper.map(bookingDto, BookingDetail.class);
 		String remarks = bookingDetail.getRemarks();
-		if(remarks != null) {
+		if (remarks != null) {
 			bookingDetail.setRemarks(remarks.replace("\n", "\\n"));
 		}
-
 		return bookingDetail;
 	}
 
 	public BookingDto convertBookingDetailToDto(BookingDetail bookingDetail) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		BookingDto bookingDto = modelMapper.map(bookingDetail, BookingDto.class);
-
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		// DateTime conversion to any required timezone
 		// bookingDto.setDocsCutOffDateTime(dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(),"US/Arizona"));
@@ -127,10 +127,10 @@ public class ConverterUtil {
 
 	public List<BookingDto> convertBookingDetailToDtoList(List<BookingDetail> bookingList) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-		Type listType = new TypeToken<List<BookingDto>>() {}.getType();
+		Type listType = new TypeToken<List<BookingDto>>() {
+		}.getType();
 		List<BookingDto> bookingDtoList = modelMapper.map(bookingList, listType);
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
-
 		return bookingDtoList;
 	}
 
@@ -146,9 +146,9 @@ public class ConverterUtil {
 
 	public List<QuotationDto> convertQuotationToDtoList(List<Quotation> quotations) {
 
-		Type listType = new TypeToken<List<QuotationDto>>() {}.getType();
+		Type listType = new TypeToken<List<QuotationDto>>() {
+		}.getType();
 		List<QuotationDto> quotationDtoList = modelMapper.map(quotations, listType);
-
 		return quotationDtoList;
 	}
 
@@ -189,28 +189,26 @@ public class ConverterUtil {
 		return modelMapper.map(containerType, ContainerTypeDto.class);
 	}
 
-	public void setLocalDateTimeToModelMapper(){
-		 Provider<LocalDateTime> localDateProvider = new AbstractProvider<LocalDateTime>() {
-		        @Override
-		        public LocalDateTime get() {
-		            return LocalDateTime.now();
-		        }
-		    };
-
-		    Converter<String, LocalDateTime> toStringDate = new AbstractConverter<String, LocalDateTime>() {
-		        @Override
-		        protected LocalDateTime convert(String source) {
-		            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		            LocalDateTime localDateTime = LocalDateTime.parse(source, format);
-		            return localDateTime;
-		        }
-		    };
-
-
-		    modelMapper.createTypeMap(String.class, LocalDateTime.class);
-		    modelMapper.addConverter(toStringDate);
-		    modelMapper.getTypeMap(String.class, LocalDateTime.class).setProvider(localDateProvider);
+	public void setLocalDateTimeToModelMapper() {
+		Provider<LocalDateTime> localDateProvider = new AbstractProvider<LocalDateTime>() {
+			@Override
+			public LocalDateTime get() {
+				return LocalDateTime.now();
+			}
+		};
+		Converter<String, LocalDateTime> toStringDate = new AbstractConverter<String, LocalDateTime>() {
+			@Override
+			protected LocalDateTime convert(String source) {
+				DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime localDateTime = LocalDateTime.parse(source, format);
+				return localDateTime;
+			}
+		};
+		modelMapper.createTypeMap(String.class, LocalDateTime.class);
+		modelMapper.addConverter(toStringDate);
+		modelMapper.getTypeMap(String.class, LocalDateTime.class).setProvider(localDateProvider);
 	}
+
 	public IncoTerm convertIncoTermDtoToEntity(IncoTermDto incoTermDto) {
 		return modelMapper.map(incoTermDto, IncoTerm.class);
 	}
@@ -264,7 +262,8 @@ public class ConverterUtil {
 	}
 
 	public List<CustomerDto> convertCustomerListToDto(List<Customer> customers) {
-		Type listType = new TypeToken<List<CustomerDto>>() {}.getType();
+		Type listType = new TypeToken<List<CustomerDto>>() {
+		}.getType();
 		List<CustomerDto> customerList = modelMapper.map(customers, listType);
 		return customerList;
 	}
@@ -274,13 +273,15 @@ public class ConverterUtil {
 	}
 
 	public List<PlaceDto> convertPlaceListToDto(List<Place> places) {
-		Type listType = new TypeToken<List<PlaceDto>>() {}.getType();
-		List<PlaceDto> placeList= modelMapper.map(places, listType);
+		Type listType = new TypeToken<List<PlaceDto>>() {
+		}.getType();
+		List<PlaceDto> placeList = modelMapper.map(places, listType);
 		return placeList;
 	}
 
 	public List<VesselDto> convertVesselListToDto(List<Vessel> vessels) {
-		Type listType = new TypeToken<List<VesselDto>>() {}.getType();
+		Type listType = new TypeToken<List<VesselDto>>() {
+		}.getType();
 		List<VesselDto> vesselList = modelMapper.map(vessels, listType);
 		return vesselList;
 	}
@@ -290,7 +291,8 @@ public class ConverterUtil {
 	}
 
 	public List<DivisionDto> convertDivisionListToDto(List<Division> allDivisions) {
-		Type listType = new TypeToken<List<DivisionDto>>() {}.getType();
+		Type listType = new TypeToken<List<DivisionDto>>() {
+		}.getType();
 		List<DivisionDto> divisionList = modelMapper.map(allDivisions, listType);
 		return divisionList;
 	}
@@ -306,38 +308,43 @@ public class ConverterUtil {
 	}
 
 	public List<PersonDto> convertPersonListToDto(List<Person> persons) {
-		Type listType = new TypeToken<List<PersonDto>>() {}.getType();
+		Type listType = new TypeToken<List<PersonDto>>() {
+		}.getType();
 		List<PersonDto> personList = modelMapper.map(persons, listType);
 		return personList;
 	}
 
-
 	public List<BusinessLineDto> convertBusinessLineListToDto(List<BusinessLine> businessLines) {
-		Type listType = new TypeToken<List<BusinessLineDto>>() {}.getType();
+		Type listType = new TypeToken<List<BusinessLineDto>>() {
+		}.getType();
 		List<BusinessLineDto> businessLineList = modelMapper.map(businessLines, listType);
 		return businessLineList;
 	}
 
 	public List<MovementTypeDto> convertMovementTypeListToDto(List<MovementType> movementTypes) {
-		Type listType = new TypeToken<List<MovementTypeDto>>() {}.getType();
+		Type listType = new TypeToken<List<MovementTypeDto>>() {
+		}.getType();
 		List<MovementTypeDto> movementTypeList = modelMapper.map(movementTypes, listType);
 		return movementTypeList;
 	}
 
 	public List<CityDto> convertCityListToDto(List<City> citiesByName) {
-		Type listType = new TypeToken<List<CityDto>>() {}.getType();
+		Type listType = new TypeToken<List<CityDto>>() {
+		}.getType();
 		List<CityDto> cities = modelMapper.map(citiesByName, listType);
 		return cities;
 	}
 
 	public List<ContainerTypeDto> convertContainerTypeListToDto(List<ContainerType> containerTypesByType) {
-		Type listType = new TypeToken<List<ContainerTypeDto>>() {}.getType();
+		Type listType = new TypeToken<List<ContainerTypeDto>>() {
+		}.getType();
 		List<ContainerTypeDto> containerTypes = modelMapper.map(containerTypesByType, listType);
 		return containerTypes;
 	}
 
 	public List<CommodityDto> convertCommodityListToDto(List<Commodity> commoditiesByName) {
-		Type listType = new TypeToken<List<CommodityDto>>() {}.getType();
+		Type listType = new TypeToken<List<CommodityDto>>() {
+		}.getType();
 		List<CommodityDto> commodities = modelMapper.map(commoditiesByName, listType);
 		return commodities;
 	}
@@ -348,7 +355,8 @@ public class ConverterUtil {
 	}
 
 	public List<TimeZoneDto> convertListTimeZoneToDto(List<TimeZone> availableTimeZonesByCountry) {
-		Type listType = new TypeToken<List<TimeZoneDto>>() {}.getType();
+		Type listType = new TypeToken<List<TimeZoneDto>>() {
+		}.getType();
 		List<TimeZoneDto> timeZones = modelMapper.map(availableTimeZonesByCountry, listType);
 		return timeZones;
 	}
@@ -359,70 +367,122 @@ public class ConverterUtil {
 		PlaceDto portOfLoad = bookingDto.getPortOfLoad();
 		if (portOfLoad != null && portOfLoad.getCity() != null) {
 			String timeZonePortOfLoad = portOfLoad.getCity().getTimeZone();
-			bookingDto.setPortCutOffDate(
-					dateUtil.convertDateToSpecificTimeZone(bookingDto.getPortCutOffDate(), timeZonePortOfLoad));
-			bookingDto.setDocsCutOffDateTime(
-					dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(), timeZonePortOfLoad));
-			bookingDto.setSailDate(dateUtil.convertDateToSpecificTimeZone(bookingDto.getSailDate(), timeZonePortOfLoad));
+			if (timeZonePortOfLoad != null && !timeZonePortOfLoad.isEmpty()) {
+				bookingDto.setPortCutOffDate(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getPortCutOffDate(), timeZonePortOfLoad));
+				bookingDto.setDocsCutOffDateTime(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsCutOffDateTime(), timeZonePortOfLoad));
+				bookingDto.setSailDate(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getSailDate(), timeZonePortOfLoad));
+				bookingDto.setDocsReceivedDate(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getDocsReceivedDate(), timeZonePortOfLoad));
+			}
 		}
 		PlaceDto portOfDischarge = bookingDto.getPortOfDischarge();
 		if (portOfDischarge != null && portOfDischarge.getCity() != null) {
 			String tzPortOfDischarge = portOfDischarge.getCity().getTimeZone();
-			bookingDto.setEta(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEta(), tzPortOfDischarge));
+			if (tzPortOfDischarge != null && !tzPortOfDischarge.isEmpty()) {
+				bookingDto.setEta(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEta(), tzPortOfDischarge));
+			}
 		}
 		PlaceDto emptyPickupDepot = bookingDto.getEmptyContainerPickup();
-		if(emptyPickupDepot != null && emptyPickupDepot.getCity() != null){
+		if (emptyPickupDepot != null && emptyPickupDepot.getCity() != null) {
 			String tzEmptyPickupDepot = emptyPickupDepot.getCity().getTimeZone();
-			bookingDto.setEmptyPickupDate(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEmptyPickupDate(), tzEmptyPickupDepot));
+			if (tzEmptyPickupDepot != null && !tzEmptyPickupDepot.isEmpty()) {
+				bookingDto.setEmptyPickupDate(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getEmptyPickupDate(), tzEmptyPickupDepot));
+			}
 		}
 		PlaceDto ingateTerminal = bookingDto.getIngateAtTerminal();
-		if(ingateTerminal != null && ingateTerminal.getCity() != null){
+		if (ingateTerminal != null && ingateTerminal.getCity() != null) {
 			String tzIngateTerminal = ingateTerminal.getCity().getTimeZone();
-			bookingDto.setEarlyReceivingDate(dateUtil.convertDateToSpecificTimeZone(bookingDto.getEarlyReceivingDate(), tzIngateTerminal));
+			if (tzIngateTerminal != null && !tzIngateTerminal.isEmpty()) {
+				bookingDto.setEarlyReceivingDate(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getEarlyReceivingDate(), tzIngateTerminal));
+			}
 		}
-
+		PlaceDto placeOfReceipt = bookingDto.getPlaceOfReceipt();
+		if (placeOfReceipt != null && placeOfReceipt.getCity() != null) {
+			String tzPlaceOfReceipt = placeOfReceipt.getCity().getTimeZone();
+			if (tzPlaceOfReceipt != null && !tzPlaceOfReceipt.isEmpty()) {
+				bookingDto.setCargoMovingDate(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getCargoMovingDate(), tzPlaceOfReceipt));
+				bookingDto.setRailCutOffDateTime(
+						dateUtil.convertDateToSpecificTimeZone(bookingDto.getRailCutOffDateTime(), tzPlaceOfReceipt));
+			}
+		}
 	}
 
-	public void associateTimeZoneWithRespectToPlace(BookingDto bookingDto){
+	public void associateTimeZoneWithRespectToPlace(BookingDto bookingDto) {
 
-	    PlaceDto portOfLoad = bookingDto.getPortOfLoad();
+		PlaceDto portOfLoad = bookingDto.getPortOfLoad();
 		if (portOfLoad != null && portOfLoad.getCity() != null) {
 			String timeZonePortOfLoad = portOfLoad.getCity().getTimeZone();
+			if (timeZonePortOfLoad != null && !timeZonePortOfLoad.isEmpty()) {
 
-			LocalDateTime portCutDate = bookingDto.getPortCutOffDate();
-			ZonedDateTime portCutDateWithZone = portCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
-			bookingDto.setPortCutOffDate(
-					portCutDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
-			LocalDateTime docsCutDate = bookingDto.getDocsCutOffDateTime();
-			ZonedDateTime dateWithPlaceTimeZone = docsCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
-			bookingDto.setDocsCutOffDateTime(
-					dateWithPlaceTimeZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
-			LocalDateTime sailDate = bookingDto.getSailDate();
-			ZonedDateTime sailDateWithZone = sailDate.atZone(ZoneId.of(timeZonePortOfLoad));
-			bookingDto.setSailDate(sailDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				LocalDateTime portCutDate = bookingDto.getPortCutOffDate();
+				ZonedDateTime portCutDateWithZone = portCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
+				bookingDto.setPortCutOffDate(
+						portCutDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				//
+				LocalDateTime docsCutDate = bookingDto.getDocsCutOffDateTime();
+				ZonedDateTime dateWithPlaceTimeZone = docsCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
+				bookingDto.setDocsCutOffDateTime(
+						dateWithPlaceTimeZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				//
+				LocalDateTime sailDate = bookingDto.getSailDate();
+				ZonedDateTime sailDateWithZone = sailDate.atZone(ZoneId.of(timeZonePortOfLoad));
+				bookingDto.setSailDate(sailDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				//
+				LocalDateTime docsreceivedate = bookingDto.getDocsReceivedDate();
+				ZonedDateTime docsreceivedateWithZone = docsreceivedate.atZone(ZoneId.of(timeZonePortOfLoad));
+				bookingDto.setDocsReceivedDate(
+						docsreceivedateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			}
 		}
-
 		PlaceDto portOfDischarge = bookingDto.getPortOfDischarge();
 		if (portOfDischarge != null && portOfDischarge.getCity() != null) {
 			String tzPortOfDischarge = portOfDischarge.getCity().getTimeZone();
-			LocalDateTime eta = bookingDto.getEta();
-			ZonedDateTime etaWithZone = eta.atZone(ZoneId.of(tzPortOfDischarge));
-			bookingDto.setEta(etaWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			if (tzPortOfDischarge != null && !tzPortOfDischarge.isEmpty()) {
+				LocalDateTime eta = bookingDto.getEta();
+				ZonedDateTime etaWithZone = eta.atZone(ZoneId.of(tzPortOfDischarge));
+				bookingDto.setEta(etaWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			}
 		}
 		PlaceDto emptyPickupDepot = bookingDto.getEmptyContainerPickup();
-		if(emptyPickupDepot != null && emptyPickupDepot.getCity() != null){
+		if (emptyPickupDepot != null && emptyPickupDepot.getCity() != null) {
 			String tzEmptyPickupDepot = emptyPickupDepot.getCity().getTimeZone();
-			LocalDateTime emptyPickupDate = bookingDto.getEmptyPickupDate();
-			ZonedDateTime emptyPickupDateWithZone = emptyPickupDate.atZone(ZoneId.of(tzEmptyPickupDepot));
-			bookingDto.setEmptyPickupDate(emptyPickupDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
-
+			if (tzEmptyPickupDepot != null && !tzEmptyPickupDepot.isEmpty()) {
+				LocalDateTime emptyPickupDate = bookingDto.getEmptyPickupDate();
+				ZonedDateTime emptyPickupDateWithZone = emptyPickupDate.atZone(ZoneId.of(tzEmptyPickupDepot));
+				bookingDto.setEmptyPickupDate(
+						emptyPickupDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			}
 		}
 		PlaceDto ingateTerminal = bookingDto.getIngateAtTerminal();
-		if(ingateTerminal != null && ingateTerminal.getCity() != null){
+		if (ingateTerminal != null && ingateTerminal.getCity() != null) {
 			String tzIngateTerminal = ingateTerminal.getCity().getTimeZone();
-			LocalDateTime earlyReceivingDate = bookingDto.getEarlyReceivingDate();
-			ZonedDateTime earlyReceivingDateWithZone = earlyReceivingDate.atZone(ZoneId.of(tzIngateTerminal));
-			bookingDto.setEarlyReceivingDate(earlyReceivingDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			if (tzIngateTerminal != null && !tzIngateTerminal.isEmpty()) {
+				LocalDateTime earlyReceivingDate = bookingDto.getEarlyReceivingDate();
+				ZonedDateTime earlyReceivingDateWithZone = earlyReceivingDate.atZone(ZoneId.of(tzIngateTerminal));
+				bookingDto.setEarlyReceivingDate(
+						earlyReceivingDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			}
+		}
+		PlaceDto placeOfReceipt = bookingDto.getPlaceOfReceipt();
+		if (placeOfReceipt != null && placeOfReceipt.getCity() != null) {
+			String tzPlaceOfReceipt = placeOfReceipt.getCity().getTimeZone();
+			if (tzPlaceOfReceipt != null && !tzPlaceOfReceipt.isEmpty()) {
+				LocalDateTime cargoMovingDate = bookingDto.getCargoMovingDate();
+				ZonedDateTime cargoMovingDateWithZone = cargoMovingDate.atZone(ZoneId.of(tzPlaceOfReceipt));
+				bookingDto.setCargoMovingDate(
+						cargoMovingDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				//
+				LocalDateTime railCutDate = bookingDto.getRailCutOffDateTime();
+				ZonedDateTime railCutDateWithZone = railCutDate.atZone(ZoneId.of(tzPlaceOfReceipt));
+				bookingDto.setRailCutOffDateTime(
+						railCutDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+			}
 		}
 	}
 }
