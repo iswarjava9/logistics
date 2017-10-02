@@ -93,14 +93,16 @@ public class BookingServiceImpl implements BookingService {
 		bookingDetail.setAmendmentDate(LocalDateTime.now());
 		BookingDetail updatedBookingDetail = bookingDao.updateBooking(bookingDetail);
 		Customer billTo = updatedBookingDetail.getBillTo();
-		new Thread(() -> {
-			ThirdPartyCustomer tpCustomerResponse = tpCustomerService
-					.createCustomer(populateThirdPartyCustomer(billTo));
-			if (tpCustomerResponse != null) {
-				billTo.setTpCustomerId(tpCustomerResponse.getCustomerId());
-				customerService.updateCustomer(billTo);
-			}
-		}).start();
+		if (billTo.getTpCustomerId() != null && !billTo.getTpCustomerId().isEmpty()) {
+			new Thread(() -> {
+				ThirdPartyCustomer tpCustomerResponse = tpCustomerService
+						.createCustomer(populateThirdPartyCustomer(billTo));
+				if (tpCustomerResponse != null) {
+					billTo.setTpCustomerId(tpCustomerResponse.getCustomerId());
+					customerService.updateCustomer(billTo);
+				}
+			}).start();
+		}
 		return updatedBookingDetail;
 	}
 

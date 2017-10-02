@@ -12,6 +12,7 @@ public class CustomerDto extends CustomerBaseDto {
 	private String	phoneNo;
 	private String	taxId;
 	private Integer	clientId;
+	private String  tpCustomerId;
 
 	public String getEmailId() {
 		return emailId;
@@ -76,4 +77,14 @@ public class CustomerDto extends CustomerBaseDto {
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
+
+	public String getTpCustomerId() {
+		return tpCustomerId;
+	}
+
+	public void setTpCustomerId(String tpCustomerId) {
+		this.tpCustomerId = tpCustomerId;
+	}
+
+
 }
