@@ -2,8 +2,6 @@ package com.suis.logistics.common;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -421,23 +419,20 @@ public class ConverterUtil {
 			if (timeZonePortOfLoad != null && !timeZonePortOfLoad.isEmpty()) {
 
 				LocalDateTime portCutDate = bookingDto.getPortCutOffDate();
-				ZonedDateTime portCutDateWithZone = portCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
-				bookingDto.setPortCutOffDate(
-						portCutDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setPortCutOffDate(dateUtil
+						.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(portCutDate, timeZonePortOfLoad));
 				//
 				LocalDateTime docsCutDate = bookingDto.getDocsCutOffDateTime();
-				ZonedDateTime dateWithPlaceTimeZone = docsCutDate.atZone(ZoneId.of(timeZonePortOfLoad));
-				bookingDto.setDocsCutOffDateTime(
-						dateWithPlaceTimeZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setDocsCutOffDateTime(dateUtil
+						.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(docsCutDate, timeZonePortOfLoad));
 				//
 				LocalDateTime sailDate = bookingDto.getSailDate();
-				ZonedDateTime sailDateWithZone = sailDate.atZone(ZoneId.of(timeZonePortOfLoad));
-				bookingDto.setSailDate(sailDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setSailDate(
+						dateUtil.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(sailDate, timeZonePortOfLoad));
 				//
 				LocalDateTime docsreceivedate = bookingDto.getDocsReceivedDate();
-				ZonedDateTime docsreceivedateWithZone = docsreceivedate.atZone(ZoneId.of(timeZonePortOfLoad));
-				bookingDto.setDocsReceivedDate(
-						docsreceivedateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setDocsReceivedDate(dateUtil
+						.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(docsreceivedate, timeZonePortOfLoad));
 			}
 		}
 		PlaceDto portOfDischarge = bookingDto.getPortOfDischarge();
@@ -445,8 +440,8 @@ public class ConverterUtil {
 			String tzPortOfDischarge = portOfDischarge.getCity().getTimeZone();
 			if (tzPortOfDischarge != null && !tzPortOfDischarge.isEmpty()) {
 				LocalDateTime eta = bookingDto.getEta();
-				ZonedDateTime etaWithZone = eta.atZone(ZoneId.of(tzPortOfDischarge));
-				bookingDto.setEta(etaWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setEta(
+						dateUtil.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(eta, tzPortOfDischarge));
 			}
 		}
 		PlaceDto emptyPickupDepot = bookingDto.getEmptyContainerPickup();
@@ -454,9 +449,8 @@ public class ConverterUtil {
 			String tzEmptyPickupDepot = emptyPickupDepot.getCity().getTimeZone();
 			if (tzEmptyPickupDepot != null && !tzEmptyPickupDepot.isEmpty()) {
 				LocalDateTime emptyPickupDate = bookingDto.getEmptyPickupDate();
-				ZonedDateTime emptyPickupDateWithZone = emptyPickupDate.atZone(ZoneId.of(tzEmptyPickupDepot));
-				bookingDto.setEmptyPickupDate(
-						emptyPickupDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setEmptyPickupDate(dateUtil
+						.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(emptyPickupDate, tzEmptyPickupDepot));
 			}
 		}
 		PlaceDto ingateTerminal = bookingDto.getIngateAtTerminal();
@@ -464,9 +458,8 @@ public class ConverterUtil {
 			String tzIngateTerminal = ingateTerminal.getCity().getTimeZone();
 			if (tzIngateTerminal != null && !tzIngateTerminal.isEmpty()) {
 				LocalDateTime earlyReceivingDate = bookingDto.getEarlyReceivingDate();
-				ZonedDateTime earlyReceivingDateWithZone = earlyReceivingDate.atZone(ZoneId.of(tzIngateTerminal));
-				bookingDto.setEarlyReceivingDate(
-						earlyReceivingDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setEarlyReceivingDate(dateUtil
+						.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(earlyReceivingDate, tzIngateTerminal));
 			}
 		}
 		PlaceDto placeOfReceipt = bookingDto.getPlaceOfReceipt();
@@ -474,14 +467,12 @@ public class ConverterUtil {
 			String tzPlaceOfReceipt = placeOfReceipt.getCity().getTimeZone();
 			if (tzPlaceOfReceipt != null && !tzPlaceOfReceipt.isEmpty()) {
 				LocalDateTime cargoMovingDate = bookingDto.getCargoMovingDate();
-				ZonedDateTime cargoMovingDateWithZone = cargoMovingDate.atZone(ZoneId.of(tzPlaceOfReceipt));
-				bookingDto.setCargoMovingDate(
-						cargoMovingDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setCargoMovingDate(dateUtil
+						.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(cargoMovingDate, tzPlaceOfReceipt));
 				//
 				LocalDateTime railCutDate = bookingDto.getRailCutOffDateTime();
-				ZonedDateTime railCutDateWithZone = railCutDate.atZone(ZoneId.of(tzPlaceOfReceipt));
-				bookingDto.setRailCutOffDateTime(
-						railCutDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
+				bookingDto.setRailCutOffDateTime(dateUtil
+						.convertDateFromSpecifiedTimeZoneToSystemDefaultTimeZone(railCutDate, tzPlaceOfReceipt));
 			}
 		}
 	}
