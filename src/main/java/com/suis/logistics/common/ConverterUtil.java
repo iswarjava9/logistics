@@ -407,14 +407,14 @@ public class ConverterUtil {
 			String tzPortOfDischarge = portOfDischarge.getCity().getTimeZone();
 			LocalDateTime eta = bookingDto.getEta();
 			ZonedDateTime etaWithZone = eta.atZone(ZoneId.of(tzPortOfDischarge));
-			bookingDto.setEta(etaWithZone.withZoneSameInstant(ZoneId.of(tzPortOfDischarge)).toLocalDateTime());
+			bookingDto.setEta(etaWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
 		}
 		PlaceDto emptyPickupDepot = bookingDto.getEmptyContainerPickup();
 		if(emptyPickupDepot != null && emptyPickupDepot.getCity() != null){
 			String tzEmptyPickupDepot = emptyPickupDepot.getCity().getTimeZone();
 			LocalDateTime emptyPickupDate = bookingDto.getEmptyPickupDate();
 			ZonedDateTime emptyPickupDateWithZone = emptyPickupDate.atZone(ZoneId.of(tzEmptyPickupDepot));
-			bookingDto.setEmptyPickupDate(emptyPickupDateWithZone.withZoneSameInstant(ZoneId.of(tzEmptyPickupDepot)).toLocalDateTime());
+			bookingDto.setEmptyPickupDate(emptyPickupDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
 
 		}
 		PlaceDto ingateTerminal = bookingDto.getIngateAtTerminal();
@@ -422,7 +422,7 @@ public class ConverterUtil {
 			String tzIngateTerminal = ingateTerminal.getCity().getTimeZone();
 			LocalDateTime earlyReceivingDate = bookingDto.getEarlyReceivingDate();
 			ZonedDateTime earlyReceivingDateWithZone = earlyReceivingDate.atZone(ZoneId.of(tzIngateTerminal));
-			bookingDto.setEarlyReceivingDate(earlyReceivingDateWithZone.withZoneSameInstant(ZoneId.of(tzIngateTerminal)).toLocalDateTime());
+			bookingDto.setEarlyReceivingDate(earlyReceivingDateWithZone.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
 		}
 	}
 }
