@@ -53,7 +53,7 @@ public class ZohoInvoiceServiceImpl implements InvoiceService {
 		try {
 			mapper.findAndRegisterModules();
 			jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(invoice);
-			System.out.println(jsonInString);
+			System.out.println("Invoice JSONString : "+ jsonInString);
 			List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 			urlParameters.add(new BasicNameValuePair("JSONString", jsonInString));
 			urlParameters.add(new BasicNameValuePair("ignore_auto_number_generation", "true"));
@@ -65,8 +65,8 @@ public class ZohoInvoiceServiceImpl implements InvoiceService {
 			StatusLine statusLine = rawResponse.getStatusLine();
 			int statusCode = statusLine.getStatusCode();
 			String content = EntityUtils.toString(rawResponse.getEntity());
-			System.out.println("Reponse Content --" + content);
-			System.out.println("Status code" + statusCode);
+			System.out.println("Invoice Response Content --" + content);
+			System.out.println("Invoice Response Status code" + statusCode);
 			if (statusCode == 201) {
 				ObjectMapper objectMapper = new ObjectMapper();
 				entity = objectMapper.readValue(content, InvoiceResponse.class);
