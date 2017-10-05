@@ -67,8 +67,12 @@ public class ZohoInvoiceServiceImpl implements InvoiceService {
 			String content = EntityUtils.toString(rawResponse.getEntity());
 			System.out.println("Reponse Content --" + content);
 			System.out.println("Status code" + statusCode);
-			ObjectMapper objectMapper = new ObjectMapper();
-			entity = objectMapper.readValue(content, InvoiceResponse.class);
+			if (statusCode == 201) {
+				ObjectMapper objectMapper = new ObjectMapper();
+				entity = objectMapper.readValue(content, InvoiceResponse.class);
+			} else {
+				throw new InvoiceCreationFailedException(content, env);
+			}
 		} catch (IOException e) {
 			throw new InvoiceCreationFailedException(e, env);
 		}

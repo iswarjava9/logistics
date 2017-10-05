@@ -12,4 +12,8 @@ public class InvoiceCreationFailedException extends BaseException {
 	public InvoiceCreationFailedException(Throwable e, Environment env) {
 		super(new ErrorResponse(1005, env), e);
 	}
+
+	public InvoiceCreationFailedException(String errorMessage, Environment env) {
+		super(new ErrorResponse(1005, env), errorMessage);
+	}
 }

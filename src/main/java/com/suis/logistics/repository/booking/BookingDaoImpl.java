@@ -43,7 +43,7 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 	@CachePut(value = "BookingList", key = "#root.targetClass")
 	public List<BookingDetail> updateCache(String cacheName, BookingDetail booking) {
 		BookingDetail bookingDetail = new BookingDetail();
-		populateBookingDetailWithLessData(bookingDetail,booking);
+		populateBookingDetailWithLessData(bookingDetail, booking);
 		Cache cache = cacheManager.getCache(cacheName);
 		Object nativeCache = cache.getNativeCache();
 		Class<?> key = null;
@@ -70,9 +70,11 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 	}
 
 	/**
-	 * This method is used to populate bookingDetail with less data which is meant for displaying booking list.
-	 * Refer getBookingList() method.
-	 * If there is a change in getBookingList() method then this method also needs to be updated
+	 * This method is used to populate bookingDetail with less data which is
+	 * meant for displaying booking list. Refer getBookingList() method. If
+	 * there is a change in getBookingList() method then this method also needs
+	 * to be updated
+	 *
 	 * @param bookingDetail
 	 * @param booking
 	 */
@@ -84,7 +86,6 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 		bookingDetail.setNvoccBookingNo(booking.getNvoccBookingNo());
 		bookingDetail.setForwarderRefNo(booking.getForwarderRefNo());
 		bookingDetail.setBookingDate(booking.getBookingDate());
-
 	}
 
 	@Override
@@ -105,8 +106,9 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 		BookingDetail bookingDetail = null;
 		try {
 			bookingDetail = getCurrentSession().load(BookingDetail.class, bookingId);
+			bookingDetail.getId();
 		} catch (ObjectNotFoundException e) {
-			throw new BookingNotFoundException(e,env);
+			throw new BookingNotFoundException(e, env);
 		}
 		return bookingDetail;
 	}

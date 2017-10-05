@@ -12,4 +12,8 @@ public class ThirdPartyCustomerCreationFailedException extends BaseException {
 	public ThirdPartyCustomerCreationFailedException(Throwable e, Environment env) {
 		super(new ErrorResponse(1006, env), e);
 	}
+
+	public ThirdPartyCustomerCreationFailedException(String errorMessage, Environment env) {
+		super(new ErrorResponse(1006, env), errorMessage);
+	}
 }

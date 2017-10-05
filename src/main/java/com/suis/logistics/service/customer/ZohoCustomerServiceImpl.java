@@ -57,6 +57,8 @@ public class ZohoCustomerServiceImpl implements ThirdPartyCustomerService {
 						ThirdPartyCustomerApiResponse.class);
 				customerResponse = response.getCustomer();
 				System.out.println("CustomerId created in Zoho :" + customerResponse.getCustomerId());
+			}else{
+				throw new ThirdPartyCustomerCreationFailedException(content, env);
 			}
 		} catch (IOException e) {
 			throw new ThirdPartyCustomerCreationFailedException(e, env);

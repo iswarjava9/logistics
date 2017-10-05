@@ -40,6 +40,12 @@ public class CustomField implements Serializable {
 	private String				placeholder;
 	@Transient
 	private String				value;
+	@Transient
+	private Double				totalWeightInKg;
+	@Transient
+	private Double				totalWeightInLb;
+	@Transient
+	private Double				totalCbm;
 
 	public String getCustomfield_id() {
 		return customfield_id;
@@ -119,6 +125,30 @@ public class CustomField implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public Double getTotalWeightInKg() {
+		return totalWeightInKg;
+	}
+
+	public void setTotalWeightInKg(Double totalWeightInKg) {
+		this.totalWeightInKg = totalWeightInKg;
+	}
+
+	public Double getTotalWeightInLb() {
+		return totalWeightInLb;
+	}
+
+	public void setTotalWeightInLb(Double totalWeightInLb) {
+		this.totalWeightInLb = totalWeightInLb;
+	}
+
+	public Double getTotalCbm() {
+		return totalCbm;
+	}
+
+	public void setTotalCbm(Double totalCbm) {
+		this.totalCbm = totalCbm;
 	}
 
 	public void setValueFromBookingDetail(BookingDto bookingDto) {

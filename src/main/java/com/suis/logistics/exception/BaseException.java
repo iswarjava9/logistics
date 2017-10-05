@@ -1,4 +1,5 @@
 package com.suis.logistics.exception;
+
 /**
  *
  * @author Iswar
@@ -14,6 +15,14 @@ public class BaseException extends RuntimeException {
 		super(e);
 		this.errorResponse = errorResponse;
 		this.developerMessage = e.getMessage();
+		this.errorResponse.setDeveloperMessage(this.developerMessage);
+	}
+
+	public BaseException(ErrorResponse errorResponse, String errorMessage) {
+		super();
+		this.errorResponse = errorResponse;
+		this.developerMessage = errorMessage;
+		this.errorResponse.setDeveloperMessage(this.developerMessage);
 	}
 
 	public ErrorResponse getErrorResponse() {
