@@ -45,7 +45,7 @@ public class CustomField implements Serializable {
 	@Transient
 	private Double				totalWeightInLb;
 	@Transient
-	private Double				totalCbm;
+	private String				shippmentDetails;
 
 	public String getCustomfield_id() {
 		return customfield_id;
@@ -143,14 +143,6 @@ public class CustomField implements Serializable {
 		this.totalWeightInLb = totalWeightInLb;
 	}
 
-	public Double getTotalCbm() {
-		return totalCbm;
-	}
-
-	public void setTotalCbm(Double totalCbm) {
-		this.totalCbm = totalCbm;
-	}
-
 	public void setValueFromBookingDetail(BookingDto bookingDto) {
 		switch (this.index) {
 			case 1:
@@ -179,35 +171,38 @@ public class CustomField implements Serializable {
 				setValue(formatDateTime);
 				break;
 			case 8:
-				setValue("NA"); // TODO for Cargo Weight
+				setValue(this.totalWeightInKg + " Kgs " + this.totalWeightInLb + " Lbs");
 				break;
 			case 9:
-				setValue(getCommodityDetails(bookingDto));
+				setValue(this.shippmentDetails);
 		}
 	}
 
 	private String getContainerDetails(BookingDto bookingDto) {
 		StringBuilder containersText = new StringBuilder("");
+		StringBuilder commodityText = new StringBuilder("");
+		this.shippmentDetails = "";
+		this.totalWeightInKg = 0.0;
+		this.totalWeightInLb = 0.0;
 		int count = 1;
 		for (ContainerDto containerDto : bookingDto.getContainerDetails()) {
-			if (count != 1) {
+			totalWeightInKg = totalWeightInKg + containerDto.getTareKgs();
+			totalWeightInLb = totalWeightInLb + containerDto.getTareLbs();
+			if (count == 1) {
 				containersText.append(",");
 			}
 			containersText.append(containerDto.getContainerNo()).append(" / ").append(containerDto.getSeal1());
-		}
-		return containersText.toString();
-	}
-
-	private String getCommodityDetails(BookingDto bookingDto) {
-		StringBuilder commodityText = new StringBuilder("");
-		int count = 1;
-		for (ContainerDto containerDto : bookingDto.getContainerDetails()) {
-			if (count != 1) {
+			if (count == 1) {
 				commodityText.append(",");
 			}
-			commodityText.append(containerDto.getCommodity().getName());
+			if (!commodityText.toString().contains(containerDto.getCommodity().getName())) {
+
+				commodityText.append(containerDto.getCommodity().getName());
+			}
+			count++;
 		}
-		return commodityText.toString();
+		this.shippmentDetails = commodityText.toString();
+		return containersText.toString();
 	}
 
 	public Integer getId() {
