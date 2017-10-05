@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,14 +24,11 @@ public class CustomerController extends BaseController {
 	CustomerService customerService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> registerClient(@RequestBody CustomerDto customerDto) {
+	public ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customerDto) {
 
-		Integer customerId = customerService.addCustomer(converterUtil.convertCustomerDtoToEntity(customerDto));
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("customerId", String.valueOf(customerId));
-
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-
+		CustomerDto customer = converterUtil.convertCustomerToDto(
+				customerService.addCustomer(converterUtil.convertCustomerDtoToEntity(customerDto)));
+		return new ResponseEntity<CustomerDto>(customer, HttpStatus.CREATED);
 	}
 
 	@Transactional
@@ -56,5 +52,4 @@ public class CustomerController extends BaseController {
 		List<CustomerDto> customers = converterUtil.convertCustomerListToDto(customerService.getCustomersByName(name));
 		return new ResponseEntity<List<CustomerDto>>(customers, HttpStatus.OK);
 	}
-
 }

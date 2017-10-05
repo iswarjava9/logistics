@@ -11,6 +11,8 @@ import com.suis.logistics.repository.booking.BookingNotFoundException;
 import com.suis.logistics.repository.booking.CreateBookingFailedException;
 import com.suis.logistics.repository.customer.AddCustomerFailedException;
 import com.suis.logistics.repository.place.AddPlaceFailedException;
+import com.suis.logistics.service.customer.ThirdPartyCustomerCreationFailedException;
+import com.suis.logistics.service.invoice.InvoiceCreationFailedException;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {
@@ -46,5 +48,17 @@ public class ExceptionControllerAdvice {
 	public ResponseEntity<ErrorResponse> exceptionHandler(BookingNotFoundException ex) {
 		ex.printStackTrace();
 		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(InvoiceCreationFailedException.class)
+	public ResponseEntity<ErrorResponse> exceptionHandler(InvoiceCreationFailedException ex) {
+		ex.printStackTrace();
+		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(ThirdPartyCustomerCreationFailedException.class)
+	public ResponseEntity<ErrorResponse> exceptionHandler(ThirdPartyCustomerCreationFailedException ex) {
+		ex.printStackTrace();
+		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

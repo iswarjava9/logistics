@@ -6,7 +6,7 @@ import com.suis.logistics.model.Customer;
 
 public interface CustomerDao {
 
-	public Integer createCustomer(Customer customer);
+	public Customer createCustomer(Customer customer);
 
 	public void updateCustomer(Customer customer);
 

@@ -18,7 +18,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "place_copy")
+@Table(name = "place")
 @NamedQueries({ @NamedQuery(name = "Place.findAll", query = "SELECT p FROM Place p"),
 		@NamedQuery(name = "Place.findByName", query = "SELECT p FROM Place p where p.name like :name") })
 public class Place implements Serializable {

@@ -11,13 +11,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.suis.logistics.service.invoice.CustomField;
+import com.suis.logistics.model.CustomField;
 import com.suis.logistics.service.invoice.Invoice;
 import com.suis.logistics.service.invoice.InvoiceResponse;
 import com.suis.logistics.service.invoice.LineItem;
@@ -59,7 +60,7 @@ public class ZohoIntegrationMain {
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 		urlParameters.add(new BasicNameValuePair("JSONString",
 				"{ \"customer_id\": \"905339000000061017\",   \"line_items\": [         { \"item_id\": \"905339000000061009\"  }   ] }"));
-		final HttpClient httpClient = new DefaultHttpClient();
+		final HttpClient httpClient = HttpClientBuilder.create().build();
 		/*
 		 * StringEntity requestEntity = new StringEntity(
 		 * "{ \"customer_id\": \"905339000000061017\",   \"line_items\": [         { \"item_id\": \"905339000000061009\"  }   ] }"
@@ -86,6 +87,7 @@ public class ZohoIntegrationMain {
 	public static void createCreateInvoiceInZoho_V2() throws Exception {
 
 		Invoice invoice = new Invoice();
+		invoice.setInvoice_number("USOE-1853049672");
 		invoice.setCustomer_id("853113000000075001");
 		invoice.setExchange_rate(20.0);
 		List<LineItem> lineItems = new ArrayList<>();
@@ -95,12 +97,12 @@ public class ZohoIntegrationMain {
 		lineItem1.setPurchase_rate(50.00);
 		lineItem1.setQuantity(1.0);
 		lineItems.add(lineItem1);
-		LineItem lineItem2 = new LineItem();
-		lineItem2.setItem_id("853113000000086393");
-		lineItem2.setRate(200.00);
-		lineItem2.setPurchase_rate(100.00);
-		lineItem2.setQuantity(2.0);
-		lineItems.add(lineItem2);
+		/*
+		 * LineItem lineItem2 = new LineItem();
+		 * lineItem2.setItem_id("853113000000086393");
+		 * lineItem2.setRate(200.00); lineItem2.setPurchase_rate(100.00);
+		 * lineItem2.setQuantity(2.0); lineItems.add(lineItem2);
+		 */
 		invoice.setLine_items(lineItems);
 		populateCustomFields(invoice);
 		// convert to json string
@@ -110,7 +112,9 @@ public class ZohoIntegrationMain {
 		System.out.println(jsonInString);
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 		urlParameters.add(new BasicNameValuePair("JSONString", jsonInString));
-		final HttpClient httpClient = new DefaultHttpClient();
+		urlParameters.add(new BasicNameValuePair("ignore_auto_number_generation", "true"));
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		;
 		/*
 		 * StringEntity requestEntity = new StringEntity(
 		 * "{ \"customer_id\": \"905339000000061017\",   \"line_items\": [         { \"item_id\": \"905339000000061009\"  }   ] }"
@@ -144,42 +148,40 @@ public class ZohoIntegrationMain {
 		customFields.add(customField2);
 		//
 		CustomField customField3 = new CustomField();
-		customField1.setCustomfield_id("853113000000075071");
-		customField1.setValue("REMET UK LTD");
+		customField3.setCustomfield_id("853113000000075071");
+		customField3.setValue("REMET UK LTD");
 		customFields.add(customField3);
 		//
 		CustomField customField4 = new CustomField();
-		customField1.setCustomfield_id("853113000000061021");
-		customField1.setValue("YM WELLNESS");
+		customField4.setCustomfield_id("853113000000061021");
+		customField4.setValue("YM WELLNESS");
 		customFields.add(customField4);
 		//
 		CustomField customField5 = new CustomField();
-		customField1.setCustomfield_id("853113000000061019");
-		customField1.setValue("TCLU8831858 /EUR787339");
+		customField5.setCustomfield_id("853113000000061019");
+		customField5.setValue("TCLU8831858 /EUR787339");
 		customFields.add(customField5);
 		//
 		CustomField customField6 = new CustomField();
-		customField1.setCustomfield_id("853113000000061013");
-		customField1.setValue("LONDON GATEWAY PORT");
+		customField6.setCustomfield_id("853113000000061013");
+		customField6.setValue("LONDON GATEWAY PORT");
 		customFields.add(customField6);
 		//
 		CustomField customField7 = new CustomField();
-		customField1.setCustomfield_id("853113000000081019");
-		customField1.setValue("CHENNAI / CHENNAI");
+		customField7.setCustomfield_id("853113000000081019");
+		customField7.setValue("CHENNAI / CHENNAI");
 		customFields.add(customField7);
 		//
 		CustomField customField8 = new CustomField();
-		customField1.setCustomfield_id("853113000000078293");
-		customField1.setValue("2017-09-01");
+		customField8.setCustomfield_id("853113000000078293");
+		customField8.setValue("2017-09-01");
 		customFields.add(customField8);
 		//
 		CustomField customField9 = new CustomField();
-		customField1.setCustomfield_id("853113000000079023");
-		customField1.setValue(
+		customField9.setCustomfield_id("853113000000079023");
+		customField9.setValue(
 				"ARTIFICIAL & PREPARED WAXES FASTFORM TXO, PREPARED FOUNDRY BINDERS ADBOND ULTRA CONCENTRATE /  4987.72 KGS/ 11.170 CBM");
 		customFields.add(customField9);
-
-
 		invoice.setCustom_fields(customFields);
 	}
 }

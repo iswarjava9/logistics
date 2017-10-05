@@ -8,7 +8,7 @@ import com.suis.logistics.model.Customer;
 
 @Transactional
 public interface CustomerService {
-	public Integer addCustomer(Customer customer);
+	public Customer addCustomer(Customer customer);
 
 	public void updateCustomer(Customer customer);
 

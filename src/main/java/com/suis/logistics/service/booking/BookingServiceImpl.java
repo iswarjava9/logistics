@@ -55,21 +55,17 @@ public class BookingServiceImpl implements BookingService {
 		// Create Customer in Zoho Books for BillTo which is required to create
 		// a invoice in Zoho
 		Customer billTo = bookingDetail.getBillTo();
-		new Thread(() -> {
-			ThirdPartyCustomer tpCustomerResponse = tpCustomerService
-					.createCustomer(populateThirdPartyCustomer(billTo));
-			if (tpCustomerResponse != null) {
-				billTo.setTpCustomerId(tpCustomerResponse.getCustomerId());
-				customerService.updateCustomer(billTo);
-			}
-		}).start();
+		if (billTo.getTpCustomerId() == null) {
+			createThirdPartyCustomer(billTo);
+		}
 		return bookingDetailCreated;
 	}
 
 	private ThirdPartyCustomer populateThirdPartyCustomer(Customer customer) {
 		ThirdPartyCustomer tpCustomer = new ThirdPartyCustomer();
+		tpCustomer.setContactType("customer");
 		tpCustomer.setCompanyName(customer.getName());
-		tpCustomer.setContactName(customer.getPersonInCharge());
+		tpCustomer.setContactName(customer.getName());
 		List<ThirdPartyPerson> contacts = new ArrayList<>();
 		ThirdPartyPerson contact1 = new ThirdPartyPerson();
 		contact1.setEmail(customer.getEmailId());
@@ -93,17 +89,18 @@ public class BookingServiceImpl implements BookingService {
 		bookingDetail.setAmendmentDate(LocalDateTime.now());
 		BookingDetail updatedBookingDetail = bookingDao.updateBooking(bookingDetail);
 		Customer billTo = updatedBookingDetail.getBillTo();
-		if (billTo.getTpCustomerId() != null && !billTo.getTpCustomerId().isEmpty()) {
-			new Thread(() -> {
-				ThirdPartyCustomer tpCustomerResponse = tpCustomerService
-						.createCustomer(populateThirdPartyCustomer(billTo));
-				if (tpCustomerResponse != null) {
-					billTo.setTpCustomerId(tpCustomerResponse.getCustomerId());
-					customerService.updateCustomer(billTo);
-				}
-			}).start();
+		if (billTo.getTpCustomerId() == null) {
+			createThirdPartyCustomer(billTo);
 		}
 		return updatedBookingDetail;
+	}
+
+	private void createThirdPartyCustomer(Customer customer) {
+		ThirdPartyCustomer tpCustomerResponse = tpCustomerService.createCustomer(populateThirdPartyCustomer(customer));
+		if (tpCustomerResponse != null) {
+			customer.setTpCustomerId(tpCustomerResponse.getCustomerId());
+			customerService.updateCustomer(customer);
+		}
 	}
 
 	@Override

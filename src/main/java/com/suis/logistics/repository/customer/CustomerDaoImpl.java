@@ -17,14 +17,14 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	Environment env;
 
 	@Override
-	public Integer createCustomer(Customer customer) {
+	public Customer createCustomer(Customer customer) {
 		try {
 			getCurrentSession().save(customer);
 		} catch (Exception e) {
 			throw new AddCustomerFailedException(e, env);
 		}
 		clearCache("customerByName");
-		return customer.getId();
+		return customer;
 	}
 
 	@Override
@@ -40,6 +40,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		return customerList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Cacheable(value = "customerByName", key = "#name")
 	public List<Customer> getCustomersByName(String name) {

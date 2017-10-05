@@ -15,6 +15,8 @@ public class ThirdPartyCustomer {
 	private String					customerId;
 	@JsonProperty("contact_name")
 	private String					contactName;
+	@JsonProperty("contact_type")
+	private String					contactType;
 	@JsonProperty("company_name")
 	private String					companyName;
 	@JsonProperty("billing_address")
@@ -70,6 +72,14 @@ public class ThirdPartyCustomer {
 
 	public void setContacts(List<ThirdPartyPerson> contacts) {
 		this.contacts = contacts;
+	}
+
+	public String getContactType() {
+		return contactType;
+	}
+
+	public void setContactType(String contactType) {
+		this.contactType = contactType;
 	}
 
 	@Override

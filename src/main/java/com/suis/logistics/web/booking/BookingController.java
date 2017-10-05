@@ -18,16 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.suis.logistics.common.PDFGeneratorUtil;
 import com.suis.logistics.service.booking.BookingService;
+import com.suis.logistics.service.invoice.Invoice;
+import com.suis.logistics.service.invoice.InvoiceService;
 import com.suis.logistics.web.BaseController;
 
 @RestController
 @RequestMapping("/booking")
 public class BookingController extends BaseController {
 	@Resource
-	BookingService	bookingService;
-
+	BookingService		bookingService;
 	@Resource
-	PDFGeneratorUtil pdfGeneratorUtil;
+	InvoiceService		invoiceService;
+	@Resource
+	PDFGeneratorUtil	pdfGeneratorUtil;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto) {
@@ -35,7 +38,7 @@ public class BookingController extends BaseController {
 		BookingDto bookingDtoResponse = converterUtil.convertBookingDetailToDto(
 				bookingService.createBooking(converterUtil.convertBookingDtoToEntity(bookingDto)));
 		String remarks = bookingDtoResponse.getRemarks();
-		if(remarks != null) {
+		if (remarks != null) {
 			bookingDtoResponse.setRemarks(remarks.replace("\\n", "\n"));
 		}
 		return new ResponseEntity<BookingDto>(bookingDtoResponse, HttpStatus.OK);
@@ -47,7 +50,7 @@ public class BookingController extends BaseController {
 		BookingDto bookingDtoResponse = converterUtil.convertBookingDetailToDto(
 				bookingService.updateBooking(converterUtil.convertBookingDtoToEntity(bookingDto)));
 		String remarks = bookingDtoResponse.getRemarks();
-		if(remarks != null) {
+		if (remarks != null) {
 			bookingDtoResponse.setRemarks(remarks.replace("\\n", "\n"));
 		}
 		return new ResponseEntity<BookingDto>(bookingDtoResponse, HttpStatus.OK);
@@ -60,10 +63,10 @@ public class BookingController extends BaseController {
 		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));
 		converterUtil.convertDateTimeFromUTCtoPlaceTimeZone(bookingDto);
 		String remarks = bookingDto.getRemarks();
-		if(remarks != null) {
+		if (remarks != null) {
 			bookingDto.setRemarks(remarks.replace("\\n", "\n"));
 		}
-		//generateBookingXml(bookingDto);
+		// generateBookingXml(bookingDto);
 		return new ResponseEntity<BookingDto>(bookingDto, HttpStatus.OK);
 	}
 
@@ -76,37 +79,21 @@ public class BookingController extends BaseController {
 
 	@Transactional
 	@RequestMapping(value = "/download/{id}", method = RequestMethod.GET, produces = "application/pdf")
-	public ResponseEntity<InputStreamResource> download(@PathVariable("id") int id)
-			throws Exception {
+	public ResponseEntity<InputStreamResource> download(@PathVariable("id") int id) throws Exception {
 		BookingDto bookingDto = converterUtil.convertBookingDetailToDto(bookingService.getBookingDetail(id));
 		pdfGeneratorUtil.generateBookingConfirmationPDF(bookingDto);
 		HttpHeaders headers = new HttpHeaders();
-		InputStream bookingConfirmationPDF = bookingService.downloadBookingConfirmation(bookingDto.getForwarderRefNo(), headers);
+		InputStream bookingConfirmationPDF = bookingService.downloadBookingConfirmation(bookingDto.getForwarderRefNo(),
+				headers);
 		ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
 				new InputStreamResource(bookingConfirmationPDF), headers, HttpStatus.OK);
 		return response;
 	}
 
-	/*private void generateBookingXml(BookingDto bookingDto) {
-		JAXBContext jc;
-		try {
-			jc = JAXBContext.newInstance(BookingDto.class);
-			JAXBElement<BookingDto> jaxbElement = new JAXBElement<BookingDto>(new QName("bookinginfo"),
-					BookingDto.class, bookingDto);
-			Marshaller marshaller = jc.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			// URL url = this.getClass().getResource("/resources");
-			// File xmlDataFile = new
-			// File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
-			File xmlDataFile = new File(
-					"C://My Drive//WORKSPACEs//Logistics//logistics//src//main//resources//xml-data//booking-"+bookingDto.getForwarderRefNo()+".xml");
-			xmlDataFile.createNewFile(); // if file already exists will do
-											// nothing
-			OutputStream out = new FileOutputStream(xmlDataFile);
-			marshaller.marshal(jaxbElement, out);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
+	@RequestMapping(value = "/invoice", method = RequestMethod.POST)
+	public ResponseEntity<Invoice> createInvoice(@RequestBody BookingDto bookingDto) {
+
+		Invoice invoice = invoiceService.createDraftInvoice(bookingDto);
+		return new ResponseEntity<Invoice>(invoice, HttpStatus.CREATED);
+	}
 }

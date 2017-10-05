@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
 	CustomerDao customerDao;
 
 	@Override
-	public Integer addCustomer(Customer customer) {
+	public Customer addCustomer(Customer customer) {
 		// TODO This needs to be changed based on login User belongs to whichf
 		// Client
 		Client client = new Client();
