@@ -6,6 +6,7 @@ import com.suis.logistics.model.ContainerDetail;
 public interface CacheService {
 
 	BookingDetail updateBookingDetailCacheOnAddContainerDetail(ContainerDetail containerDetail);
+	BookingDetail updateBookingDetailCacheOnUpdateContainerDetail(ContainerDetail containerDetail);
 	BookingDetail updateBookingDetailCacheOnDeleteContainerDetail(ContainerDetail containerDetail);
 	BookingDetail addBookingDetailToCacheOnBookingCreation(BookingDetail bookingDetail);
 }

@@ -10,6 +10,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.ContainerDetail;
@@ -47,6 +48,24 @@ public class CacheServiceImpl implements CacheService {
 		List<ContainerDetail> containerDetailList = bookingInCache.getContainerDetails();
 		if (containerDetailList != null && containerDetailList.contains(containerDetail)) {
 			containerDetailList.remove(containerDetail);
+		}
+		return bookingInCache;
+	}
+
+	@Override
+	@CachePut(value = "BookingDetail", key = "#containerDetail.bookingDetail.id")
+	public BookingDetail updateBookingDetailCacheOnUpdateContainerDetail(ContainerDetail containerDetail) {
+		Cache cache = cacheManager.getCache("BookingDetail");
+		ValueWrapper val = cache.get(containerDetail.getBookingDetail().getId());
+		BookingDetail bookingInCache = null;
+		bookingInCache = (BookingDetail) val.get();
+		List<ContainerDetail> containerDetailList = bookingInCache.getContainerDetails();
+		if (!CollectionUtils.isEmpty(containerDetailList)) {
+			if (containerDetailList.contains(containerDetail)) {
+
+				containerDetailList.remove(containerDetail);
+				containerDetailList.add(containerDetail);
+			}
 		}
 		return bookingInCache;
 	}

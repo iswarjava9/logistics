@@ -67,7 +67,7 @@ public class ContainerServiceImpl implements ContainerService {
 	@Override
 	public ContainerDetail updateContainer(ContainerDetail containerDetail) {
 		ContainerDetail containerDetailUpdated = containerDao.updateContainer(containerDetail);
-		cacheService.updateBookingDetailCacheOnDeleteContainerDetail(containerDetailUpdated);
+		cacheService.updateBookingDetailCacheOnUpdateContainerDetail(containerDetailUpdated);
 		return containerDetail;
 	}
 }
