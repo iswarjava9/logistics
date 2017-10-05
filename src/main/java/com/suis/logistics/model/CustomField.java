@@ -1,7 +1,6 @@
 package com.suis.logistics.model;
 
 import java.io.Serializable;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +13,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.suis.logistics.web.booking.BookingDto;
-import com.suis.logistics.web.container.ContainerDto;
+import com.suis.logistics.service.invoice.CustomFieldsValue;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
@@ -40,12 +38,6 @@ public class CustomField implements Serializable {
 	private String				placeholder;
 	@Transient
 	private String				value;
-	@Transient
-	private Double				totalWeightInKg;
-	@Transient
-	private Double				totalWeightInLb;
-	@Transient
-	private String				shippmentDetails;
 
 	public String getCustomfield_id() {
 		return customfield_id;
@@ -127,82 +119,36 @@ public class CustomField implements Serializable {
 		this.value = value;
 	}
 
-	public Double getTotalWeightInKg() {
-		return totalWeightInKg;
-	}
-
-	public void setTotalWeightInKg(Double totalWeightInKg) {
-		this.totalWeightInKg = totalWeightInKg;
-	}
-
-	public Double getTotalWeightInLb() {
-		return totalWeightInLb;
-	}
-
-	public void setTotalWeightInLb(Double totalWeightInLb) {
-		this.totalWeightInLb = totalWeightInLb;
-	}
-
-	public void setValueFromBookingDetail(BookingDto bookingDto) {
+	public void setValueFromBookingDetail(CustomFieldsValue value) {
 		switch (this.index) {
 			case 1:
-				setValue(bookingDto.getForwarderRefNo()); // TODO for HBL#
+				setValue(value.getHblValue());
 				break;
 			case 2:
-				setValue(bookingDto.getShipper().getName());
+				setValue(value.getShipperNameValue());
 				break;
 			case 3:
-				setValue(bookingDto.getVessel().getName() + " / " + bookingDto.getCarrierVoyage());
+				setValue(value.getVesselVoyageValue());
 				break;
 			case 4:
-				setValue(getContainerDetails(bookingDto));
+				setValue(value.getContainerSealValue());
 				break;
 			case 5:
-				setValue(bookingDto.getPortOfLoad().getName());
+				setValue(value.getPortOfLoadingValue());
 				break;
 			case 6:
-				setValue(bookingDto.getPortOfDischarge() != null ? bookingDto.getPortOfDischarge().getName()
-						: "NA" + " / " + bookingDto.getPlaceOfDelivery() != null
-								? bookingDto.getPlaceOfDelivery().getName() : "NA");
+				setValue(value.getPortOfDischargeValue());
 				break;
 			case 7:
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				String formatDateTime = bookingDto.getEta().format(formatter);
-				setValue(formatDateTime);
+				setValue(value.getEtaValue());
 				break;
 			case 8:
-				setValue(this.totalWeightInKg + " Kgs " + this.totalWeightInLb + " Lbs");
+				setValue(value.getCargoWeightValue());
 				break;
 			case 9:
-				setValue(this.shippmentDetails);
+				setValue(value.getShipmentDetailsValue());
+				break;
 		}
-	}
-
-	private String getContainerDetails(BookingDto bookingDto) {
-		StringBuilder containersText = new StringBuilder("");
-		StringBuilder commodityText = new StringBuilder("");
-		this.shippmentDetails = "";
-		this.totalWeightInKg = 0.0;
-		this.totalWeightInLb = 0.0;
-		int count = 1;
-		for (ContainerDto containerDto : bookingDto.getContainerDetails()) {
-			totalWeightInKg = totalWeightInKg + containerDto.getTareKgs();
-			totalWeightInLb = totalWeightInLb + containerDto.getTareLbs();
-			if (count == 1) {
-				containersText.append(",");
-			}
-			containersText.append(containerDto.getContainerNo()).append(" / ").append(containerDto.getSeal1());
-			if (count == 1) {
-				commodityText.append(",");
-			}
-			if (!commodityText.toString().contains(containerDto.getCommodity().getName())) {
-
-				commodityText.append(containerDto.getCommodity().getName());
-			}
-			count++;
-		}
-		this.shippmentDetails = commodityText.toString();
-		return containersText.toString();
 	}
 
 	public Integer getId() {

@@ -1,6 +1,7 @@
 package com.suis.logistics.service.invoice;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suis.logistics.model.CustomField;
 import com.suis.logistics.repository.invoice.CustomFieldDao;
 import com.suis.logistics.web.booking.BookingDto;
+import com.suis.logistics.web.container.ContainerDto;
 
 @Component
 public class ZohoInvoiceServiceImpl implements InvoiceService {
@@ -53,7 +55,7 @@ public class ZohoInvoiceServiceImpl implements InvoiceService {
 		try {
 			mapper.findAndRegisterModules();
 			jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(invoice);
-			System.out.println("Invoice JSONString : "+ jsonInString);
+			System.out.println("Invoice JSONString : " + jsonInString);
 			List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 			urlParameters.add(new BasicNameValuePair("JSONString", jsonInString));
 			urlParameters.add(new BasicNameValuePair("ignore_auto_number_generation", "true"));
@@ -82,9 +84,56 @@ public class ZohoInvoiceServiceImpl implements InvoiceService {
 	private void populateInvoiceWithCustomFields(List<CustomField> customFields, BookingDto bookingDto,
 			Invoice invoice) {
 		for (CustomField customField : customFields) {
-			customField.setValueFromBookingDetail(bookingDto);
+			customField.setValueFromBookingDetail(buildContainerTextForInvoice(bookingDto));
 		}
 		invoice.setCustom_fields(customFields);
+	}
+
+	private CustomFieldsValue buildContainerTextForInvoice(BookingDto bookingDto) {
+		StringBuilder containersTextTemp = new StringBuilder("");
+		StringBuilder commodityText = new StringBuilder("");
+		Double totalWeightInKg = 0.0;
+		Double totalWeightInLb = 0.0;
+		String shippmentDetails = "";
+		String containersText = "";
+		String totalWeightText = "";
+		int count = 1;
+		for (ContainerDto containerDto : bookingDto.getContainerDetails()) {
+			totalWeightInKg = totalWeightInKg + containerDto.getTareKgs();
+			totalWeightInLb = totalWeightInLb + containerDto.getTareLbs();
+			if (count != 1) {
+				containersTextTemp.append(",");
+			}
+			containersTextTemp.append(containerDto.getContainerNo()).append(" / ").append(containerDto.getSeal1());
+			if (count != 1) {
+				commodityText.append(",");
+			}
+			if (!commodityText.toString().contains(containerDto.getCommodity().getName())) {
+
+				commodityText.append(containerDto.getCommodity().getName());
+			}
+			count++;
+		}
+		shippmentDetails = commodityText.toString();
+		containersText = containersTextTemp.toString();
+		totalWeightText = totalWeightInKg + " Kgs " + totalWeightInLb + " Lbs";
+		CustomFieldsValue customFieldsValue = new CustomFieldsValue();
+		customFieldsValue.setHblValue(bookingDto.getForwarderRefNo());
+		customFieldsValue.setShipperNameValue(bookingDto.getShipper().getName());
+		customFieldsValue
+				.setVesselVoyageValue(bookingDto.getVessel().getName() + " / " + bookingDto.getCarrierVoyage());
+		customFieldsValue.setContainerSealValue(containersText);
+		customFieldsValue.setPortOfLoadingValue(bookingDto.getPortOfLoad().getName());
+		customFieldsValue.setPortOfDischargeValue(
+				bookingDto.getPortOfDischarge() != null ? bookingDto.getPortOfDischarge().getName()
+						: "NA" + " / " + bookingDto.getPlaceOfDelivery() != null
+								? bookingDto.getPlaceOfDelivery().getName() : "NA");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String formatDateTime = bookingDto.getEta().format(formatter);
+		customFieldsValue.setEtaValue(formatDateTime);
+		customFieldsValue.setCargoWeightValue(totalWeightText);
+		customFieldsValue.setShipmentDetailsValue(shippmentDetails);
+		return customFieldsValue;
 	}
 
 	private void populateInvoiceFromBookingDetail(BookingDto bookingDto, Invoice invoice) {
