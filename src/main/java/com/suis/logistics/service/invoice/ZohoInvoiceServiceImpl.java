@@ -102,14 +102,14 @@ public class ZohoInvoiceServiceImpl implements InvoiceService {
 			totalWeightInKg = totalWeightInKg + containerDto.getTareKgs();
 			totalWeightInLb = totalWeightInLb + containerDto.getTareLbs();
 			if (count != 1) {
-				containersTextTemp.append(",");
+				containersTextTemp.append(", ");
 			}
 			containersTextTemp.append(containerDto.getContainerNo()).append(" / ").append(containerDto.getSeal1());
-			if (count != 1) {
-				commodityText.append(",");
-			}
-			if (!commodityText.toString().contains(containerDto.getCommodity().getName())) {
+			if (count == 1) {
 
+				commodityText.append(containerDto.getCommodity().getName());
+			} else if (!commodityText.toString().contains(containerDto.getCommodity().getName())) {
+				commodityText.append(", ");
 				commodityText.append(containerDto.getCommodity().getName());
 			}
 			count++;
