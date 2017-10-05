@@ -9,6 +9,7 @@ public class PlaceDto extends PlaceBaseDto {
 	private CityDto	city;
 	private String	timeZoneId;
 	private String	timeZoneShortName;
+	private String	type;
 
 	public String getCode() {
 		return code;
@@ -49,4 +50,13 @@ public class PlaceDto extends PlaceBaseDto {
 	public void setTimeZoneShortName(String timeZoneShortName) {
 		this.timeZoneShortName = timeZoneShortName;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 }
