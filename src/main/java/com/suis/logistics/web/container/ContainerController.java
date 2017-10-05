@@ -35,13 +35,21 @@ public class ContainerController extends BaseController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity<ContainerDto> updateContainer(@RequestBody ContainerDto containerDto) {
+		ContainerDetail containerDetail = converterUtil.convertContainerDtoToEntity(containerDto);
+		ContainerDto container = converterUtil.convertContainerToDto(containerService.updateContainer(containerDetail));
+
+		return new ResponseEntity<ContainerDto>(container, HttpStatus.OK);
+	}
+
 	@Transactional
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<ContainerDto> get(@PathVariable("id") int id) {
 		ContainerDto containerDto = converterUtil.convertContainerToDto(containerService.getContainer(id));
 		return new ResponseEntity<ContainerDto>(containerDto, HttpStatus.OK);
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ContainerDto> delete(@PathVariable("id") int id) {

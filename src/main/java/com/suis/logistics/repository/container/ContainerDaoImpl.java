@@ -55,6 +55,12 @@ public class ContainerDaoImpl extends BaseDao implements ContainerDao {
 		return containerTypes;
 	}
 
+	@Override
+	public ContainerDetail updateContainer(ContainerDetail containerDetail) {
+		getCurrentSession().update(containerDetail);
+		return containerDetail;
+	}
+
 
 
 }

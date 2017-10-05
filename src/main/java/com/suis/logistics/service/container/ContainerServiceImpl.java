@@ -22,8 +22,7 @@ public class ContainerServiceImpl implements ContainerService {
 	@Resource
 	private CargoDao		cargoDao;
 	@Resource
-	private CacheService    cacheService;
-
+	private CacheService	cacheService;
 
 	@Override
 	public Integer createContainer(ContainerDetail containerDetail) {
@@ -61,7 +60,14 @@ public class ContainerServiceImpl implements ContainerService {
 	@Override
 	public ContainerDetail deleteContainer(int containerId) {
 		ContainerDetail containerDetail = containerDao.deleteContainer(containerId);
-        cacheService.updateBookingDetailCacheOnDeleteContainerDetail(containerDetail);
+		cacheService.updateBookingDetailCacheOnDeleteContainerDetail(containerDetail);
+		return containerDetail;
+	}
+
+	@Override
+	public ContainerDetail updateContainer(ContainerDetail containerDetail) {
+		ContainerDetail containerDetailUpdated = containerDao.updateContainer(containerDetail);
+		cacheService.updateBookingDetailCacheOnDeleteContainerDetail(containerDetailUpdated);
 		return containerDetail;
 	}
 }

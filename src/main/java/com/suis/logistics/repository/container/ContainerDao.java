@@ -8,6 +8,7 @@ import com.suis.logistics.model.ContainerType;
 public interface ContainerDao {
 
 	public Integer createContainer(ContainerDetail containerDetail);
+	public ContainerDetail updateContainer(ContainerDetail containerDetail);
 	public ContainerDetail getContainer(int containerId);
 	public ContainerDetail deleteContainer(int containerId);
 	public Integer createContainerType(ContainerType containerType);
