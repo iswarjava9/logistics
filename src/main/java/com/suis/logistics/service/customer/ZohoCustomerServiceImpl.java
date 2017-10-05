@@ -13,7 +13,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +25,9 @@ import com.suis.logistics.model.thirdparty.ThirdPartyCustomerApiResponse;
 @Component
 public class ZohoCustomerServiceImpl implements ThirdPartyCustomerService {
 	@Value("${zoho.auth.token}")
-	private String zohoAuthToken;
+	private String	zohoAuthToken;
+	@Autowired
+	Environment		env;
 
 	@Override
 	public ThirdPartyCustomer createCustomer(ThirdPartyCustomer customer) {
@@ -55,8 +59,7 @@ public class ZohoCustomerServiceImpl implements ThirdPartyCustomerService {
 				System.out.println("CustomerId created in Zoho :" + customerResponse.getCustomerId());
 			}
 		} catch (IOException e) {
-
-			e.printStackTrace();
+			throw new ThirdPartyCustomerCreationFailedException(e, env);
 		}
 		return customerResponse;
 	}
