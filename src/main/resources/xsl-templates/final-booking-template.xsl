@@ -645,14 +645,14 @@
 
 						<fo:block>
 							<fo:table width="100%" border-style="inset"
-								border-width="1pt" border-color="grey" border-top="0pt">
+								border-width="1pt" border-color="grey" border-top="1pt">
 								<fo:table-column />
 
 
 								<fo:table-body>
 									<fo:table-row>
 										<fo:table-cell padding-left="1mm" border-color="grey"
-											border-style="inset" border-right="1pt" border-top="0pt">
+											border-style="inset" border-right="1pt" border-top="0pt" border-bottom="1pt">
 											<fo:block font-size="x-small">
 
 												Remarks
