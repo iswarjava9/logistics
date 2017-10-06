@@ -93,6 +93,17 @@
 		transactionalMode="off">
 		<persistence strategy="localTempSwap" />
 	</cache>
+	
+	<cache name="cityByName" 
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="1000" 
+		eternal="true" 
+		diskSpoolBufferSizeMB="30"	
+		memoryStoreEvictionPolicy="LFU" 
+		timeToIdleSeconds="300" timeToLiveSeconds="600"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
 
 	<cache name="org.hibernate.cache.internal.StandardQueryCache"
 		maxEntriesLocalHeap="5" eternal="false" timeToLiveSeconds="120">

@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.suis.logistics.model.City;
@@ -17,9 +18,10 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Cacheable(value = "cityByName", key = "#name")
 	public List<City> getCitiesByName(String name) {
 		Query query = getCurrentSession().getNamedQuery("City.findByName").setParameter("name", name + "%");
-		List<City> allCities = query.list();		
+		List<City> allCities = query.list();
 		return allCities;
 	}
 
