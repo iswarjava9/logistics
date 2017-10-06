@@ -170,7 +170,7 @@ public class ConverterUtil {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		ContainerDetail containerDetail = modelMapper.map(containerDto, ContainerDetail.class);
 		BookingDetail bookingDetail = new BookingDetail();
-		bookingDetail.setId(containerDto.getBookingId());
+		bookingDetail.setId(containerDto.getBookingDetailId());
 		containerDetail.setBookingDetail(bookingDetail);
 		return containerDetail;
 	}

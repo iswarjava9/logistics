@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suis.logistics.web.cargo.CargoDto;
 import com.suis.logistics.web.commodity.CommodityDto;
 import com.suis.logistics.web.containertype.ContainerTypeDto;
@@ -38,7 +39,8 @@ public class ContainerDto {
 	private LocalDateTime		dischargeLocalDateTime;
 
 	private List<CargoDto>		cargos;
-	private Integer				bookingId;
+	@JsonProperty("bookingId")
+	private Integer				bookingDetailId;
 	private ContainerTypeDto	containerType;
 	private CommodityDto		commodity;
 	private Integer				quotationId;
@@ -237,14 +239,13 @@ public class ContainerDto {
 		this.dischargeLocalDateTime = dischargeLocalDateTime;
 	}
 
-	public Integer getBookingId() {
-		return bookingId;
+	public Integer getBookingDetailId() {
+		return bookingDetailId;
 	}
 
-	public void setBookingId(Integer bookingId) {
-		this.bookingId = bookingId;
+	public void setBookingDetailId(Integer bookingDetailId) {
+		this.bookingDetailId = bookingDetailId;
 	}
-
 
 
 }
