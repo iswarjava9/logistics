@@ -9,8 +9,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
@@ -35,58 +33,9 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 			// bookingDetail.getUser().getId(); // Simulate unknown error
 			throw new CreateBookingFailedException(e, env);
 		}
-		updateCache("BookingList", bookingDetail);
 		return bookingDetail;
 	}
 
-	@SuppressWarnings("unchecked")
-	@CachePut(value = "BookingList", key = "#root.targetClass")
-	public List<BookingDetail> updateCache(String cacheName, BookingDetail booking) {
-		BookingDetail bookingDetail = new BookingDetail();
-		populateBookingDetailWithLessData(bookingDetail, booking);
-		Cache cache = cacheManager.getCache(cacheName);
-		Object nativeCache = cache.getNativeCache();
-		Class<?> key = null;
-		if (nativeCache instanceof net.sf.ehcache.Ehcache) {
-			net.sf.ehcache.Ehcache ehCache = (net.sf.ehcache.Ehcache) nativeCache;
-			if (!ehCache.getKeys().isEmpty()) {
-				key = (Class<?>) ehCache.getKeys().get(0);
-			}
-		}
-		if (key != null) {
-			ValueWrapper val = cache.get(key);
-			List<BookingDetail> bookings = (List<BookingDetail>) val.get();
-			if (bookings.contains(bookingDetail)) {
-				int index = bookings.indexOf(bookingDetail);
-				bookings.remove(index);
-				bookings.add(index, bookingDetail);
-			} else {
-				bookings.add(0, bookingDetail);
-			}
-			// cache.put(key, bookings);
-			return bookings;
-		}
-		return null;
-	}
-
-	/**
-	 * This method is used to populate bookingDetail with less data which is
-	 * meant for displaying booking list. Refer getBookingList() method. If
-	 * there is a change in getBookingList() method then this method also needs
-	 * to be updated
-	 *
-	 * @param bookingDetail
-	 * @param booking
-	 */
-	private void populateBookingDetailWithLessData(BookingDetail bookingDetail, BookingDetail booking) {
-		bookingDetail.setId(booking.getId());
-		bookingDetail.setCarrierBookingNo(booking.getCarrierBookingNo());
-		bookingDetail.setShipperRefNo(booking.getShipperRefNo());
-		bookingDetail.setBookingStatus(booking.getBookingStatus());
-		bookingDetail.setNvoccBookingNo(booking.getNvoccBookingNo());
-		bookingDetail.setForwarderRefNo(booking.getForwarderRefNo());
-		bookingDetail.setBookingDate(booking.getBookingDate());
-	}
 
 	@Override
 	@CachePut(value = "BookingDetail", key = "#bookingDetail.id")
@@ -96,7 +45,6 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 		} catch (Exception e) {
 			throw new UpdateBookingFailedException(e, env);
 		}
-		updateCache("BookingList", bookingDetail);
 		return bookingDetail;
 	}
 

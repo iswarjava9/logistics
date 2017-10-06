@@ -51,7 +51,8 @@ public class BookingServiceImpl implements BookingService {
 		bookingDetail.setForwarderRefNo(bookingNo);
 		bookingDetail.setBookingDate(LocalDateTime.now());
 		BookingDetail bookingDetailCreated = bookingDao.createBooking(bookingDetail);
-		cacheService.addBookingDetailToCacheOnBookingCreation(bookingDetail);
+		cacheService.addBookingDetailToCacheOnBookingCreation(bookingDetailCreated);
+		cacheService.updateBookingListCache(bookingDetailCreated);
 		// Create Customer in Zoho Books for BillTo which is required to create
 		// a invoice in Zoho
 		Customer billTo = bookingDetail.getBillTo();
@@ -88,6 +89,7 @@ public class BookingServiceImpl implements BookingService {
 	public BookingDetail updateBooking(BookingDetail bookingDetail) {
 		bookingDetail.setAmendmentDate(LocalDateTime.now());
 		BookingDetail updatedBookingDetail = bookingDao.updateBooking(bookingDetail);
+		cacheService.updateBookingListCache(updatedBookingDetail);
 		Customer billTo = updatedBookingDetail.getBillTo();
 		if (billTo.getTpCustomerId() == null) {
 			createThirdPartyCustomer(billTo);
