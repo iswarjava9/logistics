@@ -36,7 +36,6 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 		return bookingDetail;
 	}
 
-
 	@Override
 	@CachePut(value = "BookingDetail", key = "#bookingDetail.id")
 	public BookingDetail updateBooking(BookingDetail bookingDetail) {
@@ -63,7 +62,6 @@ public class BookingDaoImpl extends BaseDao implements BookingDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Cacheable(value = "BookingList", key = "#root.targetClass")
 	public List<BookingDetail> getBookingList() {
 		Criteria cr = getCurrentSession().createCriteria(BookingDetail.class)
 				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")

@@ -113,7 +113,14 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public List<BookingDetail> getBookingList() {
-		return bookingDao.getBookingList();
+		// cacheService is being called here instead of bookingDao
+		// because key = "#root.targetClass" which is used to create Cache
+		// The key "#root.targetClass" refers the calling class i.e.
+		// CaseServiceImpl class
+		// otherwise earlier the cache was created in BookingDaoImpl and trying
+		// to update in CacheServiceImpl
+		// and as a result it was failing
+		return cacheService.getBookingList();
 	}
 
 	@Override

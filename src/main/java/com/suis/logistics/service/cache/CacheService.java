@@ -12,4 +12,5 @@ public interface CacheService {
 	BookingDetail updateBookingDetailCacheOnDeleteContainerDetail(ContainerDetail containerDetail);
 	BookingDetail addBookingDetailToCacheOnBookingCreation(BookingDetail bookingDetail);
 	List<BookingDetail> updateBookingListCache(BookingDetail bookingDetail);
+	List<BookingDetail> getBookingList();
 }

@@ -3,6 +3,8 @@ package com.suis.logistics.service.cache;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.Cache.ValueWrapper;
@@ -14,12 +16,15 @@ import org.springframework.util.CollectionUtils;
 
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.ContainerDetail;
+import com.suis.logistics.repository.booking.BookingDao;
 
 @Component
 public class CacheServiceImpl implements CacheService {
 
 	@Autowired
-	private CacheManager cacheManager;
+	private CacheManager	cacheManager;
+	@Resource
+	BookingDao				bookingDao;
 
 	@Override
 	@CachePut(value = "BookingDetail", key = "#containerDetail.bookingDetail.id")
@@ -125,5 +130,11 @@ public class CacheServiceImpl implements CacheService {
 		bookingDetail.setNvoccBookingNo(booking.getNvoccBookingNo());
 		bookingDetail.setForwarderRefNo(booking.getForwarderRefNo());
 		bookingDetail.setBookingDate(booking.getBookingDate());
+	}
+
+	@Override
+	@Cacheable(value = "BookingList", key = "#root.targetClass")
+	public List<BookingDetail> getBookingList() {
+		return bookingDao.getBookingList();
 	}
 }
