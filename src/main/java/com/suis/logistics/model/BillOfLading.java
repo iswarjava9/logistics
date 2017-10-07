@@ -1,4 +1,4 @@
-package model;
+package com.suis.logistics.model;
 
 import java.io.Serializable;
 
