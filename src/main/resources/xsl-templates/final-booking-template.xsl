@@ -652,20 +652,33 @@
 								<fo:table-body>
 									<fo:table-row>
 										<fo:table-cell padding-left="1mm" border-color="grey"
-											border-style="inset" border-right="1pt" border-top="0pt" border-bottom="1pt">
+											border-style="inset" border-right="1pt" border-top="0pt"
+											border-bottom="1pt">
 											<fo:block font-size="x-small">
 
 												Remarks
 
 											</fo:block>
 											<fo:block font-size="x-small" font-weight="bold">
-												<fo:block linefeed-treatment="preserve">
+												<fo:block linefeed-treatment="preserve"
+													white-space-treatment="preserve" white-space-collapse="false">
 
-													<xsl:call-template name="split">
-														<xsl:with-param name="text" select="/bookinginfo/remarks" />
+													<!-- <xsl:call-template name="split"> <xsl:with-param name="text" 
+														select="/bookinginfo/remarks" /> </xsl:call-template> -->
+
+													<xsl:variable name="text1">
+														<xsl:call-template name="string-replace-all">
+															<xsl:with-param name="text"
+																select="/bookinginfo/remarks" />
+															<xsl:with-param name="replace" select="'\n'" />
+															<xsl:with-param name="by" select="'&#xA;'" />
+														</xsl:call-template>
+													</xsl:variable>
+													<xsl:call-template name="string-replace-all">
+														<xsl:with-param name="text" select="$text1" />
+														<xsl:with-param name="replace" select="'\t'" />
+														<xsl:with-param name="by" select="'&#x9;'" />
 													</xsl:call-template>
-
-
 
 												</fo:block>
 
@@ -704,4 +717,31 @@
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
+
+	<xsl:template name="string-replace-all">
+		<xsl:param name="text" />
+		<xsl:param name="replace" />
+		<xsl:param name="by" />
+		<xsl:choose>
+			<xsl:when test="$text = '' or $replace = ''or not($replace)">
+				<!-- Prevent this routine from hanging -->
+				<xsl:value-of select="$text" />
+			</xsl:when>
+			<xsl:when test="contains($text, $replace)">
+				<xsl:value-of select="substring-before($text,$replace)" />
+				<xsl:value-of select="$by" />
+				<xsl:call-template name="string-replace-all">
+					<xsl:with-param name="text"
+						select="substring-after($text,$replace)" />
+					<xsl:with-param name="replace" select="$replace" />
+					<xsl:with-param name="by" select="$by" />
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$text" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+
 </xsl:stylesheet>
