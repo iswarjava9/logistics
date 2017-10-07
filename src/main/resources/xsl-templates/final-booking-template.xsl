@@ -183,6 +183,16 @@
 																	<xsl:value-of select="/bookinginfo/shipper/address" />
 
 																</fo:block>
+																<fo:block>
+
+																	<xsl:value-of select="/bookinginfo/shipper/city/name" />
+																	<xsl:text> , </xsl:text>
+																	<xsl:value-of select="/bookinginfo/shipper/city/stateName" />
+																	<xsl:text> , </xsl:text>
+																	<xsl:value-of select="/bookinginfo/shipper/city/countryName" />
+
+																</fo:block>
+
 															</fo:block>
 														</fo:table-cell>
 
@@ -209,6 +219,17 @@
 																	<xsl:value-of select="/bookinginfo/bookingAgent/address" />
 
 																</fo:block>
+																<fo:block>
+
+																	<xsl:value-of select="/bookinginfo/bookingAgent/city/name" />
+																	<xsl:text> , </xsl:text>
+																	<xsl:value-of
+																		select="/bookinginfo/bookingAgent/city/stateName" />
+																	<xsl:text> , </xsl:text>
+																	<xsl:value-of
+																		select="/bookinginfo/bookingAgent/city/countryName" />
+																</fo:block>
+
 															</fo:block>
 														</fo:table-cell>
 
@@ -262,6 +283,24 @@
 
 																					<xsl:value-of
 																						select="/bookinginfo/emptyContainerPickup/address" />
+
+																				</fo:block>
+																				<fo:block>
+
+																					<xsl:value-of
+																						select="/bookinginfo/emptyContainerPickup/city/name" />
+																					<xsl:text> , </xsl:text>
+
+
+
+																					<xsl:value-of
+																						select="/bookinginfo/emptyContainerPickup/city/stateName" />
+																					<xsl:text> , </xsl:text>
+
+
+
+																					<xsl:value-of
+																						select="/bookinginfo/emptyContainerPickup/city/countryName" />
 
 																				</fo:block>
 																			</fo:block>
@@ -326,6 +365,25 @@
 																						select="/bookinginfo/ingateAtTerminal/address" />
 
 																				</fo:block>
+
+																				<fo:block>
+
+
+																					<xsl:value-of
+																						select="/bookinginfo/ingateAtTerminal/city/name" />
+																					<xsl:text> , </xsl:text>
+
+
+																					<xsl:value-of
+																						select="/bookinginfo/ingateAtTerminal/city/stateName" />
+
+																					<xsl:text> , </xsl:text>
+
+																					<xsl:value-of
+																						select="/bookinginfo/ingateAtTerminal/city/countryName" />
+
+																				</fo:block>
+
 																			</fo:block>
 																		</fo:table-cell>
 																	</fo:table-row>
@@ -369,6 +427,21 @@
 
 
 																	<xsl:value-of select="/bookinginfo/cargoSupplier/address" />
+																</fo:block>
+																<fo:block>
+
+
+																	<xsl:value-of select="/bookinginfo/cargoSupplier/city/name" />
+																	<xsl:text> , </xsl:text>
+
+																	<xsl:value-of
+																		select="/bookinginfo/cargoSupplier/city/stateName" />
+																	<xsl:text> , </xsl:text>
+
+
+
+																	<xsl:value-of
+																		select="/bookinginfo/cargoSupplier/city/countryName" />
 																</fo:block>
 															</fo:block>
 														</fo:table-cell>
