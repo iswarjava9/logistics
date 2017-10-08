@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.suis.logistics.web.billoflading.BillOfLadingDto;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.container.ContainerDto;
 import com.suis.logistics.web.container.ContainerShortDto;
@@ -42,6 +43,8 @@ public class PDFGeneratorUtil {
 	@Value("${logo.image.url}")
 	private String	logoPath;
 
+	@Value("${billoflading.xmldata.url}")
+	private String	billofLadingXMLDataUrl;
 	@Resource
 	ConverterUtil converterUtil;
 
@@ -51,6 +54,12 @@ public class PDFGeneratorUtil {
 		setContainerDetailsToBookingDto(bookingDto);
 		File bookingXML = parseBookingDtoToXML(bookingDto);
 		createBookingConfirmationPDFfromXML(bookingXML, bookingDto.getForwarderRefNo());
+	}
+	
+	public void generateBillOfLadingPDF(BillOfLadingDto billOfLadingDto) throws Exception {
+		billOfLadingDto.setLogoPath(logoPath);
+		File billofladingXML = parseBillOfLadingDtoToXML(billOfLadingDto);
+		createBillOfLadingPDFfromXML(billofladingXML, billOfLadingDto.getBlNo());
 	}
 
 	private File parseBookingDtoToXML(BookingDto bookingDto) throws Exception {
@@ -64,6 +73,25 @@ public class PDFGeneratorUtil {
 		// File xmlDataFile = new
 		// File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
 		File xmlDataFile = new File(bookingXMLDataUrl + "/booking-" + bookingDto.getForwarderRefNo() + ".xml");
+		xmlDataFile.createNewFile(); // if file already exists will do
+										// nothing
+		OutputStream out = new FileOutputStream(xmlDataFile);
+		marshaller.marshal(jaxbElement, out);
+		out.flush();
+		return xmlDataFile;
+	}
+	
+	private File parseBillOfLadingDtoToXML(BillOfLadingDto billOfLadingDto) throws Exception {
+		JAXBContext jc;
+		jc = JAXBContext.newInstance(BillOfLadingDto.class);
+		JAXBElement<BillOfLadingDto> jaxbElement = new JAXBElement<BillOfLadingDto>(new QName("bookinginfo"), BillOfLadingDto.class,
+				billOfLadingDto);
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		// URL url = this.getClass().getResource("/resources");
+		// File xmlDataFile = new
+		// File(url.toURI().getPath()+"booking-"+bookingDto.getId()+".xml");
+		File xmlDataFile = new File(billofLadingXMLDataUrl + "/billoflading-" + billOfLadingDto.getBlNo() + ".xml");
 		xmlDataFile.createNewFile(); // if file already exists will do
 										// nothing
 		OutputStream out = new FileOutputStream(xmlDataFile);
@@ -86,6 +114,28 @@ public class PDFGeneratorUtil {
 		TransformerFactory factory = TransformerFactory.newInstance();
 		Transformer transformer = factory.newTransformer(new StreamSource(xslt));
 		StreamSource xmlSource = new StreamSource(bookingXML);
+		Result res = new SAXResult(fop.getDefaultHandler());
+		// Start XSLT transformation and FOP processing
+		// That's where the XML is first transformed to XSL-FO and then
+		// PDF is created
+		transformer.transform(xmlSource, res);
+		System.out.println(pdf.getName() + " PDF Generated");
+	}
+
+	private void createBillOfLadingPDFfromXML(File billofladingXML, String blNo) throws Exception {
+		File xslt = new File(bookingXSLUrl + "/final-BL-template.xsl");
+		File pdf = new File(bookingPDFUrl + "/billoflading-" + blNo + ".pdf");
+		// outDir.mkdirs();
+		// Setup input and output
+		FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
+		// a user agent is needed for transformation
+		FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
+		OutputStream out;
+		out = new java.io.FileOutputStream(pdf);
+		Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
+		TransformerFactory factory = TransformerFactory.newInstance();
+		Transformer transformer = factory.newTransformer(new StreamSource(xslt));
+		StreamSource xmlSource = new StreamSource(billofladingXML);
 		Result res = new SAXResult(fop.getDefaultHandler());
 		// Start XSLT transformation and FOP processing
 		// That's where the XML is first transformed to XSL-FO and then

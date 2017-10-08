@@ -161,6 +161,8 @@ public class BookingDetail implements Serializable {
 	private Place					transhipmentPort;
 	@OneToMany(mappedBy = "bookingDetail")
 	private List<ContainerDetail>	containerDetails;
+	@OneToOne(mappedBy = "bookingDetail")
+	private BillOfLading	billOfLading;
 
 	public BookingDetail() {
 	}
@@ -595,6 +597,14 @@ public class BookingDetail implements Serializable {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public BillOfLading getBillOfLading() {
+		return billOfLading;
+	}
+
+	public void setBillOfLading(BillOfLading billOfLading) {
+		this.billOfLading = billOfLading;
 	}
 
 	@Override

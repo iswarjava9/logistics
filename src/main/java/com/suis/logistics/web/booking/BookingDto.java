@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suis.logistics.common.CustomDateAdapter;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.client.ClientDto;
@@ -97,6 +98,10 @@ public class BookingDto {
 	private PlaceDto				portOfLoad;
 	private PlaceDto				transhipmentPort;
 	private List<ContainerDto>		containerDetails;
+	@JsonProperty("billOfLadingId")
+	private Integer				billOfLadingId;
+	//private BillOfLadingDto				billOfLading;
+	
 	//
 	private CustomerDto				forwarder;
 	private BusinessLineDto			lineOfBusiness;
@@ -562,5 +567,20 @@ public class BookingDto {
 		this.logoPath = logoPath;
 	}
 
+	public Integer getBillOfLadingId() {
+		return billOfLadingId;
+	}
+
+	public void setBillOfLadingId(Integer billOfLadingId) {
+		this.billOfLadingId = billOfLadingId;
+	}
+
+/*	public BillOfLadingDto getBillOfLading() {
+		return billOfLading;
+	}
+
+	public void setBillOfLadingDto(BillOfLadingDto billOfLading) {
+		this.billOfLading = billOfLading;
+	}*/
 
 }

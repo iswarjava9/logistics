@@ -18,6 +18,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 
 import com.suis.logistics.model.Auth;
+import com.suis.logistics.model.BillOfLading;
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.BusinessLine;
 import com.suis.logistics.model.Cargo;
@@ -41,6 +42,7 @@ import com.suis.logistics.model.Vessel;
 import com.suis.logistics.web.CityDto;
 import com.suis.logistics.web.TimeZoneDto;
 import com.suis.logistics.web.authentication.AuthDto;
+import com.suis.logistics.web.billoflading.BillOfLadingDto;
 import com.suis.logistics.web.booking.BookingDto;
 import com.suis.logistics.web.businessline.BusinessLineDto;
 import com.suis.logistics.web.cargo.CargoDto;
@@ -476,4 +478,22 @@ public class ConverterUtil {
 			}
 		}
 	}
+	
+	public BillOfLadingDto convertBillOfLadingToDto(BillOfLading billOfLading) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
+		BillOfLadingDto billOfLadingDto = modelMapper.map(billOfLading, BillOfLadingDto.class);
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
+		return billOfLadingDto;
+	}
+	
+	public BillOfLading convertBillOfLadingDtoToEntity(BillOfLadingDto billOfLadingDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
+		BillOfLading billOfLadingOfLading = modelMapper.map(billOfLadingDto, BillOfLading.class);
+		/*String remarks = bookingDetail.getRemarks();
+		if (remarks != null) {
+			bookingDetail.setRemarks(remarks.replace("\n", "\\n"));
+		}*/
+		return billOfLadingOfLading;
+	}
+
 }
