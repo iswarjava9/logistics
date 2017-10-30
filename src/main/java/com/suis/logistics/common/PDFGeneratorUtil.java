@@ -55,7 +55,7 @@ public class PDFGeneratorUtil {
 		File bookingXML = parseBookingDtoToXML(bookingDto);
 		createBookingConfirmationPDFfromXML(bookingXML, bookingDto.getForwarderRefNo());
 	}
-	
+
 	public void generateBillOfLadingPDF(BillOfLadingDto billOfLadingDto) throws Exception {
 		billOfLadingDto.setLogoPath(logoPath);
 		File billofladingXML = parseBillOfLadingDtoToXML(billOfLadingDto);
@@ -80,11 +80,11 @@ public class PDFGeneratorUtil {
 		out.flush();
 		return xmlDataFile;
 	}
-	
+
 	private File parseBillOfLadingDtoToXML(BillOfLadingDto billOfLadingDto) throws Exception {
 		JAXBContext jc;
 		jc = JAXBContext.newInstance(BillOfLadingDto.class);
-		JAXBElement<BillOfLadingDto> jaxbElement = new JAXBElement<BillOfLadingDto>(new QName("bookinginfo"), BillOfLadingDto.class,
+		JAXBElement<BillOfLadingDto> jaxbElement = new JAXBElement<BillOfLadingDto>(new QName("bl"), BillOfLadingDto.class,
 				billOfLadingDto);
 		Marshaller marshaller = jc.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<xsl:stylesheet version="1.1"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format"
-	xmlns:barcode="org.krysalis.barcode4j.xalan.BarcodeExt" xmlns:common="http://exslt.org/common"
-	xmlns:xalan="http://xml.apache.org" exclude-result-prefixes="barcode common xalan">
-	<xsl:template match="dummyData">
+<?xml version="1.0"?>
+<xsl:stylesheet version="2.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:s="http://www.stylusstudio.com/xquery"
+	xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
+	<xsl:template match="bl">
 		<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 			<fo:layout-master-set>
 				<fo:simple-page-master master-name="simple"
@@ -26,12 +25,11 @@
 							<fo:table-body height="6cm">
 									<fo:table-row height="0.7cm">  <!-- border="solid 0.1mm black" -->
 										<fo:table-cell text-align="left">
-											<fo:block margin-top="-7pt">
-										        <fo:external-graphic>
-													<xsl:attribute name="src">
-														url('<xsl:value-of select="logo"/>')
-													</xsl:attribute>
-												</fo:external-graphic> 
+											<fo:block margin-top="-7pt">											
+										        <fo:external-graphic background="transparent"
+												width="180pt" content-width="scale-to-fit" height="50pt"
+												content-height="scale-to-fit" scaling="non-uniform"
+												src="url(file:///{/bl/logoPath})"/>
 										    </fo:block>
 										</fo:table-cell>
 										<fo:table-cell text-align="center">
@@ -47,7 +45,7 @@
 									<fo:table-row height="0.6cm">
 										<fo:table-cell text-align="left">
 											<fo:block margin-top="8pt" font-family="Arial" font-style="italic" font-weight="bold" font-size="11pt">
-												FMC-OTI No. <xsl:value-of select="fmcOtiNumber" />
+												FMC-OTI No. <!-- <xsl:value-of select="fmcOtiNumber" /> -->
 											</fo:block>
 										</fo:table-cell>
 										<fo:table-cell text-align="center">
@@ -76,14 +74,14 @@
 											EXPORTER/SHIPPER
 										</fo:block>
 										<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-											<xsl:value-of select="exportedShipped"/>
+											<xsl:value-of select="shipper"/>
 										</fo:block>
 									</fo:table-cell>
 									<fo:table-cell text-align="left" border="solid 0.1mm black" padding-start="2pt" padding-before="1pt">
 										<fo:block font-family="Arial" font-size="7.7pt">
 											BOOKING NUMBER
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="bookingNumber"/>
+												<xsl:value-of select="carrierRefNo"/> 
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -91,7 +89,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											BILL OF LADING NUMBER
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="billLandingNumber"/>
+												<xsl:value-of select="blNo"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -101,7 +99,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											CONSOLIDATION NUMBER
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="consolidationNumber"/>
+												<xsl:value-of select="cosolidationNo"/> 
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -109,7 +107,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											MBL NUMBER
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="mblNumber"/>
+												<xsl:value-of select="mblNo"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -119,7 +117,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											EXPORT REFERENCES
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="exportReferences"/>
+												<xsl:value-of select="exportReference"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -127,7 +125,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											SHIPPER'S REFERENCES
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="shippersReferences"/>
+												<xsl:value-of select="shipperRef"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -138,7 +136,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											CONSIGNED TO
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="consignedTo"/>
+												<xsl:value-of select="consignee"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -156,7 +154,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											POINT (STATE) OF ORIGIN OR FTZ NUMBER
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="pointOfOriginFTZNumber"/>
+												<xsl:value-of select="ftzNo"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -167,7 +165,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											NOTIFY PARTY/INTERMEDIATE CONSIGNEE
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="notifyPartyIntermediateConsignee"/>
+												<xsl:value-of select="notify"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -175,7 +173,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											DESTINATION AGENT
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="destinationAgent"/>
+												<xsl:value-of select="delieveryAgent"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -185,7 +183,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											* PRE-CARRIAGE BY 
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="preCarriageBy"/>
+												<xsl:value-of select="precarriageBy"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -193,7 +191,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											* PLACE OF RECEIPT BY PRE-CARRIER
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="placeReceiptyByPreCarrier"/>
+												<xsl:value-of select="placeOfReceipt"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -212,7 +210,7 @@
 											<fo:block font-family="Arial" font-size="7.7pt">
 											PORT OF LOADING/EXPORT
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="portLoadingExport"/>
+												<xsl:value-of select="portOfLoad"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -220,7 +218,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											LOADING PIER/TERMINAL
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="loadingPierTerminal"/>
+												<xsl:value-of select="ingateAtTerminal"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -230,7 +228,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											FOREIGN PORT OF UNLOADING
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="foreignPortUnloading"/>
+												<xsl:value-of select="portOfDischarge"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -238,7 +236,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											* PLACE OF DELIVERY BY ON-CARRIER
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="placeDeliveryByOnCarrier"/>
+												<xsl:value-of select="placeOfDelivery"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -246,7 +244,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											CO-LOADED WITH 
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="coLoadedWith"/>
+												<xsl:value-of select="coloadedWith"/>
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -254,7 +252,7 @@
 							</fo:table-body>
 						</fo:table>
 						
-						<fo:table>
+					<!-- 	<fo:table>
 							<fo:table-column column-number="1" column-width="2.5cm" border="solid 0.1mm black" />
 							<fo:table-column column-number="2" column-width="2.5cm" border="solid 0.1mm black" />
 							<fo:table-column column-number="3" column-width="2.5cm" border="solid 0.1mm black" />
@@ -319,8 +317,10 @@
 									</fo:table-cell>
 								</fo:table-row>
 							</fo:table-footer>
+							
+							
 							<fo:table-body>
-								<!-- <xsl:variable name="packageGoodDescription" select ="packageGoodDescription"/> -->
+								<xsl:variable name="packageGoodDescription" select ="packageGoodDescription"/>
 								<xsl:for-each select="./packageList/package">
 									<fo:table-row height="0.1cm">
 										<fo:table-cell text-align="center" number-columns-spanned="2">
@@ -341,7 +341,7 @@
 															</xsl:attribute>
 															<fo:block font-family="Arial" font-size="10pt" font-weight="bold" padding-top="3pt" padding-bottom="1pt">
 																<xsl:value-of select="packageGoodDescription" />
-																<!-- <xsl:value-of select="$packageGoodDescription" /> -->
+																
 															</fo:block>
 														</fo:table-cell>
 							                        </xsl:when>
@@ -360,8 +360,12 @@
 										</fo:table-cell>
 									</fo:table-row>
 								</xsl:for-each>
-							</fo:table-body>
-						</fo:table>
+							</fo:table-body>	
+						
+						
+						</fo:table> -->
+						
+						
 						<fo:table page-break-after="always">
 							<fo:table-column column-number="1" column-width="2.5cm" border="solid 0.1mm black" />
 							<fo:table-column column-number="2" column-width="2.5cm" border="solid 0.1mm black" />
@@ -388,7 +392,7 @@
 										</fo:block>
 										<fo:block font-family="Arial" font-size="10pt" text-align="right" padding-top="-5pt">
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="declaredValue"/>
+												<!-- <xsl:value-of select="declaredValue"/> -->
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -424,7 +428,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											DESCRIPTION OF CHARGES
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="descriptionCharges"/>
+												<!-- <xsl:value-of select="descriptionCharges"/> -->
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -440,7 +444,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											TOTAL PREPAID 
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="totalPrepaid"/>
+												
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -455,7 +459,7 @@
 										<fo:block font-family="Arial" font-size="7.7pt">
 											TOTAL COLLECT
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-												<xsl:value-of select="totalCollect"/>
+												
 											</fo:block>
 										</fo:block>
 									</fo:table-cell>
@@ -494,7 +498,7 @@
 											the Goods at the port of discharge or to deliver the Goods at the place of delivery by the route and in the manner originally intended by the Ocean Carrier, the Ocean Carrier (1) at any time shall be entitled to unpack the container(s) or otherwise dispose of the Goods in such way as the Ocean Carrier may deem advisable at the risk and expense of the Merchant and/or (2) before the Goods are loaded on the Vessel, a vehicle, or other means of transport at the place of receipt or port of loading, shall be entitled to cancel the contract of carriage without compensation and to require the Merchant to take delivery of the Goods and, upon his failure to do so, to warehouse or place them at any place selected by the Ocean Carrier at the risk and expense of the Merchant and/or (3) if the Goods are at a place awaiting transshipment, shall be entitled to terminate the transport there and to store them at any place selected by the Ocean Carrier at the risk and expense of the Merchant, and/or (4) if the Goods are loaded on the Vessel, a vehicle, or other means of transport whether or not approaching, entering, or attempting to enter the port of discharge or to reach the place of delivery or attempting or commencing to discharge, shall be entitled to discharge the Goods or any part of them at any port or place selected by the Ocean Carrier or to carry them back to the port of loading or place of receipt and there discharge them .  Any actions under (3) or (4) above shall constitute complete and final delivery and full performance of this contract, and the Ocean Carrier thereafter shall be free from any responsibility for carriage of the Goods. 
 (B) If, after storage, discharge, or any actions according to subpart (A) above the Ocean Carrier makes arrangements to store and/or forward the Goods, it is agreed that he shall do so only as agent for and at the sole risk and expense of the Merchant without any liability whatsoever in respect of such agency.  The Merchant shall reimburse the Ocean Carrier forthwith upon demand for all extra freight charges and expenses incurred for any actions taken according to subpart (A), including delay or expense to the Vessel, and the Ocean Carrier shall have a lien upon the Goods to that extent. 
 (C) The situations referred to in subpart (A) above shall include, but shall not be limited to, those caused by the existence or apprehension of war declared or undeclared, hostilities, riots, civil commotions, or other disturbances closure of, obstacle in, or danger to any port or canal, blockade, prohibition, or restriction on commerce or trading quarantine, sanitary, or other similar regulations or restrictions, strikes, lockouts or other labor troubles whether partial or general and whether or not involving employees of the Ocean Carrier or its Subcontractors, congestion of port, wharf, sea terminal, or similar place, shortage, absence or obstacles of labor or facilities for loading, discharge, delivery, or other handling of the Goods, epidemics or diseases, bad weather, shallow water, ice, landslip, or other obstacles in navigation or carriage (D) The Ocean Carrier, in addition to all other liberties provided for in this Article, shall have liberty to comply with orders, directions, regulations or suggestions as to navigation or the carriage or handling of the Goods or the Vessel howsoever given, by any actual or purported government or public authority, or by any committee or person having under the terms of any insurance on the Vessel, the right to give such order, direction, regulation, or suggestion.  If by reason of and/or in compliance with any such order, direction, regulation, or suggestions, anything is done or is not done the same shall be deemed to be included within the contractual carriage and shall not be a deviation.
-9. (Description and Particulars of Goods) Any reference on the face of this Bill of Lading to marks, numbers, description, quantity, quality, gauge, weight, measure, nature, kind, value, and any other particulars of the Goods, is as furnished by the Merchant.  The Ocean Carrier shall not be responsible for the accuracy of any such reference and is not bound thereby.  The Merchant warrants to the Ocean Carrier that the descriptions and particulars furnished by him are correct, and the Merchant shall indemnify the Ocean Carrier against all loss, damage, expenses, liability, penalties and fines arising or resulting from inaccuracy of any description or particular.  Merchant acknowledges that it is required to provide verified weights obtained on calibrated, certified equipment of all cargo that is to be tendered to steamship lines. Shipper agrees that Carrier is entitled to rely on the accuracy of such weights and to counter-sign or endorse it as Carrier’s own certified weight to the steamship line carrying the cargo. The Merchant agrees that it shall indemnify and hold the Carrier harmless from any and all claims, losses, penalties or other costs resulting from any incorrect or questionable verification of the weight provided by Merchant or its agent or contractor on which the Carrier relies.
+9. (Description and Particulars of Goods) Any reference on the face of this Bill of Lading to marks, numbers, description, quantity, quality, gauge, weight, measure, nature, kind, value, and any other particulars of the Goods, is as furnished by the Merchant.  The Ocean Carrier shall not be responsible for the accuracy of any such reference and is not bound thereby.  The Merchant warrants to the Ocean Carrier that the descriptions and particulars furnished by him are correct, and the Merchant shall indemnify the Ocean Carrier against all loss, damage, expenses, liability, penalties and fines arising or resulting from inaccuracy of any description or particular.  Merchant acknowledges that it is required to provide verified weights obtained on calibrated, certified equipment of all cargo that is to be tendered to steamship lines. Shipper agrees that Carrier is entitled to rely on the accuracy of such weights and to counter-sign or endorse it as Carrierâs own certified weight to the steamship line carrying the cargo. The Merchant agrees that it shall indemnify and hold the Carrier harmless from any and all claims, losses, penalties or other costs resulting from any incorrect or questionable verification of the weight provided by Merchant or its agent or contractor on which the Carrier relies.
 10. (Use of Container)  When the Goods are not already packed into a container at the time of receipt by the Ocean Carrier, the Ocean Carrier shall be at liberty to pack and carry the Goods in any type of container.
 11. (Ocean Carrier's Container)  (A) The Merchant assumes full responsibility for and shall indemnify the Ocean Carrier against any loss of or damage to the Ocean Carrier's containers and other equipment if the loss or damage is caused or occurs while in the possession or control of the Merchant, his agents, or common carriers engaged by or on behalf of the Merchant (B) The Ocean Carrier shall in no event be liable for, and the Merchant shall indemnify and hold the Ocean Carrier harmless from, any death of or injuries to persons, or loss of or damage to property, caused by the Ocean Carrier's container or its contents while in the possession or control of the Merchant, his agents, or common carriers engaged by or on behalf of the Merchant.
 12. (Container Packed by Merchant)  If the cargo received by the Ocean or Inland Carrier is in a container packed by or on behalf of the Merchant. (A) this Bill of Lading is prima facie evidence of the receipt only of the number on the face of this Bill of Lading.  The condition and particulars of the contents are unknown to the Ocean 

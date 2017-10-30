@@ -8,7 +8,7 @@ import com.suis.logistics.web.booking.BookingDto;
 public class BillOfLadingDto {
 
 	private int id;
-	private String blNo;
+	private String blNo; // forwarder ref no
 	private String cargoDescription;
 	private String carrierRefNo;
 	private String coloadedWith;
@@ -29,10 +29,10 @@ public class BillOfLadingDto {
 	private String shipper;
 	private String shipperRef;
 	private String vesselVoyage;
-	
+
 	private BookingDto	bookingDetail;
-	
-	
+
+
 
 	public BookingDto getBookingDetail() {
 		return bookingDetail;
@@ -40,7 +40,7 @@ public class BillOfLadingDto {
 	public void setBookingDetail(BookingDto bookingDetail) {
 		this.bookingDetail = bookingDetail;
 	}
-	
+
 	@JsonIgnore
 	@Value("${logo.image.url}")
 	private String					logoPath;
