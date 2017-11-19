@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.suis.logistics.model.BillOfLading;
 import com.suis.logistics.model.BookingDetail;
 import com.suis.logistics.model.ContainerDetail;
 import com.suis.logistics.repository.booking.BookingDao;
@@ -136,5 +137,22 @@ public class CacheServiceImpl implements CacheService {
 	@Cacheable(value = "BookingList", key = "#root.targetClass")
 	public List<BookingDetail> getBookingList() {
 		return bookingDao.getBookingList();
+	}
+
+	@Override
+	@CachePut(value = "BookingDetail", key = "#billOfLading.bookingDetail.id")
+	public BookingDetail addOrUpdateBillOfLadingToBookingDetail(BillOfLading billOfLading) {
+		Cache cache = cacheManager.getCache("BookingDetail");
+		ValueWrapper val = cache.get(billOfLading.getBookingDetail().getId());
+		BookingDetail bookingInCache = null;
+		bookingInCache = (BookingDetail) val.get();
+		BillOfLading billOfLadingInCache = bookingInCache.getBillOfLading();
+		if (billOfLadingInCache != null) {
+			billOfLadingInCache = billOfLading;
+		} else {
+			bookingInCache.setBillOfLading(billOfLading);
+		}
+		return bookingInCache;
+
 	}
 }

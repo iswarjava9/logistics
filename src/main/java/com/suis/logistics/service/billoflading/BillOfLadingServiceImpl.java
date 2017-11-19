@@ -14,22 +14,28 @@ import org.springframework.stereotype.Component;
 
 import com.suis.logistics.model.BillOfLading;
 import com.suis.logistics.repository.billoflading.BillOfLadingDao;
+import com.suis.logistics.service.cache.CacheService;
 
 @Component
 public class BillOfLadingServiceImpl implements BillOfLadingService {
 	@Value("${booking.pdf.url}")
 	private String				bookingPDFUrl;
-	
+	@Resource
+	CacheService				cacheService;
 	@Resource
 	BillOfLadingDao bolDao;
 	@Override
 	public BillOfLading createBillOfLading(BillOfLading billOfLading) {
-		return bolDao.createBillOfLading(billOfLading);
+		BillOfLading billOfLadingCreated = bolDao.createBillOfLading(billOfLading);
+		cacheService.addOrUpdateBillOfLadingToBookingDetail(billOfLadingCreated);
+		return bolDao.createBillOfLading(billOfLadingCreated);
 	}
 
 	@Override
 	public BillOfLading updateBillOfLading(BillOfLading billOfLading) {
-		return bolDao.updateBillOfLading(billOfLading);
+		BillOfLading billOfLadingUpdated = bolDao.updateBillOfLading(billOfLading);
+		cacheService.addOrUpdateBillOfLadingToBookingDetail(billOfLadingUpdated);
+		return billOfLadingUpdated;
 	}
 
 	@Override
