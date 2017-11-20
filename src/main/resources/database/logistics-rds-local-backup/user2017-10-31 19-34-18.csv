@@ -1,0 +1,9 @@
+"id","name","role","user_name","password","staus","email_id","client_id"
+1,"user1","admin","user1","welcome1",,"user1@email.com",1
+2,"user1","admin","user1","welcome1",,"user1@email.com",5
+3,"user1","admin","user1","welcome1",,"user1@email.com",4
+4,"user1","admin","user1","welcome1",,"user1@email.com",4
+5,"user2","admin","user2","welcome1",,"user2@email.com",3
+6,"user2","admin","user2","welcome1",,"user2@email.com",3
+7,"iswar","admin","iswar.java@gmail.com","test@1234","ACTIVE","iswar.java@gmail.com",1
+10,"sunil","admin","sunil@gmail.com","test@1234","ACTIVE","sunil@gmail.com",1
