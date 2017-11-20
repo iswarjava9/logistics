@@ -58,6 +58,11 @@ public class PDFGeneratorUtil {
 
 	public void generateBillOfLadingPDF(BillOfLadingDto billOfLadingDto) throws Exception {
 		billOfLadingDto.setLogoPath(logoPath);
+		List<ContainerDto> containerList = billOfLadingDto.getBookingDetail().getContainerDetails();
+		if(!containerList.isEmpty()) {
+			containerList.get(0).setPackageGoodDescription(billOfLadingDto.getCargoDescription());
+			containerList.get(0).setNbRows(containerList.size());
+		}
 		File billofladingXML = parseBillOfLadingDtoToXML(billOfLadingDto);
 		createBillOfLadingPDFfromXML(billofladingXML, billOfLadingDto.getBlNo());
 	}

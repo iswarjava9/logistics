@@ -32,11 +32,10 @@ public class BillOfLadingController extends BaseController {
 
 		BillOfLadingDto billOfLadingDtoResponse = converterUtil.convertBillOfLadingToDto(
 				billOfLadingService.createBillOfLading(converterUtil.convertBillOfLadingDtoToEntity(billOfLadingDto)));
-		/*
-		 * String remarks = billOfLadingDtoResponse.getRemarks(); if (remarks !=
-		 * null) { billOfLadingDtoResponse.setRemarks(remarks.replace("\\n",
-		 * "\n")); }
-		 */
+		String remarks = billOfLadingDtoResponse.getCargoDescription();
+		if (remarks != null) {
+			billOfLadingDtoResponse.setCargoDescription(remarks.replace("\\n", "\n"));
+		}
 		return new ResponseEntity<BillOfLadingDto>(billOfLadingDtoResponse, HttpStatus.OK);
 	}
 
@@ -45,11 +44,10 @@ public class BillOfLadingController extends BaseController {
 
 		BillOfLadingDto billOfLadingDtoResponse = converterUtil.convertBillOfLadingToDto(
 				billOfLadingService.updateBillOfLading(converterUtil.convertBillOfLadingDtoToEntity(billOfLadingDto)));
-		/*
-		 * String remarks = bookingDtoResponse.getRemarks(); if (remarks !=
-		 * null) { bookingDtoResponse.setRemarks(remarks.replace("\\n", "\n"));
-		 * }
-		 */
+		String remarks = billOfLadingDtoResponse.getCargoDescription();
+		if (remarks != null) {
+			billOfLadingDtoResponse.setCargoDescription(remarks.replace("\\n", "\n"));
+		}
 		return new ResponseEntity<BillOfLadingDto>(billOfLadingDtoResponse, HttpStatus.OK);
 	}
 
@@ -59,10 +57,10 @@ public class BillOfLadingController extends BaseController {
 
 		BillOfLadingDto billOfLadingDto = converterUtil
 				.convertBillOfLadingToDto(billOfLadingService.getBillOfLading(id));
-		/*
-		 * String remarks = bookingDto.getRemarks(); if (remarks != null) {
-		 * bookingDto.setRemarks(remarks.replace("\\n", "\n")); }
-		 */
+		String remarks = billOfLadingDto.getCargoDescription();
+		if (remarks != null) {
+			billOfLadingDto.setCargoDescription(remarks.replace("\\n", "\n"));
+		}
 		return new ResponseEntity<BillOfLadingDto>(billOfLadingDto, HttpStatus.OK);
 	}
 

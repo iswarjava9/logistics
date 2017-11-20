@@ -478,22 +478,22 @@ public class ConverterUtil {
 			}
 		}
 	}
-	
+
 	public BillOfLadingDto convertBillOfLadingToDto(BillOfLading billOfLading) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		BillOfLadingDto billOfLadingDto = modelMapper.map(billOfLading, BillOfLadingDto.class);
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		return billOfLadingDto;
 	}
-	
+
 	public BillOfLading convertBillOfLadingDtoToEntity(BillOfLadingDto billOfLadingDto) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
-		BillOfLading billOfLadingOfLading = modelMapper.map(billOfLadingDto, BillOfLading.class);
-		/*String remarks = bookingDetail.getRemarks();
+		BillOfLading billOfLading = modelMapper.map(billOfLadingDto, BillOfLading.class);
+		String remarks = billOfLading.getCargoDescription();
 		if (remarks != null) {
-			bookingDetail.setRemarks(remarks.replace("\n", "\\n"));
-		}*/
-		return billOfLadingOfLading;
+			billOfLading.setCargoDescription(remarks.replace("\n", "\\n"));
+		}
+		return billOfLading;
 	}
 
 }

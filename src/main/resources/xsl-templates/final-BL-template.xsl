@@ -252,7 +252,7 @@
 							</fo:table-body>
 						</fo:table>
 						
-					<!-- 	<fo:table>
+						<fo:table>
 							<fo:table-column column-number="1" column-width="2.5cm" border="solid 0.1mm black" />
 							<fo:table-column column-number="2" column-width="2.5cm" border="solid 0.1mm black" />
 							<fo:table-column column-number="3" column-width="2.5cm" border="solid 0.1mm black" />
@@ -307,12 +307,12 @@
 									</fo:table-cell>
 									<fo:table-cell text-align="center" padding-top="12pt" padding-bottom="2pt">
 										<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-											<xsl:value-of select="sum(./packageList/package/grossWeight)"/>
+											<!-- <xsl:value-of select="sum(./packageList/package/grossWeight)"/>-->
 										</fo:block>
 									</fo:table-cell>
 									<fo:table-cell text-align="center" padding-top="12pt" padding-bottom="2pt">
 										<fo:block font-family="Arial" font-size="10pt" font-weight="bold">
-											<xsl:value-of select="format-number(sum(./packageList/package/measurement), '#.00')"/>
+											<!--  <xsl:value-of select="format-number(sum(./packageList/package/measurement), '#.00')"/>-->
 										</fo:block>
 									</fo:table-cell>
 								</fo:table-row>
@@ -320,17 +320,19 @@
 							
 							
 							<fo:table-body>
-								<xsl:variable name="packageGoodDescription" select ="packageGoodDescription"/>
-								<xsl:for-each select="./packageList/package">
+							
+								<!-- <xsl:variable name="packageGoodDescription" select ="packageGoodDescription"/>-->
+								<!-- <xsl:if test="bookingDetail/containerDetails"> -->
+							<xsl:for-each select="bookingDetail/containerDetails">
 									<fo:table-row height="0.1cm">
 										<fo:table-cell text-align="center" number-columns-spanned="2">
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold" padding-top="3pt" padding-bottom="1pt">
-												<xsl:value-of select="mark" /> &#160;&#160; <xsl:value-of select="number" />
+												<xsl:value-of select="containerNo" /> &#160;&#160; <!-- <xsl:value-of select="number" /> -->
 											</fo:block>
 										</fo:table-cell>
 										<fo:table-cell text-align="center">
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold" padding-top="3pt" padding-bottom="1pt">
-												<xsl:value-of select="packageNumber" />
+												<xsl:value-of select="containerNo" />
 											</fo:block>
 										</fo:table-cell>
 												<xsl:choose>
@@ -340,7 +342,29 @@
 																<xsl:value-of select="nbRows" />
 															</xsl:attribute>
 															<fo:block font-family="Arial" font-size="10pt" font-weight="bold" padding-top="3pt" padding-bottom="1pt">
-																<xsl:value-of select="packageGoodDescription" />
+																
+																<fo:block linefeed-treatment="preserve"
+													white-space-treatment="preserve" white-space-collapse="false">
+
+													<!-- <xsl:call-template name="split"> <xsl:with-param name="text" 
+														select="/bookinginfo/remarks" /> </xsl:call-template> -->
+
+													<xsl:variable name="text1">
+														<xsl:call-template name="string-replace-all">
+															<xsl:with-param name="text"
+																select="packageGoodDescription" />
+															<xsl:with-param name="replace" select="'\n'" />
+															<xsl:with-param name="by" select="'&#xA;'" />
+														</xsl:call-template>
+													</xsl:variable>
+													<xsl:call-template name="string-replace-all">
+														<xsl:with-param name="text" select="$text1" />
+														<xsl:with-param name="replace" select="'\t'" />
+														<xsl:with-param name="by" select="'&#x9;'" />
+													</xsl:call-template>
+
+												</fo:block>
+																
 																
 															</fo:block>
 														</fo:table-cell>
@@ -350,20 +374,21 @@
 							                    </xsl:choose>
 										<fo:table-cell text-align="center">
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold" padding-top="3pt" padding-bottom="1pt">
-												<xsl:value-of select="grossWeight" />
+												<!-- <xsl:value-of select="grossWeight" /> -->
 											</fo:block>
 										</fo:table-cell>
 										<fo:table-cell text-align="center">
 											<fo:block font-family="Arial" font-size="10pt" font-weight="bold" padding-top="3pt" padding-bottom="1pt">
-												<xsl:value-of select="measurement" />
+												<!-- <xsl:value-of select="measurement" /> -->
 											</fo:block>
 										</fo:table-cell>
 									</fo:table-row>
-								</xsl:for-each>
+						 	</xsl:for-each> 
+						 	<!-- </xsl:if> -->
 							</fo:table-body>	
 						
 						
-						</fo:table> -->
+						</fo:table> 
 						
 						
 						<fo:table page-break-after="always">
@@ -581,4 +606,30 @@
 			</fo:page-sequence>
 		</fo:root>
 	</xsl:template>
+	
+	<xsl:template name="string-replace-all">
+		<xsl:param name="text" />
+		<xsl:param name="replace" />
+		<xsl:param name="by" />
+		<xsl:choose>
+			<xsl:when test="$text = '' or $replace = ''or not($replace)">
+				<!-- Prevent this routine from hanging -->
+				<xsl:value-of select="$text" />
+			</xsl:when>
+			<xsl:when test="contains($text, $replace)">
+				<xsl:value-of select="substring-before($text,$replace)" />
+				<xsl:value-of select="$by" />
+				<xsl:call-template name="string-replace-all">
+					<xsl:with-param name="text"
+						select="substring-after($text,$replace)" />
+					<xsl:with-param name="replace" select="$replace" />
+					<xsl:with-param name="by" select="$by" />
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$text" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
 </xsl:stylesheet>

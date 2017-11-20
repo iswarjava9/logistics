@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suis.logistics.web.cargo.CargoDto;
 import com.suis.logistics.web.commodity.CommodityDto;
@@ -44,6 +45,11 @@ public class ContainerDto {
 	private ContainerTypeDto	containerType;
 	private CommodityDto		commodity;
 	private Integer				quotationId;
+
+	@JsonIgnore
+	private Integer				nbRows;
+	@JsonIgnore
+	private String      		packageGoodDescription;
 
 	public Integer getId() {
 		return id;
@@ -214,7 +220,6 @@ public class ContainerDto {
 	}
 
 
-
 	public LocalDateTime getCarrierPickupLastFreeLocalDateTime() {
 		return carrierPickupLastFreeLocalDateTime;
 	}
@@ -245,6 +250,23 @@ public class ContainerDto {
 
 	public void setBookingDetailId(Integer bookingDetailId) {
 		this.bookingDetailId = bookingDetailId;
+	}
+
+
+	public Integer getNbRows() {
+		return nbRows;
+	}
+
+	public String getPackageGoodDescription() {
+		return packageGoodDescription;
+	}
+
+	public void setPackageGoodDescription(String packageGoodDescription) {
+		this.packageGoodDescription = packageGoodDescription;
+	}
+
+	public void setNbRows(Integer nbRows) {
+		this.nbRows = nbRows;
 	}
 
 

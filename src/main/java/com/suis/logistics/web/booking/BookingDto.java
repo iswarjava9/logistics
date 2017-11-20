@@ -100,8 +100,7 @@ public class BookingDto {
 	private List<ContainerDto>		containerDetails;
 	@JsonProperty("billOfLadingId")
 	private Integer				billOfLadingId;
-	//private BillOfLadingDto				billOfLading;
-	
+
 	//
 	private CustomerDto				forwarder;
 	private BusinessLineDto			lineOfBusiness;
@@ -574,13 +573,5 @@ public class BookingDto {
 	public void setBillOfLadingId(Integer billOfLadingId) {
 		this.billOfLadingId = billOfLadingId;
 	}
-
-/*	public BillOfLadingDto getBillOfLading() {
-		return billOfLading;
-	}
-
-	public void setBillOfLadingDto(BillOfLadingDto billOfLading) {
-		this.billOfLading = billOfLading;
-	}*/
 
 }
