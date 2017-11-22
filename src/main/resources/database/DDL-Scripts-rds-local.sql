@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 CREATE TABLE `bill_of_lading` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shipper` varchar(50) DEFAULT NULL,
@@ -560,3 +561,4 @@ CREATE TABLE `vessel` (
   PRIMARY KEY (`id`),
   KEY `flag_country_FK` (`flag_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+SET FOREIGN_KEY_CHECKS = 1;
