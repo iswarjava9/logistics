@@ -32,10 +32,6 @@ public class BillOfLadingController extends BaseController {
 
 		BillOfLadingDto billOfLadingDtoResponse = converterUtil.convertBillOfLadingToDto(
 				billOfLadingService.createBillOfLading(converterUtil.convertBillOfLadingDtoToEntity(billOfLadingDto)));
-		String remarks = billOfLadingDtoResponse.getCargoDescription();
-		if (remarks != null) {
-			billOfLadingDtoResponse.setCargoDescription(remarks.replace("\\n", "\n"));
-		}
 		return new ResponseEntity<BillOfLadingDto>(billOfLadingDtoResponse, HttpStatus.OK);
 	}
 
@@ -44,10 +40,6 @@ public class BillOfLadingController extends BaseController {
 
 		BillOfLadingDto billOfLadingDtoResponse = converterUtil.convertBillOfLadingToDto(
 				billOfLadingService.updateBillOfLading(converterUtil.convertBillOfLadingDtoToEntity(billOfLadingDto)));
-		String remarks = billOfLadingDtoResponse.getCargoDescription();
-		if (remarks != null) {
-			billOfLadingDtoResponse.setCargoDescription(remarks.replace("\\n", "\n"));
-		}
 		return new ResponseEntity<BillOfLadingDto>(billOfLadingDtoResponse, HttpStatus.OK);
 	}
 
@@ -57,17 +49,14 @@ public class BillOfLadingController extends BaseController {
 
 		BillOfLadingDto billOfLadingDto = converterUtil
 				.convertBillOfLadingToDto(billOfLadingService.getBillOfLading(id));
-		String remarks = billOfLadingDto.getCargoDescription();
-		if (remarks != null) {
-			billOfLadingDto.setCargoDescription(remarks.replace("\\n", "\n"));
-		}
 		return new ResponseEntity<BillOfLadingDto>(billOfLadingDto, HttpStatus.OK);
 	}
 
 	@Transactional
 	@RequestMapping(value = "/download/{id}", method = RequestMethod.GET, produces = "application/pdf")
 	public ResponseEntity<InputStreamResource> download(@PathVariable("id") int id) throws Exception {
-	 BillOfLadingDto billOfLadingDto =  converterUtil.convertBillOfLadingToDto(billOfLadingService.getBillOfLading(id));
+		BillOfLadingDto billOfLadingDto = converterUtil
+				.convertBillOfLadingToDto(billOfLadingService.getBillOfLading(id));
 		pdfGeneratorUtil.generateBillOfLadingPDF(billOfLadingDto);
 		HttpHeaders headers = new HttpHeaders();
 		InputStream bookingConfirmationPDF = billOfLadingService.downloadBillOfLading(billOfLadingDto.getBlNo(),

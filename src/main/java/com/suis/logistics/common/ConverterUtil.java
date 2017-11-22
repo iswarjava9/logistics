@@ -111,9 +111,23 @@ public class ConverterUtil {
 		BookingDetail bookingDetail = modelMapper.map(bookingDto, BookingDetail.class);
 		String remarks = bookingDetail.getRemarks();
 		if (remarks != null) {
-			bookingDetail.setRemarks(remarks.replace("\n", "\\n"));
+			bookingDetail.setRemarks(convertTextAreaToEntityDataCompatible(remarks));
 		}
 		return bookingDetail;
+	}
+
+	private String convertTextAreaToEntityDataCompatible(String textAreaData) {
+		if (textAreaData != null) {
+			return textAreaData.replace("\n", "\\n");
+		}
+		return null;
+	}
+
+	public String convertEntityDataToTextAreaCompatible(String entityData) {
+		if (entityData != null) {
+			return entityData.replace("\\n", "\n");
+		}
+		return null;
 	}
 
 	public BookingDto convertBookingDetailToDto(BookingDetail bookingDetail) {
@@ -482,6 +496,13 @@ public class ConverterUtil {
 	public BillOfLadingDto convertBillOfLadingToDto(BillOfLading billOfLading) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		BillOfLadingDto billOfLadingDto = modelMapper.map(billOfLading, BillOfLadingDto.class);
+		billOfLadingDto
+				.setCargoDescription(convertEntityDataToTextAreaCompatible(billOfLadingDto.getCargoDescription()));
+		billOfLadingDto.setShipper(convertEntityDataToTextAreaCompatible(billOfLadingDto.getShipper()));
+		billOfLadingDto.setConsignee(convertEntityDataToTextAreaCompatible(billOfLadingDto.getConsignee()));
+		billOfLadingDto.setPortOfDischarge(convertEntityDataToTextAreaCompatible(billOfLadingDto.getPortOfDischarge()));
+		billOfLadingDto.setPortOfLoad(convertEntityDataToTextAreaCompatible(billOfLadingDto.getPortOfLoad()));
+		billOfLadingDto.setNotify(convertEntityDataToTextAreaCompatible(billOfLadingDto.getNotify()));
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		return billOfLadingDto;
 	}
@@ -489,11 +510,13 @@ public class ConverterUtil {
 	public BillOfLading convertBillOfLadingDtoToEntity(BillOfLadingDto billOfLadingDto) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
 		BillOfLading billOfLading = modelMapper.map(billOfLadingDto, BillOfLading.class);
-		String remarks = billOfLading.getCargoDescription();
-		if (remarks != null) {
-			billOfLading.setCargoDescription(remarks.replace("\n", "\\n"));
-		}
+
+		billOfLading.setCargoDescription(convertTextAreaToEntityDataCompatible(billOfLading.getCargoDescription()));
+		billOfLading.setShipper(convertTextAreaToEntityDataCompatible(billOfLading.getShipper()));
+		billOfLading.setConsignee(convertTextAreaToEntityDataCompatible(billOfLading.getConsignee()));
+		billOfLading.setPortOfDischarge(convertTextAreaToEntityDataCompatible(billOfLading.getPortOfDischarge()));
+		billOfLading.setPortOfLoad(convertTextAreaToEntityDataCompatible(billOfLading.getPortOfLoad()));
+		billOfLading.setNotify(convertTextAreaToEntityDataCompatible(billOfLading.getNotify()));
 		return billOfLading;
 	}
-
 }
