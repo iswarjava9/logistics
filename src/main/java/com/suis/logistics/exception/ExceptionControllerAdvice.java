@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.suis.logistics.repository.booking.BookingNotFoundException;
 import com.suis.logistics.repository.booking.CreateBookingFailedException;
 import com.suis.logistics.repository.customer.AddCustomerFailedException;
+import com.suis.logistics.repository.person.PersonNotFoundException;
 import com.suis.logistics.repository.place.AddPlaceFailedException;
 import com.suis.logistics.service.customer.ThirdPartyCustomerCreationFailedException;
 import com.suis.logistics.service.invoice.InvoiceCreationFailedException;
@@ -60,5 +61,11 @@ public class ExceptionControllerAdvice {
 	public ResponseEntity<ErrorResponse> exceptionHandler(ThirdPartyCustomerCreationFailedException ex) {
 		ex.printStackTrace();
 		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(PersonNotFoundException.class)
+	public ResponseEntity<ErrorResponse> exceptionHandler(PersonNotFoundException ex) {
+		ex.printStackTrace();
+		return new ResponseEntity<ErrorResponse>(ex.getErrorResponse(), HttpStatus.NOT_FOUND);
 	}
 }

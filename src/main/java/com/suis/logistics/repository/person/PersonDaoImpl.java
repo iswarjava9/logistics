@@ -21,7 +21,14 @@ public class PersonDaoImpl extends BaseDao implements PersonDao {
 
 	@Override
 	public Person findById(int id) {
-		return getCurrentSession().load(Person.class, id);
+		Person person;
+		try {
+			person = getCurrentSession().load(Person.class, id);
+			person.getId();
+		} catch (Exception e) {			
+			throw new PersonNotFoundException(e);
+		}
+		return person;
 	}
 
 	@SuppressWarnings("unchecked")

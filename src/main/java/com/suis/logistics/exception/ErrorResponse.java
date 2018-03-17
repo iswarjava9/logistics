@@ -2,10 +2,15 @@ package com.suis.logistics.exception;
 
 import org.springframework.core.env.Environment;
 
-public class ErrorResponse {
+import com.suis.logistics.common.ApplicationContextProvider;
+
+public class ErrorResponse{
+
 	private Integer	errorCode;
 	private String	errorMessage;
 	private String	developerMessage;
+	private Environment envn = ApplicationContextProvider.getBean(Environment.class);
+
 
 	public ErrorResponse() {
 
@@ -15,6 +20,12 @@ public class ErrorResponse {
 		super();
 		this.errorCode = errorCode;
 		this.errorMessage = env.getProperty(String.valueOf(errorCode));
+	}
+
+	public ErrorResponse(Integer errorCode) {
+		super();
+		this.errorCode = errorCode;
+		this.errorMessage = envn.getProperty(String.valueOf(errorCode));
 	}
 
 	public Integer getErrorCode() {
@@ -37,4 +48,5 @@ public class ErrorResponse {
 	public void setDeveloperMessage(String developerMessage) {
 		this.developerMessage = developerMessage;
 	}
+
 }
